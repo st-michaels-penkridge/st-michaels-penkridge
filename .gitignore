@@ -1,0 +1,13 @@
+.DS_Store
+.env
+.env.*
+node_modules/
+__pycache__/
+*.pyc
+.Python
+*.pem
+*.key
+credentials.json
+
+# ~1GB tomb JPEGs — too large for a plain git push; copy graveyard/LoRes10Tombs/ when cloning (USB, Drive, etc.)
+graveyard/LoRes10Tombs/

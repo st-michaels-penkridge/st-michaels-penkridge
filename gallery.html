@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gallery — St Michael's Church, Penkridge</title>
+  <meta name="description" content="Photographs of St Michael and All Angels Church, Penkridge, Staffordshire.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="eyebrow">Church of England · Diocese of Lichfield</p>
+      <p class="site-title-wrap"><a href="index.html" class="site-title-link">St Michael's Church</a></p>
+      <p class="site-subtitle">Penkridge, Staffordshire</p>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="gallery.html" aria-current="page">Gallery</a>
+        <a href="churchyard.html">Churchyard</a>
+        <a href="events.html">Events</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#visit">Find us</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="page-intro">
+      <div class="container">
+        <h1>Gallery</h1>
+        <p class="lead page-lead">Photographs of St Michael and All Angels — exterior, churchyard, tower, and interior. Tap any image to enlarge.</p>
+      </div>
+    </div>
+
+    <section class="section gallery-about" aria-labelledby="building-heading">
+      <div class="container narrow">
+        <h2 id="building-heading">The building</h2>
+        <p>St Michael and All Angels stands on St Michael’s Square at the heart of Penkridge. It was once a <strong>collegiate church</strong> — served by a college of priests rather than a single vicar — and remains the parish church for Penkridge and Stretton. The church is a <strong>Grade I listed</strong> building, the highest level of statutory protection for historic architecture in England.</p>
+        <p>Most of what you see from the outside is late medieval <strong>Perpendicular</strong> work in red sandstone: a clerestoried nave and chancel, aisles, and a two-storey south porch, with crenellated parapets and crocketed pinnacles. The <strong>west tower</strong> began in the 14th century; its upper stages were added later. The large east window is <strong>Decorated</strong> work of about 1340. Inside, the <strong>13th-century arcades</strong> show how much of the church’s plan is earlier still.</p>
+        <p>There is no single named architect for a building grown over centuries. The church was <strong>restored in 1881</strong> by Birmingham architect <strong>J. A. Chatwin</strong>, reusing much medieval fabric. The chancel holds Littleton family monuments — including alabaster tombs linked to the Royley workshop at Burton upon Trent — and Victorian stained glass by firms such as Ward &amp; Hughes.</p>
+      </div>
+    </section>
+
+    <section class="section gallery-section" aria-label="Church photographs">
+      <div class="container">
+        <p id="gallery-count" class="gallery-count" aria-live="polite">Loading…</p>
+        <div id="gallery-filters" class="gallery-filters" role="group" aria-label="Filter photos"></div>
+        <ul id="gallery-grid" class="gallery"></ul>
+        <p class="small gallery-credit">Images stored locally from <a href="https://commons.wikimedia.org/wiki/Category:St._Michael_and_All_Angels,_Penkridge" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a> (Geograph and contributors, CC licences).</p>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="gallery-lightbox" class="lightbox" aria-labelledby="lightbox-caption">
+    <button type="button" class="lightbox-close" aria-label="Close">×</button>
+    <figure class="lightbox-figure">
+      <img id="lightbox-img" src="" alt="">
+      <figcaption id="lightbox-caption"></figcaption>
+    </figure>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> St Michael's Church, Penkridge. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script src="gallery.js" defer></script>
+</body>
+</html>

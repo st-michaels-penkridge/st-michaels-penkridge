@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Churchyard records — St Michael's Church, Penkridge</title>
+  <meta name="description" content="Search grave records and explore the churchyard map at St Michael and All Angels, Penkridge.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260929">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="eyebrow">Church of England · Diocese of Lichfield</p>
+      <p class="site-title-wrap"><a href="index.html" class="site-title-link">St Michael's Church</a></p>
+      <p class="site-subtitle">Penkridge, Staffordshire</p>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="churchyard.html" aria-current="page">Churchyard</a>
+        <a href="events.html">Events</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#visit">Find us</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="page-intro">
+      <div class="container">
+        <h1>Churchyard records</h1>
+      </div>
+    </div>
+
+    <section class="section churchyard-section" aria-labelledby="churchyard-tools-heading">
+      <div class="container churchyard-layout">
+        <aside class="churchyard-sidebar" aria-label="Search and results">
+          <h2 id="churchyard-tools-heading" class="churchyard-sidebar-title">Find a grave</h2>
+
+          <form class="churchyard-search" id="churchyard-search-form">
+            <label class="churchyard-field">
+              <span>Name</span>
+              <input type="search" id="search-name" name="name" autocomplete="off" placeholder="Surname or first name">
+            </label>
+            <button type="submit" class="button churchyard-search-btn">Search</button>
+          </form>
+
+          <p class="churchyard-result-summary" id="result-summary" aria-live="polite"></p>
+          <ol class="churchyard-results" id="search-results"></ol>
+        </aside>
+
+        <div class="churchyard-main">
+          <div class="churchyard-map-wrap" id="map-wrap">
+            <img
+              id="churchyard-map"
+              class="churchyard-map-img"
+              src="graveyard/ChurchYard2019.jpg?v=20260929h"
+              width="1502"
+              height="825"
+              alt="Plan of St Michael's churchyard, Penkridge"
+              decoding="async"
+            >
+            <canvas id="churchyard-map-canvas" class="churchyard-map-canvas" aria-label="Grave markers on the churchyard map"></canvas>
+            <div
+              id="churchyard-map-marker"
+              class="churchyard-map-marker"
+              hidden
+              aria-hidden="true"
+            >
+              <span class="churchyard-map-marker-ring"></span>
+              <span class="churchyard-map-marker-ring churchyard-map-marker-ring--delay"></span>
+              <span class="churchyard-map-marker-crosshair" aria-hidden="true"></span>
+              <span class="churchyard-map-marker-label" id="map-marker-label"></span>
+            </div>
+          </div>
+          <article class="card churchyard-detail" id="stone-detail" hidden aria-live="polite">
+            <header class="churchyard-detail-header">
+              <h2 id="detail-title">Memorial</h2>
+              <p class="churchyard-detail-id" id="detail-id"></p>
+            </header>
+            <div class="churchyard-cluster-nav" id="cluster-nav" hidden>
+              <span class="churchyard-cluster-nav-label" id="cluster-nav-label"></span>
+              <div class="churchyard-cluster-nav-buttons">
+                <button type="button" class="button button-ghost" id="cluster-prev">Previous grave</button>
+                <button type="button" class="button button-ghost" id="cluster-next">Next grave</button>
+              </div>
+            </div>
+            <ul class="churchyard-people" id="detail-people"></ul>
+            <figure class="churchyard-photos" id="detail-photos" hidden>
+              <figcaption>Gravestone photographs</figcaption>
+              <div class="churchyard-photo-frame">
+                <img id="detail-photo" alt="">
+              </div>
+              <div class="churchyard-photo-controls">
+                <button type="button" class="button button-ghost" id="photo-prev">Previous photo</button>
+                <span id="photo-counter"></span>
+                <button type="button" class="button button-ghost" id="photo-next">Next photo</button>
+              </div>
+            </figure>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> St Michael's Church, Penkridge. All rights reserved.</p>
+      <p class="small">Records are transcribed from memorial inscriptions; please tell the parish office of any corrections.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script src="churchyard.js?v=20260929l" defer></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>St Michael's Church — Penkridge, Staffordshire</title>
+  <meta name="description" content="St Michael and All Angels Church, Penkridge — worship, community, and welcome in the heart of Staffordshire.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="eyebrow">Church of England · Diocese of Lichfield</p>
+      <p class="site-title-wrap"><a href="index.html" class="site-title-link">St Michael's Church</a></p>
+      <p class="site-subtitle">Penkridge, Staffordshire</p>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="churchyard.html">Churchyard</a>
+        <a href="events.html">Events</a>
+        <a href="#services">Services</a>
+        <a href="#visit">Find us</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-content">
+        <h2 id="hero-heading">A welcoming place to worship and belong</h2>
+        <p class="lead">St Michael's has stood at the centre of Penkridge for centuries — open to all who seek peace, prayer, and community.</p>
+        <div class="hero-actions">
+          <a class="button" href="#services">Sunday services</a>
+          <a class="button button-ghost" href="events.html">Events through the year</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container narrow">
+        <h2>Welcome</h2>
+        <p>Whether you live locally, are visiting Staffordshire, or are exploring faith, you are welcome here. See our <a href="gallery.html">gallery</a> for pictures of the church, or the <a href="events.html">events calendar</a> for festivals and parish gatherings through the year.</p>
+      </div>
+    </section>
+
+    <section id="services" class="section section-alt">
+      <div class="container grid-two">
+        <div>
+          <h2>Sunday services</h2>
+          <p>Our main service is Parish Eucharist at <strong>10:30</strong>, with hymns, readings, and a sermon. All baptised Christians are welcome to receive communion; others may come forward for a blessing.</p>
+          <p class="small">Weekday worship and seasonal times are listed on the notice sheet and in the annual events calendar.</p>
+        </div>
+        <aside class="card highlight">
+          <h3>Need help?</h3>
+          <p class="highlight-body">Baptisms, weddings, funerals, and pastoral visits — contact the parish office (details below).</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="visit" class="section">
+      <div class="container grid-two">
+        <div id="contact">
+          <h2>Find us &amp; contact</h2>
+          <address class="address">
+            St Michael and All Angels Church<br>
+            Church Lane, Penkridge<br>
+            Staffordshire ST19 5DJ
+          </address>
+          <dl class="contact-list contact-list-inline">
+            <div>
+              <dt>Email</dt>
+              <dd><a href="mailto:office@example.org">office@example.org</a></dd>
+            </div>
+            <div>
+              <dt>Telephone</dt>
+              <dd><a href="tel:+441902000000">01902 000 000</a></dd>
+            </div>
+          </dl>
+          <a class="link-arrow" href="https://www.google.com/maps/search/St+Michael+Church+Penkridge+Staffordshire" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
+        </div>
+        <div class="map-placeholder" role="img" aria-label="Map area showing Penkridge town centre">
+          <span>Penkridge · Staffordshire</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> St Michael's Church, Penkridge. All rights reserved.</p>
+      <p class="small">Verify service times and contacts with the parish before travelling.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
