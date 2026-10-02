@@ -13,12 +13,12 @@ Website for St Michael and All Angels, Penkridge, with a searchable churchyard g
 - 881 stones are not marked on the old map, so their positions are estimates
 - 0 positions have been checked on the ground
 - 144 issues still flagged in the spreadsheet
-- Tomb photos (`graveyard/LoRes10Tombs/`, about 1GB) are not in git - copy them over from the USB stick
+- Tomb photos (`graveyard/LoRes10Tombs/`, about 1GB) are not in git - get the folder from Tobi (shared link)
 - Gallery photos from Wikimedia Commons / Geograph need credits on the page before going live
 
 ## Running it locally
 
-1. Copy `LoRes10Tombs/` from the USB stick into `graveyard/`
+1. Get the `LoRes10Tombs/` folder from Tobi (shared link) and put it in `graveyard/`
 2. The churchyard page loads its data with `fetch`, so it must run through a local web server, not by double-clicking the HTML file. From the repo folder:
 
 ```
