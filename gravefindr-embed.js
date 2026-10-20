@@ -13,8 +13,17 @@
     "http://127.0.0.1:3010": true,
   };
 
+  var bootUntil = Date.now() + 2000;
+
+  function currentHeight() {
+    var raw = embed.style.getPropertyValue("--gravefindr-h");
+    var n = parseFloat(raw);
+    return Number.isFinite(n) ? n : 520;
+  }
+
   function setHeight(px) {
     var height = Math.max(480, Math.ceil(px));
+    if (Date.now() < bootUntil && height < currentHeight()) return;
     embed.style.setProperty("--gravefindr-h", height + "px");
   }
 

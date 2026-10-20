@@ -820,7 +820,7 @@ address {
 }
 
 .gravefindr-embed {
-  --gravefindr-h: 920px;
+  --gravefindr-h: 520px;
   height: var(--gravefindr-h);
   border: 1px solid var(--stone-line);
   background: var(--paper);
