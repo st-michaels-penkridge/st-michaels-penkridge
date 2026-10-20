@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&amp;family=Castoro+Titling&amp;family=Josefin+Sans:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261020k">
+  <link rel="stylesheet" href="styles.css?v=20261020m">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -21,7 +21,8 @@
     <nav class="nav" aria-label="Primary">
       <a href="index.html#sundays" data-nav="sundays">Sundays</a>
       <a href="events.html" data-nav="events">What's on</a>
-      <a href="churchyard.html" data-nav="churchyard">Find a grave</a>
+      <a href="life-events.html" data-nav="life">Life events</a>
+      <a href="churchyard.html" data-nav="churchyard"><span class="nav-long">Find a grave</span><span class="nav-short">Graves</span></a>
       <a href="gallery.html" data-nav="gallery">History</a>
       <a href="index.html#visit" data-nav="visit">Visit</a>
     </nav>
@@ -37,28 +38,11 @@
           <h1 id="hero-title">St&nbsp;Michael's Church, Penkridge</h1>
           <p class="lede">A Grade I listed parish church on St Michael's Square. There has been a church here for more than a thousand years, and everyone is welcome.</p>
         </div>
-        <div class="hero-actions">
-          <a class="btn btn-light btn-lg" href="#sundays">Plan your visit<span class="btn-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-          <a class="btn btn-line-light btn-lg" href="churchyard.html"><span class="btn-text">Find a grave<small>with Gravefindr</small></span><span class="btn-dot btn-dot-glass" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-        </div>
       </div>
-    </section>
-
-    <section class="band sundays" id="sundays" aria-labelledby="sundays-title" data-spy="sundays">
-      <div class="prose">
-        <span class="kicker">New here?</span>
-        <h2 id="sundays-title">Your first Sunday</h2>
-        <p>Holy Communion starts at 10:30 and usually finishes between 11:30 and 12. It follows the Church of England's Common Worship, with the organ and a mix of traditional and modern hymns.</p>
-        <p>You don't need to know what to do or when to stand. Come in, sit wherever you like, and follow along with the words on the screens. Children are welcome.</p>
-        <p>On the third Sunday of the month the pattern changes, so check the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">parish Facebook page</a> for that week.</p>
-      </div>
-      <figure class="sundays-photo">
-        <img src="images/a26c9c41459f.jpg" width="1280" height="1707" alt="The nave of St Michael's, with the crimson carpet running up the aisle to the chancel screen" loading="lazy">
-      </figure>
     </section>
 
     <!-- TODO: confirm service pattern and finish time with Greg -->
-    <section class="times-band" aria-label="Sunday service times" data-spy="sundays">
+    <section class="times-band" id="sundays" aria-label="Sunday service times" data-spy="sundays">
       <p class="times-when">
         <span class="times-time">10:30</span>
         <span class="times-what">Sunday Holy Communion</span>
@@ -74,43 +58,30 @@
       </div>
     </section>
 
-    <section class="band band-stone" aria-labelledby="month-title" data-spy="events">
-      <span class="kicker">Through the month</span>
-      <h2 id="month-title">Messy Church and coffee mornings</h2>
-        <!-- TODO: add the days and times for Messy Church and coffee mornings -->
-        <div class="month-grid">
-          <div>
-            <h3>Messy Church</h3>
-            <p>Church for families, with crafts and activities, a short celebration together and food to share. It's free, and children come with their grown-ups.</p>
-            <p class="small">Next dates are on the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">parish Facebook page</a>.</p>
-          </div>
-          <div>
-            <h3>Coffee mornings</h3>
-            <p>Tea, coffee, cake and a chat in the church. Everyone is welcome, whether or not you come on Sundays.</p>
-            <p class="small">Next dates are on the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">parish Facebook page</a>.</p>
-          </div>
-        </div>
+    <section class="band sundays" id="first-sunday" aria-labelledby="sundays-title" data-spy="sundays">
+      <div class="prose">
+        <span class="kicker">New here?</span>
+        <h2 id="sundays-title">Your first Sunday</h2>
+        <p>Holy Communion starts at 10:30 and usually finishes between 11:30 and 12. It follows the Church of England's Common Worship, with the organ and a mix of traditional and modern hymns.</p>
+        <p>You don't need to know what to do or when to stand. Come in, sit wherever you like, and follow along with the words on the screens. Children are welcome.</p>
+        <p>On the third Sunday of the month the pattern changes, so check the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">parish Facebook page</a> for that week.</p>
+      </div>
+      <figure class="sundays-photo">
+        <img src="images/a26c9c41459f.jpg" width="1280" height="1707" alt="The nave of St Michael's, with the crimson carpet running up the aisle to the chancel screen" loading="lazy">
+      </figure>
     </section>
 
-    <section class="band occasions" aria-labelledby="occasions-title">
-      <span class="kicker">Life at St Michael's</span>
-      <h2 id="occasions-title">Baptisms, weddings and funerals</h2>
-      <div class="occasions-grid">
-        <div>
-          <h3>Baptism</h3>
-          <p>To arrange a baptism or christening, for a child or for yourself, talk to the Rector.</p>
-        </div>
-        <div>
-          <h3>Weddings</h3>
-          <p>You can marry at St Michael's if you live in the parish, come to church here, or have a family connection to it.</p>
-        </div>
-        <div>
-          <h3>Funerals</h3>
-          <p>A funeral can be held here whether or not the person came to church. Your funeral director can contact us for you.</p>
-        </div>
-      </div>
-      <!-- TODO: confirm Rector's name and number with the parish -->
-      <p class="occasions-contact">Speak to the Rector, Gregory Yerbury, on <a href="tel:+441785714344">01785 714344</a>.</p>
+    <section class="band home-coming" aria-labelledby="coming-title" data-spy="events">
+      <span class="kicker">Upcoming</span>
+      <h2 id="coming-title">Coming up</h2>
+        <!-- TODO: replace with real parish events and times -->
+        <ol class="coming-list">
+          <li data-date="2026-11-08"><span class="coming-date"><span class="coming-day">8</span>November</span><span>Remembrance Sunday</span></li>
+          <li data-date="2026-11-29"><span class="coming-date"><span class="coming-day">29</span>November</span><span>Advent Sunday, the start of the church year</span></li>
+          <li data-date="2026-12-24"><span class="coming-date"><span class="coming-day">24</span>December</span><span>Christmas Eve</span></li>
+          <li data-date="2026-12-25"><span class="coming-date"><span class="coming-day">25</span>December</span><span>Christmas Day</span></li>
+        </ol>
+      <p class="coming-more">Service times go up nearer the day. <a href="events.html">See what's on through the year</a></p>
     </section>
 
     <section class="graves" aria-labelledby="graves-title" data-spy="churchyard">
@@ -130,19 +101,6 @@
         </div>
         <p class="powered">Powered by <a href="https://gravefindr.co.uk/" target="_blank" rel="noopener">Gravefindr</a></p>
       </div>
-    </section>
-
-    <section class="band" aria-labelledby="coming-title" data-spy="events">
-      <span class="kicker">Upcoming</span>
-      <h2 id="coming-title">Coming up</h2>
-        <!-- TODO: replace with real parish events and times -->
-        <ol class="coming-list">
-          <li data-date="2026-11-08"><span class="coming-date"><span class="coming-day">8</span>November</span><span>Remembrance Sunday</span></li>
-          <li data-date="2026-11-29"><span class="coming-date"><span class="coming-day">29</span>November</span><span>Advent Sunday, the start of the church year</span></li>
-          <li data-date="2026-12-24"><span class="coming-date"><span class="coming-day">24</span>December</span><span>Christmas Eve</span></li>
-          <li data-date="2026-12-25"><span class="coming-date"><span class="coming-day">25</span>December</span><span>Christmas Day</span></li>
-        </ol>
-      <p class="coming-more">Service times go up nearer the day. <a href="events.html">See what's on through the year</a></p>
     </section>
 
     <section class="glass-band" aria-label="Stained glass at St Michael's" data-spy="gallery">
@@ -226,6 +184,7 @@
       <div>
         <h2>Also here</h2>
         <ul>
+          <li><a href="life-events.html">Baptisms, weddings and funerals</a></li>
           <li><a href="churchyard.html">Find a grave</a></li>
           <li><a href="donate.html">Give to St Michael's</a></li>
           <li><a href="https://www.achurchnearyou.com/church/4431/" target="_blank" rel="noopener">Safeguarding</a></li>
@@ -281,6 +240,6 @@
       setInterval(tick, 1000);
     })();
   </script>
-  <script src="buttons.js?v=20261020k" defer></script>
+  <script src="buttons.js?v=20261020m" defer></script>
 </body>
 </html>

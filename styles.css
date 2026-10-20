@@ -27,7 +27,7 @@
   --step-3: clamp(2rem, 4vw, 2.75rem);
   --step-4: clamp(2.6rem, 6vw, 4.25rem);
 
-  --edge: max(1rem, calc((100vw - 72rem) / 2 + 1.5rem));
+  --edge: clamp(1rem, 4vw, 5rem);
   --measure: 36rem;
   --space: clamp(3.5rem, 8vw, 6.5rem);
 }
@@ -1911,21 +1911,15 @@ b {
 
 
 
-/* ---------------------------------------------------------------
-   Hero: the photo has the whole first screen. The name sits on the
-   left and two larger buttons on the right. Service times are
-   further down the page, after "Your first Sunday".
-   --------------------------------------------------------------- */
+/* Hero: the photo has the whole first screen, with the name and welcome over it.
+   Service times are further down the page, after "Your first Sunday". */
 .hero-full {
   min-height: calc(100vh - var(--mast-h, 0px));
   min-height: calc(100svh - var(--mast-h, 0px));
 }
 
 .hero-inner {
-  display: grid;
-  gap: 1.75rem 3rem;
-  align-items: end;
-  padding: 3rem var(--edge) clamp(2rem, 6vh, 3.75rem);
+  padding: 3rem var(--edge) clamp(2rem, 7vh, 4.5rem);
 }
 
 .hero-full .hero-copy {
@@ -1933,103 +1927,17 @@ b {
   min-width: 0;
 }
 
-.hero-actions {
-  display: grid;
-  gap: 0.75rem;
-  width: min(100%, 21rem);
-}
-
-.btn-lg {
-  justify-content: space-between;
-  min-height: 3.9rem;
-  padding: 0.45rem 0.45rem 0.45rem 1.75rem;
-  font-size: 1.1rem;
-}
-
-.btn-lg .btn-dot {
-  width: 3rem;
-  height: 3rem;
-}
-
-.btn-lg .btn-dot svg {
-  width: 1.2rem;
-  height: 1.2rem;
-}
-
-.btn-text {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.3rem;
-  text-align: left;
-}
-
-.btn-text small {
-  font-size: 0.8rem;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  opacity: 0.8;
-}
-
-/* The glass button's arrow sits in a clear circle; the one red dot stays on the main button */
-.btn-dot-glass {
-  background: rgba(255, 255, 255, 0.14);
-}
-
-@media (min-width: 960px) {
-  .hero-inner {
-    grid-template-columns: minmax(0, 1fr) auto;
-  }
-
-  .hero-actions {
-    width: 20rem;
-  }
-}
-
-@media (min-width: 600px) and (max-width: 959px) {
-  .hero-actions {
-    width: auto;
-    grid-template-columns: repeat(2, minmax(0, 17rem));
-  }
-}
-
 @media (max-width: 599px) {
   .hero-inner {
-    gap: 1.25rem;
     padding-top: 2rem;
-    padding-bottom: 1.5rem;
-  }
-
-  .btn-lg {
-    min-height: 3.5rem;
-    padding-left: 1.4rem;
-    font-size: 1.02rem;
-  }
-
-  .btn-lg .btn-dot {
-    width: 2.65rem;
-    height: 2.65rem;
+    padding-bottom: 1.75rem;
   }
 }
 
 @media (max-height: 700px) {
   .hero-inner {
-    gap: 1rem 3rem;
     padding-top: 1.25rem;
     padding-bottom: 1.25rem;
-  }
-
-  .hero-actions {
-    gap: 0.6rem;
-  }
-
-  .btn-lg {
-    min-height: 3.25rem;
-  }
-
-  .btn-lg .btn-dot {
-    width: 2.45rem;
-    height: 2.45rem;
   }
 }
 
@@ -2230,7 +2138,6 @@ html {
   }
 
   .hero-inner {
-    grid-template-columns: minmax(0, 1fr) auto;
     padding-top: 1rem;
     padding-bottom: 1rem;
   }
@@ -2246,11 +2153,6 @@ html {
   .hero-full h1 {
     font-size: clamp(1.8rem, 7vh, 2.6rem);
     margin-bottom: 0;
-  }
-
-  .hero-actions {
-    width: 16rem;
-    grid-template-columns: 1fr;
   }
 }
 
@@ -2320,5 +2222,137 @@ html {
 @media (prefers-reduced-motion: reduce) {
   .carousel-viewport .gallery-item img {
     transition: none;
+  }
+}
+
+/* Wordmark: both lines in the same lettering, the place set small and spaced */
+.wordmark-place {
+  margin-top: 0.35rem;
+  font-family: var(--display);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 900px) {
+  .wordmark-place {
+    margin-top: 0.25rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+  }
+}
+
+@media (max-width: 400px) {
+  .wordmark-place {
+    font-size: 0.56rem;
+    letter-spacing: 0.12em;
+  }
+}
+
+/* The nave photo no longer breaks into the next band, so it can't cover the service times */
+.sundays {
+  padding-bottom: var(--space);
+}
+
+@media (min-width: 900px) {
+  .sundays-photo {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .page-head h1 {
+    font-size: 2.05rem;
+  }
+
+  .page-head.with-glass > div {
+    min-width: 0;
+  }
+}
+
+/* Wide screens: columns stretch across the page, but lines of text stay a comfortable length */
+.month-grid p,
+.occasions-grid p,
+.weekly-grid p {
+  max-width: 38rem;
+}
+
+/* Home: Coming up follows straight on from Your first Sunday */
+.home-coming {
+  padding-top: 0;
+}
+
+/* Life events page */
+.life-grid h2 {
+  font-size: 1.35rem;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.5rem;
+}
+
+.life-grid p {
+  color: var(--ink-soft);
+}
+
+/* Service times band: three across only when there's room */
+@media (min-width: 1000px) and (max-width: 1279px) {
+  .times-band {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .times-band .actions {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1280px) {
+  .times-band {
+    grid-template-columns: minmax(0, 22rem) minmax(0, 1fr) auto;
+  }
+}
+
+/* Phones: six menu items on one line, with "Find a grave" shortened to "Graves" */
+.nav-short {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .nav-long {
+    display: none;
+  }
+
+  .nav-short {
+    display: inline;
+  }
+
+  .nav {
+    gap: 0.35rem;
+  }
+
+  .nav a {
+    font-size: 0.7rem;
+    letter-spacing: 0.03em;
+  }
+}
+
+@media (max-width: 380px) {
+  .nav {
+    gap: 0.3rem;
+  }
+
+  .nav a {
+    font-size: 0.64rem;
+    letter-spacing: 0.01em;
+  }
+}
+
+@media (max-width: 345px) {
+  .nav {
+    gap: 0.2rem;
+  }
+
+  .nav a {
+    font-size: 0.58rem;
+    letter-spacing: 0;
   }
 }
