@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Donate — St Michael's Church, Penkridge</title>
+  <meta name="description" content="Support St Michael and All Angels, Penkridge: regular giving, one-off gifts, Gift Aid and gifts in wills.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20261020">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="eyebrow">Church of England · Diocese of Lichfield</p>
+      <p class="site-title-wrap"><a href="index.html" class="site-title-link">St Michael's Church</a></p>
+      <p class="site-subtitle">Penkridge, Staffordshire</p>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="churchyard.html">Churchyard</a>
+        <a href="events.html">Events</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#visit">Find us</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="donate.html" class="nav-donate" aria-current="page">Donate</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="page-intro">
+      <div class="container">
+        <h1>Support St Michael's</h1>
+        <p class="lead page-lead">St Michael's has been at the heart of Penkridge for centuries. It is kept open, warm and cared for by the gifts of people who love it, and every gift, large or small, helps.</p>
+      </div>
+    </div>
+
+    <section class="section" aria-labelledby="ways-heading">
+      <div class="container">
+        <h2 id="ways-heading">Ways to give</h2>
+        <div class="cards donate-ways">
+          <article class="card donate-way">
+            <h3>Give regularly</h3>
+            <p>A monthly gift by Direct Debit through the Church of England's Parish Giving Scheme helps us plan ahead. You can choose to raise it each year with inflation, and Gift Aid is claimed for you.</p>
+            <!-- TODO: replace with the parish's own Parish Giving Scheme link from the treasurer -->
+            <a class="button" href="https://www.parishgiving.org.uk/donors/find-your-parish" target="_blank" rel="noopener">Set up regular giving</a>
+          </article>
+          <article class="card donate-way">
+            <h3>Give once</h3>
+            <p>Give during a service or whenever you visit the church. If you would like to make a one-off gift another way, or give in memory of someone, please contact the parish office and we will help.</p>
+            <!-- TODO: add an online one-off giving link once the PCC has chosen a provider -->
+            <a class="button button-outline" href="index.html#contact">Contact the parish office</a>
+          </article>
+          <article class="card donate-way">
+            <h3>Add Gift Aid</h3>
+            <p>If you pay UK income tax, Gift Aid lets the church claim an extra 25p for every £1 you give, at no cost to you. Tick the Gift Aid box when you set up your gift, or ask the parish office for a declaration form.</p>
+            <a class="link-arrow" href="https://www.gov.uk/donating-to-charity/gift-aid" target="_blank" rel="noopener">How Gift Aid works</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" aria-labelledby="impact-heading">
+      <div class="container grid-two">
+        <div>
+          <h2 id="impact-heading">What your gift does</h2>
+          <ul class="donate-list">
+            <li>Keeps the church open, heated, lit and insured for worship and for visitors</li>
+            <li>Cares for a historic building, from the roof and windows to the organ</li>
+            <li>Supports services, music, baptisms, weddings and funerals</li>
+            <li>Looks after the churchyard and its records, so families can find the graves of people they love</li>
+            <li>Funds our work with children, families and the wider Penkridge community</li>
+          </ul>
+        </div>
+        <aside class="card highlight">
+          <h3>Leaving a gift in your will</h3>
+          <p class="highlight-body">A gift in your will helps St Michael's stay at the heart of Penkridge for generations to come. If you are thinking about it, please speak to the parish office in confidence.</p>
+          <p class="small">The Parochial Church Council of St Michael and All Angels, Penkridge is a registered charity, number 1131086.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> St Michael's Church, Penkridge. All rights reserved.</p>
+      <p class="small">Registered charity number 1131086.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

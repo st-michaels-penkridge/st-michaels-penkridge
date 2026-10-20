@@ -4,8 +4,8 @@ Website for St Michael and All Angels, Penkridge, with a searchable churchyard g
 
 ## Where it stands
 
-- Pages: Home, Gallery, Churchyard, Events
-- Grave finder: name search, a map dot for every grave, memorial details, gravestone photos, and next/previous through nearby graves
+- Pages: Home, Gallery, Churchyard, Events, Donate
+- Grave finder: the Churchyard page now embeds Gravefindr (https://gravefindr.co.uk/graveyards/st-michaels-penkridge), with a link out to the full site. The old built-in finder (`churchyard.js` and the map files in `graveyard/`) is still in the repo but no longer loaded
 - Data: 2,130 stones and 3,576 people, from the 2000 survey updated to about 2019 (`graveyard/graves.json`, source spreadsheet `graveyard/St Michaels Churchyard - Grave Records.xlsx`)
 
 ### Known gaps
@@ -75,6 +75,44 @@ Notes:
 - Smarter search: misspellings, dates, sections, and "walk me to this grave" on mobile
 - A corrections form for families and the parish office
 - Hosting, domain, PCC sign-off, and gallery photo credits
+
+## Website improvements
+
+Ordered roughly by what matters most before the site goes live.
+
+### 1. Get the real details in
+
+The home page still has placeholder contact details (office@example.org and 01902 000 000). The address also needs checking: this site says Church Lane, ST19 5DJ, but A Church Near You lists Church Road, ST19 5AW. Service times need confirming too, as A Church Near You lists Holy Communion at 10:30 on the 1st, 2nd, 4th and 5th Sundays, which suggests the 3rd Sunday is different. Check all of this with Greg.
+
+### 2. Finish the Donate page
+
+The regular giving button currently goes to the general Parish Giving Scheme finder. Ask the treasurer for the parish's own Parish Giving link and swap it in (marked TODO in `donate.html`). The PCC also needs to decide whether to offer online one-off giving (for example a card or contactless link) and, if so, which provider.
+
+### 3. Safeguarding page
+
+Church of England parishes are expected to publish their safeguarding statement and contacts. A Church Near You already has the wording and the Parish Safeguarding Officer's details, so add a short Safeguarding page and link it from the footer of every page.
+
+### 4. Make the Gravefindr embed seamless
+
+At the moment the Churchyard page shows the whole Gravefindr page in a frame, including its own header. Because we run Gravefindr, we can add an embed view (no header, matching colours, and a frame that grows to fit its results instead of scrolling inside the page). The same approach then works for any other church that wants the finder on its own site.
+
+Later, not yet: an email sign-up popup on the Gravefindr site, for families who want updates when records or photos are added.
+
+### 5. Pick the colours
+
+Will's `colour-test` branch has a switch between the current green and green with the carpet red. Decide on one with Greg, merge it, and remove the "Local try" switch.
+
+### 6. Speed and tidying
+
+The `images` folder is about 44MB, with several photos close to 1MB each. Compress them for the web so pages load quickly on phones. Once everyone is happy with Gravefindr as the grave finder, remove the old built-in finder (`churchyard.js`, `graveyard/graves.json`, the map images and its styles) to keep the repo small. Gallery photo credits still need adding before launch.
+
+### 7. Content people look for
+
+A real map on the Find us section instead of the placeholder, pages for baptisms, weddings and funerals, and a simple news or notices area for the weekly notice sheet and events like Messy Church.
+
+### 8. Launch
+
+Host it (for example on Netlify, as with the other sites), point the church's domain at it, get PCC sign-off, and then update the "Our website" button on A Church Near You, which currently goes to the parish Facebook page.
 
 ## Open decision
 
