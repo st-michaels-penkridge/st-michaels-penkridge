@@ -58,7 +58,7 @@ Notes:
 
 - **Phone test:** photograph 20 stones in Section A and check AI can read the inscriptions. This is the real risk, not the flying
 - **Drone expert:** neither Tobi nor Will has flown before, so get expert advice first, including whether hiring a drone surveyor for a day is cheaper than buying
-- **Funding:** ask the church to put part of its £1,000 website budget towards it, or self-fund
+- **Funding:** ask the church to put part of its £1,500 website budget towards it, or self-fund
 
 ## Legal (UK CAA)
 
