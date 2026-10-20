@@ -2,10 +2,61 @@
 
 Website for St Michael and All Angels, Penkridge, with a searchable churchyard grave finder. Built by Will King and Tobi Hussey.
 
+## PRIORITY: members area, rotas and easy page updates
+
+> **Note for AI coding agents working in this repo:** at the start of every session, tell Will about this section and check he has read it. It is the next big piece of work and needs his agreement before anything is built.
+
+The aim is for the site to become a working tool for the church, not just a set of pages. There are three parts, all behind a sign-in for church members.
+
+### 1. Sign-in for church members
+
+- **Invite-only.** People are invited, or request access and an admin (for example Greg or the parish office) approves them. Nobody outside the church can sign themselves up
+- **Sign in with a link sent by email**, so there are no passwords to forget
+- **Three levels:** member (sees rotas and notices), rota lead (edits their own rota), admin (manages people, rotas and page content). Admins use two-step login
+- A "Members" link in the menu leads to it
+
+### 2. Rotas and availability
+
+- Rotas for AV, readers, coffee, flowers and welcomers
+- Members see who is on when, mark the dates they are not available, request swaps, and get an email reminder the week before
+- **Start with the AV rota as the pilot.** The AV team runs the service words on the screens (PowerPoint), so they are the obvious first users. Add the other rotas once it works
+
+### 3. Easy page updates
+
+- What's on, the seasons, Coming up dates and notices should come from a simple edit screen instead of being written into the HTML, so Greg or the office can change a date without touching code
+- Two ways to do it: keep the content in the same database as the rotas and show it on the public pages, or use a Git-based editor (for example Pages CMS or Decap CMS) that edits a data file in this repo
+
+### Backend
+
+- **Supabase** for sign-in and the database (the free tier covers a church this size). Use the London or EU region, and row-level security so each person only sees what they should
+- Build everything else ourselves: rota pages, swaps, availability, reminders and the page editor. **Do not build the login system from scratch** - homemade logins are where most security problems come from
+- Email reminders: a scheduled Supabase function plus an email sending service
+- The public site stays as static pages. The members area talks to Supabase from the browser
+
+### Data protection (must be agreed before launch)
+
+- The PCC is responsible for the data (the data controller) under UK GDPR
+- Rotas and group contact lists can be held under "legitimate interests", so signed consent is not needed just to be on a rota. Consent is needed for extras like a members' directory or newsletters. Source: [Parish Resources GDPR guide for PCCs](https://www.parishresources.org.uk/wp-content/uploads/GDPR-Short-PCC-Guide.pdf), which also says PCCs should stay exempt from the ICO data protection fee
+- Publish a privacy notice (Parish Resources has guides and templates)
+- **Store the minimum:** name, email and optionally a phone number. No addresses, dates of birth, health details, anything about children (including Messy Church), or safeguarding information, which stays with the Parish Safeguarding Officer
+- Remove people when they leave, and let people see or delete their own data
+- **No real data goes in until the PCC has agreed**
+
+### Order of work
+
+1. Will and Tobi agree the plan
+2. Build a clickable prototype with made-up names (sign-in, AV rota, swaps, the What's on editor) to show Greg and the PCC
+3. PCC approval and a privacy notice
+4. Set up Supabase and build the AV rota for real
+5. Add the other rotas and the page editor
+
+This could also be offered to other churches alongside Gravefindr (see Open decision below).
+
 ## Where it stands
 
-- Pages: Home, Gallery, Churchyard, Events
-- Grave finder: name search, a map dot for every grave, memorial details, gravestone photos, and next/previous through nearby graves
+- Pages: Home, Sundays, Find a grave, History, Visit, Life events (baptisms, weddings and funerals), What's on, Donate. Every menu item is its own page; the home page is a short tour that links into each one
+- The redesign (crimson colours, Castoro and Josefin Sans fonts, full-width layout) is on the `crimson-colours` branch
+- Grave finder: the Churchyard page now embeds Gravefindr (https://gravefindr.co.uk/graveyards/st-michaels-penkridge), with a link out to the full site. The old built-in finder (`churchyard.js` and the map files in `graveyard/`) is still in the repo but no longer loaded
 - Data: 2,130 stones and 3,576 people, from the 2000 survey updated to about 2019 (`graveyard/graves.json`, source spreadsheet `graveyard/St Michaels Churchyard - Grave Records.xlsx`)
 
 ### Known gaps
@@ -76,9 +127,47 @@ Notes:
 - A corrections form for families and the parish office
 - Hosting, domain, PCC sign-off, and gallery photo credits
 
+## Website improvements
+
+Ordered roughly by what matters most before the site goes live.
+
+### 1. Get the real details in
+
+The home page still has placeholder contact details (office@example.org and 01902 000 000). The address also needs checking: this site says Church Lane, ST19 5DJ, but A Church Near You lists Church Road, ST19 5AW. Service times need confirming too, as A Church Near You lists Holy Communion at 10:30 on the 1st, 2nd, 4th and 5th Sundays, which suggests the 3rd Sunday is different. Check all of this with Greg.
+
+### 2. Finish the Donate page
+
+The regular giving button currently goes to the general Parish Giving Scheme finder. Ask the treasurer for the parish's own Parish Giving link and swap it in (marked TODO in `donate.html`). The PCC also needs to decide whether to offer online one-off giving (for example a card or contactless link) and, if so, which provider.
+
+### 3. Safeguarding page
+
+Church of England parishes are expected to publish their safeguarding statement and contacts. A Church Near You already has the wording and the Parish Safeguarding Officer's details, so add a short Safeguarding page and link it from the footer of every page.
+
+### 4. Make the Gravefindr embed seamless
+
+At the moment the Churchyard page shows the whole Gravefindr page in a frame, including its own header. Because we run Gravefindr, we can add an embed view (no header, matching colours, and a frame that grows to fit its results instead of scrolling inside the page). The same approach then works for any other church that wants the finder on its own site.
+
+Later, not yet: an email sign-up popup on the Gravefindr site, for families who want updates when records or photos are added.
+
+### 5. Pick the colours
+
+Done: crimson, black and white was chosen, and it is on the `crimson-colours` branch. Check it with Greg before merging.
+
+### 6. Speed and tidying
+
+The `images` folder is about 44MB, with several photos close to 1MB each. Compress them for the web so pages load quickly on phones. Once everyone is happy with Gravefindr as the grave finder, remove the old built-in finder (`churchyard.js`, `graveyard/graves.json`, the map images and its styles) to keep the repo small. Gallery photo credits still need adding before launch.
+
+### 7. Content people look for
+
+Done on `crimson-colours`: a real map on the Visit section and a Life events page for baptisms, weddings and funerals. Still to do: a news or notices area for the weekly notice sheet, which fits the page editor in the priority section above.
+
+### 8. Launch
+
+Host it (for example on Netlify, as with the other sites), point the church's domain at it, get PCC sign-off, and then update the "Our website" button on A Church Near You, which currently goes to the parish Facebook page.
+
 ## Open decision
 
-Is this just St Michael's, or a multi-church platform (free church sign-up, paid drone/photo service, add-ons like gravestone cleaning)? This decides how everything gets built.
+Is this just St Michael's, or a multi-church platform (free church sign-up, paid drone/photo service, add-ons like gravestone cleaning, and the members area with rotas)? This decides how everything gets built.
 
 ## Next steps
 
