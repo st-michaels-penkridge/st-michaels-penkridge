@@ -820,14 +820,17 @@ address {
 }
 
 .gravefindr-embed {
+  --gravefindr-h: 920px;
+  height: var(--gravefindr-h);
   border: 1px solid var(--stone-line);
   background: var(--paper);
+  overflow: hidden;
 }
 
 .gravefindr-embed iframe {
   display: block;
   width: 100%;
-  height: clamp(640px, 85vh, 1100px);
+  height: 100%;
   border: 0;
 }
 
