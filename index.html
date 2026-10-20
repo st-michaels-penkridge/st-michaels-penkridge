@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&amp;family=Castoro+Titling&amp;family=Josefin+Sans:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261020s">
+  <link rel="stylesheet" href="styles.css?v=20261020w">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -19,6 +19,7 @@
       <span class="wordmark-place">Penkridge, Staffordshire</span>
     </a>
     <nav class="nav" aria-label="Primary">
+      <a href="index.html" data-nav="home" aria-current="page">Home</a>
       <a href="sundays.html" data-nav="sundays">Sundays</a>
       <a href="churchyard.html" data-nav="churchyard"><span class="nav-long">Find a grave</span><span class="nav-short">Graves</span></a>
       <a href="gallery.html" data-nav="gallery">History</a>
@@ -80,7 +81,7 @@
 
       <section class="story-row graves" aria-labelledby="graves-title">
         <figure class="graves-photo">
-          <img src="images/eefdf59a510c.jpg" width="960" height="639" alt="A path through St Michael's churchyard between old headstones and yew trees" loading="lazy">
+          <img src="images/710e549019.jpg" width="960" height="639" alt="Old headstones lining the path through St Michael's churchyard, with the church behind in spring sunshine" loading="lazy">
         </figure>
         <div class="graves-text">
           <span class="kicker">Outside, the churchyard</span>
@@ -207,7 +208,7 @@
       document.getElementById("sunday-next").textContent =
         (i === 0 ? "Today" : "Next: " + when) + ". Usually finishes between 11:30 and 12.";
       var today = new Date(); today.setHours(0, 0, 0, 0);
-      document.querySelectorAll(".coming-list li[data-date]").forEach(function (li) {
+      document.querySelectorAll(".coming-list li[data-date], .coming-cards li[data-date]").forEach(function (li) {
         if (new Date(li.getAttribute("data-date") + "T00:00:00") < today) li.remove();
       });
 
@@ -234,6 +235,6 @@
       setInterval(tick, 1000);
     })();
   </script>
-  <script src="buttons.js?v=20261020s" defer></script>
+  <script src="buttons.js?v=20261020w" defer></script>
 </body>
 </html>

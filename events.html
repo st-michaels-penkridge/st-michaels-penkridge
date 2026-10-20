@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&amp;family=Castoro+Titling&amp;family=Josefin+Sans:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261020s">
+  <link rel="stylesheet" href="styles.css?v=20261020w">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -19,6 +19,7 @@
       <span class="wordmark-place">Penkridge, Staffordshire</span>
     </a>
     <nav class="nav" aria-label="Primary">
+      <a href="index.html" data-nav="home">Home</a>
       <a href="sundays.html" data-nav="sundays">Sundays</a>
       <a href="churchyard.html" data-nav="churchyard"><span class="nav-long">Find a grave</span><span class="nav-short">Graves</span></a>
       <a href="gallery.html" data-nav="gallery">History</a>
@@ -38,9 +39,46 @@
       <div class="lancets" aria-hidden="true"><figure class="lancet"><img src="images/glass-chapel-left.jpg" alt="" loading="lazy"></figure><figure class="lancet tall"><img src="images/glass-chapel-centre.jpg" alt="" loading="lazy"></figure><figure class="lancet"><img src="images/glass-chapel-right.jpg" alt="" loading="lazy"></figure></div>
     </header>
 
-    <section class="band" aria-labelledby="weekly-title" style="padding-top:0">
+    <section class="band events-coming" aria-labelledby="coming-title" style="padding-top:0">
+      <span class="kicker">Upcoming</span>
+      <h2 id="coming-title">Coming up</h2>
+      <!-- TODO: replace with real parish events and times -->
+      <ol class="coming-cards">
+          <li data-date="2026-11-08">
+            <time class="cal" datetime="2026-11-08"><span class="cal-month">Nov</span><span class="cal-day">8</span><span class="cal-dow">Sunday</span></time>
+            <div>
+              <h3>Remembrance Sunday</h3>
+              <p>We remember those who have died in war, with two minutes' silence.</p>
+            </div>
+          </li>
+          <li data-date="2026-11-29">
+            <time class="cal" datetime="2026-11-29"><span class="cal-month">Nov</span><span class="cal-day">29</span><span class="cal-dow">Sunday</span></time>
+            <div>
+              <h3>Advent Sunday</h3>
+              <p>The start of the church year, and the four weeks of getting ready for Christmas.</p>
+            </div>
+          </li>
+          <li data-date="2026-12-24">
+            <time class="cal" datetime="2026-12-24"><span class="cal-month">Dec</span><span class="cal-day">24</span><span class="cal-dow">Thursday</span></time>
+            <div>
+              <h3>Christmas Eve</h3>
+              <p>Services on Christmas Eve. Times go up nearer the day.</p>
+            </div>
+          </li>
+          <li data-date="2026-12-25">
+            <time class="cal" datetime="2026-12-25"><span class="cal-month">Dec</span><span class="cal-day">25</span><span class="cal-dow">Friday</span></time>
+            <div>
+              <h3>Christmas Day</h3>
+              <p>Celebrate Christmas morning at St Michael's. Times go up nearer the day.</p>
+            </div>
+          </li>
+      </ol>
+      <p class="coming-more">Times go up nearer the day. Concerts, fundraisers and other parish events are posted on the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">Facebook page</a>.</p>
+    </section>
+
+    <section class="band band-stone" aria-labelledby="weekly-title">
       <span class="kicker">Every week</span>
-      <h2 id="weekly-title" class="visually-hidden">Every week</h2>
+      <h2 id="weekly-title">Sundays and services</h2>
       <div class="weekly">
         <div>
           <h3>Sunday, 10:30</h3>
@@ -57,7 +95,7 @@
       </div>
     </section>
 
-    <section class="band band-stone" aria-labelledby="month-title">
+    <section class="band" aria-labelledby="month-title">
       <span class="kicker">Through the month</span>
       <h2 id="month-title">Messy Church and coffee mornings</h2>
         <!-- TODO: add the days and times for Messy Church and coffee mornings -->
@@ -75,18 +113,6 @@
         </div>
     </section>
 
-    <section class="band" aria-labelledby="coming-title">
-      <span class="kicker">Upcoming</span>
-      <h2 id="coming-title">Coming up</h2>
-        <!-- TODO: replace with real parish events and times -->
-        <ol class="coming-list">
-          <li data-date="2026-11-08"><span class="coming-date"><span class="coming-day">8</span>November</span><span>Remembrance Sunday</span></li>
-          <li data-date="2026-11-29"><span class="coming-date"><span class="coming-day">29</span>November</span><span>Advent Sunday, the start of the church year</span></li>
-          <li data-date="2026-12-24"><span class="coming-date"><span class="coming-day">24</span>December</span><span>Christmas Eve</span></li>
-          <li data-date="2026-12-25"><span class="coming-date"><span class="coming-day">25</span>December</span><span>Christmas Day</span></li>
-        </ol>
-      <p class="coming-more">Times go up nearer the day. Concerts, fundraisers and other parish events are posted on the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">Facebook page</a>.</p>
-    </section>
 
     <section class="band band-stone" aria-labelledby="year-title">
       <span class="kicker">The church year</span>
@@ -176,11 +202,11 @@
   <script>
     (function () {
       var today = new Date(); today.setHours(0, 0, 0, 0);
-      document.querySelectorAll(".coming-list li[data-date]").forEach(function (li) {
+      document.querySelectorAll(".coming-list li[data-date], .coming-cards li[data-date]").forEach(function (li) {
         if (new Date(li.getAttribute("data-date") + "T00:00:00") < today) li.remove();
       });
     })();
   </script>
-  <script src="buttons.js?v=20261020s" defer></script>
+  <script src="buttons.js?v=20261020w" defer></script>
 </body>
 </html>

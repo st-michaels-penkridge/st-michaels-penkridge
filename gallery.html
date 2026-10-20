@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&amp;family=Castoro+Titling&amp;family=Josefin+Sans:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261020s">
+  <link rel="stylesheet" href="styles.css?v=20261020w">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -19,6 +19,7 @@
       <span class="wordmark-place">Penkridge, Staffordshire</span>
     </a>
     <nav class="nav" aria-label="Primary">
+      <a href="index.html" data-nav="home">Home</a>
       <a href="sundays.html" data-nav="sundays">Sundays</a>
       <a href="churchyard.html" data-nav="churchyard"><span class="nav-long">Find a grave</span><span class="nav-short">Graves</span></a>
       <a href="gallery.html" data-nav="gallery" aria-current="page">History</a>
@@ -101,29 +102,43 @@
     </section>
     </div>
 
-    <section class="band band-stone history-page" aria-labelledby="dates-title">
-      <div>
-        <span class="kicker">At a glance</span>
-        <h2 id="dates-title">Key dates</h2>
-        <p class="small gallery-credit">History from the <a href="https://historicengland.org.uk/listing/the-list/list-entry/1039195" target="_blank" rel="noopener">Historic England list entry</a> and the Revd Patrick Comerford's <a href="https://www.patrickcomerford.com/2016/12/how-archbishops-of-dublin-became-deans.html" target="_blank" rel="noopener">history of the deanery</a>.</p>
+    <section class="band band-stone key-dates" aria-labelledby="dates-title">
+      <span class="kicker">At a glance</span>
+      <h2 id="dates-title">Key dates</h2>
+      <div class="eras">
+        <div class="era">
+          <h3>Saxon and medieval</h3>
+          <ol class="timeline">
+            <li><strong>900s</strong><span>A royal chapel at Penkridge, said to be founded by King Eadred or King Edgar</span></li>
+            <li><strong>1086</strong><span>Domesday Book records nine clerks</span></li>
+            <li><strong>1215</strong><span>King John makes the Archbishops of Dublin deans of Penkridge</span></li>
+            <li><strong>1226</strong><span>Henry de Loundres begins the present church</span></li>
+            <li><strong>c. 1250</strong><span>The nave arcades</span></li>
+            <li><strong>1300s</strong><span>The tower and south porch are begun</span></li>
+            <li><strong>c. 1340</strong><span>The east window opening</span></li>
+          </ol>
+        </div>
+        <div class="era">
+          <h3>Tudors to Georgians</h3>
+          <ol class="timeline">
+            <li><strong>1500s</strong><span>The clerestories, the upper tower and the Littleton tombs</span></li>
+            <li><strong>1548</strong><span>The college ends and its estates pass to the Littletons</span></li>
+            <li><strong>1668</strong><span>The font</span></li>
+            <li><strong>1778</strong><span>The Dutch wrought-iron chancel screen</span></li>
+          </ol>
+        </div>
+        <div class="era">
+          <h3>Victorians to today</h3>
+          <ol class="timeline">
+            <li><strong>1858</strong><span>St Michael's becomes an ordinary parish church</span></li>
+            <li><strong>1864</strong><span>New east window glass by Ward &amp; Hughes</span></li>
+            <li><strong>1881</strong><span>Restored by J. A. Chatwin</span></li>
+            <li><strong>1962</strong><span>Listed Grade I</span></li>
+            <li><strong>Today</strong><span>Still the parish church for Penkridge and Stretton</span></li>
+          </ol>
+        </div>
       </div>
-      <ul class="history-facts" aria-label="Key dates">
-        <li><strong>900s</strong><span>A royal chapel at Penkridge, said to be founded by King Eadred or King Edgar</span></li>
-        <li><strong>1086</strong><span>Domesday Book records nine clerks</span></li>
-        <li><strong>1215</strong><span>King John makes the Archbishops of Dublin deans of Penkridge</span></li>
-        <li><strong>1226</strong><span>Henry de Loundres begins the present church</span></li>
-        <li><strong>c. 1250</strong><span>The nave arcades</span></li>
-        <li><strong>1300s</strong><span>Tower and south porch begun</span></li>
-        <li><strong>c. 1340</strong><span>The east window opening</span></li>
-        <li><strong>1500s</strong><span>Clerestories, the upper tower and the Littleton tombs</span></li>
-        <li><strong>1548</strong><span>The college ends and its estates pass to the Littletons</span></li>
-        <li><strong>1668</strong><span>The font</span></li>
-        <li><strong>1778</strong><span>The Dutch wrought-iron chancel screen</span></li>
-        <li><strong>1858</strong><span>Becomes an ordinary parish church</span></li>
-        <li><strong>1864</strong><span>New east window glass by Ward &amp; Hughes</span></li>
-        <li><strong>1881</strong><span>Restored by J. A. Chatwin</span></li>
-        <li><strong>1962</strong><span>Listed Grade I</span></li>
-      </ul>
+      <p class="small gallery-credit">History from the <a href="https://historicengland.org.uk/listing/the-list/list-entry/1039195" target="_blank" rel="noopener">Historic England list entry</a> and the Revd Patrick Comerford's <a href="https://www.patrickcomerford.com/2016/12/how-archbishops-of-dublin-became-deans.html" target="_blank" rel="noopener">history of the deanery</a>.</p>
     </section>
 
     <section class="band photos-intro" aria-labelledby="photos-title">
@@ -224,7 +239,7 @@
     </div>
   </footer>
 
-  <script src="gallery.js?v=20261020s" defer></script>
-  <script src="buttons.js?v=20261020s" defer></script>
+  <script src="gallery.js?v=20261020w" defer></script>
+  <script src="buttons.js?v=20261020w" defer></script>
 </body>
 </html>
