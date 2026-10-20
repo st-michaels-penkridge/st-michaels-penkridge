@@ -3,22 +3,22 @@
    right or full width and link one section to the next. The crimson giving
    band is the one loud moment on the home page.
    Colours come from the building: the crimson nave carpet, limewashed walls,
-   worn stone and gilt lettering. */
+   worn stone, black and white. No gold anywhere: text is red, black or white. */
 
 :root {
   --paper: #ffffff;
   --stone: #ebe8e2;
   --stone-line: #d9d3c9;
-  --ink: #261c17;
-  --ink-soft: #5b4f47;
+  --ink: #141416;
+  --ink-soft: #55555b;
   --crimson: #7a2428;
   --crimson-deep: #5c1a1e;
-  --gilt: #d6b679;
-  --gilt-soft: #f3e6c8;
+  --red: #b3262c;
+  --black: #111113;
 
   --display: "Castoro Titling", "Trajan Pro", "Times New Roman", serif;
   --script: "Castoro", "Iowan Old Style", Georgia, serif;
-  --body: "Castoro", "Iowan Old Style", Georgia, serif;
+  --body: "Josefin Sans", "Futura", "Century Gothic", system-ui, sans-serif;
 
   --step--1: 0.875rem;
   --step-0: 1.0625rem;
@@ -47,7 +47,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--body);
-  font-size: var(--step-0);
+  font-size: 1.125rem;
   line-height: 1.7;
 }
 
@@ -69,7 +69,7 @@ a:hover {
 }
 
 :focus-visible {
-  outline: 3px solid var(--gilt);
+  outline: 3px solid var(--red);
   outline-offset: 3px;
 }
 
@@ -166,28 +166,28 @@ address {
   color: var(--paper);
 }
 
-.btn-gilt {
-  background: var(--gilt);
-  border-color: var(--gilt);
+.btn-light {
+  background: #fff;
+  border-color: #fff;
   color: var(--ink);
 }
 
-.btn-gilt:hover {
-  background: var(--gilt-soft);
-  border-color: var(--gilt-soft);
+.btn-light:hover {
+  background: #fff;
+  border-color: #fff;
   color: var(--ink);
 }
 
 .btn-line-light {
   background: transparent;
-  border-color: rgba(243, 230, 200, 0.7);
-  color: var(--gilt-soft);
+  border-color: rgba(255, 255, 255, 0.7);
+  color: #fff;
 }
 
 .btn-line-light:hover {
-  background: rgba(243, 230, 200, 0.12);
-  border-color: var(--gilt-soft);
-  color: var(--gilt-soft);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #fff;
+  color: #fff;
 }
 
 .actions {
@@ -636,7 +636,7 @@ address {
 .give {
   display: grid;
   background: var(--crimson);
-  color: var(--gilt-soft);
+  color: #fff;
 }
 
 .give-text {
@@ -659,7 +659,7 @@ address {
 }
 
 .give .lede {
-  color: var(--gilt-soft);
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .give-facts {
@@ -668,7 +668,7 @@ address {
   margin: 1.75rem 0 0;
   padding: 1.25rem 0 0;
   list-style: none;
-  border-top: 1px solid rgba(243, 230, 200, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
   max-width: 34rem;
 }
 
@@ -684,7 +684,7 @@ address {
   top: 0.6em;
   width: 0.55rem;
   height: 0.55rem;
-  background: var(--gilt);
+  background: #fff;
   transform: rotate(45deg);
 }
 
@@ -747,13 +747,13 @@ address {
 /* Footer */
 .footer {
   background: var(--ink);
-  color: #e3dacf;
+  color: #dcdce0;
   padding: 3rem var(--edge) 2rem;
   font-size: 0.95rem;
 }
 
 .footer a {
-  color: var(--gilt-soft);
+  color: #fff;
 }
 
 .footer-cols {
@@ -786,8 +786,8 @@ address {
 .footer-base {
   margin-top: 2.5rem;
   padding-top: 1.25rem;
-  border-top: 1px solid rgba(227, 218, 207, 0.2);
-  color: #b6aa9d;
+  border-top: 1px solid rgba(220, 220, 224, 0.2);
+  color: #9c9ca3;
   font-size: var(--step--1);
 }
 
@@ -1087,7 +1087,7 @@ address {
 }
 
 .lightbox::backdrop {
-  background: rgba(38, 28, 23, 0.9);
+  background: rgba(17, 17, 19, 0.9);
 }
 
 .lightbox-figure {
@@ -1100,12 +1100,12 @@ address {
   width: 100%;
   max-height: 85vh;
   object-fit: contain;
-  background: #1a120f;
+  background: #0b0b0c;
 }
 
 .lightbox figcaption {
   padding: 0.85rem 1rem;
-  color: var(--gilt-soft);
+  color: #e4e4e7;
 }
 
 .lightbox-close {
@@ -1134,7 +1134,7 @@ address {
 
 .monthly {
   background: var(--crimson);
-  color: var(--gilt-soft);
+  color: #fff;
   padding: clamp(1.75rem, 4vw, 2.75rem);
 }
 
@@ -1148,7 +1148,7 @@ address {
 }
 
 .monthly .small {
-  color: var(--gilt-soft);
+  color: #fff;
   opacity: 0.85;
   margin: 1rem 0 0;
 }
@@ -1403,8 +1403,8 @@ address {
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(to top, rgba(38, 28, 23, 0.9) 0%, rgba(38, 28, 23, 0.55) 30%, rgba(38, 28, 23, 0.08) 62%, rgba(38, 28, 23, 0) 100%),
-    linear-gradient(to right, rgba(38, 28, 23, 0.35) 0%, rgba(38, 28, 23, 0) 55%);
+    linear-gradient(to top, rgba(17, 17, 19, 0.9) 0%, rgba(17, 17, 19, 0.55) 30%, rgba(17, 17, 19, 0.08) 62%, rgba(17, 17, 19, 0) 100%),
+    linear-gradient(to right, rgba(17, 17, 19, 0.35) 0%, rgba(17, 17, 19, 0) 55%);
 }
 
 .hero-copy {
@@ -1412,85 +1412,21 @@ address {
 }
 
 .hero-full .script {
-  color: var(--gilt-soft);
+  color: #fff;
 }
 
 .hero-full h1 {
   font-size: clamp(2.8rem, 7.5vw, 6rem);
   line-height: 0.98;
   max-width: 15ch;
-  text-shadow: 0 2px 30px rgba(38, 28, 23, 0.35);
+  text-shadow: 0 2px 30px rgba(17, 17, 19, 0.35);
   margin-bottom: 0.9rem;
 }
 
 .hero-full .lede {
-  color: #f1e9de;
+  color: #f2f2f4;
   margin: 0;
   max-width: 34rem;
-}
-
-.hero-bar {
-  display: grid;
-  gap: 1rem 2.5rem;
-  padding: 1.25rem var(--edge) 1.5rem;
-  border-top: 1px solid rgba(243, 230, 200, 0.28);
-  background: rgba(38, 28, 23, 0.55);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-}
-
-.hero-when {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.1rem 0.85rem;
-}
-
-.hero-time {
-  font-family: var(--display);
-  font-size: 2.6rem;
-  line-height: 1;
-  color: var(--gilt);
-  font-variant-numeric: tabular-nums;
-}
-
-.hero-what {
-  font-family: var(--display);
-  font-size: 1rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.hero-next {
-  flex-basis: 100%;
-  font-size: var(--step--1);
-  color: #e3dacf;
-}
-
-.hero-where p {
-  margin: 0;
-  color: #e3dacf;
-}
-
-.hero-where a {
-  color: var(--gilt-soft);
-}
-
-.hero-bar .actions {
-  margin: 0;
-  align-self: center;
-}
-
-@media (min-width: 1000px) {
-  .hero-bar {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1.15fr) auto;
-    align-items: center;
-  }
-
-  .hero-where {
-    border-left: 1px solid rgba(243, 230, 200, 0.28);
-    padding-left: 2.5rem;
-  }
 }
 
 @media (max-width: 760px) {
@@ -1501,15 +1437,6 @@ address {
 
   .hero-full .lede {
     font-size: 1.05rem;
-  }
-
-  .hero-time {
-    font-size: 2.2rem;
-  }
-
-  .hero-bar .btn {
-    min-height: 2.75rem;
-    padding: 0.5rem 1rem;
   }
 }
 
@@ -1554,7 +1481,7 @@ address {
 .glass-band p {
   margin: 1.25rem auto 0;
   text-align: center;
-  color: #b6aa9d;
+  color: #9c9ca3;
   font-size: var(--step--1);
 }
 
@@ -1661,19 +1588,12 @@ address {
   font-size: 1rem;
 }
 
-
 .band-stone.history-page {
   padding-top: var(--space);
 }
 
 .hero-full .script {
-  text-shadow: 0 2px 14px rgba(38, 28, 23, 0.65);
-}
-
-@media (max-width: 760px) {
-  .hero-where {
-    display: none;
-  }
+  text-shadow: 0 2px 14px rgba(17, 17, 19, 0.65);
 }
 
 /* Keep the whole hero inside shorter screens too */
@@ -1690,15 +1610,6 @@ address {
     padding-top: 1.5rem;
     padding-bottom: 1.1rem;
   }
-
-  .hero-bar {
-    padding-top: 0.9rem;
-    padding-bottom: 1rem;
-  }
-
-  .hero-time {
-    font-size: 2.2rem;
-  }
 }
 
 @media (max-height: 700px) and (max-width: 760px) {
@@ -1707,23 +1618,10 @@ address {
   }
 }
 
-@media (max-width: 999px) {
-  .hero-where {
-    display: none;
-  }
-}
-
-@media (min-width: 600px) and (max-width: 999px) {
-  .hero-bar {
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: center;
-  }
-}
-
 /* Castoro comes in one weight, so emphasis uses the titling capitals instead of fake bold */
 strong,
 b {
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .text-link,
@@ -1757,8 +1655,667 @@ b {
     font-size: 0.98rem;
     line-height: 1.55;
   }
+}
 
-  .hero-next {
+/* Hero: frosted glass instead of the brown strip, and a neutral shade on the photo */
+.hero-full::after {
+  background:
+    linear-gradient(to top, rgba(12, 14, 18, 0.62) 0%, rgba(12, 14, 18, 0.3) 34%, rgba(12, 14, 18, 0.05) 62%, rgba(12, 14, 18, 0) 100%),
+    linear-gradient(to right, rgba(12, 14, 18, 0.32) 0%, rgba(12, 14, 18, 0) 55%);
+}
+
+.hero-full h1,
+.hero-full .lede {
+  text-shadow: 0 1px 12px rgba(12, 14, 18, 0.45);
+}
+
+/* ---------------------------------------------------------------
+   Buttons, after the video: a pill, a real font, almost black,
+   one crimson dot with an arrow that turns on hover, a soft light
+   that follows the cursor, a gentle magnet and a press.
+   Secondary buttons are clear glass with no edge.
+   --------------------------------------------------------------- */
+:root {
+  --btn-ink: #141416;
+  --btn-dot: var(--red);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  min-height: 3.25rem;
+  padding: 0.4rem 1.6rem;
+  border: 0;
+  border-radius: 999px;
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  text-decoration: none;
+  line-height: 1;
+  background: var(--btn-ink);
+  color: #fff;
+  transform: translate(var(--tx, 0), var(--ty, 0));
+  transition: transform 0.35s var(--ease-out), background-color 0.2s ease;
+  will-change: transform;
+}
+
+.btn:has(.btn-dot) {
+  padding-right: 0.4rem;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: #000;
+  color: #fff;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(120px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.22), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.btn:hover::before {
+  opacity: 1;
+}
+
+.btn:active {
+  transform: translate(var(--tx, 0), var(--ty, 0)) scale(0.97);
+}
+
+.btn-dot {
+  display: inline-grid;
+  place-items: center;
+  width: 2.45rem;
+  height: 2.45rem;
+  border-radius: 50%;
+  background: var(--btn-dot);
+  color: #fff;
+  flex: 0 0 auto;
+}
+
+.btn-dot svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  transform: rotate(-45deg);
+  transition: transform 0.35s var(--ease-out);
+}
+
+.btn:hover .btn-dot svg,
+.btn:focus-visible .btn-dot svg {
+  transform: rotate(0deg);
+}
+
+/* Light button for dark backgrounds */
+.btn-light {
+  background: #fff;
+  color: var(--btn-ink);
+}
+
+.btn-light:hover,
+.btn-light:focus-visible {
+  background: #fff;
+  color: var(--btn-ink);
+}
+
+.btn-light::before {
+  background: radial-gradient(120px circle at var(--mx, 50%) var(--my, 50%), rgba(179, 38, 44, 0.14), transparent 70%);
+}
+
+/* Clear glass, no edge */
+.btn-quiet {
+  background: rgba(20, 20, 22, 0.06);
+  color: var(--btn-ink);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.btn-quiet:hover,
+.btn-quiet:focus-visible {
+  background: rgba(20, 20, 22, 0.1);
+  color: var(--btn-ink);
+}
+
+.btn-quiet::before {
+  background: radial-gradient(120px circle at var(--mx, 50%) var(--my, 50%), rgba(20, 20, 22, 0.08), transparent 70%);
+}
+
+.btn-line-light {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  backdrop-filter: blur(12px) saturate(150%);
+}
+
+.btn-line-light:hover,
+.btn-line-light:focus-visible {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+.masthead .btn {
+  min-height: 2.9rem;
+  padding: 0.3rem 0.3rem 0.3rem 1.2rem;
+  font-size: 0.95rem;
+}
+
+.masthead .btn .btn-dot {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+@media (max-width: 900px) {
+  .masthead .btn {
+    min-height: 2.75rem;
+    padding: 0.25rem 0.25rem 0.25rem 1rem;
+    font-size: 0.88rem;
+    gap: 0.6rem;
+  }
+
+  .masthead .btn .btn-dot {
+    width: 2.05rem;
+    height: 2.05rem;
+  }
+}
+
+/* Carousel controls get the same clear glass */
+.carousel-btn {
+  width: 3rem;
+  height: 3rem;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(20, 20, 22, 0.06);
+  color: var(--btn-ink);
+  transition: background-color 0.2s ease, transform 0.35s var(--ease-out);
+}
+
+.carousel-btn:hover {
+  background: var(--btn-ink);
+  color: #fff;
+}
+
+.carousel-btn:active {
+  transform: scale(0.95);
+}
+
+.carousel-btn:disabled,
+.carousel-btn:disabled:hover {
+  opacity: 0.35;
+  background: rgba(20, 20, 22, 0.06);
+  color: var(--btn-ink);
+}
+
+.carousel-pos {
+  font-family: var(--body);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn-dot svg,
+  .carousel-btn {
+    transition: none;
+  }
+}
+
+@media (max-height: 700px) and (max-width: 760px) {
+  .hero-copy {
+    padding-top: 1rem;
+    padding-bottom: 0.75rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .wordmark-name {
+    font-size: 0.78rem;
+  }
+
+  .masthead .btn {
     font-size: 0.82rem;
+    padding-left: 0.85rem;
+    gap: 0.45rem;
+  }
+
+  .masthead .btn .btn-dot {
+    width: 1.85rem;
+    height: 1.85rem;
+  }
+}
+
+/* Black everywhere the brown used to be */
+.footer,
+.glass-band,
+.band-ink,
+.lightbox-figure,
+.hero-full {
+  background: var(--black);
+}
+
+
+
+/* ---------------------------------------------------------------
+   Hero: the photo has the whole first screen. The name sits on the
+   left and two larger buttons on the right. Service times are
+   further down the page, after "Your first Sunday".
+   --------------------------------------------------------------- */
+.hero-full {
+  min-height: calc(100vh - var(--mast-h, 0px));
+  min-height: calc(100svh - var(--mast-h, 0px));
+}
+
+.hero-inner {
+  display: grid;
+  gap: 1.75rem 3rem;
+  align-items: end;
+  padding: 3rem var(--edge) clamp(2rem, 6vh, 3.75rem);
+}
+
+.hero-full .hero-copy {
+  padding: 0;
+  min-width: 0;
+}
+
+.hero-actions {
+  display: grid;
+  gap: 0.75rem;
+  width: min(100%, 21rem);
+}
+
+.btn-lg {
+  justify-content: space-between;
+  min-height: 3.9rem;
+  padding: 0.45rem 0.45rem 0.45rem 1.75rem;
+  font-size: 1.1rem;
+}
+
+.btn-lg .btn-dot {
+  width: 3rem;
+  height: 3rem;
+}
+
+.btn-lg .btn-dot svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.btn-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  text-align: left;
+}
+
+.btn-text small {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  opacity: 0.8;
+}
+
+/* The glass button's arrow sits in a clear circle; the one red dot stays on the main button */
+.btn-dot-glass {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+@media (min-width: 960px) {
+  .hero-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .hero-actions {
+    width: 20rem;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 959px) {
+  .hero-actions {
+    width: auto;
+    grid-template-columns: repeat(2, minmax(0, 17rem));
+  }
+}
+
+@media (max-width: 599px) {
+  .hero-inner {
+    gap: 1.25rem;
+    padding-top: 2rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .btn-lg {
+    min-height: 3.5rem;
+    padding-left: 1.4rem;
+    font-size: 1.02rem;
+  }
+
+  .btn-lg .btn-dot {
+    width: 2.65rem;
+    height: 2.65rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .hero-inner {
+    gap: 1rem 3rem;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .hero-actions {
+    gap: 0.6rem;
+  }
+
+  .btn-lg {
+    min-height: 3.25rem;
+  }
+
+  .btn-lg .btn-dot {
+    width: 2.45rem;
+    height: 2.45rem;
+  }
+}
+
+/* Service times: their own black band, lower down */
+.times-band {
+  display: grid;
+  gap: 1.5rem 3rem;
+  padding: clamp(2.25rem, 5vw, 3.25rem) var(--edge);
+  background: var(--black);
+  color: #fff;
+}
+
+.times-when {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.9rem;
+  margin: 0;
+}
+
+.times-time {
+  font-family: var(--display);
+  font-size: clamp(2.6rem, 5vw, 3.4rem);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.times-what {
+  font-family: var(--display);
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.times-next {
+  flex-basis: 100%;
+  margin-top: 0.4rem;
+  font-size: var(--step--1);
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.times-where p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.times-where p:first-child {
+  color: #fff;
+}
+
+.times-band .actions {
+  margin: 0;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+@media (min-width: 1000px) {
+  .times-band {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) auto;
+    align-items: center;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 999px) {
+  .times-band {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+  }
+
+  .times-band .actions {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Red, black and white only: links and focus rings on the dark bands */
+.footer a {
+  color: #fff;
+  text-decoration-color: var(--red);
+  text-decoration-thickness: 2px;
+}
+
+.footer a:hover {
+  color: #fff;
+  text-decoration-color: #fff;
+}
+
+.give a:not(.btn),
+.monthly a:not(.btn) {
+  color: #fff;
+  text-decoration-color: #fff;
+}
+
+.hero-full :focus-visible,
+.times-band :focus-visible,
+.glass-band :focus-visible,
+.give :focus-visible,
+.monthly :focus-visible,
+.footer :focus-visible,
+.lightbox :focus-visible {
+  outline-color: #fff;
+}
+
+/* Header stays at the top, and the menu underlines in red: the page
+   you're on, and on the home page the part you're reading */
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  transition: box-shadow 0.3s ease;
+}
+
+.masthead.is-scrolled {
+  box-shadow: 0 10px 30px rgba(17, 17, 19, 0.07);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: calc(var(--mast-h, 0px) + 0.5rem);
+}
+
+.nav a {
+  position: relative;
+  padding: 0.4rem 0;
+  border-bottom: 0;
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s var(--ease-out);
+}
+
+.nav a:hover,
+.nav a:focus-visible,
+.nav a[aria-current="page"],
+.nav a.is-active {
+  color: var(--crimson);
+}
+
+.nav a:hover::after,
+.nav a:focus-visible::after,
+.nav a[aria-current="page"]::after,
+.nav a.is-active::after {
+  transform: scaleX(1);
+}
+
+/* Stained glass tilts a little towards the cursor, with a soft glint */
+.lancet {
+  position: relative;
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(var(--ls, 1));
+  transition: transform 0.7s var(--ease-out);
+}
+
+.lancet.is-tilting {
+  --ls: 1.03;
+  transition-duration: 0.2s;
+}
+
+.lancet::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle 8rem at var(--gx, 50%) var(--gy, 30%), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.lancet.is-tilting::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav a::after,
+  .lancet,
+  .masthead {
+    transition: none;
+  }
+}
+
+/* Phones on their side: keep the header out of the way and the hero on one screen */
+@media (max-height: 480px) and (orientation: landscape) {
+  .masthead {
+    position: static;
+  }
+
+  .hero-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .hero-full .lede {
+    display: none;
+  }
+
+  .hero-full .script {
+    font-size: 1.3rem;
+  }
+
+  .hero-full h1 {
+    font-size: clamp(1.8rem, 7vh, 2.6rem);
+    margin-bottom: 0;
+  }
+
+  .hero-actions {
+    width: 16rem;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 400px) {
+  .nav {
+    gap: 0.4rem;
+  }
+
+  .nav a {
+    font-size: 0.66rem;
+    letter-spacing: 0.02em;
+  }
+}
+
+/* History carousels: one continuous strip across the full width of the page.
+   Photos are 40% smaller than before so more of them show at once. */
+.carousel-viewport {
+  margin-inline: calc(-1 * var(--edge));
+  overflow: hidden;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: grab;
+}
+
+.carousel-viewport.is-dragging {
+  cursor: grabbing;
+}
+
+.carousel-viewport .carousel-track {
+  width: max-content;
+  gap: 0.9rem;
+  overflow: visible;
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+  will-change: transform;
+}
+
+.carousel-viewport .carousel-track:focus-visible {
+  outline-offset: -3px;
+}
+
+.carousel-viewport .carousel-track .gallery-cell {
+  width: min(calc((100vw - 2 * var(--edge)) * 0.516), 27.6rem);
+  margin: 0;
+  scroll-snap-align: none;
+}
+
+.carousel-viewport .carousel-track .gallery-thumb {
+  height: clamp(9.6rem, 31.2vw, 19.2rem);
+}
+
+.carousel-viewport .gallery-item img {
+  transition: transform 0.6s var(--ease-out);
+}
+
+.carousel-viewport .gallery-thumb:hover img {
+  transform: scale(1.04);
+}
+
+.carousel-viewport .gallery-item figcaption {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-viewport .gallery-item img {
+    transition: none;
   }
 }

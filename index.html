@@ -7,8 +7,8 @@
   <meta name="description" content="The parish church of Penkridge with Stretton, about 800 years old. Sunday Holy Communion at 10:30, Messy Church, coffee mornings, baptisms, weddings and funerals, and a free search of the churchyard records.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&amp;family=Castoro+Titling&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261020g">
+  <link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&amp;family=Castoro+Titling&amp;family=Josefin+Sans:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20261020k">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -19,47 +19,37 @@
       <span class="wordmark-place">Penkridge, Staffordshire</span>
     </a>
     <nav class="nav" aria-label="Primary">
-      <a href="index.html#sundays">Sundays</a>
-      <a href="events.html">What's on</a>
-      <a href="churchyard.html">Find a grave</a>
-      <a href="gallery.html">History</a>
-      <a href="index.html#visit">Visit</a>
+      <a href="index.html#sundays" data-nav="sundays">Sundays</a>
+      <a href="events.html" data-nav="events">What's on</a>
+      <a href="churchyard.html" data-nav="churchyard">Find a grave</a>
+      <a href="gallery.html" data-nav="gallery">History</a>
+      <a href="index.html#visit" data-nav="visit">Visit</a>
     </nav>
-    <a class="btn" href="donate.html">Donate</a>
+    <a class="btn" href="donate.html">Donate<span class="btn-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
   </header>
 
   <main id="main">
     <section class="hero-full" aria-labelledby="hero-title">
       <img src="images/ebfe67c9cab9.jpg" width="1280" height="960" alt="The red sandstone tower and south side of St Michael's in evening sun, above the churchyard" fetchpriority="high">
-      <div class="hero-copy">
-        <span class="script">Join us for worship</span>
-        <h1 id="hero-title">St&nbsp;Michael's Church, Penkridge</h1>
-        <p class="lede">A Grade I listed parish church on St Michael's Square. There has been a church here for more than a thousand years, and everyone is welcome.</p>
-      </div>
-      <!-- TODO: confirm service pattern and finish time with Greg -->
-      <div class="hero-bar">
-        <p class="hero-when">
-          <span class="hero-time">10:30</span>
-          <span class="hero-what">Sunday Holy Communion</span>
-          <span class="hero-next" id="sunday-next">On the first, second, fourth and fifth Sundays, usually finishing between 11:30 and 12</span>
-        </p>
-        <div class="hero-where">
-          <p>Church Road, Penkridge ST19 5AW</p>
-          <p><a href="#visit">Directions</a> or call <a href="tel:+441785714344">01785 714344</a></p>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="script">Join us for worship</span>
+          <h1 id="hero-title">St&nbsp;Michael's Church, Penkridge</h1>
+          <p class="lede">A Grade I listed parish church on St Michael's Square. There has been a church here for more than a thousand years, and everyone is welcome.</p>
         </div>
-        <div class="actions">
-          <a class="btn btn-gilt" href="#sundays">Plan your visit</a>
-          <a class="btn btn-line-light" href="churchyard.html">Find a grave</a>
+        <div class="hero-actions">
+          <a class="btn btn-light btn-lg" href="#sundays">Plan your visit<span class="btn-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+          <a class="btn btn-line-light btn-lg" href="churchyard.html"><span class="btn-text">Find a grave<small>with Gravefindr</small></span><span class="btn-dot btn-dot-glass" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
         </div>
       </div>
     </section>
 
-    <section class="band sundays" id="sundays" aria-labelledby="sundays-title">
+    <section class="band sundays" id="sundays" aria-labelledby="sundays-title" data-spy="sundays">
       <div class="prose">
         <span class="kicker">New here?</span>
         <h2 id="sundays-title">Your first Sunday</h2>
         <p>Holy Communion starts at 10:30 and usually finishes between 11:30 and 12. It follows the Church of England's Common Worship, with the organ and a mix of traditional and modern hymns.</p>
-        <p>You don't need to know what to do or when to stand. Come in, sit wherever you like, and follow along with the service sheet. Children are welcome.</p>
+        <p>You don't need to know what to do or when to stand. Come in, sit wherever you like, and follow along with the words on the screens. Children are welcome.</p>
         <p>On the third Sunday of the month the pattern changes, so check the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">parish Facebook page</a> for that week.</p>
       </div>
       <figure class="sundays-photo">
@@ -67,7 +57,24 @@
       </figure>
     </section>
 
-    <section class="band band-stone" aria-labelledby="month-title">
+    <!-- TODO: confirm service pattern and finish time with Greg -->
+    <section class="times-band" aria-label="Sunday service times" data-spy="sundays">
+      <p class="times-when">
+        <span class="times-time">10:30</span>
+        <span class="times-what">Sunday Holy Communion</span>
+        <span class="times-next" id="sunday-next">On the first, second, fourth and fifth Sundays, usually finishing between 11:30 and 12</span>
+      </p>
+      <div class="times-where">
+        <p>Church Road, Penkridge <span class="nowrap">ST19 5AW</span></p>
+        <p>On St Michael's Square, a short walk from the station</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn-light" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.72503,-2.11776" target="_blank" rel="noopener">Get directions<span class="btn-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        <a class="btn btn-line-light" href="tel:+441785714344">Call 01785 714344</a>
+      </div>
+    </section>
+
+    <section class="band band-stone" aria-labelledby="month-title" data-spy="events">
       <span class="kicker">Through the month</span>
       <h2 id="month-title">Messy Church and coffee mornings</h2>
         <!-- TODO: add the days and times for Messy Church and coffee mornings -->
@@ -106,7 +113,7 @@
       <p class="occasions-contact">Speak to the Rector, Gregory Yerbury, on <a href="tel:+441785714344">01785 714344</a>.</p>
     </section>
 
-    <section class="graves" aria-labelledby="graves-title">
+    <section class="graves" aria-labelledby="graves-title" data-spy="churchyard">
       <figure class="graves-photo">
         <img src="images/eefdf59a510c.jpg" width="960" height="639" alt="A path through St Michael's churchyard between old headstones and yew trees" loading="lazy">
       </figure>
@@ -119,13 +126,13 @@
           <p><strong>2,130</strong> graves mapped</p>
         </div>
         <div class="actions">
-          <a class="btn" href="churchyard.html">Search the churchyard</a>
+          <a class="btn" href="churchyard.html">Search the churchyard<span class="btn-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
         </div>
         <p class="powered">Powered by <a href="https://gravefindr.co.uk/" target="_blank" rel="noopener">Gravefindr</a></p>
       </div>
     </section>
 
-    <section class="band" aria-labelledby="coming-title">
+    <section class="band" aria-labelledby="coming-title" data-spy="events">
       <span class="kicker">Upcoming</span>
       <h2 id="coming-title">Coming up</h2>
         <!-- TODO: replace with real parish events and times -->
@@ -138,12 +145,12 @@
       <p class="coming-more">Service times go up nearer the day. <a href="events.html">See what's on through the year</a></p>
     </section>
 
-    <section class="glass-band" aria-label="Stained glass at St Michael's">
+    <section class="glass-band" aria-label="Stained glass at St Michael's" data-spy="gallery">
       <div class="lancets" aria-hidden="true"><figure class="lancet"><img src="images/glass-east-left.jpg" alt="" loading="lazy"></figure><figure class="lancet"><img src="images/glass-east-inner-l.jpg" alt="" loading="lazy"></figure><figure class="lancet tall"><img src="images/glass-east-christ.jpg" alt="" loading="lazy"></figure><figure class="lancet"><img src="images/glass-east-inner-r.jpg" alt="" loading="lazy"></figure><figure class="lancet"><img src="images/glass-east-right.jpg" alt="" loading="lazy"></figure><figure class="lancet"><img src="images/glass-chapel-left.jpg" alt="" loading="lazy"></figure><figure class="lancet tall"><img src="images/glass-chapel-centre.jpg" alt="" loading="lazy"></figure><figure class="lancet"><img src="images/glass-chapel-right.jpg" alt="" loading="lazy"></figure></div>
       <p>Lights from the east window, made by Ward &amp; Hughes in 1864, and from the aisle chapel.</p>
     </section>
 
-    <section class="band band-stone history" aria-labelledby="history-title">
+    <section class="band band-stone history" aria-labelledby="history-title" data-spy="gallery">
       <figure class="history-photo">
         <img src="images/6dd72d267343.jpg" width="1280" height="1707" alt="The high altar beneath the east window" loading="lazy">
       </figure>
@@ -171,7 +178,7 @@
         <h2 id="give-title">Help keep St&nbsp;Michael's open</h2>
         <p class="lede">St Michael's is paid for mainly by the people who give to it. Your gift keeps an 800-year-old church warm, insured and in good repair, and looks after the churchyard.</p>
         <div class="actions">
-          <a class="btn btn-gilt" href="donate.html#monthly">Give monthly</a>
+          <a class="btn btn-light" href="donate.html#monthly">Give monthly<span class="btn-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
           <a class="btn btn-line-light" href="donate.html#once">Give once</a>
         </div>
         <ul class="give-facts">
@@ -185,7 +192,7 @@
       </figure>
     </section>
 
-    <section class="band visit" id="visit" aria-labelledby="visit-title">
+    <section class="band visit" id="visit" aria-labelledby="visit-title" data-spy="visit">
       <div>
         <span class="kicker">Find us</span>
         <h2 id="visit-title">Visit</h2>
@@ -274,5 +281,6 @@
       setInterval(tick, 1000);
     })();
   </script>
+  <script src="buttons.js?v=20261020k" defer></script>
 </body>
 </html>

@@ -1,8 +1,10 @@
 (function () {
   "use strict";
 
-  // Three sliding carousels on the History page, filled from images/manifest.json:
+  // Three carousels on the History page, filled from images/manifest.json:
   // outside (the church and the town), inside (glass, stone and wood) and memorials.
+  // Each one drifts slowly and seamlessly across the full width of the page,
+  // stops while the cursor is over it, and can be dragged or stepped with the buttons.
   const reels = document.querySelectorAll("[data-carousel]");
   if (!reels.length) return;
 
@@ -10,7 +12,8 @@
   const lbImg = document.getElementById("lightbox-img");
   const lbCap = document.getElementById("lightbox-caption");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const INTERVAL = 5000;
+  const SPEED = 38; // pixels per second
+  let lightboxOpen = false;
 
   const GLASS = [
     { file: "images/glass-east-window.jpg", caption: "The east window, glass by Ward & Hughes, 1864", rank: 200, group: "inside" },
@@ -43,7 +46,42 @@
     lbImg.src = item.file;
     lbImg.alt = cleanCaption(item.caption);
     lbCap.textContent = cleanCaption(item.caption);
-    if (dialog.showModal) dialog.showModal();
+    if (dialog.showModal) {
+      dialog.showModal();
+      lightboxOpen = true;
+    }
+  }
+
+  function makeCell(item, isCopy, eager) {
+    const li = document.createElement("li");
+    li.className = "gallery-cell";
+    if (isCopy) li.setAttribute("aria-hidden", "true");
+    const fig = document.createElement("figure");
+    fig.className = "gallery-item";
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "gallery-thumb";
+    btn.setAttribute("aria-label", "View larger: " + cleanCaption(item.caption));
+    if (isCopy) btn.tabIndex = -1;
+    const img = document.createElement("img");
+    img.src = item.file;
+    img.alt = isCopy ? "" : cleanCaption(item.caption);
+    img.loading = eager ? "eager" : "lazy";
+    img.decoding = "async";
+    img.draggable = false;
+    btn.appendChild(img);
+    btn.addEventListener("click", (e) => {
+      if (btn.closest(".carousel-viewport").dataset.dragged === "1") {
+        e.preventDefault();
+        return;
+      }
+      openLightbox(item);
+    });
+    const cap = document.createElement("figcaption");
+    cap.textContent = cleanCaption(item.caption);
+    fig.append(btn, cap);
+    li.appendChild(fig);
+    return li;
   }
 
   function build(reel, items) {
@@ -52,109 +90,162 @@
     const next = reel.querySelector("[data-next]");
     const play = reel.querySelector("[data-play]");
     const pos = reel.querySelector("[data-pos]");
-    let timer = null;
+    const n = items.length;
+    if (!n) return;
+
+    items.forEach((item, i) => track.appendChild(makeCell(item, false, i < 4)));
+
+    let step = 0;      // width of one photo plus the gap
+    let setWidth = 0;  // width of one full run of photos
+    let x = 0;         // how far the strip has moved
+    let v = 0;         // current speed, eased so it slows to a stop
     let paused = reduceMotion;
     let hovering = false;
+    let focused = false;
     let visible = false;
+    let drag = null;
+    let glide = null;
+    let last = 0;
+    let shownIndex = -1;
 
-    items.forEach((item) => {
-      const li = document.createElement("li");
-      li.className = "gallery-cell";
-      const fig = document.createElement("figure");
-      fig.className = "gallery-item";
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "gallery-thumb";
-      btn.setAttribute("aria-label", "View larger: " + cleanCaption(item.caption));
-      const img = document.createElement("img");
-      img.src = item.file;
-      img.alt = cleanCaption(item.caption);
-      img.loading = "lazy";
-      img.decoding = "async";
-      img.addEventListener("error", () => li.remove());
-      btn.appendChild(img);
-      btn.addEventListener("click", () => openLightbox(item));
-      const cap = document.createElement("figcaption");
-      cap.textContent = cleanCaption(item.caption);
-      fig.append(btn, cap);
-      li.appendChild(fig);
-      track.appendChild(li);
-    });
-
-    function step() {
+    // Repeat the photos so the strip never runs out, whatever the screen width
+    function measure() {
+      track.querySelectorAll('[aria-hidden="true"]').forEach((el) => el.remove());
       const first = track.querySelector(".gallery-cell");
-      if (!first) return track.clientWidth;
       const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
-      return first.getBoundingClientRect().width + gap;
-    }
-
-    function atEnd() {
-      return track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
-    }
-
-    function update() {
-      const total = track.querySelectorAll(".gallery-cell").length;
-      const index = Math.min(total, Math.round(track.scrollLeft / step()) + 1);
-      if (pos) pos.textContent = (atEnd() ? total : index) + " of " + total;
-      if (prev) prev.disabled = track.scrollLeft <= 4;
-      if (next) next.disabled = atEnd();
-    }
-
-    function advance() {
-      if (atEnd()) track.scrollTo({ left: 0, behavior: "smooth" });
-      else track.scrollBy({ left: step(), behavior: "smooth" });
-    }
-
-    function sync() {
-      const shouldRun = !paused && !hovering && visible && !document.hidden;
-      if (shouldRun && !timer) timer = setInterval(advance, INTERVAL);
-      if (!shouldRun && timer) {
-        clearInterval(timer);
-        timer = null;
+      step = first.getBoundingClientRect().width + gap;
+      setWidth = step * n;
+      const copies = Math.max(1, Math.ceil(reel.clientWidth / setWidth) + 1);
+      for (let c = 0; c < copies; c++) {
+        items.forEach((item) => track.appendChild(makeCell(item, true, false)));
       }
-      if (play) {
-        play.innerHTML = paused ? "&#9654;" : "&#10074;&#10074;";
-        play.setAttribute("aria-label", paused ? "Play slideshow" : "Pause slideshow");
+      x = ((x % setWidth) + setWidth) % setWidth;
+      render();
+    }
+
+    function render() {
+      track.style.transform = "translate3d(" + (-x).toFixed(2) + "px, 0, 0)";
+      const index = (Math.round(x / step) % n + n) % n;
+      if (index !== shownIndex && pos) {
+        shownIndex = index;
+        pos.textContent = index + 1 + " of " + n;
       }
     }
 
-    prev?.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: "smooth" }));
-    next?.addEventListener("click", () => advance());
+    function wrap() {
+      if (x >= setWidth) x -= setWidth;
+      if (x < 0) x += setWidth;
+    }
+
+    function moving() {
+      return !paused && !hovering && !focused && !drag && !glide && visible && !document.hidden && !lightboxOpen;
+    }
+
+    function frame(t) {
+      const dt = last ? Math.min(0.05, (t - last) / 1000) : 0;
+      last = t;
+      if (glide) {
+        const k = Math.min(1, (t - glide.start) / 550);
+        const ease = 1 - Math.pow(1 - k, 3);
+        x = glide.from + (glide.to - glide.from) * ease;
+        if (k >= 1) glide = null;
+      } else if (!drag) {
+        const target = moving() ? SPEED : 0;
+        v += (target - v) * Math.min(1, dt * 4);
+        if (Math.abs(v) < 0.5 && target === 0) v = 0;
+        x += v * dt;
+      }
+      wrap();
+      render();
+      requestAnimationFrame(frame);
+    }
+
+    function jump(dir) {
+      const from = x;
+      const base = Math.round(x / step) * step;
+      glide = { from: from, to: base + dir * step, start: performance.now() };
+      v = 0;
+    }
+
+    function syncPlay() {
+      if (!play) return;
+      play.innerHTML = paused ? "&#9654;" : "&#10074;&#10074;";
+      play.setAttribute("aria-label", paused ? "Play slideshow" : "Pause slideshow");
+    }
+
+    prev?.addEventListener("click", () => jump(-1));
+    next?.addEventListener("click", () => jump(1));
     play?.addEventListener("click", () => {
       paused = !paused;
-      sync();
+      syncPlay();
     });
 
-    reel.addEventListener("mouseenter", () => { hovering = true; sync(); });
-    reel.addEventListener("mouseleave", () => { hovering = false; sync(); });
-    reel.addEventListener("focusin", () => { hovering = true; sync(); });
-    reel.addEventListener("focusout", () => { hovering = false; sync(); });
-    track.addEventListener("touchstart", () => { paused = true; sync(); }, { passive: true });
-    document.addEventListener("visibilitychange", sync);
+    // Stop while the cursor is over the photos or keyboard focus is inside
+    const viewport = track.parentElement;
+    viewport.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") hovering = true; });
+    viewport.addEventListener("pointerleave", (e) => { if (e.pointerType === "mouse") hovering = false; });
+    reel.addEventListener("focusin", () => { focused = true; });
+    reel.addEventListener("focusout", () => { focused = false; });
+    track.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") { e.preventDefault(); jump(1); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); jump(-1); }
+    });
+
+    // Drag the strip with a finger or the mouse
+    viewport.addEventListener("pointerdown", (e) => {
+      if (e.button !== 0) return;
+      drag = { startX: e.clientX, startOffset: x, id: e.pointerId, moved: false };
+      glide = null;
+      v = 0;
+      viewport.dataset.dragged = "0";
+    });
+    viewport.addEventListener("pointermove", (e) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      const dx = e.clientX - drag.startX;
+      if (!drag.moved && Math.abs(dx) > 6) {
+        drag.moved = true;
+        viewport.dataset.dragged = "1";
+        viewport.setPointerCapture(e.pointerId);
+        viewport.classList.add("is-dragging");
+      }
+      if (drag.moved) {
+        x = drag.startOffset - dx;
+        wrap();
+      }
+    });
+    const endDrag = () => {
+      if (!drag) return;
+      drag = null;
+      viewport.classList.remove("is-dragging");
+      setTimeout(() => { viewport.dataset.dragged = "0"; }, 0);
+    };
+    viewport.addEventListener("pointerup", endDrag);
+    viewport.addEventListener("pointercancel", endDrag);
 
     if ("IntersectionObserver" in window) {
       new IntersectionObserver((entries) => {
         visible = entries[0].isIntersecting;
-        sync();
-      }, { threshold: 0.35 }).observe(reel);
+      }, { threshold: 0.1 }).observe(reel);
     } else {
       visible = true;
     }
 
-    let scrollTimer;
-    track.addEventListener("scroll", () => {
-      clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(update, 80);
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(measure, 150);
     });
-    window.addEventListener("resize", update);
-    update();
-    sync();
+
+    measure();
+    syncPlay();
+    requestAnimationFrame(frame);
   }
 
   dialog?.querySelector(".lightbox-close")?.addEventListener("click", () => dialog.close());
   dialog?.addEventListener("click", (e) => {
     if (e.target === dialog) dialog.close();
   });
+  dialog?.addEventListener("close", () => { lightboxOpen = false; });
 
   fetch("images/manifest.json")
     .then((r) => {

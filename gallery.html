@@ -7,8 +7,8 @@
   <meta name="description" content="The history of St Michael and All Angels, Penkridge, a Grade I listed church begun in the 1220s on a site of worship for more than a thousand years, with photographs.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&amp;family=Castoro+Titling&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261020g">
+  <link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&amp;family=Castoro+Titling&amp;family=Josefin+Sans:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20261020k">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -19,13 +19,13 @@
       <span class="wordmark-place">Penkridge, Staffordshire</span>
     </a>
     <nav class="nav" aria-label="Primary">
-      <a href="index.html#sundays">Sundays</a>
-      <a href="events.html">What's on</a>
-      <a href="churchyard.html">Find a grave</a>
-      <a href="gallery.html" aria-current="page">History</a>
-      <a href="index.html#visit">Visit</a>
+      <a href="index.html#sundays" data-nav="sundays">Sundays</a>
+      <a href="events.html" data-nav="events">What's on</a>
+      <a href="churchyard.html" data-nav="churchyard">Find a grave</a>
+      <a href="gallery.html" data-nav="gallery" aria-current="page">History</a>
+      <a href="index.html#visit" data-nav="visit">Visit</a>
     </nav>
-    <a class="btn" href="donate.html">Donate</a>
+    <a class="btn" href="donate.html">Donate<span class="btn-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
   </header>
 
   <main id="main">
@@ -50,10 +50,12 @@
     <section class="reel" aria-labelledby="reel-outside-title">
       <div class="reel-head">
         <h2 id="reel-outside-title">The church and the town</h2>
-        <p class="small" style="margin:0">Photographs change every few seconds. Tap one to see it full size.</p>
+        <p class="small" style="margin:0">The photos drift slowly past and stop when you point at one. Tap a photo to see it full size.</p>
       </div>
       <div class="carousel" data-carousel="outside" aria-roledescription="carousel" aria-label="The church and the town">
-        <ul class="carousel-track" tabindex="0"></ul>
+        <div class="carousel-viewport">
+          <ul class="carousel-track" tabindex="0" aria-label="Photos. Use the arrow keys to move."></ul>
+        </div>
         <div class="carousel-controls">
           <button type="button" class="carousel-btn" data-prev aria-label="Previous photo">&lsaquo;</button>
           <button type="button" class="carousel-btn" data-next aria-label="Next photo">&rsaquo;</button>
@@ -79,7 +81,9 @@
         <p class="small" style="margin:0">The nave, the chancel and the stained glass.</p>
       </div>
       <div class="carousel" data-carousel="inside" aria-roledescription="carousel" aria-label="Glass, stone and wood">
-        <ul class="carousel-track" tabindex="0"></ul>
+        <div class="carousel-viewport">
+          <ul class="carousel-track" tabindex="0" aria-label="Photos. Use the arrow keys to move."></ul>
+        </div>
         <div class="carousel-controls">
           <button type="button" class="carousel-btn" data-prev aria-label="Previous photo">&lsaquo;</button>
           <button type="button" class="carousel-btn" data-next aria-label="Next photo">&rsaquo;</button>
@@ -105,7 +109,9 @@
         <p class="small" style="margin:0">The Littleton tombs and other memorials inside the church.</p>
       </div>
       <div class="carousel" data-carousel="memorials" aria-roledescription="carousel" aria-label="Tombs and memorials">
-        <ul class="carousel-track" tabindex="0"></ul>
+        <div class="carousel-viewport">
+          <ul class="carousel-track" tabindex="0" aria-label="Photos. Use the arrow keys to move."></ul>
+        </div>
         <div class="carousel-controls">
           <button type="button" class="carousel-btn" data-prev aria-label="Previous photo">&lsaquo;</button>
           <button type="button" class="carousel-btn" data-next aria-label="Next photo">&rsaquo;</button>
@@ -173,6 +179,7 @@
     </div>
   </footer>
 
-  <script src="gallery.js?v=20261020g" defer></script>
+  <script src="gallery.js?v=20261020k" defer></script>
+  <script src="buttons.js?v=20261020k" defer></script>
 </body>
 </html>
