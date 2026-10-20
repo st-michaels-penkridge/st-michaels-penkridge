@@ -2042,8 +2042,7 @@ b {
   outline-color: #fff;
 }
 
-/* Header stays at the top, and the menu underlines in red: the page
-   you're on, and on the home page the part you're reading */
+/* Header stays at the top, and the menu underlines the page you're on in red */
 .masthead {
   position: sticky;
   top: 0;
@@ -2085,15 +2084,13 @@ html {
 
 .nav a:hover,
 .nav a:focus-visible,
-.nav a[aria-current="page"],
-.nav a.is-active {
+.nav a[aria-current="page"] {
   color: var(--crimson);
 }
 
 .nav a:hover::after,
 .nav a:focus-visible::after,
-.nav a[aria-current="page"]::after,
-.nav a.is-active::after {
+.nav a[aria-current="page"]::after {
   transform: scaleX(1);
 }
 
@@ -2355,4 +2352,405 @@ html {
     font-size: 0.58rem;
     letter-spacing: 0;
   }
+}
+
+/* ---------------------------------------------------------------
+   Home: one continuous story on white instead of separate bands.
+   First Sunday, the glass you see in church, the churchyard
+   outside, then the age of the building, each leading to the next.
+   --------------------------------------------------------------- */
+.story {
+  background: var(--paper);
+}
+
+.story > .story-row {
+  padding: clamp(2.5rem, 5vw, 4.5rem) var(--edge);
+}
+
+.story > .story-row:first-child {
+  padding-top: var(--space);
+}
+
+.story > .story-row:last-child {
+  padding-bottom: var(--space);
+}
+
+/* The glass, straight under First Sunday */
+.glass-row .lancets {
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+.glass-row p {
+  max-width: 40rem;
+  margin: 1.5rem auto 0;
+  text-align: center;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+@media (max-width: 600px) {
+  .glass-row .lancet:nth-child(n+6) {
+    display: none;
+  }
+}
+
+/* The churchyard: photo left, words right, inside the page margins */
+.story .graves {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  background: none;
+}
+
+.story .graves-photo {
+  min-height: 0;
+}
+
+.story .graves-photo img {
+  height: auto;
+  aspect-ratio: 4 / 3;
+}
+
+.story .graves-text {
+  padding: 0;
+  max-width: 40rem;
+}
+
+/* The age of the church: words left, photo right */
+.story .history {
+  gap: 2rem;
+}
+
+.history-lead {
+  margin: 0 0 0.25rem;
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: var(--measure);
+}
+
+.story .history-photo img {
+  aspect-ratio: 4 / 5;
+}
+
+@media (min-width: 900px) {
+  .story .graves {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    gap: 4.5rem;
+  }
+
+  .story .history {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 4.5rem;
+  }
+}
+
+/* Giving: the tower instead of the glass, which now sits higher up the page */
+.give-photo img {
+  object-position: 50% 35%;
+}
+
+/* Visit: a smaller closing section */
+.visit-compact {
+  display: grid;
+  gap: 1.5rem 3rem;
+  align-items: center;
+  padding: clamp(2.5rem, 5vw, 4rem) var(--edge);
+}
+
+.visit-compact h2 {
+  margin-bottom: 0.6rem;
+}
+
+.visit-compact p {
+  margin-bottom: 0.6rem;
+}
+
+.visit-compact .visit-map iframe,
+.visit-compact .visit-map .map-fallback {
+  min-height: 0;
+  height: clamp(14rem, 24vw, 18rem);
+}
+
+@media (min-width: 900px) {
+  .visit-compact {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+}
+
+/* Lists use a plain dash instead of a bullet */
+.give-facts li::before {
+  content: "-";
+  top: 0;
+  width: auto;
+  height: auto;
+  background: none;
+  transform: none;
+}
+
+.impact {
+  list-style: none;
+  padding-left: 0;
+}
+
+.impact li {
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.impact li::before {
+  content: "-";
+  position: absolute;
+  left: 0;
+}
+
+/* The bottom of the hero photo melts into the black service times band.
+   An eased fade (many small steps, not one straight line) so there's no visible edge. */
+.hero-full::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 62%;
+  z-index: -1;
+  background: linear-gradient(
+    to top,
+    rgba(17, 17, 19, 1) 0%,
+    rgba(17, 17, 19, 0.987) 8.1%,
+    rgba(17, 17, 19, 0.951) 15.5%,
+    rgba(17, 17, 19, 0.896) 22.5%,
+    rgba(17, 17, 19, 0.825) 29%,
+    rgba(17, 17, 19, 0.741) 35.3%,
+    rgba(17, 17, 19, 0.648) 41.2%,
+    rgba(17, 17, 19, 0.55) 47.1%,
+    rgba(17, 17, 19, 0.45) 52.9%,
+    rgba(17, 17, 19, 0.352) 58.8%,
+    rgba(17, 17, 19, 0.259) 64.7%,
+    rgba(17, 17, 19, 0.175) 71%,
+    rgba(17, 17, 19, 0.104) 77.5%,
+    rgba(17, 17, 19, 0.049) 84.5%,
+    rgba(17, 17, 19, 0.013) 91.9%,
+    rgba(17, 17, 19, 0) 100%
+  );
+  pointer-events: none;
+}
+
+.hero-full::after {
+  background: linear-gradient(to right, rgba(17, 17, 19, 0.38) 0%, rgba(17, 17, 19, 0) 55%);
+}
+
+.times-band {
+  margin-top: -1px;
+}
+
+/* Donate in the header: 30% bigger */
+.masthead .btn {
+  min-height: 3.77rem;
+  padding: 0.39rem 0.39rem 0.39rem 1.56rem;
+  font-size: 1.235rem;
+  gap: 1.1rem;
+}
+
+.masthead .btn .btn-dot {
+  width: 2.86rem;
+  height: 2.86rem;
+}
+
+.masthead .btn .btn-dot svg {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+@media (max-width: 900px) {
+  .masthead .btn {
+    min-height: 3.575rem;
+    padding: 0.33rem 0.33rem 0.33rem 1.3rem;
+    font-size: 1.14rem;
+    gap: 0.8rem;
+  }
+
+  .masthead .btn .btn-dot {
+    width: 2.67rem;
+    height: 2.67rem;
+  }
+}
+
+/* With the bigger Donate button, medium screens put the menu on its own line under the name */
+@media (min-width: 901px) and (max-width: 1279px) {
+  .masthead {
+    gap: 0.5rem 1.75rem;
+  }
+
+  .nav {
+    order: 3;
+    width: 100%;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 2rem;
+  }
+}
+
+/* Small phones: the name and Donate still share the top line */
+@media (max-width: 400px) {
+  .masthead .btn {
+    min-height: 3.1rem;
+    padding: 0.28rem 0.28rem 0.28rem 1rem;
+    font-size: 1rem;
+    gap: 0.55rem;
+  }
+
+  .masthead .btn .btn-dot {
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .wordmark-name {
+    font-size: 0.72rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .wordmark-name {
+    font-size: 0.66rem;
+  }
+
+  .masthead .btn {
+    min-height: 2.9rem;
+    font-size: 0.9rem;
+    padding-left: 0.85rem;
+  }
+
+  .masthead .btn .btn-dot {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+}
+
+/* Mount colour for the thin frames on the History page photo strips */
+:root {
+  --mount: #f6f4ef;
+}
+
+/* The History page photo strips: thin black frames with a pale mount */
+.carousel-viewport .carousel-track .gallery-thumb {
+  padding: 0.4rem;
+  background: var(--mount);
+  border: 4px solid #141416;
+  border-image: linear-gradient(145deg, #505056 0%, #222225 30%, #121214 62%, #050506 100%) 1;
+  box-shadow: inset 0 1px 2px rgba(17, 17, 19, 0.25), 0 3px 8px -4px rgba(17, 17, 19, 0.35), 0 14px 24px -16px rgba(17, 17, 19, 0.45);
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+
+.carousel-viewport .gallery-item img {
+  box-shadow: 0 0 0 1.5px #fff, 0 0 0 2.5px rgba(17, 17, 19, 0.14);
+}
+
+.carousel-viewport .gallery-thumb:hover img {
+  transform: none;
+}
+
+.carousel-viewport .gallery-thumb:hover {
+  transform: translateY(-3px);
+  box-shadow: inset 0 1px 2px rgba(17, 17, 19, 0.25), 0 6px 12px -6px rgba(17, 17, 19, 0.35), 0 22px 32px -18px rgba(17, 17, 19, 0.5);
+}
+
+.carousel-viewport .carousel-track {
+  padding-block: 0.5rem 1.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-viewport .carousel-track .gallery-thumb {
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------
+   History page: the story first, each chapter with a photo beside
+   it, then the key dates, then the photo strips
+   --------------------------------------------------------------- */
+.hist > .hist-row {
+  display: grid;
+  gap: 1.75rem 4.5rem;
+  align-items: center;
+  padding: clamp(2.5rem, 5vw, 4.5rem) var(--edge);
+}
+
+.hist > .hist-row:first-child {
+  padding-top: 0;
+}
+
+.hist-row .prose p {
+  font-size: 1.08rem;
+}
+
+.hist-photo {
+  margin: 0;
+}
+
+.hist-photo img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.hist-photo.tall img {
+  aspect-ratio: 4 / 5;
+  max-height: 34rem;
+}
+
+.hist-photo figcaption {
+  margin-top: 0.6rem;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+@media (min-width: 900px) {
+  .hist > .hist-row {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  }
+
+  .hist > .hist-row.flip {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  }
+
+  .hist > .hist-row.flip .hist-photo {
+    order: -1;
+  }
+}
+
+.photos-intro {
+  padding-bottom: 1.5rem;
+}
+
+.photos-intro p {
+  margin: 0;
+}
+
+.photos-credit {
+  padding: 0 var(--edge) var(--space);
+  margin: 0;
+}
+
+/* Visit page */
+.visit-page {
+  align-items: center;
+}
+
+.visit-page h2 {
+  font-size: var(--step-2);
+}
+
+.visit-page address {
+  font-size: var(--step-1);
+  line-height: 1.5;
+}
+
+.visit-page .visit-map iframe,
+.visit-page .visit-map .map-fallback {
+  min-height: 0;
+  height: clamp(18rem, 34vw, 28rem);
 }

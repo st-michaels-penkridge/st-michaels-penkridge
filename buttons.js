@@ -18,34 +18,6 @@
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
-  // Home page: underline the menu item for the part of the page you're reading
-  var spied = Array.prototype.slice.call(document.querySelectorAll("[data-spy]"));
-  var navLinks = document.querySelectorAll(".nav a[data-nav]");
-  if (spied.length && navLinks.length && "IntersectionObserver" in window) {
-    var showing = [];
-    var mark = function () {
-      var key = null;
-      for (var i = 0; i < spied.length; i++) {
-        if (showing.indexOf(spied[i]) !== -1) {
-          key = spied[i].getAttribute("data-spy");
-          break;
-        }
-      }
-      navLinks.forEach(function (a) {
-        a.classList.toggle("is-active", a.getAttribute("data-nav") === key);
-      });
-    };
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        var at = showing.indexOf(e.target);
-        if (e.isIntersecting && at === -1) showing.push(e.target);
-        if (!e.isIntersecting && at !== -1) showing.splice(at, 1);
-      });
-      mark();
-    }, { rootMargin: "-35% 0px -60% 0px" });
-    spied.forEach(function (el) { io.observe(el); });
-  }
-
   // Buttons: a light that follows the cursor, and a gentle magnet pull.
   // Only for mouse and trackpad users, and never when motion is turned off.
   var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
