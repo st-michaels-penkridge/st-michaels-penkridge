@@ -1,145 +1,63 @@
 (function () {
-  const grid = document.getElementById("gallery-grid");
-  const filters = document.getElementById("gallery-filters");
-  const countEl = document.getElementById("gallery-count");
+  "use strict";
+
+  // Three sliding carousels on the History page, filled from images/manifest.json:
+  // outside (the church and the town), inside (glass, stone and wood) and memorials.
+  const reels = document.querySelectorAll("[data-carousel]");
+  if (!reels.length) return;
+
   const dialog = document.getElementById("gallery-lightbox");
   const lbImg = document.getElementById("lightbox-img");
   const lbCap = document.getElementById("lightbox-caption");
-  if (!grid) return;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const INTERVAL = 5000;
 
-  let items = [];
-  let active = "all";
+  const GLASS = [
+    { file: "images/glass-east-window.jpg", caption: "The east window, glass by Ward & Hughes, 1864", rank: 200, group: "inside" },
+    { file: "images/glass-chapel-window.jpg", caption: "Christ with the children, stained glass in the aisle chapel", rank: 190, group: "inside" },
+    { file: "images/glass-east-tracery.jpg", caption: "Tracery at the top of the east window", rank: 120, group: "inside" },
+  ];
 
-  const labels = {
-    all: "All",
-    exterior: "Exterior",
-    churchyard: "Churchyard",
-    interior: "Interior",
-    details: "Tower & details",
-    local: "Local area",
-  };
-
-  const filterOrder = ["exterior", "churchyard", "interior", "details", "local"];
-
-  function isLocalArea(caption) {
-    const c = caption.toLowerCase().replace(/\.(jpe?g|png|webp)$/i, "").trim();
-    if (/st\.?\s*michael|all angels|church of st|littleton|memorial|monument| tomb/.test(c)) {
-      if (!c.includes("village green")) return false;
-    }
-    return (
-      c.includes("village green") ||
-      c.includes("roscoe gjr") ||
-      c.includes("market street") ||
-      c.includes("market place") ||
-      c.includes("old market") ||
-      c.includes("white hart") ||
-      c.includes("star inn") ||
-      c.includes("almshouse") ||
-      /canal at penkridge|canal in penkridge|narrowboat/.test(c) ||
-      c.includes("penkridge station") ||
-      c.includes("penkridge railway") ||
-      c.includes("vale gardens") ||
-      c.includes("birch trees in the park") ||
-      c.includes("valley of the penk") ||
-      c.includes("deanery")
-    );
+  function cleanCaption(caption) {
+    return caption
+      .replace(/\.(jpe?g|png|webp)$/i, "")
+      .replace(/\s*\(\d+\)\s*$/, "")
+      .replace(/\s+0?\d{1,2}\s*$/, "")
+      .replace(/^Penkridge St\.? Michael\s*-\s*/i, "")
+      .trim();
   }
 
-  function classifyTag(caption) {
-    const c = caption.toLowerCase().replace(/\.(jpe?g|png|webp)$/i, "").trim();
-    if (isLocalArea(caption)) return "local";
-    if (c.includes("graveyard") || c.includes("churchyard") || c.includes("cross in st")) {
-      return "churchyard";
+  function groupFor(item) {
+    const c = (item.caption || "").toLowerCase();
+    if (/memorial|tomb|monument|littleton|hatherton|congreve|arms|tablet|effigy|wynnesbury|percy|hyacinth|inscription/.test(c)) {
+      return "memorials";
     }
-    if (
-      c.includes("window exterior") ||
-      c.includes("west tower") ||
-      c.includes("east window exterior") ||
-      c.includes("the tower of") ||
-      c.includes("gargoyle") ||
-      c.includes("peal board") ||
-      c.includes("ordnance survey") ||
-      c.includes(" bolt ") ||
-      c.includes("tower 01")
-    ) {
-      return "details";
+    if (/nave|altar|chapel|organ|chancel|pulpit|lavabo|font|peal board|interior/.test(c)) {
+      return "inside";
     }
-    if (
-      c.includes("interior") ||
-      c.includes(" nave") ||
-      c.includes("the nave") ||
-      c.includes("organ") ||
-      c.includes("chancel") ||
-      c.includes("altar") ||
-      c.includes("pulpit") ||
-      c.includes("lavabo") ||
-      c.includes("aisle chapel") ||
-      c.includes("memorial") ||
-      c.includes("monument") ||
-      c.includes(" tomb") ||
-      c.includes("littleton") ||
-      c.includes("hatherton") ||
-      c.includes("congreve") ||
-      c.includes("effigy") ||
-      c.includes("font") ||
-      c.includes("pew") ||
-      c.includes("tablet") ||
-      c.includes("inscription") ||
-      c.includes("double tomb") ||
-      c.includes("high altar") ||
-      c.includes("arms") ||
-      c.includes("wynnesbury") ||
-      c.includes("cockayne") ||
-      c.includes("percy memorial") ||
-      c.includes("hyacinthe")
-    ) {
-      return "interior";
-    }
-    return "exterior";
-  }
-
-  function renderFilterButtons() {
-    const tags = new Set(items.map((i) => i.tag));
-    filters.innerHTML = "";
-    ["all", ...filterOrder.filter((k) => tags.has(k))].forEach((tag) => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "gallery-filter" + (tag === active ? " is-active" : "");
-      btn.textContent = labels[tag] || tag;
-      btn.dataset.tag = tag;
-      btn.addEventListener("click", () => {
-        active = tag;
-        filters.querySelectorAll(".gallery-filter").forEach((b) => {
-          b.classList.toggle("is-active", b.dataset.tag === active);
-        });
-        renderGrid();
-      });
-      filters.appendChild(btn);
-    });
+    return "outside";
   }
 
   function openLightbox(item) {
+    if (!dialog) return;
     lbImg.src = item.file;
-    lbImg.alt = item.caption;
-    lbCap.textContent = item.caption.replace(/\.(jpe?g|png|webp)$/i, "");
+    lbImg.alt = cleanCaption(item.caption);
+    lbCap.textContent = cleanCaption(item.caption);
     if (dialog.showModal) dialog.showModal();
   }
 
-  function renderGrid() {
-    const visible = active === "all" ? items : items.filter((i) => i.tag === active);
-    grid.innerHTML = "";
-    const sorted = [...visible].sort((a, b) => {
-      if (active === "all") {
-        const churchA = a.tag === "local" ? 0 : 1;
-        const churchB = b.tag === "local" ? 0 : 1;
-        if (churchB !== churchA) return churchB - churchA;
-      }
-      const ra = a.rank ?? 0;
-      const rb = b.rank ?? 0;
-      if (rb !== ra) return rb - ra;
-      return a.caption.localeCompare(b.caption, "en");
-    });
-    sorted.forEach((item) => {
+  function build(reel, items) {
+    const track = reel.querySelector(".carousel-track");
+    const prev = reel.querySelector("[data-prev]");
+    const next = reel.querySelector("[data-next]");
+    const play = reel.querySelector("[data-play]");
+    const pos = reel.querySelector("[data-pos]");
+    let timer = null;
+    let paused = reduceMotion;
+    let hovering = false;
+    let visible = false;
+
+    items.forEach((item) => {
       const li = document.createElement("li");
       li.className = "gallery-cell";
       const fig = document.createElement("figure");
@@ -147,40 +65,95 @@
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "gallery-thumb";
-      btn.setAttribute("aria-label", "View larger: " + item.caption);
+      btn.setAttribute("aria-label", "View larger: " + cleanCaption(item.caption));
       const img = document.createElement("img");
       img.src = item.file;
-      img.alt = item.caption;
+      img.alt = cleanCaption(item.caption);
       img.loading = "lazy";
       img.decoding = "async";
-      img.addEventListener("error", () => {
-        li.remove();
-        if (countEl) {
-          const n = grid.querySelectorAll(".gallery-cell").length;
-          countEl.textContent = n + " photo" + (n === 1 ? "" : "s");
-        }
-      });
+      img.addEventListener("error", () => li.remove());
       btn.appendChild(img);
       btn.addEventListener("click", () => openLightbox(item));
       const cap = document.createElement("figcaption");
-      cap.textContent = item.caption.replace(/\.(jpe?g|png|webp)$/i, "");
+      cap.textContent = cleanCaption(item.caption);
       fig.append(btn, cap);
       li.appendChild(fig);
-      grid.appendChild(li);
+      track.appendChild(li);
     });
-    if (countEl) {
-      countEl.textContent =
-        visible.length + " photo" + (visible.length === 1 ? "" : "s") +
-        (active === "all" ? "" : " · " + (labels[active] || active));
+
+    function step() {
+      const first = track.querySelector(".gallery-cell");
+      if (!first) return track.clientWidth;
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      return first.getBoundingClientRect().width + gap;
     }
+
+    function atEnd() {
+      return track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+    }
+
+    function update() {
+      const total = track.querySelectorAll(".gallery-cell").length;
+      const index = Math.min(total, Math.round(track.scrollLeft / step()) + 1);
+      if (pos) pos.textContent = (atEnd() ? total : index) + " of " + total;
+      if (prev) prev.disabled = track.scrollLeft <= 4;
+      if (next) next.disabled = atEnd();
+    }
+
+    function advance() {
+      if (atEnd()) track.scrollTo({ left: 0, behavior: "smooth" });
+      else track.scrollBy({ left: step(), behavior: "smooth" });
+    }
+
+    function sync() {
+      const shouldRun = !paused && !hovering && visible && !document.hidden;
+      if (shouldRun && !timer) timer = setInterval(advance, INTERVAL);
+      if (!shouldRun && timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+      if (play) {
+        play.innerHTML = paused ? "&#9654;" : "&#10074;&#10074;";
+        play.setAttribute("aria-label", paused ? "Play slideshow" : "Pause slideshow");
+      }
+    }
+
+    prev?.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: "smooth" }));
+    next?.addEventListener("click", () => advance());
+    play?.addEventListener("click", () => {
+      paused = !paused;
+      sync();
+    });
+
+    reel.addEventListener("mouseenter", () => { hovering = true; sync(); });
+    reel.addEventListener("mouseleave", () => { hovering = false; sync(); });
+    reel.addEventListener("focusin", () => { hovering = true; sync(); });
+    reel.addEventListener("focusout", () => { hovering = false; sync(); });
+    track.addEventListener("touchstart", () => { paused = true; sync(); }, { passive: true });
+    document.addEventListener("visibilitychange", sync);
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver((entries) => {
+        visible = entries[0].isIntersecting;
+        sync();
+      }, { threshold: 0.35 }).observe(reel);
+    } else {
+      visible = true;
+    }
+
+    let scrollTimer;
+    track.addEventListener("scroll", () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(update, 80);
+    });
+    window.addEventListener("resize", update);
+    update();
+    sync();
   }
 
   dialog?.querySelector(".lightbox-close")?.addEventListener("click", () => dialog.close());
   dialog?.addEventListener("click", (e) => {
     if (e.target === dialog) dialog.close();
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && dialog?.open) dialog.close();
   });
 
   fetch("images/manifest.json")
@@ -189,15 +162,19 @@
       return r.json();
     })
     .then((data) => {
-      items = data.map((item) => ({
-        ...item,
-        tag: classifyTag(item.caption || ""),
-      }));
-      renderFilterButtons();
-      renderGrid();
+      const all = data.map((item) => ({ ...item, group: groupFor(item) })).concat(GLASS);
+      reels.forEach((reel) => {
+        const key = reel.getAttribute("data-carousel");
+        const items = all
+          .filter((i) => i.group === key)
+          .sort((a, b) => (b.rank ?? 0) - (a.rank ?? 0) || a.caption.localeCompare(b.caption, "en"));
+        build(reel, items);
+      });
     })
     .catch(() => {
-      grid.innerHTML =
-        '<li class="gallery-error">Photos could not be loaded. Run <code>python3 scripts/fetch-gallery.py</code> from the project folder, then refresh.</li>';
+      reels.forEach((reel) => {
+        reel.querySelector(".carousel-track").innerHTML =
+          '<li class="gallery-error">The photos could not be loaded. Please refresh the page to try again.</li>';
+      });
     });
 })();
