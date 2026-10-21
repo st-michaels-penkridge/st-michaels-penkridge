@@ -727,7 +727,7 @@
   // Page editor
   // ---------------------------------------------------------------------
   async function editorPage() {
-    add(main, h("p", { class: "lede", text: "Changes show on the What's on page as soon as you save." }),
+    add(main, h("p", { class: "lede", text: "Saved content updates What's on. Published notices also appear on the home page, between the dates you choose." }),
       h("p", null, h("a", { href: "../events.html", target: "_blank", rel: "noopener", text: "Open the What's on page" })));
     var res = await Promise.all([api.events(), api.notices(), api.siteText()]);
     add(main, eventsEditor(res[0]), noticesEditor(res[1]), textEditor(res[2]));
@@ -826,8 +826,9 @@
   }
 
   function noticesEditor(list) {
-    var s = section("Notices", "What's on page");
-    add(s, h("p", { class: "muted", text: "Short notices show at the top of What's on between the dates you choose, like a closed car park or a change of time." }));
+    var s = section("Notice board", "Home and What's on");
+    add(s, h("p", { class: "muted", text: "Publish a short update for the church community. The latest three notices appear on the home page, with up to five on What's on. They appear and expire on the dates you choose. These notices are public, so keep private team messages out of them." }));
+    add(s, h("a", { href: "../index.html#notice-board", target: "_blank", rel: "noopener", text: "View the home page notice board ↗" }));
     var body = h("div");
     async function redraw() { drawList(await api.notices()); }
     function drawList(items) {

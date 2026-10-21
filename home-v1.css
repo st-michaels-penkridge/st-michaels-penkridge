@@ -1,0 +1,83 @@
+/* V1 home: limestone, crimson and photographs held within the architecture. */
+.home-v1 { --paper: #f7f4ee; --stone: #eae4da; --ink: #292724; --ink-soft: #615b55; --edge: clamp(1.25rem, 6vw, 6rem); }
+.home-v1 h1, .home-v1 h2, .home-v1 h3 { font-family: var(--script); text-transform: none; letter-spacing: -.035em; }
+.home-v1 .masthead { padding-block: 1.25rem; }
+.home-v1 .wordmark-place { display: block; margin-top: .4rem; }
+.home-v1 .hero-full { min-height: 40rem; min-height: min(780px, 85svh); justify-content: flex-end; }
+.home-v1 .hero-full > img { object-position: 50% 38%; }
+.home-v1 .hero-inner { padding: 0; }
+.home-v1 .hero-full::after { background: linear-gradient(90deg,rgba(20,24,22,.85),rgba(20,24,22,.38) 55%,rgba(20,24,22,.12)),linear-gradient(0deg,rgba(20,24,22,.3),transparent 60%); }
+.home-v1 .hero-copy { padding: 5rem var(--edge); background: none; backdrop-filter: none; border: 0; border-radius: 0; max-width: none; }
+.hero-eyebrow { display: block; color: #f4e9dc; font-size: .8rem; text-transform: uppercase; letter-spacing: .18em; margin-bottom: 1.5rem; }
+.home-v1 .hero-full h1 { font-size: clamp(2.7rem, 5.6vw, 5.5rem); max-width: 18ch; line-height: 1.04; margin-bottom: 1.5rem; }
+.home-v1 .hero-full .lede { display: block; max-width: 31rem; font-size: 1.15rem; line-height: 1.65; }
+.hero-links { display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem 2rem; margin-top: 2rem; }
+.hero-links > a { color: white; }
+.hero-links .btn { background: #f7f4ee; color: #292724; gap: 2rem; }
+.home-v1 .times-band { background: #6c272c; padding: 2rem var(--edge); }
+.home-v1 .times-time { font-family: var(--script); }
+.notice-board { padding: 5rem var(--edge); background: radial-gradient(ellipse at top left,#fffaf0,transparent 65%),var(--paper); }
+.board-heading { display: flex; justify-content: space-between; align-items: end; gap: 1.5rem; margin-bottom: 2rem; }
+.board-heading h2 { font-size: clamp(2.2rem,4vw,3.5rem); }
+.board-heading .text-link { flex-shrink: 0; }
+.home-v1 .kicker { font-size: .75rem; letter-spacing: .15em; }
+.home-v1 .notices { max-width: none; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+.home-v1 .notice { background: #fffdf8; border: 1px solid #d9d0c3; border-top: 3px solid var(--crimson); padding: 1.75rem; box-shadow: 0 7px 18px #372b1e06; overflow-wrap: anywhere; }
+.home-v1 .notice h3 { font-size: 1.6rem; line-height: 1.2; margin-bottom: .75rem; }
+.home-v1 .notice p { font-size: 1rem; line-height: 1.65; }
+.board-status { padding: 1.5rem 0; border-block: 1px solid var(--stone-line); color: var(--ink-soft); }
+.board-demo { color: var(--crimson); font-size: .9rem; }
+.board-links { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 2rem; margin-top: 2.5rem; }
+.board-links > a { color: var(--ink); text-decoration: none; border-top: 1px solid #c9bfb0; padding-top: 1.5rem; }
+.board-links h3 { font-size: 1.5rem; display: flex; justify-content: space-between; gap: .75rem; }
+.board-links a:hover h3 { color: var(--crimson); }
+.board-links p { font-size: 1rem; color: var(--ink-soft); margin: .75rem 0 0; }
+.home-v1 .story { background: var(--paper); }
+.home-v1 .story-row.sundays, .home-v1 .story-row.history { padding: 0; gap: 0; align-items: stretch; background: var(--stone); }
+.home-v1 .sundays > .prose, .home-v1 .history-text { padding: clamp(2.5rem,5vw,5rem) var(--edge); align-self: center; max-width: none; }
+.home-v1 .sundays-photo, .home-v1 .history-photo { margin: 0; height: 100%; min-height: 32rem; }
+.home-v1 .sundays-photo img, .home-v1 .history-photo img { width: 100%; height: 100%; max-height: none; aspect-ratio: auto; object-fit: cover; object-position: center; }
+.home-v1 .story h2 { font-size: clamp(2rem,3.5vw,3.25rem); }
+.home-v1 .story-row.graves { margin: 0; padding: 0; gap: 0; align-items: stretch; background: var(--paper); }
+.home-v1 .graves-text { padding: clamp(2.5rem,5vw,5rem) var(--edge); align-self: center; }
+.home-v1 .graves-photo img { height: 100%; aspect-ratio: auto; object-fit: cover; }
+.home-v1 .graves-photo { min-height: 30rem; }
+.home-v1 .history { border-top: 1px solid var(--stone-line); }
+.home-v1 .counter { flex-wrap: wrap; gap: 1rem; }
+.home-v1 .give { background: #6c272c; }
+.home-v1 .give h2 { font-size: clamp(2.2rem,4vw,3.6rem); }
+.home-v1 .give-photo img { filter: saturate(.75); }
+.home-v1 .visit { background: var(--paper); }
+.home-v1 .footer { background: #292b28; }
+@media (max-width: 1150px) {
+  .home-v1 .masthead { grid-template-columns: minmax(0,1fr); gap: 1rem; }
+  .home-v1 .wordmark-name { font-size: 1rem; }
+  .home-v1 .nav { flex-wrap: wrap; justify-content: flex-start; gap: .5rem 1.25rem; }
+  .home-v1 .nav a { font-size: .75rem; min-height: 2.5rem; display: inline-flex; align-items: center; }
+}
+@media (max-width: 899px) {
+  .home-v1 .hero-full { min-height: 36rem; }
+  .home-v1 .hero-copy { padding-block: 3.5rem; }
+  .home-v1 .sundays-photo, .home-v1 .history-photo, .home-v1 .graves-photo { min-height: 0; height: 25rem; }
+  .home-v1 .sundays-photo { order: -1; }
+  .home-v1 .notices { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .home-v1 .masthead { position: static; }
+  .home-v1 .nav { gap: .2rem 1rem; }
+  .home-v1 .hero-full { min-height: 35rem; }
+  .home-v1 .hero-full > img { object-position: 58% center; }
+  .home-v1 .hero-full::after { background: linear-gradient(0deg,rgba(20,24,22,.92),rgba(20,24,22,.25)); }
+  .home-v1 .hero-copy { padding-block: 3rem; }
+  .hero-eyebrow { font-size: .7rem; letter-spacing: .12em; }
+  .board-heading { display: block; }
+  .board-heading .text-link { display: inline-block; margin-top: 1rem; }
+  .notice-board { padding-block: 3rem; }
+  .board-links { grid-template-columns: 1fr; }
+  .home-v1 .times-band { display: flex; flex-direction: column; align-items: stretch; gap: 1.25rem; }
+  .home-v1 .times-where { padding: 0; border: 0; }
+  .home-v1 .times-band .actions { flex-wrap: wrap; }
+  .home-v1 .counter { display: flex; }
+  .home-v1 .counter strong { font-size: 2rem; }
+  .home-v1 .give-photo { margin: 0; }
+}

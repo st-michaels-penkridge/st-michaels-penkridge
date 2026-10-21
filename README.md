@@ -1,5 +1,15 @@
 # St Michael's Penkridge - Church Site & Grave Finder
 
+## V1 revision preview
+
+`codex/v1-revision` starts from `main-with-data-collection`. It revises the home page with a warm stone palette, integrated photographs and a public notice board. Home-specific styling is in `home-v1.css`.
+
+The existing members Page editor manages notices for both Home (latest three) and What's on (latest five). Publish and date controls determine what appears. On localhost only, saved members-demo notices can be previewed on the public pages; these are made-up data. A configured Supabase project supplies real published notices. No connection means an honest placeholder, not sample announcements presented as real news.
+
+AV remains the pilot for a wider church team system. Future teams may include readers, welcoming, refreshments and flowers; occasional jobs should be considered alongside regular rotas. This revision does not add those teams or change their permissions.
+
+To try it: open the members demo, choose Alex (admin), sign in and enter any six numbers for the demo two-step check. Save a notice in Page editor, then open the home page notice board in the same browser. No real personal data should be entered in this preview.
+
 Website for St Michael and All Angels, Penkridge, with a searchable churchyard grave finder. Built by Will King and Tobi Hussey.
 
 ## PRIORITY: members area, rotas and easy page updates
