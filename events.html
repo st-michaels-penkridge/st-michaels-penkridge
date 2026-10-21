@@ -9,8 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&amp;family=Castoro+Titling&amp;family=Josefin+Sans:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=20261021w">
+  <link rel="stylesheet" href="chosen-type.css?v=1">
 </head>
-<body>
+<body class="events-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="masthead">
@@ -25,24 +26,19 @@
       <a href="gallery.html" data-nav="gallery">History</a>
       <a href="visit.html" data-nav="visit">Visit</a>
       <a href="life-events.html" data-nav="life"><span class="nav-long">Life events</span><span class="nav-short">Life</span></a>
-      <a href="events.html" data-nav="events" aria-current="page"><span class="nav-long">What\'s on</span><span class="nav-short">Events</span></a>
+      <a href="events.html" data-nav="events" aria-current="page"><span class="nav-long">What's on</span><span class="nav-short">Events</span></a>
       <a href="members/index.html" data-nav="account">Account</a>
       <a href="donate.html" data-nav="donate">Donate</a>
     </nav>
   </header>
 
   <main id="main">
-    <header class="page-head with-glass">
-      <div>
+    <header class="events-head">
         <h1>What's on</h1>
-        <p class="lede">Sunday worship every week, Messy Church and coffee mornings through the month, and the big days of the church year.</p>
-      </div>
-      <div class="lancets" aria-hidden="true"><figure class="lancet"><img src="images/glass-chapel-left.jpg" alt="" loading="lazy"></figure><figure class="lancet tall"><img src="images/glass-chapel-centre.jpg" alt="" loading="lazy"></figure><figure class="lancet"><img src="images/glass-chapel-right.jpg" alt="" loading="lazy"></figure></div>
+        <p>Services, gatherings and dates for your diary.</p>
     </header>
 
     <section class="band events-coming" aria-labelledby="coming-title" style="padding-top:0">
-      <p id="notice-demo" class="muted" hidden>Local preview · These are made-up notices from the members demo.</p>
-      <div class="notices" id="notices" hidden></div>
       <span class="kicker">Upcoming</span>
       <h2 id="coming-title">Coming up</h2>
       <!-- These dates show until the members area is set up. After that, the
@@ -78,6 +74,8 @@
           </li>
       </ol>
       <p class="coming-more">Times go up nearer the day. Concerts, fundraisers and other parish events are posted on the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">Facebook page</a>.</p>
+      <p id="notice-demo" class="muted" hidden>Local preview · These are made-up notices from the members demo.</p>
+      <div class="notices" id="notices" hidden></div>
     </section>
 
     <section class="band band-stone" aria-labelledby="weekly-title">

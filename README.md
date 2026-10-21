@@ -2,6 +2,12 @@
 
 ## V1 revision preview
 
+### Selected design
+
+The active pairing is **Cormorant Garamond + Source Sans 3**, shared by all 14 public and members pages through `chosen-type.css`. Font comparison controls now appear only with `?design=1`; old `?type=...` links do not override the chosen pairing. The What's on page has a compact heading and puts its date cards before notices.
+
+The active hero is the **4032 × 3024 original** of *Church of St. Michael and All Angels, Penkridge*, by [Ajay Tegala / Geograph, photo 6651755](https://www.geograph.org.uk/photo/6651755), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), retrieved from Wikimedia Commons. It replaces the low-resolution blossom preview; the image is cropped in CSS and credited in the footer.
+
 ### Second design pass
 
 - On localhost, the bottom-right font comparison offers four full-page treatments. Direct links use `?type=classic`, `?type=literary`, `?type=warm` or `?type=modern`. Add `&design=1` to expose the comparison control on a hosted preview. The default stays classic.

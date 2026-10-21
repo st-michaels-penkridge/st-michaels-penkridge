@@ -1,0 +1,37 @@
+/* Selected pairing: Cormorant Garamond headings, Source Sans 3 reading text. */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Sans+3:wght@400;500;600&display=swap');
+:root { --display: 'Cormorant Garamond', Georgia, serif; --script: 'Cormorant Garamond', Georgia, serif; --body: 'Source Sans 3', system-ui, sans-serif; }
+body { font-family: var(--body); }
+h1, h2, h3 { text-transform: none; letter-spacing: -.025em; font-weight: 500; }
+.home-v1 { --heading-font: 'Cormorant Garamond', Georgia, serif; --reading-font: 'Source Sans 3', system-ui, sans-serif; --label-font: 'Source Sans 3', system-ui, sans-serif; }
+.nav a, .kicker, .text-link, .btn, button, input, textarea, select { font-family: var(--body); }
+.wordmark-name { font-family: var(--display); }
+.home-v1 .hero-full > img { object-position: 50% 24%; }
+.home-v1 .hero-full::after { background: linear-gradient(90deg,rgba(16,23,23,.65),rgba(16,23,23,.08) 75%),linear-gradient(0deg,rgba(16,23,23,.6),transparent 75%); }
+.home-v1 .hero-full h1 { font-weight: 500; font-size: clamp(3rem,6.2vw,6rem); }
+.events-page { background: #f7f4ee; }
+.events-head { padding: 1.5rem var(--edge) 1rem; display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .5rem 2rem; }
+.events-head h1 { font-size: clamp(2.5rem,4vw,3.5rem); line-height: 1; }
+.events-head p { margin: 0; color: var(--ink-soft); font-size: 1.05rem; }
+.events-page .events-coming { padding-bottom: 2rem; }
+.events-page .events-coming > .kicker { display: none; }
+.events-page #coming-title { font-size: 1.6rem; }
+.events-page .coming-cards { margin-top: 1rem; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .85rem; }
+.events-page .coming-cards li { background: #fffdf9; padding: 1rem; }
+.events-page .coming-cards h3 { font-size: 1.5rem; line-height: 1.1; }
+.events-page .coming-cards p { font-size: 1rem; line-height: 1.45; }
+.events-page .coming-more { margin-top: 1rem; font-size: .95rem; }
+.events-page .notices { margin: 1rem 0 0; }
+.events-page #notice-demo { margin-bottom: .5rem; font-size: .85rem; }
+@media (max-width: 1150px) {
+  .masthead { grid-template-columns: minmax(0,1fr); gap: .75rem; }
+  .nav { flex-wrap: wrap; justify-content: flex-start; gap: .25rem 1.2rem; }
+  .nav a { font-size: .8rem; min-height: 2.5rem; display: inline-flex; align-items: center; }
+}
+@media (max-width: 600px) {
+  .events-head { padding-top: 1rem; }
+  .events-head p { font-size: .95rem; }
+  .events-page .coming-cards { grid-template-columns: 1fr; }
+  .home-v1 .hero-full > img { object-position: 43% 22%; }
+  .home-v1 .hero-full h1 { font-size: 3rem; }
+}

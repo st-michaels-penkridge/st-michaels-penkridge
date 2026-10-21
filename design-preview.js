@@ -2,6 +2,8 @@
 (function () {
   'use strict';
   var params = new URLSearchParams(location.search);
+  // The pairing is chosen now. Old comparison URLs must not override it.
+  if (params.get('design') !== '1') return;
   var styles = [
     ['classic', '01 · Original', 'Castoro + Josefin Sans', 'Castoro, Georgia, serif'],
     ['literary', '02 · Literary', 'Cormorant Garamond + Inter', '"Cormorant Garamond", Georgia, serif'],
