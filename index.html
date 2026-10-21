@@ -10,6 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&amp;family=Castoro+Titling&amp;family=Josefin+Sans:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=20261021w">
   <link rel="stylesheet" href="home-v1.css?v=1">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&amp;family=DM+Sans:wght@400;500;600&amp;family=Inter:wght@400;500;600&amp;family=Lora:wght@400;500&amp;family=Source+Sans+3:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="home-v2.css?v=1">
 </head>
 <body class="home-v1">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -34,7 +36,7 @@
 
   <main id="main">
     <section class="hero-full" aria-labelledby="hero-title">
-      <img src="images/ebfe67c9cab9.jpg" width="1280" height="960" alt="The red sandstone tower and south side of St Michael's in evening sun, above the churchyard" fetchpriority="high">
+      <img src="images/church-blossom-original.jpg" width="640" height="447" alt="St Michael's tower and sandstone church behind pink cherry blossom" fetchpriority="high">
       <div class="hero-inner">
         <div class="hero-copy">
           <span class="hero-eyebrow">St Michael and All Angels · Penkridge</span>
@@ -93,15 +95,27 @@
 
       <section class="story-row graves" aria-labelledby="graves-title">
         <figure class="graves-photo">
-          <img src="images/710e549019.jpg" width="960" height="639" alt="Old headstones lining the path through St Michael's churchyard, with the church behind in spring sunshine" loading="lazy">
+          <div class="grave-scene">
+            <img src="images/710e549019.jpg" width="960" height="639" alt="Headstones beside the path through St Michael's churchyard" loading="lazy">
+            <svg class="grave-outlines" viewBox="0 0 960 639" aria-label="Explore the churchyard records">
+              <a href="#grave-search" aria-label="Search records for people remembered in the churchyard"><path d="M595 599 L591 561 Q592 539 610 538 Q633 536 648 554 L654 591 Z"/><title>Search the churchyard records</title></a>
+              <a href="#grave-search" aria-label="Explore memorial records"><path d="M682 611 L675 566 L684 554 L685 530 Q696 510 713 528 L714 546 L727 550 L729 610 Z"/><title>Explore memorial records</title></a>
+              <a href="#grave-search" aria-label="Find someone in the churchyard records"><path d="M774 564 L773 523 Q777 510 789 510 Q806 510 811 528 L815 562 Z"/><title>Find someone in the churchyard records</title></a>
+            </svg>
+          </div>
+          <figcaption>Every stone holds a story. Explore the records below.</figcaption>
         </figure>
         <div class="graves-text">
-          <span class="kicker">Outside, the churchyard</span>
+          <span class="kicker">Remembering Penkridge</span>
           <h2 id="graves-title">Find a grave</h2>
-          <p>Step outside and the churchyard holds generations of Penkridge families. Search by name to see where someone is buried, read their memorial and see photographs of the stone. It's free, and it works on your phone at the graveside.</p>
+          <p>Find someone remembered here. Search names, discover family connections and see where a memorial lies in the churchyard.</p>
+          <form class="grave-search" id="grave-search" action="https://gravefindr.co.uk/graveyards/st-michaels-penkridge" method="get">
+            <label for="memorial-name">Who are you looking for?</label>
+            <div><input id="memorial-name" name="q" type="search" placeholder="Enter a name" required maxlength="100"><button type="submit">Search <span aria-hidden="true">↗</span></button></div>
+          </form>
           <div class="graves-figures">
             <p><strong>3,576</strong> people recorded</p>
-            <p><strong>2,130</strong> graves mapped</p>
+            <p><strong>2,130</strong> memorial records</p>
           </div>
           <div class="actions">
             <a class="btn" href="churchyard.html">Search the churchyard<span class="btn-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
@@ -137,21 +151,18 @@
 
     <section class="give" aria-labelledby="give-title">
       <div class="give-text">
-        <h2 id="give-title">Help keep St&nbsp;Michael's open</h2>
-        <p class="lede">Eight hundred years on, St Michael's is still paid for mainly by the people who give to it. Your gift keeps it warm, insured and in good repair, and looks after the churchyard and its records.</p>
+        <span class="kicker">Here for the next generation</span>
+        <h2 id="give-title">Help keep the doors open.</h2>
+        <p class="lede">A warm welcome. A place to remember. A church to come back to. Your generosity helps care for St Michael's and the people it serves.</p>
         <div class="actions">
-          <a class="btn btn-light" href="donate.html#monthly">Give monthly<span class="btn-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-          <a class="btn btn-line-light" href="donate.html#once">Give once</a>
+          <a class="btn" href="donate.html#monthly">Regular giving<span class="btn-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+          <a class="text-link" href="donate.html#once">Give when you visit <span aria-hidden="true">↗</span></a>
         </div>
         <ul class="give-facts">
           <li>Gift Aid adds 25p to every &pound;1 if you pay UK income tax</li>
-          <li>Set up securely through the Parish Giving Scheme</li>
           <li>Registered charity 1131086</li>
         </ul>
       </div>
-      <figure class="give-photo">
-        <img src="images/b871acdf2823.jpg" width="1280" height="960" alt="St Michael's in summer sunshine, seen across the churchyard" loading="lazy">
-      </figure>
     </section>
 
     <section class="visit visit-compact" id="visit" aria-labelledby="visit-title">
@@ -203,6 +214,7 @@
     <div class="footer-base">
       <p>The Parochial Church Council of St Michael and All Angels, Penkridge. Registered charity 1131086.</p>
       <p>Photographs from <a href="https://commons.wikimedia.org/wiki/Category:St._Michael_and_All_Angels,_Penkridge" target="_blank" rel="noopener">Wikimedia Commons</a> contributors, under Creative Commons licences.</p>
+      <p>Blossom photograph: <a href="https://www.geograph.org.uk/photo/4461800">Mike Searle / Geograph</a>, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>. Cropped for this layout.</p>
     </div>
   </footer>
 
@@ -256,5 +268,6 @@
   <script src="members/config.js?v=20261021n" defer></script>
   <script src="live-content.js?v=2" defer></script>
   <script src="buttons.js?v=20261021n" defer></script>
+  <script src="design-preview.js?v=1" defer></script>
 </body>
 </html>

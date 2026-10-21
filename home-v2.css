@@ -1,0 +1,62 @@
+/* Second pass: typography studies and a continuous history / giving section. */
+.home-v1 { --heading-font: var(--script); --reading-font: var(--body); --label-font: var(--display); font-family: var(--reading-font); }
+.home-v1[data-type="literary"] { --heading-font: 'Cormorant Garamond', Georgia, serif; --reading-font: Inter, sans-serif; --label-font: Inter, sans-serif; }
+.home-v1[data-type="warm"] { --heading-font: Lora, Georgia, serif; --reading-font: 'Source Sans 3', sans-serif; --label-font: 'Source Sans 3', sans-serif; }
+.home-v1[data-type="modern"] { --heading-font: 'DM Sans', sans-serif; --reading-font: 'DM Sans', sans-serif; --label-font: 'DM Sans', sans-serif; }
+.home-v1 h1, .home-v1 h2, .home-v1 h3, .home-v1 .counter strong, .home-v1 .graves-figures strong { font-family: var(--heading-font); }
+.home-v1 .wordmark-name { font-family: var(--heading-font); font-size: 1.1rem; letter-spacing: .025em; }
+.home-v1 .nav a, .home-v1 .kicker, .home-v1 .text-link { font-family: var(--label-font); }
+.home-v1 .btn, .home-v1 input, .home-v1 button { font-family: var(--reading-font); }
+.home-v1[data-type="literary"] h1 { font-size: clamp(3rem,6.2vw,6rem); font-weight: 500; }
+.home-v1[data-type="modern"] h1, .home-v1[data-type="modern"] h2 { font-weight: 500; letter-spacing: -.055em; }
+.home-v1 .hero-full > img { object-position: 50% 43%; }
+.home-v1 .hero-full::after { background: linear-gradient(90deg,rgba(16,23,23,.76),rgba(16,23,23,.12) 72%),linear-gradient(0deg,rgba(16,23,23,.5),transparent 65%); }
+.home-v1 .hero-copy { padding-block: 4rem; }
+.home-v1 .hero-full h1 { max-width: 17ch; }
+.home-v1 .story-row.history { background: var(--paper); border: 0; padding-top: 4rem; }
+.home-v1 .history-photo { padding-right: var(--edge); }
+.home-v1 .history-photo img { mask-image: linear-gradient(to bottom,#000 82%,transparent); }
+.home-v1 .give { display: block; position: relative; padding: 5rem var(--edge) 6rem; background: var(--paper); color: var(--ink); text-align: center; }
+.home-v1 .give-text { max-width: 49rem; margin: auto; padding: 0; }
+.home-v1 .give h2 { color: var(--ink); margin: .6rem 0 1.5rem; }
+.home-v1 .give .lede { color: var(--ink-soft); max-width: 39rem; margin-inline: auto; }
+.home-v1 .give .actions { justify-content: center; gap: 1.5rem 2rem; margin-top: 2rem; }
+.home-v1 .give .text-link { color: var(--crimson); }
+.home-v1 .give .give-facts { border: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem 1.5rem; color: var(--ink-soft); padding: 0; margin-top: 2rem; font-size: .85rem; }
+.home-v1 .give-facts li { padding: 0; }
+.home-v1 .give-facts li::before { content: none; }
+.home-v1 .graves-photo { display: flex; flex-direction: column; justify-content: center; background: var(--paper); height: auto; min-height: 0; }
+.grave-scene { position: relative; }
+.home-v1 .grave-scene img { width: 100%; height: auto; aspect-ratio: 960 / 639; object-fit: contain; }
+.grave-outlines { position: absolute; inset: 0; width: 100%; height: 100%; }
+.grave-outlines a { outline: none; }
+.grave-outlines path { fill: transparent; stroke: #fff6; stroke-width: 1.3; vector-effect: non-scaling-stroke; transition: fill .2s,stroke .2s; }
+.grave-outlines a:hover path, .grave-outlines a:focus path { fill: #ffffff26; stroke: #fff; stroke-width: 2.5; }
+.home-v1 .graves-photo figcaption { margin: 0; padding: .85rem 1.25rem; font-size: .85rem; color: var(--ink-soft); }
+.grave-search { margin: 1.5rem 0; }
+.grave-search label { display: block; font-size: .9rem; margin-bottom: .5rem; }
+.grave-search > div { display: flex; border: 1px solid #bfb7aa; border-radius: 5px; background: #fffdf9; padding: .3rem; gap: .3rem; }
+.grave-search input { border: 0; min-width: 0; flex: 1; background: transparent; padding: .7rem; font-size: 1rem; color: var(--ink); }
+.grave-search button { border: 0; border-radius: 3px; background: var(--crimson); color: white; padding: .7rem 1rem; font-size: .95rem; cursor: pointer; }
+.type-preview { position: fixed; bottom: 1rem; right: 1rem; z-index: 100; width: min(23rem,calc(100vw - 2rem)); border: 1px solid #cfc5b8; background: #fffdf9; color: #292724; box-shadow: 0 5px 30px #0002; border-radius: .5rem; font: 14px/1.4 system-ui,sans-serif; }
+.type-preview summary { padding: .8rem 1rem; cursor: pointer; font-weight: 600; }
+.type-options { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; padding: 0 .8rem .8rem; }
+.home-v1 .type-options button { text-align: left; border: 1px solid #d9d0c3; background: #f7f4ee; color: #292724; border-radius: 4px; padding: .7rem; cursor: pointer; font-family: system-ui,sans-serif; }
+.type-options button[aria-pressed="true"] { outline: 2px solid #7a2428; outline-offset: -2px; }
+.type-options span { display: block; font-size: 2rem; line-height: 1.2; }
+.type-options small { display: block; font-size: 10px; margin-top: .25rem; }
+.type-note { margin: 0; padding: 0 1rem 1rem; font-size: 12px; }
+@media (max-width: 899px) {
+  .home-v1 .history-photo { padding: 0 var(--edge); height: 25rem; }
+  .home-v1 .give { padding-top: 2rem; }
+  .home-v1 .graves-photo { height: auto; }
+}
+@media (max-width: 600px) {
+  .home-v1 .hero-full > img { object-position: 47% center; }
+  .home-v1 .hero-full::after { background: linear-gradient(0deg,rgba(16,23,23,.9),rgba(16,23,23,.12)); }
+  .home-v1 .hero-full h1 { font-size: 2.8rem; }
+  .home-v1 .give .actions { flex-direction: column; }
+  .home-v1 .give .give-facts { display: block; }
+}
+@media (prefers-reduced-motion: reduce) { .grave-outlines path { transition: none; } }
+@media print { .type-preview { display: none; } }

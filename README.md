@@ -2,6 +2,14 @@
 
 ## V1 revision preview
 
+### Second design pass
+
+- On localhost, the bottom-right font comparison offers four full-page treatments. Direct links use `?type=classic`, `?type=literary`, `?type=warm` or `?type=modern`. Add `&design=1` to expose the comparison control on a hosted preview. The default stays classic.
+- History and giving share the same background; the repeated giving photo and hard crimson boundary have been removed.
+- The churchyard photograph has three subtle keyboard/touch-accessible SVG hotspots leading to a real Gravefindr name search. **These are an interaction study, not identified stones.** No names are attached: matching these photographed stones requires verified records and ground/photo references first. Gravefindr's public page provides burial records but no verified mapping from this photograph to burial IDs.
+- Donation checkout remains blocked on the treasurer's provider and church-specific payment link. The generic parish finder was removed as a misleading checkout destination. Current links describe the actual visit/phone options. Once the verified payment link is supplied, connect the home-page button directly to that checkout.
+- Blossom hero: Mike Searle, *St Michael & All Angels Church, Penkridge (2)*, 30 April 2015, [Geograph 4461800](https://www.geograph.org.uk/photo/4461800), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/). Retrieved from Wikimedia Commons original image, displayed with a CSS crop. **Available source is only 640 × 447, not high resolution.** Geograph's reuse/download page could not be accessed due to a browser challenge; a higher-resolution photographer original remains outstanding. The image has not been AI-upscaled or reconstructed.
+
 `codex/v1-revision` starts from `main-with-data-collection`. It revises the home page with a warm stone palette, integrated photographs and a public notice board. Home-specific styling is in `home-v1.css`.
 
 The existing members Page editor manages notices for both Home (latest three) and What's on (latest five). Publish and date controls determine what appears. On localhost only, saved members-demo notices can be previewed on the public pages; these are made-up data. A configured Supabase project supplies real published notices. No connection means an honest placeholder, not sample announcements presented as real news.
