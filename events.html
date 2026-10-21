@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&amp;family=Castoro+Titling&amp;family=Josefin+Sans:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261020w">
+  <link rel="stylesheet" href="styles.css?v=20261021m">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -40,10 +40,12 @@
     </header>
 
     <section class="band events-coming" aria-labelledby="coming-title" style="padding-top:0">
+      <div class="notices" id="notices" hidden></div>
       <span class="kicker">Upcoming</span>
       <h2 id="coming-title">Coming up</h2>
-      <!-- TODO: replace with real parish events and times -->
-      <ol class="coming-cards">
+      <!-- These dates show until the members area is set up. After that, the
+           office edits Coming up in the members area and live-content.js fills it in -->
+      <ol class="coming-cards" id="coming-list">
           <li data-date="2026-11-08">
             <time class="cal" datetime="2026-11-08"><span class="cal-month">Nov</span><span class="cal-day">8</span><span class="cal-dow">Sunday</span></time>
             <div>
@@ -86,7 +88,7 @@
         </div>
         <div>
           <h3>Third Sunday</h3>
-          <p>The pattern changes, so check the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">parish Facebook page</a> for that week.</p>
+          <p data-text="third_sunday">The pattern changes, so check the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">parish Facebook page</a> for that week.</p>
         </div>
         <div>
           <h3>By arrangement</h3>
@@ -103,12 +105,12 @@
           <div>
             <h3>Messy Church</h3>
             <p>Church for families, with crafts and activities, a short celebration together and food to share. It's free, and children come with their grown-ups.</p>
-            <p class="small">Next dates are on the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">parish Facebook page</a>.</p>
+            <p class="small" data-text="messy_church_when">Next dates are on the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">parish Facebook page</a>.</p>
           </div>
           <div>
             <h3>Coffee mornings</h3>
             <p>Tea, coffee, cake and a chat in the church. Everyone is welcome, whether or not you come on Sundays.</p>
-            <p class="small">Next dates are on the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">parish Facebook page</a>.</p>
+            <p class="small" data-text="coffee_morning_when">Next dates are on the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">parish Facebook page</a>.</p>
           </div>
         </div>
     </section>
@@ -188,6 +190,7 @@
           <li><a href="life-events.html">Baptisms, weddings and funerals</a></li>
           <li><a href="churchyard.html">Find a grave</a></li>
           <li><a href="donate.html">Give to St Michael's</a></li>
+          <li><a href="members/index.html">Members area</a></li>
           <li><a href="https://www.achurchnearyou.com/church/4431/" target="_blank" rel="noopener">Safeguarding</a></li>
           <li><a href="https://gravefindr.co.uk/" target="_blank" rel="noopener">Gravefindr</a></li>
         </ul>
@@ -207,6 +210,8 @@
       });
     })();
   </script>
-  <script src="buttons.js?v=20261020w" defer></script>
+  <script src="members/config.js?v=20261021m" defer></script>
+  <script src="live-content.js?v=20261021m" defer></script>
+  <script src="buttons.js?v=20261021m" defer></script>
 </body>
 </html>

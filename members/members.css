@@ -1,0 +1,995 @@
+/* Members area. Builds on ../styles.css: same colours, fonts and buttons */
+
+.members-head {
+  padding-bottom: 1rem;
+}
+
+.members-head h1 {
+  font-size: var(--step-3);
+}
+
+.m-app {
+  padding: 0 var(--edge) var(--space);
+  min-height: 50vh;
+}
+
+.m-loading {
+  color: var(--ink-soft);
+}
+
+/* Demo bar */
+.m-demo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin: 0 0 1.5rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--ink);
+  color: #fff;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.m-demo p {
+  margin: 0;
+}
+
+.m-demo strong {
+  color: #fff;
+}
+
+.m-demo-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.m-app .m-demo select {
+  width: auto;
+  min-height: 2.4rem;
+  padding: 0.3rem 0.6rem;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.m-demo .m-btn-quiet {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+.m-demo .m-btn-quiet:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+/* Members menu */
+.m-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--stone-line);
+}
+
+.m-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.6rem;
+}
+
+.m-nav a {
+  position: relative;
+  padding: 0.35rem 0;
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.m-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.m-nav a:hover::after,
+.m-nav a:focus-visible::after,
+.m-nav a[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.m-who {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+/* Messages */
+.m-flash:empty {
+  display: none;
+}
+
+.m-flash {
+  margin: 0 0 1.5rem;
+  padding: 0.85rem 1.1rem;
+  border-left: 3px solid var(--ink);
+  background: var(--stone);
+}
+
+.m-flash p {
+  margin: 0;
+}
+
+.m-flash.is-error {
+  border-left-color: var(--red);
+  background: #f8ebeb;
+}
+
+/* Layout */
+.m-grid {
+  display: grid;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (min-width: 860px) {
+  .m-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  }
+}
+
+.m-card {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--stone-line);
+  background: var(--paper);
+}
+
+.m-card-stone {
+  background: var(--stone);
+  border-color: var(--stone);
+}
+
+.m-card h2,
+.m-section h2 {
+  font-size: var(--step-2);
+  margin-bottom: 0.75rem;
+}
+
+.m-gate {
+  margin-bottom: 2rem;
+  border-left: 3px solid var(--red);
+}
+
+.m-hello {
+  margin-bottom: 1.5rem;
+}
+
+.m-hello h2 {
+  font-size: var(--step-3);
+  margin: 0;
+}
+
+.m-section {
+  margin: 0 0 clamp(2.25rem, 5vw, 3.25rem);
+  max-width: 64rem;
+}
+
+.m-section h3 {
+  font-size: 1.05rem;
+}
+
+.m-empty {
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.m-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.m-row.m-wrap {
+  align-items: flex-end;
+  gap: 0.6rem 1rem;
+}
+
+.m-row.m-wrap .m-field {
+  flex: 1 1 12rem;
+  margin: 0;
+}
+
+/* Forms */
+.m-form {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 40rem;
+}
+
+.m-form p {
+  margin: 0;
+}
+
+.m-field {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.m-field label,
+.m-label,
+.m-fieldset legend {
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.m-help,
+.m-count {
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+.m-count {
+  margin-top: -0.6rem;
+  justify-self: end;
+}
+
+.m-static {
+  margin: 0;
+}
+
+.m-app input:not([type="checkbox"]),
+.m-app select,
+.m-app textarea,
+.m-demo select {
+  width: 100%;
+  min-height: 2.9rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid #b7afa2;
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.m-app .m-demo select {
+  width: auto;
+  min-height: 2.4rem;
+  color: var(--ink);
+}
+
+.m-app textarea {
+  resize: vertical;
+}
+
+.m-app input:focus-visible,
+.m-app select:focus-visible,
+.m-app textarea:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 1px;
+  border-color: var(--ink);
+}
+
+.m-app input[type="checkbox"] {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: var(--red);
+  margin: 0;
+}
+
+.m-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.m-fieldset {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--stone-line);
+}
+
+.m-code {
+  max-width: 11rem;
+  font-size: 1.4rem !important;
+  letter-spacing: 0.3em;
+  text-align: center;
+}
+
+.m-inline-form {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), max-content));
+  align-items: end;
+  max-width: none;
+}
+
+.m-inline-form .m-field {
+  min-width: 10rem;
+}
+
+.m-inline-form + .m-inline-form {
+  margin-top: 0.9rem;
+}
+
+/* Buttons: the site's pill buttons, without the arrow dot */
+.m-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.9rem;
+  padding: 0.4rem 1.4rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font: 600 1rem/1.1 var(--body);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  justify-self: start;
+}
+
+.m-btn:hover,
+.m-btn:focus-visible {
+  background: #000;
+  color: #fff;
+}
+
+.m-btn:active {
+  transform: scale(0.97);
+}
+
+.m-btn[disabled] {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+.m-btn-sm {
+  min-height: 2.4rem;
+  padding: 0.3rem 1rem;
+  font-size: 0.92rem;
+}
+
+.m-btn-quiet {
+  background: rgba(20, 20, 22, 0.07);
+  color: var(--ink);
+}
+
+.m-btn-quiet:hover,
+.m-btn-quiet:focus-visible {
+  background: rgba(20, 20, 22, 0.13);
+  color: var(--ink);
+}
+
+.m-btn.is-armed,
+.m-btn.is-armed:hover {
+  background: var(--red);
+  color: #fff;
+}
+
+.m-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--crimson);
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  cursor: pointer;
+}
+
+/* Labels */
+.m-tag {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.1rem 0.55rem;
+  border: 1px solid var(--stone-line);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.m-tag:first-child {
+  margin-left: 0;
+}
+
+.m-tag-red {
+  border-color: var(--red);
+  background: var(--red);
+  color: #fff;
+}
+
+.m-note {
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+/* Your dates */
+.m-dates {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.m-date {
+  display: grid;
+  grid-template-columns: 5.25rem minmax(0, 1fr);
+  gap: 0.9rem 1.25rem;
+  align-items: start;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--stone-line);
+}
+
+.m-date h3 {
+  margin: 0.1rem 0 0.3rem;
+}
+
+.m-date p {
+  margin: 0 0 0.3rem;
+  font-size: 0.98rem;
+}
+
+.m-date .m-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+@media (min-width: 760px) {
+  .m-date {
+    grid-template-columns: 5.25rem minmax(0, 1fr) auto;
+  }
+
+  .m-date .m-actions {
+    grid-column: auto;
+    justify-content: flex-end;
+    align-self: center;
+  }
+}
+
+.m-swap-form {
+  width: min(100%, 22rem);
+}
+
+.m-away {
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+  max-width: 34rem;
+}
+
+.m-away li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  background: var(--stone);
+}
+
+/* Rota cards */
+.m-rotas {
+  list-style: none;
+  margin: 0 0 1.5rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+  gap: 1rem;
+}
+
+.m-rotas a {
+  display: grid;
+  gap: 0.3rem;
+  height: 100%;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--stone-line);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+
+.m-rotas a:hover,
+.m-rotas a:focus-visible {
+  border-color: var(--ink);
+}
+
+.m-rotas strong {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.m-rotas span {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.m-rotas .m-tag {
+  justify-self: start;
+  margin: 0.3rem 0 0;
+}
+
+/* The rota itself */
+.m-rota-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.m-rota-head h2 {
+  font-size: var(--step-3);
+  margin: 0;
+}
+
+.m-rota-head p {
+  margin: 0.4rem 0 0;
+}
+
+.m-table-wrap {
+  overflow-x: auto;
+  margin: 0 0 1rem;
+}
+
+.m-rota,
+.m-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.98rem;
+}
+
+.m-rota th,
+.m-rota td,
+.m-table th,
+.m-table td {
+  padding: 0.75rem 0.9rem;
+  border-bottom: 1px solid var(--stone-line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.m-rota thead th,
+.m-table thead th {
+  border-bottom: 2px solid var(--ink);
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.m-rota tbody th {
+  width: 13rem;
+  font-weight: 400;
+}
+
+.m-when {
+  display: block;
+  font-weight: 600;
+}
+
+.m-what {
+  display: block;
+  font-size: var(--step--1);
+  color: var(--ink-soft);
+}
+
+.m-chips {
+  list-style: none;
+  margin: 0 0 0.4rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.m-chip {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.35rem 0.25rem 0.75rem;
+  border: 1px solid var(--stone-line);
+  border-radius: 999px;
+  background: var(--paper);
+}
+
+.m-chip:not(:has(button)) {
+  padding-right: 0.75rem;
+}
+
+.m-chip .m-tag {
+  margin: 0;
+}
+
+.m-chip.is-mine {
+  border-color: var(--red);
+  color: var(--red);
+  font-weight: 600;
+}
+
+.m-x {
+  display: inline-grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(20, 20, 22, 0.07);
+  color: var(--ink);
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.m-x:hover,
+.m-x:focus-visible {
+  background: var(--red);
+  color: #fff;
+}
+
+.m-app select.m-add {
+  width: auto;
+  min-width: 11rem;
+  min-height: 2.3rem;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.92rem;
+}
+
+.m-nobody {
+  color: var(--ink-soft);
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+.m-mini-form {
+  margin-top: 0.6rem;
+  gap: 0.5rem;
+}
+
+.m-mini-form .m-field label {
+  font-size: 0.85rem;
+}
+
+/* On phones each date becomes a card */
+@media (max-width: 700px) {
+  .m-rota thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .m-rota,
+  .m-rota tbody,
+  .m-rota tr,
+  .m-rota th,
+  .m-rota td {
+    display: block;
+    width: auto;
+  }
+
+  .m-rota tr {
+    margin-bottom: 1rem;
+    border: 1px solid var(--stone-line);
+  }
+
+  .m-rota tbody th {
+    width: auto;
+    background: var(--stone);
+  }
+
+  .m-rota td {
+    border-bottom: 0;
+  }
+
+  .m-rota td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 0.35rem;
+    font-family: var(--display);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .m-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .m-table,
+  .m-table tbody,
+  .m-table tr,
+  .m-table td {
+    display: block;
+  }
+
+  .m-table tr {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--stone-line);
+  }
+
+  .m-table td {
+    padding: 0.2rem 0;
+    border: 0;
+  }
+
+  .m-table td[data-label]:not([data-label=""])::before {
+    content: attr(data-label) ": ";
+    font-weight: 600;
+  }
+}
+
+/* Lead and admin tools */
+.m-tools {
+  margin: 2.5rem calc(var(--edge) * -1) 0;
+  padding: clamp(2rem, 5vw, 3rem) var(--edge) 0.5rem;
+  background: var(--stone);
+}
+
+.m-tools .m-section {
+  padding-bottom: clamp(1.5rem, 4vw, 2.25rem);
+  border-bottom: 1px solid var(--stone-line);
+}
+
+.m-tools .m-section:last-child {
+  border-bottom: 0;
+}
+
+.m-tools .m-form h3 {
+  margin-top: 1.25rem;
+}
+
+.m-people {
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.m-people > li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--paper);
+}
+
+.m-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 1rem;
+  font-size: var(--step--1);
+}
+
+.m-contact a {
+  overflow-wrap: anywhere;
+}
+
+/* Editor lists */
+.m-items {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.m-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.6rem 1.25rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--stone-line);
+}
+
+@media (min-width: 760px) {
+  .m-item {
+    grid-template-columns: 9.5rem minmax(0, 1fr) auto;
+    align-items: start;
+  }
+
+  .m-item:has(> .m-form) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.m-item.is-draft {
+  background: #faf9f6;
+  border-style: dashed;
+}
+
+.m-item-date {
+  display: grid;
+  font-size: 0.95rem;
+}
+
+.m-item-date span {
+  color: var(--ink-soft);
+}
+
+.m-item-body h3 {
+  margin: 0 0 0.25rem;
+}
+
+.m-item-body p {
+  margin: 0 0 0.35rem;
+  font-size: 0.98rem;
+}
+
+.m-add-box,
+.m-past {
+  margin-top: 1rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--stone-line);
+}
+
+.m-add-box > summary,
+.m-past > summary {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.m-add-box[open] > summary,
+.m-past[open] > summary {
+  margin-bottom: 1rem;
+}
+
+.m-edit {
+  max-width: 44rem;
+}
+
+.m-section > .m-edit + .m-edit {
+  margin-top: 1.5rem;
+}
+
+.m-log td {
+  font-size: 0.95rem;
+}
+
+/* Two-step setup */
+.m-steps {
+  margin: 0;
+  padding-left: 1.3rem;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.m-qr {
+  margin: 0.75rem 0;
+  border: 1px solid var(--stone-line);
+  background: #fff;
+}
+
+.m-key code {
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  overflow-wrap: anywhere;
+}
+
+.m-btn.m-danger.is-armed,
+.m-form .m-danger:hover {
+  background: var(--red);
+  color: #fff;
+}
+
+/* Privacy notice */
+.m-privacy {
+  padding: 0 var(--edge) var(--space);
+}
+
+.m-privacy h2 {
+  font-size: var(--step-2);
+  margin-top: 2.25rem;
+}
+
+.m-privacy ul {
+  padding-left: 1.2rem;
+}
+
+.m-draft {
+  max-width: var(--measure);
+  padding: 0.85rem 1.1rem;
+  border-left: 3px solid var(--red);
+  background: var(--stone);
+}
+
+/* Printing a rota for the noticeboard */
+@media print {
+  .masthead,
+  .footer,
+  .skip-link,
+  .m-demo,
+  .m-bar,
+  .m-flash,
+  .m-no-print,
+  .m-tools,
+  .members-head .lede {
+    display: none !important;
+  }
+
+  .m-app {
+    padding: 0;
+  }
+
+  .m-rota {
+    font-size: 11pt;
+  }
+
+  .m-chip {
+    border: 0;
+    padding: 0;
+  }
+
+  .m-chip.is-mine {
+    color: inherit;
+  }
+}
+
+.m-privacy ul {
+  list-style: none;
+  padding-left: 1.1rem;
+}
+
+.m-privacy li {
+  position: relative;
+}
+
+.m-privacy li::before {
+  content: "-";
+  position: absolute;
+  left: -1.1rem;
+}
+
+.m-section > .m-row {
+  margin-bottom: 1.25rem;
+}
+
+.m-section > .m-form + .m-help,
+.m-section > .m-inline-form + .m-help {
+  margin-top: 0.9rem;
+}

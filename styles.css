@@ -3063,3 +3063,30 @@ html {
 .sun-steps .prose p {
   font-size: 1.08rem;
 }
+
+/* Notices at the top of What's on, written by the office in the members area */
+.notices {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0 0 2.25rem;
+  max-width: 48rem;
+}
+
+.notices[hidden] {
+  display: none;
+}
+
+.notice {
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--red);
+  background: var(--stone);
+}
+
+.notice h3 {
+  margin: 0 0 0.3rem;
+}
+
+.notice p {
+  margin: 0;
+  white-space: pre-line;
+}

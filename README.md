@@ -13,7 +13,7 @@ The aim is for the site to become a working tool for the church, not just a set 
 - **Invite-only.** People are invited, or request access and an admin (for example Greg or the parish office) approves them. Nobody outside the church can sign themselves up
 - **Sign in with a link sent by email**, so there are no passwords to forget
 - **Three levels:** member (sees rotas and notices), rota lead (edits their own rota), admin (manages people, rotas and page content). Admins use two-step login
-- A "Members" link in the menu leads to it
+- A "Members area" link in the footer leads to it for now. Add it to the main menu when it goes live
 
 ### 2. Rotas and availability
 
@@ -50,11 +50,20 @@ The aim is for the site to become a working tool for the church, not just a set 
 4. Set up Supabase and build the AV rota for real
 5. Add the other rotas and the page editor
 
+### Where the members area stands
+
+Built on the `members-area` branch and tested against a local Supabase. Setup steps and details are in [`supabase/README.md`](supabase/README.md).
+
+- **Done:** invite-only sign-in by email link or code, two-step sign-in for admins, the AV rota with swaps, away dates and daily reminder emails, rota lead tools, the page editor for Coming up, notices and the Messy Church, coffee morning and third Sunday details, the People page (invite, approve, remove, admins), download and delete your own data, and a draft privacy notice
+- **Demo mode:** while `members/config.js` is empty the members area runs with made-up names in the browser. This is the clickable prototype for step 2
+- **Waiting on:** PCC approval, the privacy notice finished, the Supabase project and email sending set up, and the real jobs on the AV rota
+
 This could also be offered to other churches alongside Gravefindr (see Open decision below).
 
 ## Where it stands
 
 - Pages: Home, Sundays, Find a grave, History, Visit, Life events (baptisms, weddings and funerals), What's on, Donate. Every menu item is its own page; the home page is a short tour that links into each one
+- Members area in `members/` (see the PRIORITY section above)
 - The redesign (crimson colours, Castoro and Josefin Sans fonts, full-width layout) is on the `crimson-colours` branch
 - Grave finder: the Churchyard page now embeds Gravefindr (https://gravefindr.co.uk/graveyards/st-michaels-penkridge), with a link out to the full site. The old built-in finder (`churchyard.js` and the map files in `graveyard/`) is still in the repo but no longer loaded
 - Data: 2,130 stones and 3,576 people, from the 2000 survey updated to about 2019 (`graveyard/graves.json`, source spreadsheet `graveyard/St Michaels Churchyard - Grave Records.xlsx`)
