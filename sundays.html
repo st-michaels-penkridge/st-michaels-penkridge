@@ -7,9 +7,9 @@
   <meta name="description" content="Sunday Holy Communion at 10:30 at St Michael and All Angels, Penkridge. What to expect on your first visit, children, and the third Sunday of the month.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&amp;family=Castoro+Titling&amp;family=Josefin+Sans:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261021w">
-  <link rel="stylesheet" href="chosen-type.css?v=1">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=20261105">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -19,15 +19,25 @@
       <span class="wordmark-name">St Michael and All Angels</span>
       <span class="wordmark-place">Penkridge, Staffordshire</span>
     </a>
-    <nav class="nav" aria-label="Primary">
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span>Menu</button>
+    <nav class="nav" id="site-nav" aria-label="Primary">
       <a href="index.html" data-nav="home">Home</a>
-      <a href="sundays.html" data-nav="sundays" aria-current="page">Sundays</a>
-      <a href="churchyard.html" data-nav="churchyard"><span class="nav-long">Find a grave</span><span class="nav-short">Graves</span></a>
-      <a href="gallery.html" data-nav="gallery">History</a>
-      <a href="visit.html" data-nav="visit">Visit</a>
-      <a href="life-events.html" data-nav="life"><span class="nav-long">Life events</span><span class="nav-short">Life</span></a>
-      <a href="events.html" data-nav="events"><span class="nav-long">What's on</span><span class="nav-short">Events</span></a>
-      <a href="members/index.html" data-nav="account">Account</a>
+      <div class="nav-group is-current">
+        <button type="button" class="nav-group-btn" aria-expanded="false">Worship</button>
+        <div class="nav-menu">
+          <a href="sundays.html" data-nav="sundays" aria-current="page">Sundays<small>Holy Communion at 10:30</small></a>
+          <a href="events.html" data-nav="events">What's on<small>Services, coffee mornings, Messy Church</small></a>
+          <a href="life-events.html" data-nav="life">Baptisms, weddings &amp; funerals</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-btn" aria-expanded="false">About us</button>
+        <div class="nav-menu">
+          <a href="gallery.html" data-nav="gallery">History of St Michael's</a>
+          <a href="visit.html" data-nav="visit">Visit us<small>Where we are and how to get here</small></a>
+        </div>
+      </div>
+      <a href="churchyard.html" data-nav="churchyard">Find a grave</a>
       <a href="donate.html" data-nav="donate">Donate</a>
     </nav>
   </header>
@@ -50,7 +60,7 @@
         </div>
       </div>
       <figure class="sun-intro-photo">
-        <img src="images/a26c9c41459f.jpg" width="1280" height="1707" alt="The nave of St Michael's, with the crimson carpet running up the aisle to the chancel screen" fetchpriority="high">
+        <img decoding="async" src="images/opt/a26c9c41459f-800.webp" srcset="images/opt/a26c9c41459f-400.webp 400w, images/opt/a26c9c41459f-800.webp 800w, images/opt/a26c9c41459f-1600.webp 1280w" sizes="100vw" width="1280" height="1707" alt="The nave of St Michael's, with the crimson carpet running up the aisle to the chancel screen" fetchpriority="high">
       </figure>
     </section>
 
@@ -106,6 +116,8 @@
           <li><a href="churchyard.html">Find a grave</a></li>
           <li><a href="donate.html">Give to St Michael's</a></li>
           <li><a href="members/index.html">Members area</a></li>
+          <li><a href="privacy.html">Privacy and cookies</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
           <li><a href="https://www.achurchnearyou.com/church/4431/" target="_blank" rel="noopener">Safeguarding</a></li>
           <li><a href="https://gravefindr.co.uk/" target="_blank" rel="noopener">Gravefindr</a></li>
         </ul>
@@ -133,6 +145,6 @@
         (i === 0 ? "Today" : when) + " at 10:30";
     })();
   </script>
-  <script src="buttons.js?v=20261021n" defer></script>
+  <script src="buttons.js?v=20261105" defer></script>
 </body>
 </html>

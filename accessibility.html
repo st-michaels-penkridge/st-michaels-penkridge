@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accessibility, St Michael's Church, Penkridge</title>
+  <meta name="description" content="How accessible the St Michael's Penkridge website is, and how to tell us about a problem.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=20261105">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="masthead">
+    <a class="wordmark" href="index.html">
+      <span class="wordmark-name">St Michael and All Angels</span>
+      <span class="wordmark-place">Penkridge, Staffordshire</span>
+    </a>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span>Menu</button>
+    <nav class="nav" id="site-nav" aria-label="Primary">
+      <a href="index.html" data-nav="home">Home</a>
+      <div class="nav-group">
+        <button type="button" class="nav-group-btn" aria-expanded="false">Worship</button>
+        <div class="nav-menu">
+          <a href="sundays.html" data-nav="sundays">Sundays<small>Holy Communion at 10:30</small></a>
+          <a href="events.html" data-nav="events">What's on<small>Services, coffee mornings, Messy Church</small></a>
+          <a href="life-events.html" data-nav="life">Baptisms, weddings &amp; funerals</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-btn" aria-expanded="false">About us</button>
+        <div class="nav-menu">
+          <a href="gallery.html" data-nav="gallery">History of St Michael's</a>
+          <a href="visit.html" data-nav="visit">Visit us<small>Where we are and how to get here</small></a>
+        </div>
+      </div>
+      <a href="churchyard.html" data-nav="churchyard">Find a grave</a>
+      <a href="donate.html" data-nav="donate">Donate</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <header class="page-head">
+      <div>
+        <h1>Accessibility</h1>
+        <p class="lede">We want everyone to be able to use this website, whatever device or access needs they have.</p>
+      </div>
+    </header>
+
+    <section class="band prose-page" style="padding-top:0">
+      <div class="prose">
+        <h2>What we've done</h2>
+        <ul>
+          <li>Pages are built to work on phones, tablets and computers, and when zoomed in.</li>
+          <li>Text is in sentence case with strong contrast, and headings follow a clear order.</li>
+          <li>Images have descriptions for screen readers, and every link and button can be reached with a keyboard.</li>
+          <li>Animation is reduced if your device asks for less motion.</li>
+        </ul>
+        <p>We aim to meet the Web Content Accessibility Guidelines (WCAG) 2.1 at level AA.</p>
+        <h2>Known problems</h2>
+        <ul>
+          <li>The Google map, when shown, is hard to use with a screen reader. The address and a directions link are always shown beside it.</li>
+          <li>Some older photographs and engravings have only short descriptions.</li>
+        </ul>
+        <h2>Visiting the church</h2>
+        <p>For access to the building itself, see <a href="visit.html">Visit us</a>, or call the parish office.</p>
+        <h2>Tell us about a problem</h2>
+        <p>If something on this website doesn't work for you, call the parish office on <a href="tel:+441785714344">01785 714344</a> and we'll put it right.</p>
+        <p>This statement was written on 5 November 2026.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-cols">
+      <div>
+        <h2>St Michael and All Angels</h2>
+        <!-- TODO: confirm church address and postcode with Greg -->
+        <address>Church Road, Penkridge<br>Stafford ST19 5AW</address>
+        <p>Holy Communion, Sundays at 10:30</p>
+      </div>
+      <div>
+        <h2>Parish office</h2>
+        <address>The Rectory, New Road<br>Penkridge ST19 5DN</address>
+        <p><a href="tel:+441785714344">01785 714344</a></p>
+        <p><a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">Parish Facebook page</a></p>
+      </div>
+      <div>
+        <h2>Also here</h2>
+        <ul>
+          <li><a href="sundays.html">Sundays</a></li>
+          <li><a href="visit.html">Plan your visit</a></li>
+          <li><a href="life-events.html">Baptisms, weddings and funerals</a></li>
+          <li><a href="churchyard.html">Find a grave</a></li>
+          <li><a href="donate.html">Give to St Michael's</a></li>
+          <li><a href="members/index.html">Members area</a></li>
+          <li><a href="privacy.html">Privacy and cookies</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
+          <li><a href="https://www.achurchnearyou.com/church/4431/" target="_blank" rel="noopener">Safeguarding</a></li>
+          <li><a href="https://gravefindr.co.uk/" target="_blank" rel="noopener">Gravefindr</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <p>The Parochial Church Council of St Michael and All Angels, Penkridge. Registered charity 1131086.</p>
+      <p>Photographs from <a href="https://commons.wikimedia.org/wiki/Category:St._Michael_and_All_Angels,_Penkridge" target="_blank" rel="noopener">Wikimedia Commons</a> contributors, under Creative Commons licences.</p>
+    </div>
+  </footer>
+
+  <script src="buttons.js?v=20261105" defer></script>
+</body>
+</html>

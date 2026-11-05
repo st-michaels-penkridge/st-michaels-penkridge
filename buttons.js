@@ -62,3 +62,62 @@
     });
   });
 })();
+
+// Main menu: dropdown groups, and the Menu button on phones
+(function () {
+  "use strict";
+  var mast = document.querySelector(".masthead");
+  var toggle = document.querySelector(".nav-toggle");
+  var groups = Array.prototype.slice.call(document.querySelectorAll(".nav-group"));
+  function setGroup(g, open) {
+    g.classList.toggle("is-open", open);
+    g.querySelector(".nav-group-btn").setAttribute("aria-expanded", String(open));
+  }
+  function closeAll(except) { groups.forEach(function (g) { if (g !== except) setGroup(g, false); }); }
+  groups.forEach(function (g) {
+    var btn = g.querySelector(".nav-group-btn");
+    btn.addEventListener("click", function () {
+      var open = !g.classList.contains("is-open");
+      closeAll(g); setGroup(g, open);
+    });
+    g.addEventListener("focusout", function (e) {
+      if (!g.contains(e.relatedTarget) && window.matchMedia("(min-width: 1001px)").matches) setGroup(g, false);
+    });
+  });
+  if (toggle && mast) {
+    toggle.addEventListener("click", function () {
+      var open = !mast.classList.contains("nav-open");
+      mast.classList.toggle("nav-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      if (open) groups.forEach(function (g) { if (g.classList.contains("is-current")) setGroup(g, true); });
+    });
+  }
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest || !e.target.closest(".nav-group")) {
+      if (window.matchMedia("(min-width: 1001px)").matches) closeAll();
+    }
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") return;
+    var g = document.activeElement && document.activeElement.closest && document.activeElement.closest(".nav-group");
+    closeAll();
+    if (g) g.querySelector(".nav-group-btn").focus();
+    else if (mast && mast.classList.contains("nav-open") && toggle) { mast.classList.remove("nav-open"); toggle.setAttribute("aria-expanded", "false"); toggle.focus(); }
+  });
+})();
+
+// Map loads only when asked, so the page stays light
+(function () {
+  "use strict";
+  document.querySelectorAll(".map-facade").forEach(function (box) {
+    var btn = box.querySelector(".map-load");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var frame = document.createElement("iframe");
+      frame.title = "Google map showing St Michael's Church, Penkridge";
+      frame.src = box.getAttribute("data-src");
+      frame.referrerPolicy = "no-referrer-when-downgrade";
+      box.replaceWith(frame);
+    });
+  });
+})();

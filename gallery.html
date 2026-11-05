@@ -7,9 +7,9 @@
   <meta name="description" content="The history of St Michael and All Angels, Penkridge: a royal chapel, the Archbishops of Dublin, 800 years of building in red sandstone, the Littleton tombs and the 1881 restoration, with photographs.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&amp;family=Castoro+Titling&amp;family=Josefin+Sans:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261021w">
-  <link rel="stylesheet" href="chosen-type.css?v=1">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=20261105">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -19,15 +19,25 @@
       <span class="wordmark-name">St Michael and All Angels</span>
       <span class="wordmark-place">Penkridge, Staffordshire</span>
     </a>
-    <nav class="nav" aria-label="Primary">
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span>Menu</button>
+    <nav class="nav" id="site-nav" aria-label="Primary">
       <a href="index.html" data-nav="home">Home</a>
-      <a href="sundays.html" data-nav="sundays">Sundays</a>
-      <a href="churchyard.html" data-nav="churchyard"><span class="nav-long">Find a grave</span><span class="nav-short">Graves</span></a>
-      <a href="gallery.html" data-nav="gallery" aria-current="page">History</a>
-      <a href="visit.html" data-nav="visit">Visit</a>
-      <a href="life-events.html" data-nav="life"><span class="nav-long">Life events</span><span class="nav-short">Life</span></a>
-      <a href="events.html" data-nav="events"><span class="nav-long">What's on</span><span class="nav-short">Events</span></a>
-      <a href="members/index.html" data-nav="account">Account</a>
+      <div class="nav-group">
+        <button type="button" class="nav-group-btn" aria-expanded="false">Worship</button>
+        <div class="nav-menu">
+          <a href="sundays.html" data-nav="sundays">Sundays<small>Holy Communion at 10:30</small></a>
+          <a href="events.html" data-nav="events">What's on<small>Services, coffee mornings, Messy Church</small></a>
+          <a href="life-events.html" data-nav="life">Baptisms, weddings &amp; funerals</a>
+        </div>
+      </div>
+      <div class="nav-group is-current">
+        <button type="button" class="nav-group-btn" aria-expanded="false">About us</button>
+        <div class="nav-menu">
+          <a href="gallery.html" data-nav="gallery" aria-current="page">History of St Michael's</a>
+          <a href="visit.html" data-nav="visit">Visit us<small>Where we are and how to get here</small></a>
+        </div>
+      </div>
+      <a href="churchyard.html" data-nav="churchyard">Find a grave</a>
       <a href="donate.html" data-nav="donate">Donate</a>
     </nav>
   </header>
@@ -38,7 +48,7 @@
         <h1>History of St&nbsp;Michael's</h1>
         <p class="lede">A royal chapel for more than a thousand years, a church begun in 1226 by an Archbishop of Dublin, and still the parish church for Penkridge and Stretton.</p>
       </div>
-      <div class="lancets" aria-hidden="true"><figure class="lancet"><img src="images/glass-east-left.jpg" alt="" loading="lazy"></figure><figure class="lancet"><img src="images/glass-east-inner-l.jpg" alt="" loading="lazy"></figure><figure class="lancet tall"><img src="images/glass-east-christ.jpg" alt="" loading="lazy"></figure><figure class="lancet"><img src="images/glass-east-inner-r.jpg" alt="" loading="lazy"></figure><figure class="lancet"><img src="images/glass-east-right.jpg" alt="" loading="lazy"></figure></div>
+      <div class="lancets" aria-hidden="true"><figure class="lancet"><img decoding="async" src="images/opt/glass-east-left-800.webp" srcset="images/opt/glass-east-left-400.webp 97w, images/opt/glass-east-left-800.webp 97w" sizes="(max-width: 600px) 30vw, 120px" alt="" loading="lazy"></figure><figure class="lancet"><img decoding="async" src="images/opt/glass-east-inner-l-800.webp" srcset="images/opt/glass-east-inner-l-400.webp 87w, images/opt/glass-east-inner-l-800.webp 87w" sizes="(max-width: 600px) 30vw, 120px" alt="" loading="lazy"></figure><figure class="lancet tall"><img decoding="async" src="images/opt/glass-east-christ-800.webp" srcset="images/opt/glass-east-christ-400.webp 98w, images/opt/glass-east-christ-800.webp 98w" sizes="(max-width: 600px) 30vw, 120px" alt="" loading="lazy"></figure><figure class="lancet"><img decoding="async" src="images/opt/glass-east-inner-r-800.webp" srcset="images/opt/glass-east-inner-r-400.webp 87w, images/opt/glass-east-inner-r-800.webp 87w" sizes="(max-width: 600px) 30vw, 120px" alt="" loading="lazy"></figure><figure class="lancet"><img decoding="async" src="images/opt/glass-east-right-800.webp" srcset="images/opt/glass-east-right-400.webp 97w, images/opt/glass-east-right-800.webp 97w" sizes="(max-width: 600px) 30vw, 120px" alt="" loading="lazy"></figure></div>
     </header>
 
     <div class="hist">
@@ -50,7 +60,7 @@
         <p>By the time of the Domesday Book in 1086 it was served by nine clerks, priests who lived and worshipped together and were supported by land from the Crown. A church served by a community of priests is called a collegiate church, and as a royal chapel St Michael's answered to the king rather than to the local bishop.</p>
       </div>
       <figure class="hist-photo">
-        <img src="images/b871acdf2823.jpg" width="1280" height="960" alt="St Michael's in summer sunshine, seen across the churchyard" loading="lazy">
+        <img decoding="async" src="images/opt/b871acdf2823-800.webp" srcset="images/opt/b871acdf2823-400.webp 400w, images/opt/b871acdf2823-800.webp 800w, images/opt/b871acdf2823-1600.webp 1280w" sizes="(max-width: 899px) 100vw, 50vw" width="1280" height="960" alt="St Michael's in summer sunshine, seen across the churchyard" loading="lazy">
         <figcaption>The church stands where the royal chapel stood before it.</figcaption>
       </figure>
     </section>
@@ -62,7 +72,7 @@
         <p>In 1226 Henry made himself dean, came to live in Penkridge, pulled down the old Saxon minster and began the church that stands today. In 1259 the Pope joined the two offices for good, so for the rest of the Middle Ages the Archbishop of Dublin was also the Dean of Penkridge.</p>
       </div>
       <figure class="hist-photo">
-        <img src="images/a26c9c41459f.jpg" width="1280" height="1707" alt="The nave, with its 13th-century arcades and the crimson carpet up the aisle" loading="lazy">
+        <img decoding="async" src="images/opt/a26c9c41459f-800.webp" srcset="images/opt/a26c9c41459f-400.webp 400w, images/opt/a26c9c41459f-800.webp 800w, images/opt/a26c9c41459f-1600.webp 1280w" sizes="(max-width: 899px) 100vw, 50vw" width="1280" height="1707" alt="The nave, with its 13th-century arcades and the crimson carpet up the aisle" loading="lazy">
         <figcaption>The nave arcades date from about 1250.</figcaption>
       </figure>
     </section>
@@ -74,7 +84,7 @@
         <p>In the 1500s the builders added the clerestory windows high in the nave and chancel, finished the upper stages of the tower and gave the outside much of the look it has today. The choir stalls, with their carved misericords, are from the late 1400s.</p>
       </div>
       <figure class="hist-photo tall">
-        <img src="images/ce2c7eaba2e8.jpg" width="1280" height="1707" alt="The red sandstone west tower against a blue sky" loading="lazy">
+        <img decoding="async" src="images/opt/ce2c7eaba2e8-800.webp" srcset="images/opt/ce2c7eaba2e8-400.webp 400w, images/opt/ce2c7eaba2e8-800.webp 800w, images/opt/ce2c7eaba2e8-1600.webp 1280w" sizes="(max-width: 899px) 100vw, 50vw" width="1280" height="1707" alt="The red sandstone west tower against a blue sky" loading="lazy">
         <figcaption>The tower: the lowest stage is from the 1300s, the top from the 1500s.</figcaption>
       </figure>
     </section>
@@ -86,7 +96,7 @@
         <p>Their tombs fill the chancel. Sir Edward Littleton, who died in 1558, lies in alabaster between his two wives, Helen and Isabel, and his son Sir Edward, who died in 1574, lies beside his wife Alice. Both tombs are thought to be the work of the Royley family of Burton. The family were patrons of the church until 1990.</p>
       </div>
       <figure class="hist-photo">
-        <img src="images/3fa55a686075.jpg" width="1280" height="960" alt="Alabaster effigies on the tomb of Sir Edward Littleton and his wives" loading="lazy">
+        <img decoding="async" src="images/opt/3fa55a686075-800.webp" srcset="images/opt/3fa55a686075-400.webp 400w, images/opt/3fa55a686075-800.webp 800w, images/opt/3fa55a686075-1600.webp 1280w" sizes="(max-width: 899px) 100vw, 50vw" width="1280" height="960" alt="Alabaster effigies on the tomb of Sir Edward Littleton and his wives" loading="lazy">
         <figcaption>The tomb of Sir Edward Littleton, who died in 1558.</figcaption>
       </figure>
     </section>
@@ -98,7 +108,7 @@
         <p>In 1881 the church was restored by J. A. Chatwin of Birmingham. He raised the chancel arch by eight feet and gave the nave a new roof, keeping six oak angels from the 1500s roof. The church has been listed Grade I since 1962, and it is still the parish church for Penkridge and Stretton.</p>
       </div>
       <figure class="hist-photo">
-        <img src="images/local-ccbb652d2cb4.jpg" width="960" height="694" alt="An engraving of Penkridge in 1839, with the church tower above the village" loading="lazy">
+        <img decoding="async" src="images/opt/local-ccbb652d2cb4-800.webp" srcset="images/opt/local-ccbb652d2cb4-400.webp 400w, images/opt/local-ccbb652d2cb4-800.webp 800w, images/opt/local-ccbb652d2cb4-1600.webp 960w" sizes="(max-width: 899px) 100vw, 50vw" width="960" height="694" alt="An engraving of Penkridge in 1839, with the church tower above the village" loading="lazy">
         <figcaption>Penkridge in an engraving of 1839, before the restoration.</figcaption>
       </figure>
     </section>
@@ -231,6 +241,8 @@
           <li><a href="churchyard.html">Find a grave</a></li>
           <li><a href="donate.html">Give to St Michael's</a></li>
           <li><a href="members/index.html">Members area</a></li>
+          <li><a href="privacy.html">Privacy and cookies</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
           <li><a href="https://www.achurchnearyou.com/church/4431/" target="_blank" rel="noopener">Safeguarding</a></li>
           <li><a href="https://gravefindr.co.uk/" target="_blank" rel="noopener">Gravefindr</a></li>
         </ul>
@@ -242,7 +254,7 @@
     </div>
   </footer>
 
-  <script src="gallery.js?v=20261021n" defer></script>
-  <script src="buttons.js?v=20261021n" defer></script>
+  <script src="gallery.js?v=20261105" defer></script>
+  <script src="buttons.js?v=20261105" defer></script>
 </body>
 </html>
