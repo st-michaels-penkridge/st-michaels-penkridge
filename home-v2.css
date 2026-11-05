@@ -16,15 +16,6 @@
 .home-v1 .story-row.history { background: var(--paper); border: 0; padding-top: 4rem; }
 .home-v1 .history-photo { padding-right: var(--edge); }
 .home-v1 .history-photo img { mask-image: linear-gradient(to bottom,#000 82%,transparent); }
-.home-v1 .give { display: block; position: relative; padding: 5rem var(--edge) 6rem; background: var(--paper); color: var(--ink); text-align: center; }
-.home-v1 .give-text { max-width: 49rem; margin: auto; padding: 0; }
-.home-v1 .give h2 { color: var(--ink); margin: .6rem 0 1.5rem; }
-.home-v1 .give .lede { color: var(--ink-soft); max-width: 39rem; margin-inline: auto; }
-.home-v1 .give .actions { justify-content: center; gap: 1.5rem 2rem; margin-top: 2rem; }
-.home-v1 .give .text-link { color: var(--crimson); }
-.home-v1 .give .give-facts { border: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: .4rem 1.5rem; color: var(--ink-soft); padding: 0; margin-top: 2rem; font-size: .85rem; }
-.home-v1 .give-facts li { padding: 0; }
-.home-v1 .give-facts li::before { content: none; }
 .home-v1 .graves-photo { display: flex; flex-direction: column; justify-content: center; background: var(--paper); height: auto; min-height: 0; }
 .grave-scene { position: relative; }
 .home-v1 .grave-scene img { width: 100%; height: auto; aspect-ratio: 960 / 639; object-fit: contain; }
@@ -38,6 +29,7 @@
 .grave-search > div { display: flex; border: 1px solid #bfb7aa; border-radius: 5px; background: #fffdf9; padding: .3rem; gap: .3rem; }
 .grave-search input { border: 0; min-width: 0; flex: 1; background: transparent; padding: .7rem; font-size: 1rem; color: var(--ink); }
 .grave-search button { border: 0; border-radius: 3px; background: var(--crimson); color: white; padding: .7rem 1rem; font-size: .95rem; cursor: pointer; }
+.home-v1 .notice-date { display: block; margin-bottom: .6rem; color: var(--crimson); }
 .type-preview { position: fixed; bottom: 1rem; right: 1rem; z-index: 100; width: min(23rem,calc(100vw - 2rem)); border: 1px solid #cfc5b8; background: #fffdf9; color: #292724; box-shadow: 0 5px 30px #0002; border-radius: .5rem; font: 14px/1.4 system-ui,sans-serif; }
 .type-preview summary { padding: .8rem 1rem; cursor: pointer; font-weight: 600; }
 .type-options { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; padding: 0 .8rem .8rem; }
@@ -48,15 +40,12 @@
 .type-note { margin: 0; padding: 0 1rem 1rem; font-size: 12px; }
 @media (max-width: 899px) {
   .home-v1 .history-photo { padding: 0 var(--edge); height: 25rem; }
-  .home-v1 .give { padding-top: 2rem; }
   .home-v1 .graves-photo { height: auto; }
 }
 @media (max-width: 600px) {
   .home-v1 .hero-full > img { object-position: 47% center; }
   .home-v1 .hero-full::after { background: linear-gradient(0deg,rgba(16,23,23,.9),rgba(16,23,23,.12)); }
   .home-v1 .hero-full h1 { font-size: 2.8rem; }
-  .home-v1 .give .actions { flex-direction: column; }
-  .home-v1 .give .give-facts { display: block; }
 }
 @media (prefers-reduced-motion: reduce) { .grave-outlines path { transition: none; } }
 @media print { .type-preview { display: none; } }
