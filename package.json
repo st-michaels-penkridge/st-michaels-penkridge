@@ -2,6 +2,11 @@
   "name": "st-michaels-penkridge",
   "private": true,
   "scripts": {
-    "start": "npx --yes serve -l 3000"
+    "start": "npx --yes serve -l 3000",
+    "test:members": "node --test supabase/tests/members.test.mjs"
+  },
+  "devDependencies": {
+    "@supabase/supabase-js": "2.117.2",
+    "otplib": "12.0.1"
   }
 }

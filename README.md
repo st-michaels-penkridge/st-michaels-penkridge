@@ -1,5 +1,29 @@
 # St Michael's Penkridge - Church Site & Grave Finder
 
+## V1 revision preview
+
+### Selected design
+
+The active pairing is **Cormorant Garamond + Source Sans 3**, shared by all 14 public and members pages through `chosen-type.css`. Font comparison controls now appear only with `?design=1`; old `?type=...` links do not override the chosen pairing. The What's on page has a compact heading and puts its date cards before notices.
+
+The active hero is the **4032 × 3024 original** of *Church of St. Michael and All Angels, Penkridge*, by [Ajay Tegala / Geograph, photo 6651755](https://www.geograph.org.uk/photo/6651755), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), retrieved from Wikimedia Commons. It replaces the low-resolution blossom preview; the image is cropped in CSS and credited in the footer.
+
+### Second design pass
+
+- On localhost, the bottom-right font comparison offers four full-page treatments. Direct links use `?type=classic`, `?type=literary`, `?type=warm` or `?type=modern`. Add `&design=1` to expose the comparison control on a hosted preview. The default stays classic.
+- History and giving share the same background; the repeated giving photo and hard crimson boundary have been removed.
+- The churchyard photograph has three subtle keyboard/touch-accessible SVG hotspots leading to a real Gravefindr name search. **These are an interaction study, not identified stones.** No names are attached: matching these photographed stones requires verified records and ground/photo references first. Gravefindr's public page provides burial records but no verified mapping from this photograph to burial IDs.
+- Donation checkout remains blocked on the treasurer's provider and church-specific payment link. The generic parish finder was removed as a misleading checkout destination. Current links describe the actual visit/phone options. Once the verified payment link is supplied, connect the home-page button directly to that checkout.
+- Blossom hero: Mike Searle, *St Michael & All Angels Church, Penkridge (2)*, 30 April 2015, [Geograph 4461800](https://www.geograph.org.uk/photo/4461800), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/). Retrieved from Wikimedia Commons original image, displayed with a CSS crop. **Available source is only 640 × 447, not high resolution.** Geograph's reuse/download page could not be accessed due to a browser challenge; a higher-resolution photographer original remains outstanding. The image has not been AI-upscaled or reconstructed.
+
+`codex/v1-revision` starts from `main-with-data-collection`. It revises the home page with a warm stone palette, integrated photographs and a public notice board. Home-specific styling is in `home-v1.css`.
+
+The existing members Page editor manages notices for both Home (latest three) and What's on (latest five). Publish and date controls determine what appears. On localhost only, saved members-demo notices can be previewed on the public pages; these are made-up data. A configured Supabase project supplies real published notices. No connection means an honest placeholder, not sample announcements presented as real news.
+
+AV remains the pilot for a wider church team system. Future teams may include readers, welcoming, refreshments and flowers; occasional jobs should be considered alongside regular rotas. This revision does not add those teams or change their permissions.
+
+To try it: open the members demo, choose Alex (admin), sign in and enter any six numbers for the demo two-step check. Save a notice in Page editor, then open the home page notice board in the same browser. No real personal data should be entered in this preview.
+
 Website for St Michael and All Angels, Penkridge, with a searchable churchyard grave finder. Built by Will King and Tobi Hussey.
 
 ## PRIORITY: members area, rotas and easy page updates
@@ -13,7 +37,7 @@ The aim is for the site to become a working tool for the church, not just a set 
 - **Invite-only.** People are invited, or request access and an admin (for example Greg or the parish office) approves them. Nobody outside the church can sign themselves up
 - **Sign in with a link sent by email**, so there are no passwords to forget
 - **Three levels:** member (sees rotas and notices), rota lead (edits their own rota), admin (manages people, rotas and page content). Admins use two-step login
-- A "Members" link in the menu leads to it
+- A "Members area" link in the footer leads to it for now. Add it to the main menu when it goes live
 
 ### 2. Rotas and availability
 
@@ -50,11 +74,20 @@ The aim is for the site to become a working tool for the church, not just a set 
 4. Set up Supabase and build the AV rota for real
 5. Add the other rotas and the page editor
 
+### Where the members area stands
+
+Built on the `members-area` branch and tested against a local Supabase. Setup steps and details are in [`supabase/README.md`](supabase/README.md).
+
+- **Done:** invite-only sign-in by email link or code, two-step sign-in for admins, the AV rota with swaps, away dates and daily reminder emails, rota lead tools, the page editor for Coming up, notices and the Messy Church, coffee morning and third Sunday details, the People page (invite, approve, remove, admins), download and delete your own data, and a draft privacy notice
+- **Demo mode:** while `members/config.js` is empty the members area runs with made-up names in the browser. This is the clickable prototype for step 2
+- **Waiting on:** PCC approval, the privacy notice finished, the Supabase project and email sending set up, and the real jobs on the AV rota
+
 This could also be offered to other churches alongside Gravefindr (see Open decision below).
 
 ## Where it stands
 
 - Pages: Home, Sundays, Find a grave, History, Visit, Life events (baptisms, weddings and funerals), What's on, Donate. Every menu item is its own page; the home page is a short tour that links into each one
+- Members area in `members/` (see the PRIORITY section above)
 - The redesign (crimson colours, Castoro and Josefin Sans fonts, full-width layout) is on the `crimson-colours` branch
 - Grave finder: the Churchyard page now embeds Gravefindr (https://gravefindr.co.uk/graveyards/st-michaels-penkridge), with a link out to the full site. The old built-in finder (`churchyard.js` and the map files in `graveyard/`) is still in the repo but no longer loaded
 - Data: 2,130 stones and 3,576 people, from the 2000 survey updated to about 2019 (`graveyard/graves.json`, source spreadsheet `graveyard/St Michaels Churchyard - Grave Records.xlsx`)

@@ -11,3 +11,7 @@ credentials.json
 
 # ~1GB tomb JPEGs — too large for a plain git push; copy graveyard/LoRes10Tombs/ when cloning (USB, Drive, etc.)
 graveyard/LoRes10Tombs/
+
+# Supabase CLI working files
+supabase/.temp/
+supabase/.branches/

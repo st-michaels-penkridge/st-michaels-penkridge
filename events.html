@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Temporary address: remove this line when the site moves to the church domain -->
+  <meta name="robots" content="noindex, nofollow">
   <title>What's on, St Michael's Church, Penkridge</title>
   <meta name="description" content="Sunday worship, Messy Church, coffee mornings and the main dates of the church year at St Michael and All Angels, Penkridge.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&amp;family=Castoro+Titling&amp;family=Josefin+Sans:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261020w">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&amp;family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=20261106">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
-<body>
+<body class="events-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="masthead">
@@ -18,32 +21,41 @@
       <span class="wordmark-name">St Michael and All Angels</span>
       <span class="wordmark-place">Penkridge, Staffordshire</span>
     </a>
-    <nav class="nav" aria-label="Primary">
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav"><span class="nav-toggle-bars" aria-hidden="true"></span>Menu</button>
+    <nav class="nav" id="site-nav" aria-label="Primary">
       <a href="index.html" data-nav="home">Home</a>
-      <a href="sundays.html" data-nav="sundays">Sundays</a>
-      <a href="churchyard.html" data-nav="churchyard"><span class="nav-long">Find a grave</span><span class="nav-short">Graves</span></a>
-      <a href="gallery.html" data-nav="gallery">History</a>
-      <a href="visit.html" data-nav="visit">Visit</a>
-      <a href="life-events.html" data-nav="life">Life events</a>
-      <a href="events.html" data-nav="events" aria-current="page">What's on</a>
+      <div class="nav-group is-current">
+        <button type="button" class="nav-group-btn" aria-expanded="false">Worship</button>
+        <div class="nav-menu">
+          <a href="sundays.html" data-nav="sundays">Sundays<small>Holy Communion at 10:30</small></a>
+          <a href="events.html" data-nav="events" aria-current="page">What's on<small>Services, coffee mornings, Messy Church</small></a>
+          <a href="life-events.html" data-nav="life">Baptisms, weddings &amp; funerals</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button type="button" class="nav-group-btn" aria-expanded="false">About us</button>
+        <div class="nav-menu">
+          <a href="gallery.html" data-nav="gallery">History of St Michael's</a>
+          <a href="visit.html" data-nav="visit">Visit us<small>Where we are and how to get here</small></a>
+        </div>
+      </div>
+      <a href="churchyard.html" data-nav="churchyard">Find a grave</a>
+      <a href="donate.html" data-nav="donate">Donate</a>
     </nav>
-    <a class="btn" href="donate.html">Donate<span class="btn-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
   </header>
 
   <main id="main">
-    <header class="page-head with-glass">
-      <div>
+    <header class="events-head">
         <h1>What's on</h1>
-        <p class="lede">Sunday worship every week, Messy Church and coffee mornings through the month, and the big days of the church year.</p>
-      </div>
-      <div class="lancets" aria-hidden="true"><figure class="lancet"><img src="images/glass-chapel-left.jpg" alt="" loading="lazy"></figure><figure class="lancet tall"><img src="images/glass-chapel-centre.jpg" alt="" loading="lazy"></figure><figure class="lancet"><img src="images/glass-chapel-right.jpg" alt="" loading="lazy"></figure></div>
+        <p>Services, gatherings and dates for your diary.</p>
     </header>
 
     <section class="band events-coming" aria-labelledby="coming-title" style="padding-top:0">
       <span class="kicker">Upcoming</span>
       <h2 id="coming-title">Coming up</h2>
-      <!-- TODO: replace with real parish events and times -->
-      <ol class="coming-cards">
+      <!-- These dates show until the members area is set up. After that, the
+           office edits Coming up in the members area and live-content.js fills it in -->
+      <ol class="coming-cards" id="coming-list">
           <li data-date="2026-11-08">
             <time class="cal" datetime="2026-11-08"><span class="cal-month">Nov</span><span class="cal-day">8</span><span class="cal-dow">Sunday</span></time>
             <div>
@@ -74,6 +86,8 @@
           </li>
       </ol>
       <p class="coming-more">Times go up nearer the day. Concerts, fundraisers and other parish events are posted on the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">Facebook page</a>.</p>
+      <p id="notice-demo" class="muted" hidden>Local preview · These are made-up notices from the members demo.</p>
+      <div class="notices" id="notices" hidden></div>
     </section>
 
     <section class="band band-stone" aria-labelledby="weekly-title">
@@ -86,7 +100,7 @@
         </div>
         <div>
           <h3>Third Sunday</h3>
-          <p>The pattern changes, so check the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">parish Facebook page</a> for that week.</p>
+          <p data-text="third_sunday">The pattern changes, so check the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">parish Facebook page</a> for that week.</p>
         </div>
         <div>
           <h3>By arrangement</h3>
@@ -103,12 +117,12 @@
           <div>
             <h3>Messy Church</h3>
             <p>Church for families, with crafts and activities, a short celebration together and food to share. It's free, and children come with their grown-ups.</p>
-            <p class="small">Next dates are on the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">parish Facebook page</a>.</p>
+            <p class="small" data-text="messy_church_when">Next dates are on the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">parish Facebook page</a>.</p>
           </div>
           <div>
             <h3>Coffee mornings</h3>
             <p>Tea, coffee, cake and a chat in the church. Everyone is welcome, whether or not you come on Sundays.</p>
-            <p class="small">Next dates are on the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">parish Facebook page</a>.</p>
+            <p class="small" data-text="coffee_morning_when">Next dates are on the <a href="https://www.facebook.com/penkridgeparishchurch" target="_blank" rel="noopener">parish Facebook page</a>.</p>
           </div>
         </div>
     </section>
@@ -188,6 +202,9 @@
           <li><a href="life-events.html">Baptisms, weddings and funerals</a></li>
           <li><a href="churchyard.html">Find a grave</a></li>
           <li><a href="donate.html">Give to St Michael's</a></li>
+          <li><a href="members/index.html">Members area</a></li>
+          <li><a href="privacy.html">Privacy and cookies</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
           <li><a href="https://www.achurchnearyou.com/church/4431/" target="_blank" rel="noopener">Safeguarding</a></li>
           <li><a href="https://gravefindr.co.uk/" target="_blank" rel="noopener">Gravefindr</a></li>
         </ul>
@@ -207,6 +224,8 @@
       });
     })();
   </script>
-  <script src="buttons.js?v=20261020w" defer></script>
+  <script src="members/config.js?v=20261105" defer></script>
+  <script src="live-content.js?v=20261105" defer></script>
+  <script src="buttons.js?v=20261105" defer></script>
 </body>
 </html>

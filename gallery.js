@@ -41,9 +41,16 @@
     return "outside";
   }
 
+
+  // Small WebP thumbnails in the strip, a large one in the lightbox
+  function sized(file, w) {
+    var m = /^images\/([^\/]+)\.(jpe?g|JPG)$/.exec(file);
+    return m ? "images/opt/" + m[1] + "-" + w + ".webp" : file;
+  }
+
   function openLightbox(item) {
     if (!dialog) return;
-    lbImg.src = item.file;
+    lbImg.src = sized(item.file, 1600);
     lbImg.alt = cleanCaption(item.caption);
     lbCap.textContent = cleanCaption(item.caption);
     if (dialog.showModal) {
@@ -64,7 +71,7 @@
     btn.setAttribute("aria-label", "View larger: " + cleanCaption(item.caption));
     if (isCopy) btn.tabIndex = -1;
     const img = document.createElement("img");
-    img.src = item.file;
+    img.src = sized(item.file, 400);
     img.alt = isCopy ? "" : cleanCaption(item.caption);
     img.loading = eager ? "eager" : "lazy";
     img.decoding = "async";

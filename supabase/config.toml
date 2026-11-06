@@ -1,0 +1,67 @@
+# Settings for running the members area on a local Supabase with the Supabase CLI
+# (supabase start). The real project's settings are made in the Supabase
+# dashboard; supabase/README.md lists them.
+
+project_id = "st-michaels-penkridge"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+
+[db.seed]
+enabled = true
+sql_paths = ["./seed.sql"]
+
+[auth]
+enabled = true
+# Where the sign-in links send people. Run the site locally on port 8000
+site_url = "http://127.0.0.1:8000/members/"
+additional_redirect_urls = ["http://127.0.0.1:8000/**", "http://localhost:8000/**"]
+jwt_expiry = 3600
+enable_refresh_token_rotation = true
+# Invite-only: nobody can create their own account
+enable_signup = false
+enable_anonymous_sign_ins = false
+
+[auth.email]
+enable_signup = false
+double_confirm_changes = true
+enable_confirmations = false
+otp_length = 6
+otp_expiry = 3600
+max_frequency = "1m0s"
+
+[auth.email.template.magic_link]
+subject = "Your sign-in link for St Michael's"
+content_path = "./supabase/templates/magic_link.html"
+
+[auth.email.template.invite]
+subject = "You're invited to the St Michael's members area"
+content_path = "./supabase/templates/invite.html"
+
+# Two-step sign-in with an authenticator app, required for admins
+[auth.mfa]
+max_enrolled_factors = 10
+
+[auth.mfa.totp]
+enroll_enabled = true
+verify_enabled = true
+
+# The functions check who is calling themselves, so the gateway check is off
+[functions.invite-member]
+verify_jwt = false
+
+[functions.remove-member]
+verify_jwt = false
+
+[functions.delete-me]
+verify_jwt = false
+
+[functions.send-reminders]
+verify_jwt = false
