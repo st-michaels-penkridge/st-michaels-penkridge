@@ -3501,3 +3501,19 @@ h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
 @media (prefers-reduced-motion: reduce) {
   .home-v1 .masthead, .hero-pill, .welcome-links svg { transition: none; }
 }
+
+/* History: centred, no photo, live counter; Sundays on the same cream as the rest */
+.home-v1 .story-row.sundays { background: var(--paper); }
+.home-v1 .story .history { display: block; padding: clamp(3.5rem, 7vw, 6rem) var(--edge); text-align: center; }
+.home-v1 .history-text { max-width: 46rem; margin: 0 auto; padding: 0; display: flex; flex-direction: column; align-items: center; }
+.home-v1 .history-text h2 { text-wrap: balance; }
+.home-v1 .history-lead { max-width: 34rem; margin-inline: auto; }
+.home-v1 .history .counter { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem clamp(1.25rem, 3.5vw, 2.75rem); width: 100%; }
+.home-v1 .history .counter div { align-items: center; min-width: 3.5ch; }
+.home-v1 .history .prose { max-width: 38rem; margin-inline: auto; }
+.home-v1 .history .prose .text-link { display: inline-block; }
+@media (max-width: 600px) {
+  .home-v1 .history .counter { gap: .75rem 1.1rem; }
+  .home-v1 .history .counter strong { font-size: 1.9rem; }
+  .home-v1 .history .counter span { font-size: .68rem; }
+}

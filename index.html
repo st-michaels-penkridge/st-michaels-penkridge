@@ -136,6 +136,9 @@
           <div class="counter" aria-hidden="true">
             <div><strong data-unit="years">800</strong><span>Years</span></div>
             <div><strong data-unit="days">0</strong><span>Days</span></div>
+            <div><strong data-unit="hours">00</strong><span>Hours</span></div>
+            <div><strong data-unit="minutes">00</strong><span>Minutes</span></div>
+            <div><strong data-unit="seconds">00</strong><span>Seconds</span></div>
           </div>
           <div class="prose">
             <p>It was begun in the late 1220s, when Henry de Loundres, Archbishop of Dublin and Dean of Penkridge, pulled down the old Saxon minster and started a great new collegiate church. The count runs from 1226.</p>
@@ -143,9 +146,6 @@
             <a class="text-link" href="gallery.html">Read the full history</a>
           </div>
         </div>
-        <figure class="history-photo">
-          <img decoding="async" src="images/opt/church-hero-4032-800.webp" srcset="images/opt/church-hero-4032-400.webp 400w, images/opt/church-hero-4032-800.webp 800w, images/opt/church-hero-4032-1600.webp 1600w" sizes="(max-width: 899px) 100vw, 50vw" width="4032" height="3024" alt="St Michael's sandstone tower in warm evening sunlight" loading="lazy">
-        </figure>
       </section>
     </div>
 
@@ -245,7 +245,7 @@
       // Age of the present church, counted from 1 September 1226
       var START = 1226;
       var cells = {};
-      ["years", "days"].forEach(function (u) {
+      ["years", "days", "hours", "minutes", "seconds"].forEach(function (u) {
         cells[u] = document.querySelector('[data-unit="' + u + '"]');
       });
       function pad(n) { return (n < 10 ? "0" : "") + n; }
@@ -261,10 +261,13 @@
         }
         if (cells.years) cells.years.textContent = years;
         if (cells.days) cells.days.textContent = Math.round((midnight - yearStart) / 86400000);
+        if (cells.hours) cells.hours.textContent = pad(t.getHours());
+        if (cells.minutes) cells.minutes.textContent = pad(t.getMinutes());
+        if (cells.seconds) cells.seconds.textContent = pad(t.getSeconds());
         document.querySelectorAll("[data-years]").forEach(function (el) { el.textContent = years; });
       }
       tick();
-      setInterval(tick, 60000);
+      setInterval(tick, 1000);
     })();
   </script>
   <script src="members/config.js?v=20261105" defer></script>
