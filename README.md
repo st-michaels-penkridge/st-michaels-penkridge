@@ -89,8 +89,7 @@ This could also be offered to other churches alongside Gravefindr (see Open deci
 - Pages: Home, Sundays, Find a grave, History, Visit, Life events (baptisms, weddings and funerals), What's on, Donate. Every menu item is its own page; the home page is a short tour that links into each one
 - Members area in `members/` (see the PRIORITY section above)
 - The redesign (crimson colours, Castoro and Josefin Sans fonts, full-width layout) is on the `crimson-colours` branch
-- Grave finder: the Churchyard page now embeds Gravefindr (https://gravefindr.co.uk/graveyards/st-michaels-penkridge), with a link out to the full site. The old built-in finder (`churchyard.js` and the map files in `graveyard/`) is still in the repo but no longer loaded
-- Data: 2,130 stones and 3,576 people, from the 2000 survey updated to about 2019 (`graveyard/graves.json`, source spreadsheet `graveyard/St Michaels Churchyard - Grave Records.xlsx`)
+- Grave finder: the Churchyard page embeds Gravefindr (https://gravefindr.co.uk/graveyards/st-michaels-penkridge), with a link out to the full site. The old built-in finder (`churchyard.js`, `graveyard/graves.json`, the map images and the legacy `graveyard/churchyard.html`) has been removed now that Gravefindr is the grave finder
 
 ### Known gaps
 
@@ -188,7 +187,7 @@ Done: crimson, black and white was chosen, and it is on the `crimson-colours` br
 
 ### 6. Speed and tidying
 
-The `images` folder is about 44MB, with several photos close to 1MB each. Compress them for the web so pages load quickly on phones. Once everyone is happy with Gravefindr as the grave finder, remove the old built-in finder (`churchyard.js`, `graveyard/graves.json`, the map images and its styles) to keep the repo small. Gallery photo credits still need adding before launch.
+The `images` folder is about 44MB, with several photos close to 1MB each. Compress them for the web so pages load quickly on phones. Done: the old built-in finder (`churchyard.js`, `graveyard/graves.json`, the map images and its styles) has been removed now that Gravefindr is the grave finder. Gallery photo credits still need adding before launch.
 
 ### 7. Content people look for
 

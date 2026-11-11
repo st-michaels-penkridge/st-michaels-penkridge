@@ -20,12 +20,20 @@
     return d.toISOString();
   }
 
-  // Turn database errors into something a person can act on
+  // Turn database errors into something a person can act on. Messages the
+  // app itself raises on purpose (e.g. "Please give your name") are safe to
+  // show as-is; anything that looks like a raw database/driver error is
+  // replaced so column, table and constraint names never reach the screen.
+  var RAW_DB_ERROR = /constraint|relation|column|duplicate key|syntax error|violates|null value|is not present in table|out of range|too long for type/i;
   function friendly(err) {
     var msg = (err && (err.message || err.error_description || err.msg)) || "Something went wrong. Please try again.";
     if (/row-level security|permission denied|not allowed|42501/i.test(msg)) msg = "You don't have permission to do that.";
-    if (/Failed to fetch|NetworkError|Load failed/i.test(msg)) msg = "Couldn't reach the members area. Check your connection and try again.";
-    if (/JWT expired|invalid JWT|refresh token/i.test(msg)) msg = "Your sign-in has run out. Please sign in again.";
+    else if (/Failed to fetch|NetworkError|Load failed/i.test(msg)) msg = "Couldn't reach the members area. Check your connection and try again.";
+    else if (/JWT expired|invalid JWT|refresh token/i.test(msg)) msg = "Your sign-in has run out. Please sign in again.";
+    else if (RAW_DB_ERROR.test(msg)) {
+      console.error("Members area error:", err);
+      msg = "Something went wrong. Please try again.";
+    }
     var e = new Error(msg);
     e.original = err;
     return e;

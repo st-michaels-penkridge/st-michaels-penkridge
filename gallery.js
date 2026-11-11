@@ -16,9 +16,32 @@
   let lightboxOpen = false;
 
   const GLASS = [
-    { file: "images/glass-east-window.jpg", caption: "The east window, glass by Ward & Hughes, 1864", rank: 200, group: "inside" },
-    { file: "images/glass-chapel-window.jpg", caption: "Christ with the children, stained glass in the aisle chapel", rank: 190, group: "inside" },
+    { file: "images/glass-east-window.jpg", caption: "East window, by Ward & Hughes, 1864", rank: 200, group: "inside" },
+    { file: "images/glass-chapel-window.jpg", caption: "Christ with the children, chapel glass", rank: 190, group: "inside" },
     { file: "images/glass-east-tracery.jpg", caption: "Tracery at the top of the east window", rank: 120, group: "inside" },
+  ];
+
+  // Photos supplied by the parish (not from Wikimedia Commons), November 2026.
+  // Grouped and ranked explicitly so they land in the right carousel, best first,
+  // regardless of what rank-gallery.py later does to images/manifest.json.
+  const PARISH_PHOTOS = [
+    { file: "images/8df36e0988e8.jpg", caption: "Cherry blossom at the gate", rank: 200, group: "outside" },
+    { file: "images/7cc8b9568f0a.jpg", caption: "Blossom beneath the tower", rank: 195, group: "outside" },
+    { file: "images/6cc1ade8fa68.jpg", caption: "Snow in the churchyard", rank: 190, group: "outside" },
+    { file: "images/a275dbe9703f.jpg", caption: "St Michael's under snow", rank: 185, group: "outside" },
+    { file: "images/58425c177166.jpg", caption: "A crisp winter morning", rank: 180, group: "outside" },
+    { file: "images/325a5ddeec4b.jpg", caption: "The church lit at night", rank: 175, group: "outside" },
+    { file: "images/bec610a0b444.jpg", caption: "St Michael's after dark", rank: 170, group: "outside" },
+    { file: "images/0405fa5054b4.jpg", caption: "A rainbow over the church", rank: 165, group: "outside" },
+    { file: "images/f4caec345099.jpg", caption: "The church from the air", rank: 160, group: "outside" },
+    { file: "images/0b274b19ff65.jpg", caption: "The tower at dusk", rank: 155, group: "outside" },
+    { file: "images/c8d80d6a706b.jpg", caption: "The church on a bright day", rank: 150, group: "outside" },
+    { file: "images/efb1ab435f91.jpg", caption: "Path through the churchyard", rank: 145, group: "outside" },
+    { file: "images/71a2cb618232.jpg", caption: "A classic view of the church", rank: 140, group: "outside" },
+    { file: "images/14045945b55f.jpg", caption: "Down the nave", rank: 200, group: "inside" },
+    { file: "images/b9cb8df4a1ae.jpg", caption: "The nave, towards the screen", rank: 195, group: "inside" },
+    { file: "images/7ef7bae8d361.jpg", caption: "The Littleton tombs", rank: 200, group: "memorials" },
+    { file: "images/c7d7c4f48edd.jpg", caption: "War memorial unveiling, 1921", rank: 195, group: "memorials" },
   ];
 
   function cleanCaption(caption) {
@@ -44,7 +67,7 @@
 
   // Small WebP thumbnails in the strip, a large one in the lightbox
   function sized(file, w) {
-    var m = /^images\/([^\/]+)\.(jpe?g|JPG)$/.exec(file);
+    var m = /^images\/([^\/]+)\.jpe?g$/i.exec(file);
     return m ? "images/opt/" + m[1] + "-" + w + ".webp" : file;
   }
 
@@ -260,7 +283,7 @@
       return r.json();
     })
     .then((data) => {
-      const all = data.map((item) => ({ ...item, group: groupFor(item) })).concat(GLASS);
+      const all = data.map((item) => ({ ...item, group: groupFor(item) })).concat(GLASS, PARISH_PHOTOS);
       reels.forEach((reel) => {
         const key = reel.getAttribute("data-carousel");
         const items = all

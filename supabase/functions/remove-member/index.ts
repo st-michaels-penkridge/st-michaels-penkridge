@@ -21,7 +21,10 @@ Deno.serve(handle(async (req) => {
   }
 
   const { error } = await db.auth.admin.deleteUser(profileId);
-  if (error) throw new HttpError(500, error.message);
+  if (error) {
+    console.error("remove-member delete failed", error);
+    throw new HttpError(500, "Something went wrong. Please try again.");
+  }
   await logActivity(db, caller.user.id, "removed", profileId);
   return json({ ok: true });
 }));

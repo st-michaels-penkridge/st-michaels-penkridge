@@ -20,7 +20,10 @@ Deno.serve(handle(async (req) => {
   const db = serviceClient();
   const { data: known, error: lookupError } = await db
     .from("contact_details").select("profile_id").eq("email", email).maybeSingle();
-  if (lookupError) throw new HttpError(500, lookupError.message);
+  if (lookupError) {
+    console.error("invite-member lookup failed", lookupError);
+    throw new HttpError(500, "Something went wrong. Please try again.");
+  }
 
   let userId: string;
   if (known) {
@@ -36,14 +39,20 @@ Deno.serve(handle(async (req) => {
 
   const { error: approveError } = await db
     .from("profiles").update({ approved: true, full_name: fullName }).eq("id", userId);
-  if (approveError) throw new HttpError(500, approveError.message);
+  if (approveError) {
+    console.error("invite-member approve failed", approveError);
+    throw new HttpError(500, "Something went wrong. Please try again.");
+  }
 
   if (rotaIds.length) {
     const { error } = await db.from("rota_members").upsert(
       rotaIds.map((rota_id) => ({ rota_id, profile_id: userId })),
       { onConflict: "rota_id,profile_id", ignoreDuplicates: true },
     );
-    if (error) throw new HttpError(400, error.message);
+    if (error) {
+      console.error("invite-member rota_members upsert failed", error);
+      throw new HttpError(400, "Something went wrong adding them to those teams. Please try again.");
+    }
   }
 
   if (requestId) await db.from("access_requests").delete().eq("id", requestId);
