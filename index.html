@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&amp;family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=20261106c">
+  <link rel="stylesheet" href="site.css?v=20261113b">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body class="home-v1">
@@ -41,6 +41,20 @@
       <a href="donate.html" data-nav="donate">Donate</a>
     </nav>
   </header>
+
+  <dialog id="welcome-dialog" class="welcome-dialog" aria-labelledby="welcome-title">
+    <button type="button" class="welcome-close" aria-label="Close">&times;</button>
+    <div class="welcome-body">
+      <span class="kicker">Hello, Penkridge</span>
+      <h2 id="welcome-title">Come and visit us</h2>
+      <p>We'd love to see you. Holy Communion is every Sunday at 10:30, except the third Sunday of the month.</p>
+      <p class="welcome-where">Church Road, Penkridge <span class="nowrap">ST19 5AW</span></p>
+      <div class="welcome-actions">
+        <a class="welcome-btn welcome-btn-fill" href="sundays.html">Plan a visit</a>
+        <button type="button" class="welcome-btn welcome-btn-ghost welcome-dismiss">Not today</button>
+      </div>
+    </div>
+  </dialog>
 
   <main id="main">
     <section class="hero-altar" aria-labelledby="hero-title">
@@ -266,6 +280,27 @@
       }
       tick();
       setInterval(tick, 1000);
+    })();
+  </script>
+  <script>
+    (function () {
+      var params = new URLSearchParams(location.search);
+      if (params.get("welcome") !== "1") return;
+      var dialog = document.getElementById("welcome-dialog");
+      if (!dialog || !dialog.showModal) return;
+      var opener = document.activeElement;
+      function closeDialog() {
+        if (dialog.open) dialog.close();
+      }
+      dialog.querySelector(".welcome-close").addEventListener("click", closeDialog);
+      dialog.querySelector(".welcome-dismiss").addEventListener("click", closeDialog);
+      dialog.addEventListener("click", function (e) {
+        if (e.target === dialog) closeDialog();
+      });
+      dialog.addEventListener("close", function () {
+        if (opener && opener.focus) opener.focus();
+      });
+      dialog.showModal();
     })();
   </script>
   <script src="members/config.js?v=20261105" defer></script>
