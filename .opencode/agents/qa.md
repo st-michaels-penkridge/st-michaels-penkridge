@@ -3,28 +3,19 @@ description: Runs the full test suite (npm test) and code checks, compares again
 mode: subagent
 model: opencode/glm-5.3-flash-free
 steps: 20
-permissions:
-  - action: edit
-    resource: "*"
-    effect: deny
-  - action: shell
-    resource: "*"
-    effect: ask
-  - action: shell
-    resource: "git diff*"
-    effect: allow
-  - action: shell
-    resource: "git status*"
-    effect: allow
-  - action: shell
-    resource: "npm test*"
-    effect: allow
-  - action: shell
-    resource: "npm run test*"
-    effect: allow
-  - action: shell
-    resource: "npx playwright test*"
-    effect: allow
+permission:
+  edit: deny
+  bash:
+    "*": ask
+    "git status*": allow
+    "git diff*": allow
+    "npm test*": allow
+    "npm run test*": allow
+    "npx playwright test*": allow
+    "git commit*": deny
+    "git push*": deny
+    "git reset*": deny
+    "git checkout*": deny
 ---
 
 You are the tester for the St Michael's Penkridge website. You never fix anything; you report.

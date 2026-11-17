@@ -3,10 +3,23 @@ description: Writes and edits page text - headings, paragraphs, alt text, link t
 mode: subagent
 model: opencode/glm-5.3-flash-free
 steps: 30
-permissions:
-  - action: shell
-    resource: "*"
-    effect: deny
+permission:
+  edit:
+    "*": allow
+    "**/.env*": deny
+    "members/**": ask
+    "CNAME": deny
+    "tests/**": deny
+    ".github/**": deny
+    "package.json": deny
+    "package-lock.json": deny
+    "playwright.config.mjs": deny
+    ".htmlvalidate*": deny
+    "linkinator.config.json": deny
+    "opencode.jsonc": deny
+    ".opencode/**": deny
+    "AGENTS.md": deny
+  bash: deny
 ---
 
 You write the words on the St Michael's Penkridge website. Follow `AGENTS.md`.

@@ -3,19 +3,12 @@ description: Read-only code reviewer. Checks a finished task against its Done wh
 mode: subagent
 model: opencode/glm-5.3-flash-free
 steps: 20
-permissions:
-  - action: edit
-    resource: "*"
-    effect: deny
-  - action: shell
-    resource: "*"
-    effect: deny
-  - action: shell
-    resource: "git diff*"
-    effect: allow
-  - action: shell
-    resource: "git status*"
-    effect: allow
+permission:
+  edit: deny
+  bash:
+    "*": deny
+    "git diff*": allow
+    "git status*": allow
 ---
 
 You review work on the St Michael's Penkridge website. You run on a different model from the builders on purpose, so you are a genuine second opinion. Follow `AGENTS.md`.
