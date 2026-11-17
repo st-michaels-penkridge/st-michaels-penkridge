@@ -10,25 +10,26 @@ Why only two photos are being compressed (measured 17 Nov): every page already s
 
 ## Tasks
 
-- [ ] T1 | Agent: assets | Checks: qa, review
+- [x] T1 | Agent: assets | Checks: qa, review
   Files: styles.css, home-v1.css, home-v2.css, chosen-type.css, nav.css, members/members.css
   Do: First run `git grep -n -e "styles.css" -e "home-v1.css" -e "home-v2.css" -e "chosen-type.css" -e "nav.css" -- "*.html" "*.js"`. It must print nothing, because no page or script loads these files (site.css replaced all five on 5 Nov). If it prints anything, stop and report it. Otherwise run `git rm styles.css home-v1.css home-v2.css chosen-type.css nav.css`. Then, on line 1 of `members/members.css`, change `Builds on ../styles.css` to `Builds on ../site.css`. Leave the comment on line 1 of site.css alone, because it records where site.css came from.
   Done when: the five files are deleted, the members.css comment says `../site.css`, and `npm test` passes with every page unchanged.
 
-- [ ] T2 | Agent: content | Checks: qa, review
+- [x] T2 | Agent: content | Checks: qa, review
   Files: README.md
   Do: On line 7, change ``shared by all 14 public and members pages through `chosen-type.css`.`` to ``shared by all 14 public and members pages through `site.css`.`` On line 19, change ``Home-specific styling is in `home-v1.css`.`` to ``Home-specific styling is now in `site.css`.`` Change nothing else.
   Done when: README.md no longer names any of the five deleted CSS files, and the diff is those two lines.
 
-- [ ] T3 | Agent: assets | Checks: qa, review
+- [x] T3 | Agent: assets | Checks: qa, review
   Files: scripts/gallery-tags.py
   Do: Run `git grep -n "gallery-tags"`. The only match should be in `.claude/debt-log.md`. If anything else mentions it (a .bat, .ps1, .py or .md file), stop and report it. Otherwise run `git rm scripts/gallery-tags.py`. Keep `scripts/gallery_tags.py` (with the underscore), because that's the one the other scripts import.
   Done when: scripts/gallery-tags.py is deleted and scripts/gallery_tags.py is untouched.
 
-- [ ] T4 | Agent: assets | Checks: qa, review
+- [!] BLOCKED T4 | Agent: assets | Checks: qa, review
   Files: images/opt/7cc8b9568f0a-1600.webp, images/opt/f4caec345099-1600.webp
   Do: From the repo folder, run `npm install --no-save sharp`, then `node .ai/tools/compress-webp.mjs`. Don't edit the script. It rebuilds each large photo over 250KB from its original JPG at the same pixel size, and only keeps the new file if it's at least 20% smaller. Expected output: `SHRUNK` for 7cc8b9568f0a-1600.webp (303KB to about 227KB) and f4caec345099-1600.webp (256KB to about 167KB), `kept` for the other 14, and `2 replaced` at the end. If the output is different, report it word for word.
   Done when: `git status` shows only those two .webp files changed (package.json and package-lock.json untouched), both keep their names and pixel sizes (1443x1114 and 1440x960), and `npm test` passes.
+  Blocked: the script stops with `Error: UNKNOWN: unknown error, open` / `errno -4094` at `writeFileSync` on 7cc8b9568f0a-1600.webp, after 8 `kept` lines. Both target files have the OneDrive `ReparsePoint` attribute (Files On-Demand placeholders). Tried twice; no image, package.json or package-lock.json changed, images/opt clean in git. Needs Tobi to pin/download them locally, then re-run the two commands.
 
 - [ ] T5 | Agent: assets | Checks: qa, review
   Files: .claude/debt-log.md
