@@ -19,8 +19,17 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
-      - run: npm test
+      - id: install
+        run: npm ci
+      # Each stage runs even if an earlier one failed, so one run reports everything
+      - name: HTML is valid
+        run: npm run test:html
+      - name: No broken links or missing files
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: npm run test:links
+      - name: Every page works on phone and desktop
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: npm run test:pages
       - name: Save the test report if anything failed
         if: failure()
         uses: actions/upload-artifact@v4
