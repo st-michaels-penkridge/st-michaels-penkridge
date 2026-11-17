@@ -15,3 +15,7 @@ graveyard/LoRes10Tombs/
 # Supabase CLI working files
 supabase/.temp/
 supabase/.branches/
+
+# Test tools
+test-results/
+playwright-report/
