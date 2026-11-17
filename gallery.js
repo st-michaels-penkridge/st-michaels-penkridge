@@ -9,7 +9,7 @@
   if (!reels.length) return;
 
   const dialog = document.getElementById("gallery-lightbox");
-  const lbImg = document.getElementById("lightbox-img");
+  let lbImg = null; // made on first open, so no empty <img> sits in the page
   const lbCap = document.getElementById("lightbox-caption");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const SPEED = 38; // pixels per second
@@ -73,6 +73,11 @@
 
   function openLightbox(item) {
     if (!dialog) return;
+    if (!lbImg) {
+      lbImg = document.createElement("img");
+      lbImg.id = "lightbox-img";
+      dialog.querySelector(".lightbox-figure").prepend(lbImg);
+    }
     lbImg.src = sized(item.file, 1600);
     lbImg.alt = cleanCaption(item.caption);
     lbCap.textContent = cleanCaption(item.caption);
@@ -95,6 +100,8 @@
     if (isCopy) btn.tabIndex = -1;
     const img = document.createElement("img");
     img.src = sized(item.file, 400);
+    img.width = 400;
+    img.height = 300;
     img.alt = isCopy ? "" : cleanCaption(item.caption);
     img.loading = eager ? "eager" : "lazy";
     img.decoding = "async";
