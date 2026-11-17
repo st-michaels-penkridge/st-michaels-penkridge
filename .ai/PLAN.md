@@ -25,13 +25,13 @@ Why only two photos are being compressed (measured 17 Nov): every page already s
   Do: Run `git grep -n "gallery-tags"`. The only match should be in `.claude/debt-log.md`. If anything else mentions it (a .bat, .ps1, .py or .md file), stop and report it. Otherwise run `git rm scripts/gallery-tags.py`. Keep `scripts/gallery_tags.py` (with the underscore), because that's the one the other scripts import.
   Done when: scripts/gallery-tags.py is deleted and scripts/gallery_tags.py is untouched.
 
-- [!] BLOCKED T4 | Agent: assets | Checks: qa, review
+- [x] T4 | Agent: assets (done by Opus at sign-off, after OneDrive blocked it locally) | Checks: qa, review
   Files: images/opt/7cc8b9568f0a-1600.webp, images/opt/f4caec345099-1600.webp
   Do: From the repo folder, run `npm install --no-save sharp`, then `node .ai/tools/compress-webp.mjs`. Don't edit the script. It rebuilds each large photo over 250KB from its original JPG at the same pixel size, and only keeps the new file if it's at least 20% smaller. Expected output: `SHRUNK` for 7cc8b9568f0a-1600.webp (303KB to about 227KB) and f4caec345099-1600.webp (256KB to about 167KB), `kept` for the other 14, and `2 replaced` at the end. If the output is different, report it word for word.
   Done when: `git status` shows only those two .webp files changed (package.json and package-lock.json untouched), both keep their names and pixel sizes (1443x1114 and 1440x960), and `npm test` passes.
   Blocked: the script stops with `Error: UNKNOWN: unknown error, open` / `errno -4094` at `writeFileSync` on 7cc8b9568f0a-1600.webp, after 8 `kept` lines. Both target files have the OneDrive `ReparsePoint` attribute (Files On-Demand placeholders). Tried twice; no image, package.json or package-lock.json changed, images/opt clean in git. Needs Tobi to pin/download them locally, then re-run the two commands.
 
-- [ ] T5 | Agent: assets | Checks: qa, review
+- [x] T5 | Agent: assets | Checks: qa, review
   Files: .claude/debt-log.md
   Do: Replace the file's two lines (both dated 2026-11-11) with this one line:
   `2026-11-17 | resolved: the five superseded CSS files and scripts/gallery-tags.py | deleted in the clean-up plan (T1, T3) | nothing left open`
