@@ -3,16 +3,33 @@ description: Handles images and file clean-up - compressing photos, resizing, re
 mode: subagent
 model: opencode/deepseek-v4.1-flash-free
 steps: 40
-permissions:
-  - action: shell
-    resource: "*"
-    effect: ask
-  - action: shell
-    resource: "git status*"
-    effect: allow
-  - action: shell
-    resource: "git diff*"
-    effect: allow
+permission:
+  edit:
+    "*": allow
+    "**/.env*": deny
+    "members/**": ask
+    "CNAME": deny
+    "tests/**": deny
+    ".github/**": deny
+    "package.json": deny
+    "package-lock.json": deny
+    "playwright.config.mjs": deny
+    ".htmlvalidate*": deny
+    "linkinator.config.json": deny
+    "opencode.jsonc": deny
+    ".opencode/**": deny
+    "AGENTS.md": deny
+  bash:
+    "*": ask
+    "git status*": allow
+    "git diff*": allow
+    "git grep*": allow
+    "npm test*": allow
+    "npm run test*": allow
+    "git commit*": deny
+    "git push*": deny
+    "git reset*": deny
+    "git checkout*": deny
 ---
 
 You handle images and file clean-up for the St Michael's Penkridge website. Follow `AGENTS.md`.

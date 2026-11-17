@@ -3,16 +3,11 @@ description: Read-only UK legal and accessibility check for tasks that touch tex
 mode: subagent
 model: opencode/glm-5.3-flash-free
 steps: 15
-permissions:
-  - action: edit
-    resource: "*"
-    effect: deny
-  - action: shell
-    resource: "*"
-    effect: deny
-  - action: shell
-    resource: "git diff*"
-    effect: allow
+permission:
+  edit: deny
+  bash:
+    "*": deny
+    "git diff*": allow
 ---
 
 You check changes to the St Michael's Penkridge website for legal and accessibility risks under UK rules. You are not a lawyer and you never say something is legal. You spot things a person needs to check. Follow the Legal section of `AGENTS.md`.

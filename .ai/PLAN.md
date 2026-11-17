@@ -1,44 +1,49 @@
 # Plan
 
-**Goal (done 17 Nov 2026, by Opus during setup):** Get `npm test` fully green so the GitHub check can guard main. These are the only failures on the site today: 5 HTML errors and 274 gallery thumbnails without sizes.
+**Goal:** Remove the six dead files from the clean-up log, and shrink the large photos where it can be done without them looking worse.
 
 ## Design notes
 
-None of these tasks should change how anything looks. If a page looks different afterwards, that's a bug.
+Nothing on the site should look different after this plan.
+
+Why only two photos are being compressed (measured 17 Nov): every page already serves WebP. Phones download between 8KB and 880KB of images per page. The only files over 250KB are the large 1280px versions, which open in the gallery lightbox and are used for the hero photos on desktop. Rebuilding them from the originals makes two of them 25-35% smaller. Every other one would come out the same size or bigger unless it was visibly softened, so those stay as they are. The ~57MB of original and unused photos in `images/` are never sent to visitors, so they don't slow the site (see Waiting on).
 
 ## Tasks
 
-- [x] T1 | Agent: frontend | Checks: qa, review
-  Files: churchyard.html
-  Do: In the gravefindr `<iframe>` (line 56), delete the `scrolling="no"` attribute. Change nothing else on the tag. `gravefindr-embed.js` already resizes the frame to fit its content, so no scrollbar is needed.
-  Done when: `npm run test:html` reports nothing for churchyard.html, and the diff is that one attribute.
+- [x] T1 | Agent: assets | Checks: qa, review
+  Files: styles.css, home-v1.css, home-v2.css, chosen-type.css, nav.css, members/members.css
+  Do: First run `git grep -n -e "styles.css" -e "home-v1.css" -e "home-v2.css" -e "chosen-type.css" -e "nav.css" -- "*.html" "*.js"`. It must print nothing, because no page or script loads these files (site.css replaced all five on 5 Nov). If it prints anything, stop and report it. Otherwise run `git rm styles.css home-v1.css home-v2.css chosen-type.css nav.css`. Then, on line 1 of `members/members.css`, change `Builds on ../styles.css` to `Builds on ../site.css`. Leave the comment on line 1 of site.css alone, because it records where site.css came from.
+  Done when: the five files are deleted, the members.css comment says `../site.css`, and `npm test` passes with every page unchanged.
 
-- [x] T2 | Agent: frontend | Checks: qa, review
-  Files: gallery.html
-  Do: Add `role="region"` to the three `<div class="carousel" ...>` elements (lines 165, 181 and 197, data-carousel `outside`, `inside` and `memorials`). Keep their `aria-roledescription` and `aria-label` exactly as they are. This is the standard accessible carousel pattern.
-  Done when: no `aria-label-misuse` errors, and the diff is those three attributes.
+- [x] T2 | Agent: content | Checks: qa, review
+  Files: README.md
+  Do: On line 7, change ``shared by all 14 public and members pages through `chosen-type.css`.`` to ``shared by all 14 public and members pages through `site.css`.`` On line 19, change ``Home-specific styling is in `home-v1.css`.`` to ``Home-specific styling is now in `site.css`.`` Change nothing else.
+  Done when: README.md no longer names any of the five deleted CSS files, and the diff is those two lines.
 
-- [x] T3 | Agent: frontend | Checks: qa, review
-  Files: gallery.html, gallery.js
-  Do: Delete `<img id="lightbox-img" src="" alt="">` from the lightbox `<figure>` in gallery.html. In gallery.js, change `const lbImg = document.getElementById("lightbox-img");` to `let lbImg = null; // made on first open, so no empty <img> sits in the page`. At the top of `openLightbox`, straight after `if (!dialog) return;`, add:
-  ```js
-  if (!lbImg) {
-    lbImg = document.createElement("img");
-    lbImg.id = "lightbox-img";
-    dialog.querySelector(".lightbox-figure").prepend(lbImg);
-  }
-  ```
-  Leave the existing `lbImg.src` and `lbImg.alt` lines as they are.
-  Done when: no `attribute-allowed-values` error in gallery.html. Clicking any thumbnail opens the lightbox with the large photo above its caption, it closes with the button and with Esc, and there are no console errors.
+- [x] T3 | Agent: assets | Checks: qa, review
+  Files: scripts/gallery-tags.py
+  Do: Run `git grep -n "gallery-tags"`. The only match should be in `.claude/debt-log.md`. If anything else mentions it (a .bat, .ps1, .py or .md file), stop and report it. Otherwise run `git rm scripts/gallery-tags.py`. Keep `scripts/gallery_tags.py` (with the underscore), because that's the one the other scripts import.
+  Done when: scripts/gallery-tags.py is deleted and scripts/gallery_tags.py is untouched.
 
-- [x] T4 | Agent: frontend | Checks: qa, review
-  Files: gallery.js
-  Do: In `makeCell`, straight after `img.src = sized(item.file, 400);`, add `img.width = 400;` and `img.height = 300;`. The thumbnails sit in fixed-height frames with `object-fit: cover`, so this doesn't change how they look. It just tells the browser their size up front.
-  Done when: `npm run test:pages` passes for /gallery.html on phone and desktop, and the carousels look and move exactly as before.
+- [x] T4 | Agent: assets (done by Opus at sign-off, after OneDrive blocked it locally) | Checks: qa, review
+  Files: images/opt/7cc8b9568f0a-1600.webp, images/opt/f4caec345099-1600.webp
+  Do: From the repo folder, run `npm install --no-save sharp`, then `node .ai/tools/compress-webp.mjs`. Don't edit the script. It rebuilds each large photo over 250KB from its original JPG at the same pixel size, and only keeps the new file if it's at least 20% smaller. Expected output: `SHRUNK` for 7cc8b9568f0a-1600.webp (303KB to about 227KB) and f4caec345099-1600.webp (256KB to about 167KB), `kept` for the other 14, and `2 replaced` at the end. If the output is different, report it word for word.
+  Done when: `git status` shows only those two .webp files changed (package.json and package-lock.json untouched), both keep their names and pixel sizes (1443x1114 and 1440x960), and `npm test` passes.
+  Blocked: the script stops with `Error: UNKNOWN: unknown error, open` / `errno -4094` at `writeFileSync` on 7cc8b9568f0a-1600.webp, after 8 `kept` lines. Both target files have the OneDrive `ReparsePoint` attribute (Files On-Demand placeholders). Tried twice; no image, package.json or package-lock.json changed, images/opt clean in git. Needs Tobi to pin/download them locally, then re-run the two commands.
+
+- [x] T5 | Agent: assets | Checks: qa, review
+  Files: .claude/debt-log.md
+  Do: Replace the file's two lines (both dated 2026-11-11) with this one line:
+  `2026-11-17 | resolved: the five superseded CSS files and scripts/gallery-tags.py | deleted in the clean-up plan (T1, T3) | nothing left open`
+  Done when: debt-log.md is that one line.
 
 ## Waiting on
 
-These need facts from Greg or the parish (24 TODOs across the site). Don't guess any of them:
+Decisions for Tobi (and Will):
+- `images/` holds about 57MB that visitors never download: the original JPGs the WebP versions were made from, plus photos nothing uses (including the QR code PNGs and the frame-*.webp files). They only make the repo heavier. Keep them, or plan a careful delete job? Some of them are needed to rebuild the WebP versions.
+- The desktop hero photos on the home page and Sundays page are about 480KB each. A desktop-only wide crop would cut that by more than half, but it's a design change. Do you want it?
+
+Facts from Greg or the parish, carried over (24 TODOs across the site). Don't guess any of them:
 - The church address and postcode (on most pages)
 - Service pattern and finish time (index.html, sundays.html)
 - The parish's own Parish Giving link, from the treasurer (donate.html)

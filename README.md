@@ -4,7 +4,7 @@
 
 ### Selected design
 
-The active pairing is **Cormorant Garamond + Source Sans 3**, shared by all 14 public and members pages through `chosen-type.css`. Font comparison controls now appear only with `?design=1`; old `?type=...` links do not override the chosen pairing. The What's on page has a compact heading and puts its date cards before notices.
+The active pairing is **Cormorant Garamond + Source Sans 3**, shared by all 14 public and members pages through `site.css`. Font comparison controls now appear only with `?design=1`; old `?type=...` links do not override the chosen pairing. The What's on page has a compact heading and puts its date cards before notices.
 
 The active hero is the **4032 × 3024 original** of *Church of St. Michael and All Angels, Penkridge*, by [Ajay Tegala / Geograph, photo 6651755](https://www.geograph.org.uk/photo/6651755), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), retrieved from Wikimedia Commons. It replaces the low-resolution blossom preview; the image is cropped in CSS and credited in the footer.
 
@@ -16,7 +16,7 @@ The active hero is the **4032 × 3024 original** of *Church of St. Michael and A
 - Donation checkout remains blocked on the treasurer's provider and church-specific payment link. The generic parish finder was removed as a misleading checkout destination. Current links describe the actual visit/phone options. Once the verified payment link is supplied, connect the home-page button directly to that checkout.
 - Blossom hero: Mike Searle, *St Michael & All Angels Church, Penkridge (2)*, 30 April 2015, [Geograph 4461800](https://www.geograph.org.uk/photo/4461800), [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/). Retrieved from Wikimedia Commons original image, displayed with a CSS crop. **Available source is only 640 × 447, not high resolution.** Geograph's reuse/download page could not be accessed due to a browser challenge; a higher-resolution photographer original remains outstanding. The image has not been AI-upscaled or reconstructed.
 
-`codex/v1-revision` starts from `main-with-data-collection`. It revises the home page with a warm stone palette, integrated photographs and a public notice board. Home-specific styling is in `home-v1.css`.
+`codex/v1-revision` starts from `main-with-data-collection`. It revises the home page with a warm stone palette, integrated photographs and a public notice board. Home-specific styling is now in `site.css`.
 
 The existing members Page editor manages notices for both Home (latest three) and What's on (latest five). Publish and date controls determine what appears. On localhost only, saved members-demo notices can be previewed on the public pages; these are made-up data. A configured Supabase project supplies real published notices. No connection means an honest placeholder, not sample announcements presented as real news.
 
