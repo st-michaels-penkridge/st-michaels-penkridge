@@ -1,0 +1,40 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  // Start every session on the lead agent, which works through .ai/PLAN.md
+  "default_agent": "lead",
+
+  // Defaults for every agent. An agent file that sets "edit" or "bash" replaces these,
+  // so each agent file repeats the protections it needs.
+  "permission": {
+    "read": { "*": "allow", "**/.env*": "deny" },
+    "edit": {
+      "*": "allow",
+      "**/.env*": "deny",
+      "members/**": "ask",
+      "CNAME": "deny",
+      "tests/**": "deny",
+      ".github/**": "deny",
+      "package.json": "deny",
+      "package-lock.json": "deny",
+      "playwright.config.mjs": "deny",
+      ".htmlvalidate*": "deny",
+      "linkinator.config.json": "deny",
+      "opencode.jsonc": "deny",
+      ".opencode/**": "deny",
+      "AGENTS.md": "deny"
+    },
+    "bash": {
+      "*": "ask",
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git grep*": "allow",
+      "npm test*": "allow",
+      "npm run test*": "allow",
+      "git commit*": "deny",
+      "git push*": "deny",
+      "git reset*": "deny",
+      "git checkout*": "deny"
+    }
+  }
+}
