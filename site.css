@@ -725,7 +725,7 @@ address {
   transform: rotate(45deg);
 }
 
-.give a:not(.btn) {
+.give a:not(.btn):not(.btn-square) {
   color: var(--paper);
 }
 
@@ -1182,20 +1182,19 @@ address {
   padding: 2.5rem 2rem 2rem;
 }
 
-.welcome-actions {
-  display: flex;
-  gap: 0.65rem;
-  margin-top: 1.5rem;
+.welcome-body .actions .btn-square {
+  flex: 1;
 }
 
-.welcome-btn {
-  flex: 1;
+/* Square, bordered buttons: a bordered alternative to the pill .btn family.
+   -fill/-ghost are for light (paper/stone) backgrounds; -light/-light-ghost
+   are for dark backgrounds (times-band, the crimson give/monthly bands). */
+.btn-square {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 2.9rem;
-  padding: 0.6rem 0.9rem;
-  border: 2px solid var(--crimson);
+  padding: 0.6rem 1.2rem;
   border-radius: 2px;
   font-family: var(--body);
   font-weight: 600;
@@ -1206,24 +1205,52 @@ address {
   cursor: pointer;
 }
 
-.welcome-btn-fill {
+.btn-square-fill {
+  border: 2px solid var(--crimson);
   background: var(--crimson);
   color: var(--paper);
 }
 
-.welcome-btn-fill:hover {
+.btn-square-fill:hover,
+.btn-square-fill:focus-visible {
   background: var(--crimson-deep);
   border-color: var(--crimson-deep);
 }
 
-.welcome-btn-ghost {
+.btn-square-ghost {
+  border: 2px solid var(--crimson);
   background: transparent;
   color: var(--crimson);
 }
 
-.welcome-btn-ghost:hover {
+.btn-square-ghost:hover,
+.btn-square-ghost:focus-visible {
   background: var(--crimson);
   color: var(--paper);
+}
+
+.btn-square-light {
+  border: 2px solid #fff;
+  background: #fff;
+  color: var(--btn-ink);
+}
+
+.btn-square-light:hover,
+.btn-square-light:focus-visible {
+  background: transparent;
+  color: #fff;
+}
+
+.btn-square-light-ghost {
+  border: 2px solid #fff;
+  background: transparent;
+  color: #fff;
+}
+
+.btn-square-light-ghost:hover,
+.btn-square-light-ghost:focus-visible {
+  background: #fff;
+  color: var(--btn-ink);
 }
 
 .welcome-where {
@@ -2148,8 +2175,8 @@ b {
   text-decoration-color: #fff;
 }
 
-.give a:not(.btn),
-.monthly a:not(.btn) {
+.give a:not(.btn):not(.btn-square),
+.monthly a:not(.btn):not(.btn-square) {
   color: #fff;
   text-decoration-color: #fff;
 }
