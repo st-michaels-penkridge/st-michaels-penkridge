@@ -1,5 +1,9 @@
 # St Michael's Penkridge - Church Site & Grave Finder
 
+## Church seasons
+
+The site changes on its own for Advent (violet), Christmas (evergreen bands with the crimson), Easter (gold) and Pentecost, and the home page hero shows a line for the season. The dates are worked out in `buttons.js` and the colours live at the end of `site.css`. To preview a season, add `?season=advent` (or `christmas`, `easter`, `pentecost`, `none`) to any page address.
+
 ## V1 revision preview
 
 ### Selected design
