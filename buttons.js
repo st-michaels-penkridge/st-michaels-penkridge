@@ -1,3 +1,49 @@
+// Church seasons: the site takes on the colour of the season, as the altar frontal does.
+// Advent runs from Advent Sunday to 23 December, Christmas from 24 December to Epiphany (6 January),
+// Easter from Easter Day to the day before Pentecost, and Pentecost for its own week.
+// To preview a season, add ?season=advent (or christmas, easter, pentecost, none) to any page address.
+(function () {
+  "use strict";
+  var now = new Date();
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var year = today.getFullYear();
+
+  function daysAfter(date, days) {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate() + days);
+  }
+
+  // Easter Day in the Western church (the Meeus/Jones/Butcher method)
+  function easterDay(y) {
+    var a = y % 19, b = Math.floor(y / 100), c = y % 100;
+    var d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25);
+    var g = Math.floor((b - f + 1) / 3);
+    var h = (19 * a + b - d - g + 15) % 30;
+    var i = Math.floor(c / 4), k = c % 4;
+    var l = (32 + 2 * e + 2 * i - h - k) % 7;
+    var m = Math.floor((a + 11 * h + 22 * l) / 451);
+    var month = Math.floor((h + l - 7 * m + 114) / 31);
+    var day = ((h + l - 7 * m + 114) % 31) + 1;
+    return new Date(y, month - 1, day);
+  }
+
+  function seasonOn() {
+    var christmas = new Date(year, 11, 25);
+    // Advent Sunday is the fourth Sunday before Christmas Day
+    var adventSunday = daysAfter(christmas, -(christmas.getDay() || 7) - 21);
+    var easter = easterDay(year);
+    var pentecost = daysAfter(easter, 49);
+    if (today >= adventSunday && today < new Date(year, 11, 24)) return "advent";
+    if (today >= new Date(year, 11, 24) || today <= new Date(year, 0, 6)) return "christmas";
+    if (today >= easter && today < pentecost) return "easter";
+    if (today >= pentecost && today < daysAfter(pentecost, 7)) return "pentecost";
+    return "";
+  }
+
+  var preview = new URLSearchParams(location.search).get("season");
+  var season = /^(advent|christmas|easter|pentecost|none)$/.test(preview) ? preview : seasonOn();
+  if (season && season !== "none") document.documentElement.setAttribute("data-season", season);
+})();
+
 (function () {
   "use strict";
   // Size the full-screen hero to whatever height the header really is
