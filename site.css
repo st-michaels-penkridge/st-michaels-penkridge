@@ -15,6 +15,7 @@
   --crimson: #7a2428;
   --crimson-deep: #7a2428;
   --red: #7a2428;
+  --band: #6c272c;
   --black: #111113;
 
   --display: "Castoro Titling", "Trajan Pro", "Times New Roman", serif;
@@ -2770,8 +2771,9 @@ html {
   --mount: #f6f4ef;
 }
 
-/* The History page photo strips: thin black frames with a pale mount */
-.carousel-viewport .carousel-track .gallery-thumb {
+/* The History page photo strips and the Bygone days album: thin black frames with a pale mount */
+.carousel-viewport .carousel-track .gallery-thumb,
+.album img {
   padding: 0.4rem;
   background: var(--mount);
   border: 4px solid #141416;
@@ -3218,7 +3220,7 @@ html {
 .hero-links { display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem 2rem; margin-top: 2rem; }
 .hero-links > a { color: white; }
 .hero-links .btn { background: #f7f4ee; color: #292724; gap: 2rem; }
-.home-v1 .times-band { background: #6c272c; padding: 2rem var(--edge); }
+.home-v1 .times-band { background: var(--band); padding: 2rem var(--edge); }
 .home-v1 .times-time { font-family: var(--script); }
 .notice-board { padding: 5rem var(--edge); background: radial-gradient(ellipse at top left,#fffaf0,transparent 65%),var(--paper); }
 .board-heading { display: flex; justify-content: space-between; align-items: end; gap: 1.5rem; margin-bottom: 2rem; }
@@ -3248,7 +3250,7 @@ html {
 .home-v1 .graves-photo { min-height: 30rem; }
 .home-v1 .history { border-top: 1px solid var(--stone-line); }
 .home-v1 .counter { flex-wrap: wrap; gap: 1rem; }
-.home-v1 .give { background: #6c272c; }
+.home-v1 .give { background: var(--band); }
 .home-v1 .give h2 { font-size: clamp(2.2rem,4vw,3.6rem); }
 .home-v1 .give-photo img { filter: saturate(.75); }
 .home-v1 .visit { background: var(--paper); }
@@ -3609,3 +3611,30 @@ h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
 .hero-altar > img { z-index: 0; }
 .hero-altar::after { z-index: 1; }
 .hero-altar-inner, .hero-address { position: relative; z-index: 2; }
+
+/* ===== 18 Nov 2026: church seasons =====
+   buttons.js sets data-season on <html> from the date. The accent takes the season's colour,
+   as the altar frontal does: violet for Advent, evergreen with the crimson for Christmas, gold for Easter.
+   Pentecost is red, which is already the site's own colour. */
+[data-season="advent"] { --crimson: #4f2d5c; --crimson-deep: #4f2d5c; --red: #4f2d5c; --band: #45274f; }
+[data-season="christmas"] { --band: #1f3d2b; }
+[data-season="easter"] { --crimson: #7a5518; --crimson-deep: #7a5518; --red: #7a5518; --band: #2a221d; }
+
+.season-note { display: none; margin: 0; }
+[data-season="advent"] .season-note[data-for="advent"],
+[data-season="christmas"] .season-note[data-for="christmas"],
+[data-season="easter"] .season-note[data-for="easter"],
+[data-season="pentecost"] .season-note[data-for="pentecost"] { display: block; }
+.season-note a {
+  display: inline-flex; align-items: center; gap: .6rem; padding: .35rem 0;
+  font-size: clamp(.95rem, .9rem + .2vw, 1.05rem); color: #fff; text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,.45); transition: border-color .2s ease;
+}
+.season-note a:hover, .season-note a:focus-visible { border-bottom-color: var(--brass); }
+.season-note a:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+.season-note svg { width: 1.5rem; height: 1.5rem; flex: none; color: var(--brass); }
+@media (prefers-reduced-motion: reduce) { .season-note a { transition: none; } }
+
+/* ===== 18 Nov 2026: Bygone days, old pictures laid out like an album ===== */
+.album { columns: 3 17rem; column-gap: clamp(1.25rem, 3vw, 2.5rem); }
+.album .gallery-item { margin-bottom: 2rem; break-inside: avoid; }

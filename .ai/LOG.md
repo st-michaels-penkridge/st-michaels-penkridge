@@ -1,20 +1,25 @@
 # Log
 
 ## Baseline test failures
-none (17 Nov 2026: npm test passes - HTML valid, 46 links OK, 34 of 34 page runs)
+none (18 Nov 2026: npm test passes - HTML valid, links OK, 34 of 34 page runs)
 
 ## Done
 <!-- One line per finished task: T1 | files | summary -->
-T1 | styles.css, home-v1.css, home-v2.css, chosen-type.css, nav.css, members/members.css | deleted the five superseded CSS files and pointed the members.css header at site.css; npm test 34/34, 46 links OK
-T2 | README.md | repointed the two stale stylesheet mentions (chosen-type.css, home-v1.css) to site.css; no deleted CSS filenames remain in README.md; npm test 34/34, 46 links OK
-T3 | scripts/gallery-tags.py | deleted the dead hyphenated duplicate; scripts/gallery_tags.py untouched; npm test 34/34, 46 links OK
-T4 | images/opt/7cc8b9568f0a-1600.webp, images/opt/f4caec345099-1600.webp | rebuilt from the originals at sign-off: 303KB to 227KB and 256KB to 167KB, same names and pixel sizes, checked side by side at full size
-T5 | .claude/debt-log.md | replaced the two resolved entries with one resolved line
+S1 | buttons.js | season worked out from the date and set as data-season on <html>; checked 29 dates across 2022-2028 plus the ?season= preview
+S2 | site.css | --band variable for the two home bands; Advent violet, Christmas evergreen bands, Easter gold; .season-note styles
+S3 | index.html | one seasonal hero line per season, linking to What's on
+S4 | all pages | cache versions bumped to 20261118
+B1 | bygone.html, images/bygone/ | Bygone days page with 24 of Andy's old pictures in four groups
+B2 | site.css | .album columns, reusing the History page frame
+B3 | all pages, gallery.html | Bygone days in the About us menu, and linked from the History page photos
 
 ## Questions for Tobi
-- (resolved) T4 was blocked locally because the repo sits in OneDrive and the photos were online-only placeholders. Fix for next time: right-click the repo folder and choose "Always keep on this device", or re-clone it outside OneDrive.
+- Lent and Holy Week weren't asked for. Add them too?
 
 ## Legal flags for Tobi
+- Bygone days only uses old postcards, engravings and early photographs. The dated ones are 1936 or earlier, and the rest look as old, but most are undated, so Andy should confirm none of them are recent or someone else's work. The pictures left out are listed in PLAN.md under Waiting on.
+- The home page says giving is set up through the Parish Giving Scheme, but the scheme's own site says St Michael's hasn't registered yet. The treasurer should check.
+- Colours meet WCAG 2.2 AA in every season (axe, 4 seasons x 13 pages).
 
 ## Final test run
-17 Nov 2026, Opus sign-off: npm test fully passes - HTML valid, 46 links OK, 34 of 34 page runs.
+18 Nov 2026, Opus: npm test fully passes - HTML valid, links OK, 36 of 36 page runs. Extra season check: 4 seasons x 13 pages, axe clean on desktop, no sideways scroll at 375px.

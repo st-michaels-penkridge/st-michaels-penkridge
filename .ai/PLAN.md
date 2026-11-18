@@ -1,49 +1,84 @@
 # Plan
 
-**Goal:** Remove the six dead files from the clean-up log, and shrink the large photos where it can be done without them looking worse.
+**Goal:** The site changes on its own for the church seasons the parish asked for (Advent, Christmas, Easter, Pentecost), and a new Bygone days page shows the parish's old pictures.
 
 ## Design notes
 
-Nothing on the site should look different after this plan.
+The site takes on the season's colour the way the altar frontal does, and the home page hero gets one quiet line for the season. Nothing else moves.
 
-Why only two photos are being compressed (measured 17 Nov): every page already serves WebP. Phones download between 8KB and 880KB of images per page. The only files over 250KB are the large 1280px versions, which open in the gallery lightbox and are used for the hero photos on desktop. Rebuilding them from the originals makes two of them 25-35% smaller. Every other one would come out the same size or bigger unless it was visibly softened, so those stay as they are. The ~57MB of original and unused photos in `images/` are never sent to visitors, so they don't slow the site (see Waiting on).
+- Season is worked out from the visitor's date in `buttons.js` (already on every page), which sets `data-season` on `<html>`. Advent: Advent Sunday to 23 Dec. Christmas: 24 Dec to 6 Jan. Easter: Easter Day to the day before Pentecost. Pentecost: its own week. Outside those, nothing changes.
+- Colours swap through the existing `--crimson`, `--crimson-deep` and `--red` variables, plus a new `--band` for the two home bands (times band and giving) that were hard-coded `#6c272c`.
+  - Advent: violet `#4f2d5c`, bands `#45274f`.
+  - Christmas: crimson stays, bands go evergreen `#1f3d2b`.
+  - Easter: gold `#7a5518`, bands warm dark `#2a221d`.
+  - Pentecost: red is already the site's colour, so only the hero line changes.
+  All pass 4.5:1 on white and on the cream paper.
+- Hero line: `.season-note` under the tagline, one per season in the HTML, shown by CSS when `data-season` matches. Brass line icon (same 24px, 1.4 stroke family as the welcome links), white Source Sans text, thin underline, links to What's on.
+- Preview any season by adding `?season=advent` (christmas, easter, pentecost, none) to a page address. Only lasts for that page.
+
+### Bygone days
+
+- New page `bygone.html`, in the About us menu under History ("Bygone days", small line "Old postcards and photographs"). The church liked "Bygone days" as the name.
+- Built from existing pieces only: `.page-head`, `.reel` and `.reel-head` (as on the History page photo strips), `.gallery-item` figures, and the History page's thin black frame with a pale mount. The only new CSS is `.album`: three columns that drop to one on a phone, so every picture keeps its own shape.
+- 24 pictures from Andy's "Old Church Pics" deck, in four groups: old postcards, inside, engravings, Penkridge around the church. Captions use only what is printed on the card, the year on Andy's slide, or the history booklet. WebP, 800px wide at most, all under 160KB; everything after the first three loads lazily.
 
 ## Tasks
 
-- [x] T1 | Agent: assets | Checks: qa, review
-  Files: styles.css, home-v1.css, home-v2.css, chosen-type.css, nav.css, members/members.css
-  Do: First run `git grep -n -e "styles.css" -e "home-v1.css" -e "home-v2.css" -e "chosen-type.css" -e "nav.css" -- "*.html" "*.js"`. It must print nothing, because no page or script loads these files (site.css replaced all five on 5 Nov). If it prints anything, stop and report it. Otherwise run `git rm styles.css home-v1.css home-v2.css chosen-type.css nav.css`. Then, on line 1 of `members/members.css`, change `Builds on ../styles.css` to `Builds on ../site.css`. Leave the comment on line 1 of site.css alone, because it records where site.css came from.
-  Done when: the five files are deleted, the members.css comment says `../site.css`, and `npm test` passes with every page unchanged.
+- [x] S1 | Agent: Opus (built directly) | Checks: qa, review
+  Files: buttons.js
+  Do: season logic at the top of buttons.js; sets `data-season` on `<html>`.
+  Done when: checked against Advent and Easter dates for 2022 and 2024-2028, and the preview parameter works.
 
-- [x] T2 | Agent: content | Checks: qa, review
-  Files: README.md
-  Do: On line 7, change ``shared by all 14 public and members pages through `chosen-type.css`.`` to ``shared by all 14 public and members pages through `site.css`.`` On line 19, change ``Home-specific styling is in `home-v1.css`.`` to ``Home-specific styling is now in `site.css`.`` Change nothing else.
-  Done when: README.md no longer names any of the five deleted CSS files, and the diff is those two lines.
+- [x] S2 | Agent: Opus | Checks: qa, review, legal
+  Files: site.css
+  Do: `--band` in `:root`, the two home bands use it, season colour block and `.season-note` styles at the end of site.css.
+  Done when: every season passes axe (WCAG 2.2 AA) on 12 pages at desktop, no sideways scroll at 375px.
 
-- [x] T3 | Agent: assets | Checks: qa, review
-  Files: scripts/gallery-tags.py
-  Do: Run `git grep -n "gallery-tags"`. The only match should be in `.claude/debt-log.md`. If anything else mentions it (a .bat, .ps1, .py or .md file), stop and report it. Otherwise run `git rm scripts/gallery-tags.py`. Keep `scripts/gallery_tags.py` (with the underscore), because that's the one the other scripts import.
-  Done when: scripts/gallery-tags.py is deleted and scripts/gallery_tags.py is untouched.
+- [x] S3 | Agent: Opus | Checks: qa, review, legal
+  Files: index.html
+  Do: four `.season-note` lines after `.hero-tagline`.
+  Done when: hidden outside the seasons, one line shows in each season.
 
-- [x] T4 | Agent: assets (done by Opus at sign-off, after OneDrive blocked it locally) | Checks: qa, review
-  Files: images/opt/7cc8b9568f0a-1600.webp, images/opt/f4caec345099-1600.webp
-  Do: From the repo folder, run `npm install --no-save sharp`, then `node .ai/tools/compress-webp.mjs`. Don't edit the script. It rebuilds each large photo over 250KB from its original JPG at the same pixel size, and only keeps the new file if it's at least 20% smaller. Expected output: `SHRUNK` for 7cc8b9568f0a-1600.webp (303KB to about 227KB) and f4caec345099-1600.webp (256KB to about 167KB), `kept` for the other 14, and `2 replaced` at the end. If the output is different, report it word for word.
-  Done when: `git status` shows only those two .webp files changed (package.json and package-lock.json untouched), both keep their names and pixel sizes (1443x1114 and 1440x960), and `npm test` passes.
-  Blocked: the script stops with `Error: UNKNOWN: unknown error, open` / `errno -4094` at `writeFileSync` on 7cc8b9568f0a-1600.webp, after 8 `kept` lines. Both target files have the OneDrive `ReparsePoint` attribute (Files On-Demand placeholders). Tried twice; no image, package.json or package-lock.json changed, images/opt clean in git. Needs Tobi to pin/download them locally, then re-run the two commands.
+- [x] S4 | Agent: Opus | Checks: qa
+  Files: every page
+  Do: cache versions bumped to `?v=20261118` for site.css and buttons.js.
 
-- [x] T5 | Agent: assets | Checks: qa, review
-  Files: .claude/debt-log.md
-  Do: Replace the file's two lines (both dated 2026-11-11) with this one line:
-  `2026-11-17 | resolved: the five superseded CSS files and scripts/gallery-tags.py | deleted in the clean-up plan (T1, T3) | nothing left open`
-  Done when: debt-log.md is that one line.
+- [x] B1 | Agent: Opus | Checks: qa, review, legal
+  Files: images/bygone/*.webp, bygone.html
+  Do: 24 old pictures cropped, trimmed and saved as WebP; the page.
+  Done when: npm test passes with the new page on phone and desktop.
+
+- [x] B2 | Agent: Opus | Checks: qa, review
+  Files: site.css
+  Do: `.album` columns; the History frame rule also covers `.album img`.
+
+- [x] B3 | Agent: Opus | Checks: qa
+  Files: every page, gallery.html
+  Do: Bygone days added to the About us menu everywhere; a link to it under Photographs on the History page.
 
 ## Waiting on
 
-Decisions for Tobi (and Will):
-- `images/` holds about 57MB that visitors never download: the original JPGs the WebP versions were made from, plus photos nothing uses (including the QR code PNGs and the frame-*.webp files). They only make the repo heavier. Keep them, or plan a careful delete job? Some of them are needed to rebuild the WebP versions.
-- The desktop hero photos on the home page and Sundays page are about 480KB each. A desktop-only wide crop would cut that by more than half, but it's a design change. Do you want it?
+Old pictures left out until Andy or the PCC can say we may use them:
+- The 1930 aerial views carry the Aerofilms mark (Historic England's Britain from Above collection), so they need Historic England's permission.
+- The procession with the church banner is a coloured copy taken from a website. The original black and white print would be fine.
+- The carnival parade, the hunt meets outside the church and the 1967 pictures show people who may still be alive, so the PCC should decide.
+- Modern photos (snow, sunsets, the market) and the signed pen drawing of the church: we need the photographers' or artist's permission.
+- The engraving with the Alamy watermark and the Facebook screenshot can't be used.
 
-Facts from Greg or the parish, carried over (24 TODOs across the site). Don't guess any of them:
+Decisions for Tobi (and Will):
+- Lent and Holy Week (violet, then red) weren't asked for. Easy to add the same way if the parish wants them.
+- The seasonal greetings in the hero are generic. Greg may want his own wording.
+
+From Andy (in Tobi's Outlook):
+- Old Church Pics.pptx and Old Church Pictures.docx, for the Bygone days page.
+- History booklet PDF, mini history leaflet, Greg's self-guided tour leaflet and the 800th PowerPoint, for the history section.
+- The church logo (not found in the emails so far).
+
+Carried over from the clean-up plan:
+- `images/` holds about 57MB visitors never download. Keep, or plan a careful delete job?
+- Desktop hero photos on Home and Sundays are about 480KB each. Want a desktop-only wide crop?
+
+Facts from Greg or the parish (24 TODOs across the site). Don't guess any of them:
 - The church address and postcode (on most pages)
 - Service pattern and finish time (index.html, sundays.html)
 - The parish's own Parish Giving link, from the treasurer (donate.html)
