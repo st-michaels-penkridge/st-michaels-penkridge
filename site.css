@@ -540,64 +540,6 @@ address {
 }
 
 /* Gravefindr band: a main feature, kept to one band */
-.graves {
-  display: grid;
-  background: var(--stone);
-}
-
-.graves-photo {
-  margin: 0;
-  min-height: 16rem;
-}
-
-.graves-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.graves-text {
-  padding: clamp(2.5rem, 6vw, 4.5rem) var(--edge);
-}
-
-.graves-figures {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 2rem;
-  margin: 1.25rem 0 0.25rem;
-}
-
-.graves-figures p {
-  margin: 0;
-  color: var(--ink-soft);
-}
-
-.graves-figures strong {
-  display: block;
-  font-family: var(--display);
-  font-size: 2rem;
-  font-weight: 400;
-  line-height: 1.1;
-  color: var(--crimson);
-  font-variant-numeric: tabular-nums;
-}
-
-.powered {
-  margin-top: 1.25rem;
-  font-size: var(--step--1);
-  color: var(--ink-soft);
-}
-
-@media (min-width: 900px) {
-  .graves {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  }
-
-  .graves-text {
-    padding-left: 4rem;
-    max-width: 44rem;
-  }
-}
 
 /* Coming up */
 .coming-list {
@@ -646,28 +588,6 @@ address {
 }
 
 /* History, leading into giving */
-.history {
-  display: grid;
-  gap: 2.5rem;
-  align-items: center;
-}
-
-.history-photo {
-  margin: 0;
-}
-
-.history-photo img {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-}
-
-@media (min-width: 900px) {
-  .history {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    gap: 4.5rem;
-  }
-}
 
 /* Giving: the one loud band */
 .give {
@@ -697,32 +617,6 @@ address {
 
 .give .lede {
   color: rgba(255, 255, 255, 0.92);
-}
-
-.give-facts {
-  display: grid;
-  gap: 0.75rem;
-  margin: 1.75rem 0 0;
-  padding: 1.25rem 0 0;
-  list-style: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
-  max-width: 34rem;
-}
-
-.give-facts li {
-  padding-left: 1.4rem;
-  position: relative;
-}
-
-.give-facts li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.6em;
-  width: 0.55rem;
-  height: 0.55rem;
-  background: #fff;
-  transform: rotate(45deg);
 }
 
 .give a:not(.btn):not(.btn-square) {
@@ -1188,7 +1082,7 @@ address {
 
 /* Square, bordered buttons: a bordered alternative to the pill .btn family.
    -fill/-ghost are for light (paper/stone) backgrounds; -light/-light-ghost
-   are for dark backgrounds (times-band, the crimson give/monthly bands). */
+   are for dark backgrounds (the crimson give/monthly bands). */
 .btn-square {
   display: inline-flex;
   align-items: center;
@@ -2090,77 +1984,8 @@ b {
   }
 }
 
-/* Service times: their own black band, lower down */
-.times-band {
-  display: grid;
-  gap: 1.5rem 3rem;
-  padding: clamp(2.25rem, 5vw, 3.25rem) var(--edge);
-  background: var(--black);
-  color: #fff;
-}
-
-.times-when {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.15rem 0.9rem;
-  margin: 0;
-}
-
-.times-time {
-  font-family: var(--display);
-  font-size: clamp(2.6rem, 5vw, 3.4rem);
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-}
-
-.times-what {
-  font-family: var(--display);
-  font-size: 1rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.times-next {
-  flex-basis: 100%;
-  margin-top: 0.4rem;
-  font-size: var(--step--1);
-  color: rgba(255, 255, 255, 0.78);
-}
-
-.times-where p {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.86);
-}
-
-.times-where p:first-child {
-  color: #fff;
-}
-
-.times-band .actions {
-  margin: 0;
-}
-
 .nowrap {
   white-space: nowrap;
-}
-
-@media (min-width: 1000px) {
-  .times-band {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) auto;
-    align-items: center;
-  }
-}
-
-@media (min-width: 640px) and (max-width: 999px) {
-  .times-band {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: center;
-  }
-
-  .times-band .actions {
-    grid-column: 1 / -1;
-  }
 }
 
 /* Red, black and white only: links and focus rings on the dark bands */
@@ -2182,7 +2007,6 @@ b {
 }
 
 .hero-full :focus-visible,
-.times-band :focus-visible,
 .glass-band :focus-visible,
 .give :focus-visible,
 .monthly :focus-visible,
@@ -2472,23 +2296,6 @@ html {
   color: var(--ink-soft);
 }
 
-/* Service times band: three across only when there's room */
-@media (min-width: 1000px) and (max-width: 1279px) {
-  .times-band {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .times-band .actions {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (min-width: 1280px) {
-  .times-band {
-    grid-template-columns: minmax(0, 22rem) minmax(0, 1fr) auto;
-  }
-}
-
 /* Shorter labels below 1280px; full labels and normal spacing above */
 .nav-short {
   display: none;
@@ -2537,21 +2344,6 @@ html {
    First Sunday, the glass you see in church, the churchyard
    outside, then the age of the building, each leading to the next.
    --------------------------------------------------------------- */
-.story {
-  background: var(--paper);
-}
-
-.story > .story-row {
-  padding: clamp(2.5rem, 5vw, 4.5rem) var(--edge);
-}
-
-.story > .story-row:first-child {
-  padding-top: var(--space);
-}
-
-.story > .story-row:last-child {
-  padding-bottom: var(--space);
-}
 
 /* The glass, straight under First Sunday */
 .glass-row .lancets {
@@ -2574,55 +2366,8 @@ html {
 }
 
 /* The churchyard: photo left, words right, inside the page margins */
-.story .graves {
-  display: grid;
-  gap: 2rem;
-  align-items: center;
-  background: none;
-}
-
-.story .graves-photo {
-  min-height: 0;
-}
-
-.story .graves-photo img {
-  height: auto;
-  aspect-ratio: 4 / 3;
-}
-
-.story .graves-text {
-  padding: 0;
-  max-width: 40rem;
-}
 
 /* The age of the church: words left, photo right */
-.story .history {
-  gap: 2rem;
-}
-
-.history-lead {
-  margin: 0 0 0.25rem;
-  font-size: var(--step-1);
-  line-height: 1.5;
-  color: var(--ink-soft);
-  max-width: var(--measure);
-}
-
-.story .history-photo img {
-  aspect-ratio: 4 / 5;
-}
-
-@media (min-width: 900px) {
-  .story .graves {
-    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
-    gap: 4.5rem;
-  }
-
-  .story .history {
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    gap: 4.5rem;
-  }
-}
 
 /* Giving: the tower instead of the glass, which now sits higher up the page */
 .give-photo img {
@@ -2658,14 +2403,6 @@ html {
 }
 
 /* Lists use a plain dash instead of a bullet */
-.give-facts li::before {
-  content: "-";
-  top: 0;
-  width: auto;
-  height: auto;
-  background: none;
-  transform: none;
-}
 
 .impact {
   list-style: none;
@@ -2717,10 +2454,6 @@ html {
 
 .hero-full::after {
   background: linear-gradient(to right, rgba(17, 17, 19, 0.38) 0%, rgba(17, 17, 19, 0) 55%);
-}
-
-.times-band {
-  margin-top: -1px;
 }
 
 /* Donate in the header: 30% bigger */
@@ -3247,36 +2980,19 @@ html {
 .hero-links { display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem 2rem; margin-top: 2rem; }
 .hero-links > a { color: white; }
 .hero-links .btn { background: #f7f4ee; color: #292724; gap: 2rem; }
-.home-v1 .times-band { background: var(--band); padding: 2rem var(--edge); }
-.home-v1 .times-time { font-family: var(--script); }
-.notice-board { padding: 5rem var(--edge); background: radial-gradient(ellipse at top left,#fffaf0,transparent 65%),var(--paper); }
-.board-heading { display: flex; justify-content: space-between; align-items: end; gap: 1.5rem; margin-bottom: 2rem; }
-.board-heading h2 { font-size: clamp(2.2rem,4vw,3.5rem); }
-.board-heading .text-link { flex-shrink: 0; }
 .home-v1 .kicker { font-size: .75rem; letter-spacing: .15em; }
-.home-v1 .notices { max-width: none; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-.home-v1 .notice { background: #fffdf8; border: 1px solid #d9d0c3; border-top: 3px solid var(--crimson); padding: 1.75rem; box-shadow: 0 7px 18px #372b1e06; overflow-wrap: anywhere; }
-.home-v1 .notice h3 { font-size: 1.6rem; line-height: 1.2; margin-bottom: .75rem; }
-.home-v1 .notice p { font-size: 1rem; line-height: 1.65; }
-.board-status { padding: 1.5rem 0; border-block: 1px solid var(--stone-line); color: var(--ink-soft); }
 .board-demo { color: var(--crimson); font-size: .9rem; }
 .board-links { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 2rem; margin-top: 2.5rem; }
 .board-links > a { color: var(--ink); text-decoration: none; border-top: 1px solid #c9bfb0; padding-top: 1.5rem; }
 .board-links h3 { font-size: 1.5rem; display: flex; justify-content: space-between; gap: .75rem; }
 .board-links a:hover h3 { color: var(--crimson); }
 .board-links p { font-size: 1rem; color: var(--ink-soft); margin: .75rem 0 0; }
-.home-v1 .story { background: var(--paper); }
-.home-v1 .story-row.sundays, .home-v1 .story-row.history { padding: 0; gap: 0; align-items: stretch; background: var(--stone); }
-.home-v1 .sundays > .prose, .home-v1 .history-text { padding: clamp(2.5rem,5vw,5rem) var(--edge); align-self: center; max-width: none; }
-.home-v1 .sundays-photo, .home-v1 .history-photo { margin: 0; height: 100%; min-height: 32rem; }
-.home-v1 .sundays-photo img, .home-v1 .history-photo img { width: 100%; height: 100%; max-height: none; aspect-ratio: auto; object-fit: cover; object-position: center; }
-.home-v1 .story h2 { font-size: clamp(2rem,3.5vw,3.25rem); }
-.home-v1 .story-row.graves { margin: 0; padding: 0; gap: 0; align-items: stretch; background: var(--paper); }
-.home-v1 .graves-text { padding: clamp(2.5rem,5vw,5rem) var(--edge); align-self: center; }
-.home-v1 .graves-photo img { height: 100%; aspect-ratio: auto; object-fit: cover; }
-.home-v1 .graves-photo { min-height: 30rem; }
-.home-v1 .history { border-top: 1px solid var(--stone-line); }
-.home-v1 .counter { flex-wrap: wrap; gap: 1rem; }
+
+.home-v1 .story-row.sundays { padding: 0; gap: 0; align-items: stretch; background: var(--stone); }
+.home-v1 .sundays > .prose { padding: clamp(2.5rem,5vw,5rem) var(--edge); align-self: center; max-width: none; }
+.home-v1 .sundays-photo { margin: 0; position: relative; }
+.home-v1 .sundays-photo img { width: 100%; height: 100%; max-height: none; aspect-ratio: auto; object-fit: cover; object-position: center; }
+
 .home-v1 .give { background: var(--band); }
 .home-v1 .give h2 { font-size: clamp(2.2rem,4vw,3.6rem); }
 .home-v1 .give-photo img { filter: saturate(.75); }
@@ -3291,9 +3007,8 @@ html {
 @media (max-width: 899px) {
   .home-v1 .hero-full { min-height: 36rem; }
   .home-v1 .hero-copy { padding-block: 3.5rem; }
-  .home-v1 .sundays-photo, .home-v1 .history-photo, .home-v1 .graves-photo { min-height: 0; height: 25rem; }
+  .home-v1 .sundays-photo { min-height: 0; height: 25rem; }
   .home-v1 .sundays-photo { order: -1; }
-  .home-v1 .notices { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
   .home-v1 .masthead { position: static; }
@@ -3303,22 +3018,14 @@ html {
   .home-v1 .hero-full::after { background: linear-gradient(0deg,rgba(20,24,22,.92),rgba(20,24,22,.25)); }
   .home-v1 .hero-copy { padding-block: 3rem; }
   .hero-eyebrow { font-size: .7rem; letter-spacing: .12em; }
-  .board-heading { display: block; }
-  .board-heading .text-link { display: inline-block; margin-top: 1rem; }
-  .notice-board { padding-block: 3rem; }
   .board-links { grid-template-columns: 1fr; }
-  .home-v1 .times-band { display: flex; flex-direction: column; align-items: stretch; gap: 1.25rem; }
-  .home-v1 .times-where { padding: 0; border: 0; }
-  .home-v1 .times-band .actions { flex-wrap: wrap; }
-  .home-v1 .counter { display: flex; }
-  .home-v1 .counter strong { font-size: 2rem; }
   .home-v1 .give-photo { margin: 0; }
 }
 
 /* ===== home-v2.css ===== */
 /* Second pass: typography studies and a continuous history / giving section. */
 .home-v1 { font-family: var(--reading-font); }
-.home-v1 h1, .home-v1 h2, .home-v1 h3, .home-v1 .counter strong, .home-v1 .graves-figures strong { font-family: var(--heading-font); }
+.home-v1 h1, .home-v1 h2, .home-v1 h3, .home-v1 .counter strong { font-family: var(--heading-font); }
 .home-v1 .wordmark-name { font-family: var(--heading-font); font-size: 1.1rem; letter-spacing: .025em; }
 .home-v1 .nav a, .home-v1 .kicker, .home-v1 .text-link { font-family: var(--label-font); }
 .home-v1 .btn, .home-v1 input, .home-v1 button { font-family: var(--reading-font); }
@@ -3326,33 +3033,19 @@ html {
 .home-v1 .hero-full::after { background: linear-gradient(90deg,rgba(16,23,23,.76),rgba(16,23,23,.12) 72%),linear-gradient(0deg,rgba(16,23,23,.5),transparent 65%); }
 .home-v1 .hero-copy { padding-block: 4rem; }
 .home-v1 .hero-full h1 { max-width: 17ch; }
-.home-v1 .story-row.history { background: var(--paper); border: 0; padding-top: 4rem; }
-.home-v1 .history-photo { padding-right: var(--edge); }
-.home-v1 .history-photo img { mask-image: linear-gradient(to bottom,#000 82%,transparent); }
-.home-v1 .graves-photo { display: flex; flex-direction: column; justify-content: center; background: var(--paper); height: auto; min-height: 0; }
-.grave-scene { position: relative; }
-.home-v1 .grave-scene img { width: 100%; height: auto; aspect-ratio: 960 / 639; object-fit: contain; }
-.grave-outlines { position: absolute; inset: 0; width: 100%; height: 100%; }
-.grave-outlines a { outline: none; }
-.grave-outlines path { fill: transparent; stroke: #fff6; stroke-width: 1.3; vector-effect: non-scaling-stroke; transition: fill .2s,stroke .2s; }
-.grave-outlines a:hover path, .grave-outlines a:focus path { fill: #ffffff26; stroke: #fff; stroke-width: 2.5; }
-.home-v1 .graves-photo figcaption { margin: 0; padding: .85rem 1.25rem; font-size: .85rem; color: var(--ink-soft); }
+
 .grave-search { margin: 1.5rem 0; }
 .grave-search label { display: block; font-size: .9rem; margin-bottom: .5rem; }
 .grave-search > div { display: flex; border: 1px solid #bfb7aa; border-radius: 5px; background: #fffdf9; padding: .3rem; gap: .3rem; }
 .grave-search input { border: 0; min-width: 0; flex: 1; background: transparent; padding: .7rem; font-size: 1rem; color: var(--ink); }
 .grave-search button { border: 0; border-radius: 3px; background: var(--crimson); color: white; padding: .7rem 1rem; font-size: .95rem; cursor: pointer; }
 .home-v1 .notice-date { display: block; margin-bottom: .6rem; color: var(--crimson); }
-@media (max-width: 899px) {
-  .home-v1 .history-photo { padding: 0 var(--edge); height: 25rem; }
-  .home-v1 .graves-photo { height: auto; }
-}
+
 @media (max-width: 600px) {
   .home-v1 .hero-full > img { object-position: 47% center; }
   .home-v1 .hero-full::after { background: linear-gradient(0deg,rgba(16,23,23,.9),rgba(16,23,23,.12)); }
   .home-v1 .hero-full h1 { font-size: 2.8rem; }
 }
-@media (prefers-reduced-motion: reduce) { .grave-outlines path { transition: none; } }
 
 /* ===== chosen-type.css ===== */
 /* Selected pairing: Cormorant Garamond headings, Source Sans 3 reading text. */
@@ -3493,11 +3186,11 @@ h1, h2, h3 { text-transform: none; letter-spacing: -.025em; font-weight: 500; }
 :root { --ink-soft: #4a4a50; }
 
 /* Sentence case instead of capitals (easier to read); the church name keeps its lettering */
-.btn, .kicker, .subhead, .text-link, .sunday-what, .year-month time, .times-what, .cal-month, .sun-facts dt,
+.btn, .kicker, .subhead, .text-link, .sunday-what, .year-month time, .cal-month, .sun-facts dt,
 .counter span, .carousel-pos, .hero-eyebrow, .masthead .nav > a, .nav-group-btn, .nav-toggle {
   text-transform: none;
 }
-.kicker, .hero-eyebrow, .times-what, .counter span, .sun-facts dt, .subhead { letter-spacing: .02em; }
+.kicker, .hero-eyebrow, .counter span, .sun-facts dt, .subhead { letter-spacing: .02em; }
 .masthead .nav > a, .nav-group-btn, .nav-toggle { letter-spacing: .01em; font-size: .95rem; }
 .text-link { letter-spacing: 0; }
 
@@ -3511,9 +3204,7 @@ h1, h2, h3 { text-transform: none; letter-spacing: -.025em; font-weight: 500; }
 }
 
 /* Find a grave: never wider than the screen */
-.graves-text, .graves-text > *, .grave-search, .grave-search > div { min-width: 0; max-width: 100%; }
-.graves-figures { flex-wrap: wrap; }
-.home-v1 .graves-text .text-link { display: inline-block; margin-top: .25rem; }
+.grave-search, .grave-search > div { min-width: 0; max-width: 100%; }
 
 /* Map that loads only when asked */
 .map-facade {
@@ -3539,7 +3230,7 @@ h1, h2, h3 { text-transform: none; letter-spacing: -.025em; font-weight: 500; }
 :root {
   --display: "Cinzel", "Cinzel Fallback", "Times New Roman", serif;
   --script: var(--display);
-  --brass: #e3c48e; --brass-soft: #e8d3ad; --brass-icon: #a8834f;
+  --brass: #e3c48e; --brass-soft: #e8d3ad;
 }
 h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
 .wordmark-name { font-family: var(--display); text-transform: none; letter-spacing: .06em; }
@@ -3592,47 +3283,18 @@ h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
 .hero-pill:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 .hero-address { margin: 0; font-size: 1rem; }
 
-.welcome-strip {
-  display: flex; flex-direction: column; align-items: center; gap: 2rem;
-  padding: clamp(2.5rem, 6vw, 4.5rem) var(--edge); text-align: center; background: var(--paper);
-}
-.welcome-strip > p { margin: 0; max-width: 44rem; font-style: italic; font-size: clamp(1.1rem, 1rem + .4vw, 1.3rem); line-height: 1.6; color: var(--ink-soft); }
-.welcome-links { display: grid; grid-template-columns: repeat(4, minmax(0, 8rem)); justify-content: center; gap: 1rem clamp(1.5rem, 5vw, 4rem); }
-.welcome-links a {
-  display: flex; flex-direction: column; align-items: center; gap: .6rem; padding: .5rem;
-  font-family: var(--display); font-size: .95rem; letter-spacing: .12em; color: var(--ink); text-decoration: none;
-}
-.welcome-links svg { width: 2.4rem; height: 2.4rem; color: var(--brass-icon); transition: transform .2s ease; }
-.welcome-links a:hover, .welcome-links a:focus-visible { color: var(--crimson); }
-.welcome-links a:hover svg { transform: translateY(-2px); }
-.welcome-links .is-give, .welcome-links .is-give svg { color: var(--crimson); }
-
 @media (max-width: 600px) {
   .hero-altar { min-height: clamp(30rem, 88svh, 42rem); padding-bottom: 1.5rem; }
   .hero-mark { width: 3rem; height: 3rem; }
   .hero-tagline { letter-spacing: .16em; }
   .hero-address { font-size: .92rem; }
-  .welcome-links { grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .home-v1 .masthead, .hero-pill, .welcome-links svg { transition: none; }
+  .home-v1 .masthead, .hero-pill { transition: none; }
 }
 
 /* History: centred, no photo, live counter; Sundays on the same cream as the rest */
 .home-v1 .story-row.sundays { background: var(--paper); }
-.home-v1 .story .history { display: block; padding: clamp(3.5rem, 7vw, 6rem) var(--edge); text-align: center; }
-.home-v1 .history-text { max-width: 46rem; margin: 0 auto; padding: 0; display: flex; flex-direction: column; align-items: center; }
-.home-v1 .history-text h2 { text-wrap: balance; }
-.home-v1 .history-lead { max-width: 34rem; margin-inline: auto; }
-.home-v1 .history .counter { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem clamp(1.25rem, 3.5vw, 2.75rem); width: 100%; }
-.home-v1 .history .counter div { align-items: center; min-width: 3.5ch; }
-.home-v1 .history .prose { max-width: 38rem; margin-inline: auto; }
-.home-v1 .history .prose .text-link { display: inline-block; }
-@media (max-width: 600px) {
-  .home-v1 .history .counter { gap: .75rem 1.1rem; }
-  .home-v1 .history .counter strong { font-size: 1.9rem; }
-  .home-v1 .history .counter span { font-size: .68rem; }
-}
 
 /* Hero photo: stack with positive layers so every browser paints it (some skipped the negative z-index) */
 .hero-altar > img { z-index: 0; }
@@ -3665,3 +3327,79 @@ h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
 /* ===== 18 Nov 2026: Bygone days, old pictures laid out like an album ===== */
 .album { columns: 3 17rem; column-gap: clamp(1.25rem, 3vw, 2.5rem); }
 .album .gallery-item { margin-bottom: 2rem; break-inside: avoid; }
+
+/* ===== 18 Nov 2026: home page rework ===== */
+/* Notice board: one framed board. Pictures from the members area sit on the left
+   when there are any; notices on the right */
+.notice-board { padding: clamp(3rem, 6vw, 5rem) var(--edge); background: var(--paper); }
+.board { max-width: 76rem; margin: 0 auto; background: #fffdf8; border: 1px solid #d9d0c3; }
+.board-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .5rem 1.5rem; padding: 1.25rem clamp(1.25rem, 3vw, 2.25rem); border-bottom: 1px solid #d9d0c3; }
+.board-heading h2 { margin: 0; font-size: clamp(2rem, 3.6vw, 3rem); }
+.board-body { display: grid; }
+.board-pictures { display: grid; gap: 1.75rem; align-content: start; padding: clamp(1.25rem, 3vw, 2.25rem); border-bottom: 1px solid #d9d0c3; }
+.board-pictures[hidden] { display: none; }
+.board-notices { min-width: 0; padding: clamp(1.25rem, 3vw, 2.25rem); }
+.notice-board .notices { max-width: none; margin: 0; gap: 0; }
+.notice-board .notice { padding: 1.4rem 0; background: none; border: 0; border-top: 1px solid #e6ded2; overflow-wrap: anywhere; }
+.notice-board .notice:first-child { padding-top: 0; border-top: 0; }
+.notice-board .notice:last-child { padding-bottom: 0; }
+.notice-board .notice h3 { font-size: 1.5rem; line-height: 1.2; margin-bottom: .5rem; }
+.notice-board .notice p { font-size: 1rem; line-height: 1.65; }
+.board-status { margin: 0; color: var(--ink-soft); }
+@media (min-width: 900px) {
+  .board-body.has-pictures { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+  .has-pictures .board-pictures { border-bottom: 0; border-right: 1px solid #d9d0c3; }
+  .board-body:not(.has-pictures) .notices { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem; }
+  .board-body:not(.has-pictures) .notice { padding: 0; border: 0; }
+}
+
+/* A picture keeps the crop chosen in the page editor: shape, position and size */
+.board-picture { margin: 0; }
+.board-frame { display: block; overflow: hidden; aspect-ratio: 210 / 297; background: var(--stone); border: 1px solid #d9d0c3; }
+[data-shape="square"] > .board-frame { aspect-ratio: 1; }
+[data-shape="landscape"] > .board-frame { aspect-ratio: 4 / 3; }
+.board-frame img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: var(--x, 50%) var(--y, 50%); transform: scale(var(--zoom, 1)); transform-origin: var(--x, 50%) var(--y, 50%); }
+.board-picture figcaption { margin-top: .6rem; font-size: var(--step--1); color: var(--ink-soft); }
+
+/* Your first Sunday: the photo is exactly as tall as the words beside it */
+@media (min-width: 900px) {
+  .home-v1 .sundays-photo img { position: absolute; inset: 0; }
+}
+
+/* Find a grave: one strong call to search, over the churchyard photo */
+.find-grave { position: relative; display: grid; place-items: center; overflow: hidden; padding: clamp(4.5rem, 10vw, 8rem) var(--edge); text-align: center; color: #fff; background: var(--black); }
+.find-grave > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .38; }
+.find-grave-inner { position: relative; width: 100%; max-width: 42rem; }
+.find-grave .kicker { color: var(--brass); }
+.find-grave h2 { margin: .4rem 0 1rem; font-size: clamp(2.6rem, 6vw, 4.5rem); color: #fff; }
+.find-grave p { margin: 0 auto; max-width: 34rem; font-size: clamp(1.05rem, 1rem + .3vw, 1.25rem); color: rgba(255, 255, 255, .92); }
+.find-grave .grave-search { max-width: 36rem; margin: 2.25rem auto 1.5rem; text-align: left; }
+.find-grave .grave-search label { color: var(--brass-soft); }
+.find-grave .grave-search > div { border: 0; border-radius: 4px; background: #fff; padding: .35rem; }
+.find-grave .grave-search input { padding: .9rem 1rem; font-size: 1.1rem; }
+.find-grave .grave-search button { padding: .9rem 1.6rem; font-size: 1.05rem; }
+.find-grave .find-grave-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 2rem; font-size: var(--step--1); color: rgba(255, 255, 255, .85); }
+.find-grave a { color: #fff; }
+.find-grave :focus-visible { outline-color: #fff; }
+
+/* The age of the church: the counter is the whole point, so it is big */
+.age { display: flex; flex-direction: column; align-items: center; padding: clamp(4rem, 9vw, 7.5rem) var(--edge); text-align: center; background: var(--paper); }
+.age h2 { max-width: 22ch; margin: .4rem 0 0; font-size: clamp(1.8rem, 3.4vw, 2.7rem); text-wrap: balance; }
+.age .counter { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem clamp(1.75rem, 4.5vw, 4rem); width: 100%; max-width: 68rem; margin: clamp(2rem, 5vw, 3.5rem) 0; padding: clamp(1.75rem, 4vw, 3rem) 0; }
+.age .counter div { align-items: center; min-width: 2ch; }
+.age .counter strong { font-size: clamp(3.4rem, 9vw, 7.5rem); }
+.age .counter span { margin-top: .9rem; font-size: clamp(.8rem, .7rem + .3vw, 1rem); }
+@media (max-width: 600px) {
+  .age .counter { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.75rem .5rem; }
+  .age .counter div:first-child { grid-column: 1 / -1; }
+  .age .counter div:first-child strong { font-size: 6rem; }
+  .age .counter strong { font-size: 2.4rem; }
+}
+
+.give-charity { margin: 1.75rem 0 0; font-size: var(--step--1); color: rgba(255, 255, 255, .82); }
+
+/* Asks before Google's map loads, because Google sets cookies. Not a pop-up: it sits at the bottom and doesn't block the page */
+.cookie-bar { position: fixed; z-index: 60; left: 1rem; right: 1rem; bottom: 1rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; max-width: 48rem; margin: 0 auto; padding: 1.25rem 1.5rem; color: var(--ink); background: var(--paper); border: 1px solid var(--stone-line); box-shadow: 0 10px 30px rgba(17, 17, 19, .2); }
+.cookie-bar p { flex: 1 1 18rem; margin: 0; font-size: var(--step--1); }
+.cookie-bar .actions { margin: 0; flex-wrap: wrap; }
+

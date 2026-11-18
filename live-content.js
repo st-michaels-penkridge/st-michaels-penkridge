@@ -1,4 +1,5 @@
-// What's on: Coming up, notices and service details from the members area.
+// What's on: Coming up, notices and service details from the members area,
+// plus the pictures (newsletters, posters) pinned to the home page notice board.
 // The office changes them in members/editor.html. If the members area isn't set
 // up yet, or can't be reached, the dates written into the page stay as they are.
 (function () {
@@ -70,6 +71,40 @@
     if (!rows.length) showComingUp();
   }
 
+  // Pictures keep the crop chosen in the page editor: shape, position and size
+  function showPictures(rows, srcOf) {
+    var box = document.getElementById("board-pictures");
+    if (!box) return;
+    rows = rows.filter(function (p) { return p.published && p.show_from <= today && (!p.show_until || p.show_until >= today); });
+    rows.sort(function (a, b) { return b.show_from.localeCompare(a.show_from); });
+    rows = rows.slice(0, 3);
+    while (box.firstChild) box.removeChild(box.firstChild);
+    rows.forEach(function (p) {
+      var fig = el("figure", "board-picture");
+      fig.setAttribute("data-shape", p.shape);
+      var link = el("a", "board-frame");
+      link.href = srcOf(p);
+      link.target = "_blank";
+      link.rel = "noopener";
+      var img = el("img");
+      img.src = srcOf(p);
+      img.alt = p.alt;
+      img.loading = "lazy";
+      img.decoding = "async";
+      img.style.setProperty("--x", p.focus_x + "%");
+      img.style.setProperty("--y", p.focus_y + "%");
+      img.style.setProperty("--zoom", p.zoom);
+      link.appendChild(img);
+      link.appendChild(el("span", "visually-hidden", " (opens full size in a new tab)"));
+      fig.appendChild(link);
+      if (p.caption) fig.appendChild(el("figcaption", null, p.caption));
+      box.appendChild(fig);
+    });
+    box.hidden = !rows.length;
+    var body = document.getElementById("board-body");
+    if (body) body.classList.toggle("has-pictures", rows.length > 0);
+  }
+
   function showStatus() {
     var status = document.getElementById("notice-status");
     if (status) status.hidden = false;
@@ -126,6 +161,7 @@
       function previewNotices() {
         try {
           var data = JSON.parse(localStorage.getItem("smp-members-demo-1") || "null");
+          if (data && Array.isArray(data.pictures)) showPictures(data.pictures, function (p) { return p.src; });
           if (!data || !Array.isArray(data.notices)) { showComingUp(); return; }
           var label = document.getElementById("notice-demo");
           if (label) label.hidden = false;
@@ -144,6 +180,11 @@
     .then(showEvents).catch(function () { /* keep the dates in the HTML */ });
   get("notices?select=title,body,published,show_from,show_until&published=is.true&show_from=lte." + today + "&or=(show_until.is.null,show_until.gte." + today + ")&order=show_from.desc&limit=5")
     .then(showNotices).catch(showComingUp);
+  if (document.getElementById("board-pictures")) get("board_pictures?select=path,alt,caption,shape,zoom,focus_x,focus_y,show_from,show_until,published&published=is.true&show_from=lte." + today + "&or=(show_until.is.null,show_until.gte." + today + ")&order=show_from.desc&limit=3")
+    .then(function (rows) {
+      var store = cfg.url.replace(/\/+$/, "") + "/storage/v1/object/public/notice-board/";
+      showPictures(rows, function (p) { return store + encodeURIComponent(p.path); });
+    }).catch(function () { /* the board shows notices only */ });
   if (document.querySelector("[data-text]")) get("site_text?select=key,value")
     .then(showText).catch(function () {});
 })();

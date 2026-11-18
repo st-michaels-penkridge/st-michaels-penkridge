@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&amp;family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=20261118">
+  <link rel="stylesheet" href="site.css?v=20261118b">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body class="home-v1">
@@ -72,41 +72,21 @@
       <p class="hero-address">Church Road, Penkridge <span class="nowrap">ST19 5AW</span></p>
     </section>
 
-    <section class="welcome-strip" aria-label="Welcome">
-      <p>A parish church where everyone is welcome. Holy Communion every Sunday at 10:30, except the third Sunday.</p>
-      <nav class="welcome-links" aria-label="Start here">
-        <a href="sundays.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M12 3v18M7 8h10"/></svg>Worship</a>
-        <a href="events.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>Belong</a>
-        <a href="churchyard.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M7 21V9a5 5 0 0 1 10 0v12M5 21h14"/></svg>Remember</a>
-        <a class="is-give" href="donate.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M4 11h16v9H4zM12 11v9M2 7h20v4H2z"/></svg>Give</a>
-      </nav>
+    <section class="notice-board" id="notice-board" aria-labelledby="board-title">
+      <div class="board">
+        <div class="board-heading"><h2 id="board-title">Notice board</h2><a class="text-link" href="events.html">What's on <span aria-hidden="true">↗</span></a></div>
+        <div class="board-body" id="board-body">
+          <div class="board-pictures" id="board-pictures" hidden></div>
+          <div class="board-notices">
+            <p id="notice-demo" class="board-demo" hidden>Local preview · These are made-up notices from the members demo.</p>
+            <div id="notices" class="notices" data-limit="3" aria-live="polite" hidden></div>
+            <p id="notice-status" class="board-status" role="status" hidden>No current notices. See What's on for upcoming services and events.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- TODO: confirm service pattern and finish time with Greg -->
-    <section class="times-band" id="sundays" aria-label="Sunday service times">
-      <p class="times-when">
-        <span class="times-time">10:30</span>
-        <span class="times-what">Sunday Holy Communion</span>
-        <span class="times-next" id="sunday-next">On the first, second, fourth and fifth Sundays</span>
-      </p>
-      <div class="times-where">
-        <p>Church Road, Penkridge <span class="nowrap">ST19 5AW</span></p>
-        <p>On St Michael's Square, a short walk from the station</p>
-      </div>
-      <div class="actions">
-        <a class="btn-square btn-square-light" href="https://www.google.com/maps/dir/?api=1&amp;destination=52.72503,-2.11776" target="_blank" rel="noopener">Get directions</a>
-        <a class="btn-square btn-square-light-ghost" href="tel:+441785714344">Call 01785 714344</a>
-      </div>
-    </section>
-
-    <section class="notice-board" id="notice-board" aria-labelledby="board-title">
-      <div class="board-heading"><div><span class="kicker">From our church community</span><h2 id="board-title">The notice board</h2></div><a class="text-link" href="events.html">What's on <span aria-hidden="true">↗</span></a></div>
-      <p id="notice-demo" class="board-demo" hidden>Local preview · These are made-up notices from the members demo.</p>
-      <div id="notices" class="notices" data-limit="3" aria-live="polite" hidden></div>
-      <p id="notice-status" class="board-status" role="status" hidden>No current notices. See What's on for upcoming services and events.</p>
-    </section>
-
-    <div class="story">
     <section class="story-row sundays" id="first-sunday" aria-labelledby="sundays-title">
       <div class="prose">
         <span class="kicker">New here?</span>
@@ -121,64 +101,43 @@
       </figure>
     </section>
 
-      <section class="story-row graves" aria-labelledby="graves-title">
-        <figure class="graves-photo">
-          <div class="grave-scene">
-            <img decoding="async" src="images/opt/710e549019-800.webp" srcset="images/opt/710e549019-400.webp 400w, images/opt/710e549019-800.webp 800w, images/opt/710e549019-1600.webp 960w" sizes="(max-width: 899px) 100vw, 50vw" width="960" height="639" alt="Headstones beside the path through St Michael's churchyard" loading="lazy">
-          </div>
-        </figure>
-        <div class="graves-text">
-          <span class="kicker">Remembering Penkridge</span>
-          <h2 id="graves-title">Find a grave</h2>
-          <p>Find someone remembered here. Search names, discover family connections and see where a memorial lies in the churchyard.</p>
-          <form class="grave-search" id="grave-search" action="https://gravefindr.co.uk/graveyards/st-michaels-penkridge" method="get">
-            <label for="memorial-name">Who are you looking for?</label>
-            <div><input id="memorial-name" name="q" type="search" placeholder="Enter a name" required maxlength="100"><button type="submit">Search <span aria-hidden="true">↗</span></button></div>
-          </form>
-          <div class="graves-figures">
-            <p><strong>3,576</strong> people recorded</p>
-            <p><strong>2,130</strong> graves on the churchyard plan</p>
-          </div>
-          <a class="text-link" href="churchyard.html">Browse the churchyard map</a>
-          <p class="powered">Powered by <a href="https://gravefindr.co.uk/" target="_blank" rel="noopener">Gravefindr</a></p>
-        </div>
-      </section>
+    <section class="find-grave" aria-labelledby="graves-title">
+      <img decoding="async" src="images/opt/710e549019-800.webp" srcset="images/opt/710e549019-400.webp 400w, images/opt/710e549019-800.webp 800w, images/opt/710e549019-1600.webp 960w" sizes="100vw" width="960" height="639" alt="" loading="lazy">
+      <div class="find-grave-inner">
+        <span class="kicker">Remembering Penkridge</span>
+        <h2 id="graves-title">Find a grave</h2>
+        <p>Search the 3,576 people recorded in St Michael's churchyard and find where their memorial lies.</p>
+        <form class="grave-search" id="grave-search" action="https://gravefindr.co.uk/graveyards/st-michaels-penkridge" method="get">
+          <label for="memorial-name">Search by name</label>
+          <div><input id="memorial-name" name="q" type="search" placeholder="Enter a name" required maxlength="100" autocomplete="off"><button type="submit">Search <span aria-hidden="true">↗</span></button></div>
+        </form>
+        <p class="find-grave-links"><a href="churchyard.html">Browse the churchyard map</a><span>Powered by <a href="https://gravefindr.co.uk/" target="_blank" rel="noopener">Gravefindr</a></span></p>
+      </div>
+    </section>
 
-      <section class="story-row history" aria-labelledby="history-title">
-        <div class="history-text">
-          <span class="kicker">Since the 1220s</span>
-          <h2 id="history-title"><span data-years>800</span> years at the heart of Penkridge</h2>
-          <p class="history-lead">Every one of those graves lies beside a church that is older still. The present building has been standing for</p>
-          <p class="visually-hidden">about <span data-years>800</span> years.</p>
-          <div class="counter" aria-hidden="true">
-            <div><strong data-unit="years">800</strong><span>Years</span></div>
-            <div><strong data-unit="days">0</strong><span>Days</span></div>
-            <div><strong data-unit="hours">00</strong><span>Hours</span></div>
-            <div><strong data-unit="minutes">00</strong><span>Minutes</span></div>
-            <div><strong data-unit="seconds">00</strong><span>Seconds</span></div>
-          </div>
-          <div class="prose">
-            <p>It was begun in the late 1220s, when Henry de Loundres, Archbishop of Dublin and Dean of Penkridge, pulled down the old Saxon minster and started a great new collegiate church. The count runs from St Michael's Day, 29 September 1226.</p>
-            <p>Its 13th-century arcades, the east window opening of about 1340 and the alabaster tombs of the Littleton family are all still here. The church was restored in 1881 and is listed Grade I.</p>
-            <a class="text-link" href="gallery.html">Read the full history</a>
-          </div>
-        </div>
-      </section>
-    </div>
+    <section class="age" aria-labelledby="history-title">
+      <span class="kicker">Since St Michael's Day, 1226</span>
+      <h2 id="history-title"><span data-years>800</span> years at the heart of Penkridge</h2>
+      <p class="visually-hidden">The present church has been standing for about <span data-years>800</span> years.</p>
+      <div class="counter" aria-hidden="true">
+        <div><strong data-unit="years">800</strong><span>Years</span></div>
+        <div><strong data-unit="days">0</strong><span>Days</span></div>
+        <div><strong data-unit="hours">00</strong><span>Hours</span></div>
+        <div><strong data-unit="minutes">00</strong><span>Minutes</span></div>
+        <div><strong data-unit="seconds">00</strong><span>Seconds</span></div>
+      </div>
+      <a class="text-link" href="gallery.html">Read the full history</a>
+    </section>
 
     <section class="give" aria-labelledby="give-title">
       <div class="give-text">
         <h2 id="give-title">Help keep St&nbsp;Michael's open</h2>
-        <p class="lede">Eight hundred years on, St Michael's is still paid for mainly by the people who give to it. Your gift keeps it warm, insured and in good repair, and looks after the churchyard and its records.</p>
+        <p class="lede">St Michael's is paid for by the people who give to it.</p>
         <div class="actions">
           <a class="btn-square btn-square-light" href="donate.html#monthly">Give monthly</a>
           <a class="btn-square btn-square-light-ghost" href="donate.html#once">Give once</a>
         </div>
-        <ul class="give-facts">
-          <li>Gift Aid adds 25p to every &pound;1 if you pay UK income tax</li>
-          <li>Set up securely through the Parish Giving Scheme</li>
-          <li>Registered charity 1131086</li>
-        </ul>
+        <p class="give-charity">Registered charity 1131086</p>
       </div>
       <figure class="give-photo">
         <img decoding="async" src="images/opt/b871acdf2823-800.webp" srcset="images/opt/b871acdf2823-400.webp 400w, images/opt/b871acdf2823-800.webp 800w, images/opt/b871acdf2823-1600.webp 1280w" sizes="(max-width: 899px) 100vw, 50vw" width="1280" height="960" alt="St Michael's in summer sunshine, seen across the churchyard" loading="lazy">
@@ -242,23 +201,6 @@
 
   <script>
     (function () {
-      // Next Holy Communion: 10:30 on the 1st, 2nd, 4th and 5th Sundays, finishing by about 12
-      var now = new Date();
-      var d = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      for (var i = 0; i < 21; i++) {
-        var nth = Math.ceil(d.getDate() / 7);
-        var past = i === 0 && now.getHours() >= 12;
-        if (d.getDay() === 0 && nth !== 3 && !past) break;
-        d.setDate(d.getDate() + 1);
-      }
-      var when = d.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" });
-      document.getElementById("sunday-next").textContent =
-        (i === 0 ? "Next service: today" : "Next service: " + when) + ".";
-      var today = new Date(); today.setHours(0, 0, 0, 0);
-      document.querySelectorAll(".coming-list li[data-date], .coming-cards li[data-date]").forEach(function (li) {
-        if (new Date(li.getAttribute("data-date") + "T00:00:00") < today) li.remove();
-      });
-
       // Age of the present church, counted from St Michael's Day, 29 September 1226
       var START = 1226;
       var cells = {};
@@ -309,7 +251,7 @@
     })();
   </script>
   <script src="members/config.js?v=20261105" defer></script>
-  <script src="live-content.js?v=20261105" defer></script>
-  <script src="buttons.js?v=20261118" defer></script>
+  <script src="live-content.js?v=20261118" defer></script>
+  <script src="buttons.js?v=20261118b" defer></script>
 </body>
 </html>

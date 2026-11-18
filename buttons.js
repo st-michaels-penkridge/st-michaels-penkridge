@@ -152,18 +152,60 @@
   });
 })();
 
-// Map loads only when asked, so the page stays light
+// Google's map sets cookies, so it loads only once the visitor agrees. The choice
+// stays in this browser, and the privacy page has a button to change it.
 (function () {
   "use strict";
-  document.querySelectorAll(".map-facade").forEach(function (box) {
-    var btn = box.querySelector(".map-load");
-    if (!btn) return;
-    btn.addEventListener("click", function () {
-      var frame = document.createElement("iframe");
-      frame.title = "Google map showing St Michael's Church, Penkridge";
-      frame.src = box.getAttribute("data-src");
-      frame.referrerPolicy = "no-referrer-when-downgrade";
-      box.replaceWith(frame);
+  var KEY = "smp-cookies";
+  var settings = document.querySelector("[data-cookie-settings]");
+  if (!document.querySelector(".map-facade") && !settings) return;
+  var bar = null;
+
+  function stored() {
+    try { return localStorage.getItem(KEY); } catch (e) { return null; }
+  }
+  function store(choice) {
+    try { localStorage.setItem(KEY, choice); } catch (e) { /* storage blocked: ask again next visit */ }
+  }
+  function load(box) {
+    var frame = document.createElement("iframe");
+    frame.title = "Google map showing St Michael's Church, Penkridge";
+    frame.src = box.getAttribute("data-src");
+    frame.referrerPolicy = "no-referrer-when-downgrade";
+    box.replaceWith(frame);
+  }
+  function loadAll() {
+    document.querySelectorAll(".map-facade").forEach(load);
+  }
+  function ask() {
+    if (bar) return;
+    bar = document.createElement("div");
+    bar.className = "cookie-bar";
+    bar.setAttribute("role", "region");
+    bar.setAttribute("aria-label", "Cookies");
+    bar.innerHTML = '<p>Our map comes from Google, which sets cookies. Are you happy for it to load? <a href="privacy.html#cookies">About cookies</a></p>' +
+      '<div class="actions"><button type="button" class="btn-square btn-square-ghost" data-choice="accepted">Allow Google Maps</button>' +
+      '<button type="button" class="btn-square btn-square-ghost" data-choice="rejected">No thanks</button></div>';
+    bar.addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-choice]");
+      if (!btn) return;
+      store(btn.getAttribute("data-choice"));
+      bar.remove();
+      bar = null;
+      if (btn.getAttribute("data-choice") === "accepted") loadAll();
     });
+    document.body.appendChild(bar);
+  }
+
+  // "Show the map" still loads that one map, just this once
+  document.querySelectorAll(".map-facade .map-load").forEach(function (btn) {
+    btn.addEventListener("click", function () { load(btn.closest(".map-facade")); });
   });
+  if (settings) settings.addEventListener("click", function () {
+    try { localStorage.removeItem(KEY); } catch (e) { /* nothing stored */ }
+    ask();
+  });
+  var choice = stored();
+  if (choice === "accepted") loadAll();
+  else if (!choice && document.querySelector(".map-facade")) ask();
 })();
