@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&amp;family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=20261118b">
+  <link rel="stylesheet" href="site.css?v=20261119">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -31,10 +31,16 @@
         </div>
       </div>
       <div class="nav-group">
+        <button type="button" class="nav-group-btn" aria-expanded="false">Notices</button>
+        <div class="nav-menu">
+          <a href="notices.html" data-nav="notices">Notices<small>News from the parish</small></a>
+          <a href="bygone.html" data-nav="bygone">Bygone days<small>Past events, old postcards and photographs</small></a>
+        </div>
+      </div>
+      <div class="nav-group">
         <button type="button" class="nav-group-btn" aria-expanded="false">About us</button>
         <div class="nav-menu">
           <a href="gallery.html" data-nav="gallery">History of St Michael's</a>
-          <a href="bygone.html" data-nav="bygone">Bygone days<small>Old postcards and photographs</small></a>
           <a href="visit.html" data-nav="visit">Visit us<small>Where we are and how to get here</small></a>
         </div>
       </div>
@@ -146,6 +152,6 @@
         (i === 0 ? "Today" : when) + " at 10:30";
     })();
   </script>
-  <script src="buttons.js?v=20261118b" defer></script>
+  <script src="buttons.js?v=20261119" defer></script>
 </body>
 </html>

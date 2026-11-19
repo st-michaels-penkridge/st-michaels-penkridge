@@ -589,60 +589,19 @@ address {
 
 /* History, leading into giving */
 
-/* Giving: the one loud band */
-.give {
-  display: grid;
-  background: var(--crimson);
-  color: #fff;
+/* Giving: everything in one centred box on white, lifted by six stacked shadows */
+.give { padding: clamp(3rem, 6vw, 5rem) var(--edge); background: #fff; }
+.give-box {
+  max-width: 44rem; margin: 0 auto; overflow: hidden; border-radius: 8px; background: #fff; text-align: center;
+  box-shadow: 0 1px 1px rgba(20, 20, 22, .07), 0 2px 2px rgba(20, 20, 22, .07), 0 4px 4px rgba(20, 20, 22, .07), 0 8px 8px rgba(20, 20, 22, .07), 0 16px 16px rgba(20, 20, 22, .07), 0 32px 32px rgba(20, 20, 22, .07);
 }
-
-.give-text {
-  padding: var(--space) var(--edge);
-}
-
-.give-text {
-  min-width: 0;
-}
-
-.give h2 {
-  font-size: clamp(2.1rem, 6vw, 4.25rem);
-  color: var(--paper);
-  max-width: 14ch;
-  margin-bottom: 1.25rem;
-}
-
-.give p {
-  max-width: 34rem;
-}
-
-.give .lede {
-  color: rgba(255, 255, 255, 0.92);
-}
-
-.give a:not(.btn):not(.btn-square) {
-  color: var(--paper);
-}
-
-.give-photo {
-  margin: 0;
-  min-height: 18rem;
-}
-
-.give-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-@media (min-width: 900px) {
-  .give {
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  }
-
-  .give-text {
-    padding-right: 4rem;
-  }
-}
+.give-photo { margin: 0; aspect-ratio: 16 / 7; }
+.give-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
+.give-text { display: grid; justify-items: center; padding: clamp(2rem, 5vw, 3rem) clamp(1.25rem, 4vw, 3rem); }
+.give h2 { max-width: 16ch; margin: 0 0 1rem; font-size: clamp(2rem, 4vw, 3rem); }
+.give .lede { max-width: 34rem; margin: 0; color: var(--ink-soft); }
+.give .actions { justify-content: center; }
+.give-charity { margin: 1.25rem 0 0; font-size: var(--step--1); color: var(--ink-soft); }
 
 /* Visit */
 .visit {
@@ -1316,7 +1275,7 @@ address {
   font-variant-numeric: tabular-nums;
 }
 
-.counter span {
+.counter div > span {
   font-family: var(--display);
   font-size: 0.8rem;
   letter-spacing: 0.12em;
@@ -2000,7 +1959,6 @@ b {
   text-decoration-color: #fff;
 }
 
-.give a:not(.btn):not(.btn-square),
 .monthly a:not(.btn):not(.btn-square) {
   color: #fff;
   text-decoration-color: #fff;
@@ -2008,7 +1966,6 @@ b {
 
 .hero-full :focus-visible,
 .glass-band :focus-visible,
-.give :focus-visible,
 .monthly :focus-visible,
 .footer :focus-visible,
 .lightbox :focus-visible {
@@ -2368,11 +2325,6 @@ html {
 /* The churchyard: photo left, words right, inside the page margins */
 
 /* The age of the church: words left, photo right */
-
-/* Giving: the tower instead of the glass, which now sits higher up the page */
-.give-photo img {
-  object-position: 50% 35%;
-}
 
 /* Visit: a smaller closing section */
 .visit-compact {
@@ -2993,9 +2945,6 @@ html {
 .home-v1 .sundays-photo { margin: 0; position: relative; }
 .home-v1 .sundays-photo img { width: 100%; height: 100%; max-height: none; aspect-ratio: auto; object-fit: cover; object-position: center; }
 
-.home-v1 .give { background: var(--band); }
-.home-v1 .give h2 { font-size: clamp(2.2rem,4vw,3.6rem); }
-.home-v1 .give-photo img { filter: saturate(.75); }
 .home-v1 .visit { background: var(--paper); }
 .home-v1 .footer { background: #292b28; }
 @media (max-width: 1150px) {
@@ -3019,7 +2968,6 @@ html {
   .home-v1 .hero-copy { padding-block: 3rem; }
   .hero-eyebrow { font-size: .7rem; letter-spacing: .12em; }
   .board-links { grid-template-columns: 1fr; }
-  .home-v1 .give-photo { margin: 0; }
 }
 
 /* ===== home-v2.css ===== */
@@ -3034,11 +2982,6 @@ html {
 .home-v1 .hero-copy { padding-block: 4rem; }
 .home-v1 .hero-full h1 { max-width: 17ch; }
 
-.grave-search { margin: 1.5rem 0; }
-.grave-search label { display: block; font-size: .9rem; margin-bottom: .5rem; }
-.grave-search > div { display: flex; border: 1px solid #bfb7aa; border-radius: 5px; background: #fffdf9; padding: .3rem; gap: .3rem; }
-.grave-search input { border: 0; min-width: 0; flex: 1; background: transparent; padding: .7rem; font-size: 1rem; color: var(--ink); }
-.grave-search button { border: 0; border-radius: 3px; background: var(--crimson); color: white; padding: .7rem 1rem; font-size: .95rem; cursor: pointer; }
 .home-v1 .notice-date { display: block; margin-bottom: .6rem; color: var(--crimson); }
 
 @media (max-width: 600px) {
@@ -3187,10 +3130,10 @@ h1, h2, h3 { text-transform: none; letter-spacing: -.025em; font-weight: 500; }
 
 /* Sentence case instead of capitals (easier to read); the church name keeps its lettering */
 .btn, .kicker, .subhead, .text-link, .sunday-what, .year-month time, .cal-month, .sun-facts dt,
-.counter span, .carousel-pos, .hero-eyebrow, .masthead .nav > a, .nav-group-btn, .nav-toggle {
+.counter div > span, .carousel-pos, .hero-eyebrow, .masthead .nav > a, .nav-group-btn, .nav-toggle {
   text-transform: none;
 }
-.kicker, .hero-eyebrow, .counter span, .sun-facts dt, .subhead { letter-spacing: .02em; }
+.kicker, .hero-eyebrow, .counter div > span, .sun-facts dt, .subhead { letter-spacing: .02em; }
 .masthead .nav > a, .nav-group-btn, .nav-toggle { letter-spacing: .01em; font-size: .95rem; }
 .text-link { letter-spacing: 0; }
 
@@ -3202,9 +3145,6 @@ h1, h2, h3 { text-transform: none; letter-spacing: -.025em; font-weight: 500; }
   .home-v1 .hero-full .lede { font-size: 1.02rem; }
   .hero-links { margin-top: 1.25rem; gap: 1rem 1.5rem; }
 }
-
-/* Find a grave: never wider than the screen */
-.grave-search, .grave-search > div { min-width: 0; max-width: 100%; }
 
 /* Map that loads only when asked */
 .map-facade {
@@ -3273,7 +3213,6 @@ h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
   margin: 0; max-width: 26ch; color: #fff; font-family: var(--display); font-weight: 400;
   font-size: clamp(2rem, 1rem + 4.2vw, 4.25rem); line-height: 1.12; letter-spacing: .04em; text-wrap: balance;
 }
-.hero-tagline { margin: 0; font-family: var(--display); font-size: clamp(.85rem, .75rem + .35vw, 1.05rem); letter-spacing: .24em; color: var(--brass-soft); }
 .hero-pill {
   margin-top: .5rem; display: inline-flex; align-items: center; min-height: 2.9rem; padding: .7rem 1.75rem;
   border: 1px solid rgba(255,255,255,.7); border-radius: 999px; color: #fff; text-decoration: none; text-shadow: none;
@@ -3281,13 +3220,21 @@ h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
 }
 .hero-pill:hover, .hero-pill:focus-visible { background: #fff; color: var(--ink); }
 .hero-pill:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
-.hero-address { margin: 0; font-size: 1rem; }
+/* The address under the hero links to directions */
+.hero-address {
+  align-self: center; display: inline-flex; align-items: center; gap: .55rem; min-height: 2.75rem; padding: 0 .25rem;
+  font-family: var(--display); font-size: clamp(.8rem, .72rem + .3vw, 1rem); letter-spacing: .16em; color: var(--brass-soft);
+  text-decoration: underline; text-decoration-color: rgba(232, 211, 173, .45); text-decoration-thickness: 1px; text-underline-offset: .45em;
+  transition: color .2s ease, text-decoration-color .2s ease;
+}
+.hero-address svg { flex: none; width: 1.15em; height: 1.15em; }
+.hero-address:hover, .hero-address:focus-visible { color: #fff; text-decoration-color: currentColor; }
+.hero-address:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 
 @media (max-width: 600px) {
   .hero-altar { min-height: clamp(30rem, 88svh, 42rem); padding-bottom: 1.5rem; }
   .hero-mark { width: 3rem; height: 3rem; }
-  .hero-tagline { letter-spacing: .16em; }
-  .hero-address { font-size: .92rem; }
+  .hero-address { letter-spacing: .1em; }
 }
 @media (prefers-reduced-motion: reduce) {
   .home-v1 .masthead, .hero-pill { transition: none; }
@@ -3332,25 +3279,28 @@ h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
 /* Notice board: one framed board. Pictures from the members area sit on the left
    when there are any; notices on the right */
 .notice-board { padding: clamp(3rem, 6vw, 5rem) var(--edge); background: var(--paper); }
-.board { max-width: 76rem; margin: 0 auto; background: #fffdf8; border: 1px solid #d9d0c3; }
-.board-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .5rem 1.5rem; padding: 1.25rem clamp(1.25rem, 3vw, 2.25rem); border-bottom: 1px solid #d9d0c3; }
-.board-heading h2 { margin: 0; font-size: clamp(2rem, 3.6vw, 3rem); }
+.board { max-width: 76rem; margin: 0 auto; text-align: center; background: #fffdf8; border: 1px solid #d9d0c3; }
+.board-heading { display: flex; flex-direction: column; align-items: center; gap: .5rem; padding: 1.25rem clamp(1.25rem, 3vw, 2.25rem); border-bottom: 1px solid #d9d0c3; }
+.board-heading h1 { margin: 0; font-size: clamp(2rem, 3.6vw, 3rem); }
 .board-body { display: grid; }
 .board-pictures { display: grid; gap: 1.75rem; align-content: start; padding: clamp(1.25rem, 3vw, 2.25rem); border-bottom: 1px solid #d9d0c3; }
 .board-pictures[hidden] { display: none; }
 .board-notices { min-width: 0; padding: clamp(1.25rem, 3vw, 2.25rem); }
-.notice-board .notices { max-width: none; margin: 0; gap: 0; }
-.notice-board .notice { padding: 1.4rem 0; background: none; border: 0; border-top: 1px solid #e6ded2; overflow-wrap: anywhere; }
+.notice-board .notices { max-width: 40rem; margin: 0 auto; gap: 0; }
+.notice-board .notice { padding: 1rem 0; background: none; border: 0; border-top: 1px solid #e6ded2; overflow-wrap: anywhere; }
 .notice-board .notice:first-child { padding-top: 0; border-top: 0; }
 .notice-board .notice:last-child { padding-bottom: 0; }
-.notice-board .notice h3 { font-size: 1.5rem; line-height: 1.2; margin-bottom: .5rem; }
-.notice-board .notice p { font-size: 1rem; line-height: 1.65; }
+.notice-board .notice h3 { font-size: 1.2rem; line-height: 1.25; margin-bottom: .3rem; }
+.notice-board .notice p { font-size: .95rem; line-height: 1.6; }
 .board-status { margin: 0; color: var(--ink-soft); }
+/* Past events on Bygone days: kept notices as quiet rows */
+.past-notices { gap: 0; }
+.past-notices .notice { padding: 1rem 0; background: none; border: 0; border-top: 1px solid #e6ded2; }
+.past-notices .notice h3 { font-size: 1.2rem; line-height: 1.25; }
+.past-notices .notice p { font-size: .95rem; line-height: 1.6; }
 @media (min-width: 900px) {
   .board-body.has-pictures { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
   .has-pictures .board-pictures { border-bottom: 0; border-right: 1px solid #d9d0c3; }
-  .board-body:not(.has-pictures) .notices { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem; }
-  .board-body:not(.has-pictures) .notice { padding: 0; border: 0; }
 }
 
 /* A picture keeps the crop chosen in the page editor: shape, position and size */
@@ -3366,29 +3316,66 @@ h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
   .home-v1 .sundays-photo img { position: absolute; inset: 0; }
 }
 
-/* Find a grave: one strong call to search, over the churchyard photo */
-.find-grave { position: relative; display: grid; place-items: center; overflow: hidden; padding: clamp(4.5rem, 10vw, 8rem) var(--edge); text-align: center; color: #fff; background: var(--black); }
-.find-grave > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .38; }
-.find-grave-inner { position: relative; width: 100%; max-width: 42rem; }
-.find-grave .kicker { color: var(--brass); }
-.find-grave h2 { margin: .4rem 0 1rem; font-size: clamp(2.6rem, 6vw, 4.5rem); color: #fff; }
-.find-grave p { margin: 0 auto; max-width: 34rem; font-size: clamp(1.05rem, 1rem + .3vw, 1.25rem); color: rgba(255, 255, 255, .92); }
-.find-grave .grave-search { max-width: 36rem; margin: 2.25rem auto 1.5rem; text-align: left; }
-.find-grave .grave-search label { color: var(--brass-soft); }
-.find-grave .grave-search > div { border: 0; border-radius: 4px; background: #fff; padding: .35rem; }
-.find-grave .grave-search input { padding: .9rem 1rem; font-size: 1.1rem; }
-.find-grave .grave-search button { padding: .9rem 1.6rem; font-size: 1.05rem; }
-.find-grave .find-grave-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 2rem; font-size: var(--step--1); color: rgba(255, 255, 255, .85); }
-.find-grave a { color: #fff; }
-.find-grave :focus-visible { outline-color: #fff; }
+/* Find a grave: a plain search on white that goes straight to the churchyard records */
+.find-grave { display: grid; justify-items: center; gap: 1.25rem; padding: clamp(2rem, 4vw, 3rem) var(--edge); text-align: center; background: #fff; border-block: 3px solid var(--brass); }
+.find-grave h2 { margin: 0 0 .6rem; font-size: clamp(2.6rem, 6vw, 4.5rem); }
+.find-grave p { margin: 0 auto; max-width: 34rem; font-size: clamp(1.05rem, 1rem + .3vw, 1.25rem); color: var(--ink-soft); }
+/* One rounded field with a dark search button closing off the right-hand end */
+.grave-search {
+  display: flex; box-sizing: border-box; width: 100%; min-width: 0; max-width: 34rem; height: 3.5rem; margin-top: .5rem; overflow: hidden;
+  border: 1px solid #c9c4bd; border-radius: 999px; background: #fff; transition: border-color .15s ease, box-shadow .15s ease;
+}
+.grave-search:focus-within { border-color: var(--black); box-shadow: 0 0 0 4px rgba(20, 20, 22, .1); }
+.grave-field { position: relative; display: flex; flex: 1; min-width: 0; }
+.grave-search input { flex: 1; min-width: 0; padding: 0 1.5rem; border: 0; background: none; font: inherit; font-size: 1.1rem; color: var(--ink); }
+.grave-search input:focus { outline: none; }
+.grave-search input::-webkit-search-cancel-button { display: none; }
+/* Example surnames roll down through the empty field to prompt a search (buttons.js) */
+.grave-hint { position: absolute; top: 50%; left: 1.5rem; right: .5rem; overflow: hidden; text-align: left; transform: translateY(-50%); font-size: 1.1rem; color: #77706a; white-space: nowrap; text-overflow: ellipsis; pointer-events: none; }
+.grave-search.typed .grave-hint { visibility: hidden; }
+.grave-name { display: inline-block; color: var(--ink-soft); transition: opacity .25s ease, transform .25s ease; }
+.grave-name.out { opacity: 0; transform: translateY(.6em); }
+.grave-name.prep { opacity: 0; transform: translateY(-.6em); transition: none; }
+.grave-search button { display: grid; place-items: center; flex: none; width: 4rem; border: 0; background: var(--black); color: #fff; cursor: pointer; transition: background-color .15s ease; }
+.grave-search button:hover, .grave-search button:focus-visible { background: #34343a; }
+.grave-search button:focus-visible { outline: 2px solid #fff; outline-offset: -5px; }
+.grave-search button svg { width: 1.3rem; height: 1.3rem; }
+@media (prefers-reduced-motion: reduce) { .grave-search, .grave-search button { transition: none; } }
+
+/* Life at St Michael's: rows of links over the organ */
+.life { position: relative; overflow: hidden; padding: clamp(4.5rem, 10vw, 8rem) var(--edge); color: #fff; background: var(--black); }
+.life > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; opacity: .4; }
+.life-inner { position: relative; max-width: 76rem; margin: 0 auto; }
+.life h2 { margin: 0 0 clamp(1.5rem, 4vw, 2.5rem); font-size: clamp(2.6rem, 6vw, 4.5rem); color: #fff; }
+.life-rows { position: relative; max-width: 40rem; margin: 0; padding: 0; list-style: none; border-bottom: 1px solid rgba(255, 255, 255, .3); }
+.life-rows li { border-top: 1px solid rgba(255, 255, 255, .3); }
+/* One pane of frosted glass glides to the row being pointed at or focused (buttons.js sets --y and --h,
+   and --gx and --gy so a soft patch of light follows the mouse across it) */
+.life-rows::before { content: ""; position: absolute; top: 0; left: -1rem; right: -1rem; height: var(--h, 0); border: 1px solid rgba(255, 255, 255, .3); border-radius: 6px; background: radial-gradient(circle 9rem at var(--gx, 50%) var(--gy, 50%), rgba(255, 255, 255, .13), rgba(255, 255, 255, 0)), rgba(255, 255, 255, .06); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2); -webkit-backdrop-filter: blur(6px) saturate(140%); backdrop-filter: blur(6px) saturate(140%); opacity: 0; transform: translateY(var(--y, 0)); transition: opacity .2s ease-out; pointer-events: none; }
+.life-rows.is-on::before { opacity: 1; transition: opacity .2s ease-out, transform .3s cubic-bezier(.2, .8, .2, 1), height .3s cubic-bezier(.2, .8, .2, 1); }
+.life-rows a { position: relative; display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin: 0 -1rem; padding: 1rem; font-family: var(--display); font-size: clamp(1.3rem, 1.1rem + .7vw, 1.75rem); color: #fff; text-decoration: none; transition: opacity .2s ease-out; }
+.life-rows span { transition: translate .25s cubic-bezier(.2, .8, .2, 1), scale .15s ease-out, background-color .2s, color .2s, border-color .2s; }
+.life-rows span + span { display: grid; place-items: center; flex: none; width: 2.5rem; height: 2.5rem; border: 1px solid rgba(255, 255, 255, .6); border-radius: 50%; font: 1rem/1 var(--body); }
+.life-rows a:is(:hover, :focus-visible) span:first-child { translate: .6rem 0; }
+.life-rows a:is(:hover, :focus-visible) span + span { scale: 1.15; color: var(--crimson); background: #fff; border-color: #fff; }
+.life-rows a:active span { scale: .97; }
+@media (hover: hover) { .life-rows:hover a:not(:hover) { opacity: .55; } }
+@media (prefers-reduced-motion: reduce) { .life-rows::before, .life-rows.is-on::before, .life-rows a, .life-rows span { transition: none; } }
+.life :focus-visible { outline-color: #fff; }
 
 /* The age of the church: the counter is the whole point, so it is big */
-.age { display: flex; flex-direction: column; align-items: center; padding: clamp(4rem, 9vw, 7.5rem) var(--edge); text-align: center; background: var(--paper); }
-.age h2 { max-width: 22ch; margin: .4rem 0 0; font-size: clamp(1.8rem, 3.4vw, 2.7rem); text-wrap: balance; }
-.age .counter { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem clamp(1.75rem, 4.5vw, 4rem); width: 100%; max-width: 68rem; margin: clamp(2rem, 5vw, 3.5rem) 0; padding: clamp(1.75rem, 4vw, 3rem) 0; }
+.age { display: flex; flex-direction: column; align-items: center; padding: clamp(2rem, 4vw, 3rem) var(--edge); text-align: center; color: var(--black); background: #fff; border-block: 3px solid var(--brass); }
+.age h2 { max-width: 22ch; margin: 0; font-size: clamp(1.8rem, 3.4vw, 2.7rem); text-wrap: balance; }
+.age .counter { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem clamp(1.75rem, 4.5vw, 4rem); width: 100%; max-width: 68rem; margin: clamp(1rem, 2.5vw, 1.75rem) 0 0; padding: clamp(1rem, 2.5vw, 1.75rem) 0; }
 .age .counter div { align-items: center; min-width: 2ch; }
-.age .counter strong { font-size: clamp(3.4rem, 9vw, 7.5rem); }
-.age .counter span { margin-top: .9rem; font-size: clamp(.8rem, .7rem + .3vw, 1rem); }
+.age .counter strong { font-size: clamp(3.4rem, 9vw, 7.5rem); color: inherit; }
+.age .counter div > span { margin-top: .9rem; font-size: clamp(.8rem, .7rem + .3vw, 1rem); color: inherit; }
+/* Each digit rolls down to the next one (the script in index.html swaps them) */
+.counter .digit { display: inline-block; width: .6em; height: 1em; overflow: hidden; text-align: center; vertical-align: top; }
+.counter .roll { display: flex; flex-direction: column; }
+.counter .roll > span { height: 1em; }
+.counter .roll.go { animation: roll-down .45s cubic-bezier(.2, .8, .2, 1); }
+@keyframes roll-down { from { transform: translateY(-50%); } }
 @media (max-width: 600px) {
   .age .counter { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.75rem .5rem; }
   .age .counter div:first-child { grid-column: 1 / -1; }
@@ -3396,7 +3383,6 @@ h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
   .age .counter strong { font-size: 2.4rem; }
 }
 
-.give-charity { margin: 1.75rem 0 0; font-size: var(--step--1); color: rgba(255, 255, 255, .82); }
 
 /* Asks before Google's map loads, because Google sets cookies. Not a pop-up: it sits at the bottom and doesn't block the page */
 .cookie-bar { position: fixed; z-index: 60; left: 1rem; right: 1rem; bottom: 1rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; max-width: 48rem; margin: 0 auto; padding: 1.25rem 1.5rem; color: var(--ink); background: var(--paper); border: 1px solid var(--stone-line); box-shadow: 0 10px 30px rgba(17, 17, 19, .2); }

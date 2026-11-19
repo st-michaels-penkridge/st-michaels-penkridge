@@ -727,7 +727,7 @@
   // Page editor
   // ---------------------------------------------------------------------
   async function editorPage() {
-    add(main, h("p", { class: "lede", text: "Saved content updates What's on. Published notices also appear on the home page, between the dates you choose." }),
+    add(main, h("p", { class: "lede", text: "Saved content updates What's on. Published notices also appear on the Notices page, between the dates you choose." }),
       h("p", null, h("a", { href: "../events.html", target: "_blank", rel: "noopener", text: "Open the What's on page" })));
     // Pictures need the notice board database update; until it's applied the rest of the editor still works
     var res = await Promise.all([api.events(), api.notices(), api.siteText(), api.pictures().catch(function () { return null; })]);
@@ -803,23 +803,26 @@
   }
 
   function noticeForm(n, onDone) {
-    var d = n || { title: "", body: "", show_from: today(), show_until: "", published: true };
+    var d = n || { title: "", body: "", show_from: today(), show_until: "", published: true, keep: false };
     var title = input({ value: d.title, maxlength: "80", required: true });
     var body = h("textarea", { rows: "3", maxlength: "600" });
     body.value = d.body || "";
     var from = input({ type: "date", value: d.show_from || today(), required: true });
     var until = input({ type: "date", value: d.show_until || "" });
     var pub = input({ type: "checkbox", checked: d.published !== false });
+    var keep = input({ type: "checkbox", checked: !!d.keep });
     var save = button(n ? "Save changes" : "Add the notice", "m-btn m-btn-sm");
     var f = h("form", { class: "m-form m-edit" },
       field("Title", title), field("The notice", body), counter(body, 600),
       h("div", { class: "m-row m-wrap" }, field("Show from", from), field("Until (optional)", until, "Leave empty to show it until you remove it.")),
       h("label", { class: "m-check" }, pub, " Show it on the website"),
+      h("label", { class: "m-check" }, keep, " Keep it in Bygone days after its last day"),
       h("div", { class: "m-row" }, save, n ? h("button", { type: "button", class: "m-btn m-btn-quiet m-btn-sm", text: "Cancel", onclick: function () { onDone(false); } }) : null));
     f.addEventListener("submit", act(save, async function () {
       if (!title.value.trim()) throw new Error("Give the notice a title.");
       if (until.value && until.value < from.value) throw new Error("The last day can't be before the first.");
-      await api.saveNotice({ id: n && n.id, title: title.value.trim(), body: body.value.trim(), show_from: from.value, show_until: until.value || null, published: pub.checked });
+      if (keep.checked && !until.value) throw new Error("Give it a last day, so it knows when to move to Bygone days.");
+      await api.saveNotice({ id: n && n.id, title: title.value.trim(), body: body.value.trim(), show_from: from.value, show_until: until.value || null, published: pub.checked, keep: keep.checked });
       say(n ? "Saved." : "Notice added.", "ok");
       onDone(true);
     }));
@@ -827,9 +830,9 @@
   }
 
   function noticesEditor(list) {
-    var s = section("Notice board", "Home and What's on");
-    add(s, h("p", { class: "muted", text: "Publish a short update for the church community. The latest three notices appear on the home page, with up to five on What's on. They appear and expire on the dates you choose. These notices are public, so keep private team messages out of them." }));
-    add(s, h("a", { href: "../index.html#notice-board", target: "_blank", rel: "noopener", text: "View the home page notice board ↗" }));
+    var s = section("Notices", "Notices, What's on and Bygone days");
+    add(s, h("p", { class: "muted", text: "Publish a short update for the church community. Up to five appear on the Notices page and on What's on, between the dates you choose. Tick \"Keep it in Bygone days\" and, once its last day has passed, it moves to Past events on the Bygone days page. These notices are public, so keep private team messages out of them." }));
+    add(s, h("a", { href: "../notices.html", target: "_blank", rel: "noopener", text: "View the Notices page ↗" }));
     var body = h("div");
     async function redraw() { drawList(await api.notices()); }
     function drawList(items) {
@@ -844,7 +847,7 @@
           add(li, h("div", { class: "m-item-date" },
             h("strong", { text: plainDate(n.show_from, { day: "numeric", month: "short" }) + (n.show_until ? " to " + plainDate(n.show_until, { day: "numeric", month: "short" }) : " onwards") })),
             h("div", { class: "m-item-body" }, h("h3", { text: n.title }), n.body ? h("p", { text: n.body }) : null,
-              h("span", { class: "m-tag" + (live ? " m-tag-red" : ""), text: live ? "On the website now" : n.published ? "Not showing on these dates" : "Hidden from the website" })),
+              h("span", { class: "m-tag" + (live ? " m-tag-red" : ""), text: live ? "On the website now" : n.published && n.keep && n.show_until && n.show_until < t ? "In Bygone days" : n.published ? "Not showing on these dates" : "Hidden from the website" })),
             h("div", { class: "m-row" },
               h("button", { type: "button", class: "m-btn m-btn-quiet m-btn-sm", text: "Edit", onclick: function () { clear(li); add(li, noticeForm(n, function (c) { if (c) redraw(); else view(); })); } }),
               confirmButton("Remove", "Yes, remove it", async function () { await api.deleteNotice(n.id); say("Removed.", "ok"); redraw(); }, "m-btn m-btn-quiet m-btn-sm")));
@@ -978,8 +981,8 @@
       add(s, empty("Pictures need a database update before they can be used. It's in supabase/migrations: ask whoever set up the members area to apply it."));
       return s;
     }
-    add(s, h("p", { class: "muted", text: "Pin up to three pictures, such as the newsletter or a poster, on the left of the home page notice board. Visitors can tap one to see it full size. They appear and come down on the dates you choose." }));
-    add(s, h("a", { href: "../index.html#notice-board", target: "_blank", rel: "noopener", text: "View the home page notice board ↗" }));
+    add(s, h("p", { class: "muted", text: "Pin up to three pictures, such as the newsletter or a poster, on the left of the Notices page. Visitors can tap one to see it full size. They appear and come down on the dates you choose." }));
+    add(s, h("a", { href: "../notices.html", target: "_blank", rel: "noopener", text: "View the Notices page ↗" }));
     var body = h("div");
     async function redraw() { drawList(await api.pictures()); }
     function drawList(items) {

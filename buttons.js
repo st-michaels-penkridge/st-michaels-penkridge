@@ -152,8 +152,8 @@
   });
 })();
 
-// Google's map sets cookies, so it loads only once the visitor agrees. The choice
-// stays in this browser, and the privacy page has a button to change it.
+// Google's map sets cookies, so it loads only once the visitor agrees: by pressing
+// "Show the map", or by allowing it on the privacy page, which this browser remembers.
 (function () {
   "use strict";
   var KEY = "smp-cookies";
@@ -205,7 +205,77 @@
     try { localStorage.removeItem(KEY); } catch (e) { /* nothing stored */ }
     ask();
   });
-  var choice = stored();
-  if (choice === "accepted") loadAll();
-  else if (!choice && document.querySelector(".map-facade")) ask();
+  if (stored() === "accepted") loadAll();
+})();
+
+// Life at St Michael's: one pane of frosted glass glides to whichever row is pointed at
+// or focused. Without this script the rows still slide and fill their arrows.
+(function () {
+  "use strict";
+  var list = document.querySelector(".life-rows");
+  if (!list) return;
+  function show(link) {
+    list.style.setProperty("--y", link.offsetTop + "px");
+    list.style.setProperty("--h", link.offsetHeight + "px");
+    if (list.classList.contains("is-on")) return;
+    void list.offsetWidth; // place the block before it fades in, so it doesn't glide from the last row
+    list.classList.add("is-on");
+  }
+  function hide() { list.classList.remove("is-on"); }
+  list.addEventListener("pointerover", function (e) {
+    var link = e.target.closest("a");
+    if (link) show(link);
+  });
+  list.addEventListener("pointerleave", hide);
+  list.addEventListener("focusin", function (e) { show(e.target); });
+  list.addEventListener("focusout", function (e) { if (!list.contains(e.relatedTarget)) hide(); });
+
+  // A soft patch of light follows the mouse across the glass. Near the arrow,
+  // its white circle follows the mouse too, then eases back when the mouse moves away
+  if (!matchMedia("(hover: hover) and (pointer: fine)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  list.addEventListener("pointermove", function (e) {
+    var link = e.target.closest("a");
+    if (!link) return;
+    var arrow = link.lastElementChild, box = link.getBoundingClientRect();
+    list.style.setProperty("--gx", (e.clientX - box.left).toFixed(0) + "px");
+    list.style.setProperty("--gy", (e.clientY - box.top).toFixed(0) + "px");
+    var dx = e.clientX - (box.left + arrow.offsetLeft + arrow.offsetWidth / 2);
+    var dy = e.clientY - (box.top + arrow.offsetTop + arrow.offsetHeight / 2);
+    arrow.style.translate = Math.hypot(dx, dy) < 110 ? (dx * .35).toFixed(1) + "px " + (dy * .245).toFixed(1) + "px" : "";
+  });
+  list.addEventListener("pointerout", function (e) {
+    var link = e.target.closest("a");
+    if (link && !link.contains(e.relatedTarget)) link.lastElementChild.style.translate = "";
+  });
+})();
+
+// Find a grave: example surnames roll down through the empty search field to prompt
+// a search. They stop once someone types, and stay still for people who turn motion off.
+(function () {
+  "use strict";
+  var form = document.querySelector(".grave-search");
+  var hint = form && form.querySelector(".grave-hint");
+  if (!hint) return;
+  var input = form.querySelector("input"), name = hint.querySelector(".grave-name");
+  var names = ["Smith", "Wright", "Walker", "Taylor", "Green", "Hall", "Jackson", "Wood", "Turner", "Harris", "Baker", "Clarke",
+    "Morris", "Cooper", "Ward", "Hughes", "Robinson", "Lewis", "Wilson", "Edwards", "Thompson", "Hill", "Allen", "Bennett"];
+  var i = 0, still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  input.placeholder = "";
+  hint.hidden = false;
+  function typed() { form.classList.toggle("typed", input.value !== ""); }
+  typed(); // a name the browser kept from last time
+  input.addEventListener("input", typed);
+  if (still) return;
+  setInterval(function () {
+    if (input.value) return;
+    name.classList.add("out");
+    setTimeout(function () {
+      i = (i + 1) % names.length;
+      name.textContent = names[i];
+      name.classList.remove("out");
+      name.classList.add("prep");
+      void name.offsetWidth;
+      name.classList.remove("prep");
+    }, 250);
+  }, 1560);
 })();

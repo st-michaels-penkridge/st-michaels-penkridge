@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&amp;family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=20261118b">
+  <link rel="stylesheet" href="site.css?v=20261119">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -31,10 +31,16 @@
         </div>
       </div>
       <div class="nav-group is-current">
+        <button type="button" class="nav-group-btn" aria-expanded="false">Notices</button>
+        <div class="nav-menu">
+          <a href="notices.html" data-nav="notices">Notices<small>News from the parish</small></a>
+          <a href="bygone.html" data-nav="bygone" aria-current="page">Bygone days<small>Past events, old postcards and photographs</small></a>
+        </div>
+      </div>
+      <div class="nav-group">
         <button type="button" class="nav-group-btn" aria-expanded="false">About us</button>
         <div class="nav-menu">
           <a href="gallery.html" data-nav="gallery">History of St Michael's</a>
-          <a href="bygone.html" data-nav="bygone" aria-current="page">Bygone days<small>Old postcards and photographs</small></a>
           <a href="visit.html" data-nav="visit">Visit us<small>Where we are and how to get here</small></a>
         </div>
       </div>
@@ -50,6 +56,12 @@
         <p class="lede">St Michael's and Penkridge on old postcards, in engravings and in photographs from the parish's collection.</p>
       </div>
     </header>
+
+    <section class="reel" id="past-events" aria-labelledby="past-title" hidden>
+      <div class="reel-head"><div><span class="kicker">From the notices</span><h2 id="past-title">Past events</h2></div></div>
+      <p id="past-demo" class="board-demo" hidden>Local preview · These are made-up notices from the members demo.</p>
+      <div class="notices past-notices" id="past-notices"></div>
+    </section>
 
     <section class="reel" aria-labelledby="postcards-title">
       <div class="reel-head"><div><span class="kicker">On old postcards</span><h2 id="postcards-title">The church through the years</h2></div></div>
@@ -133,6 +145,8 @@
     </div>
   </footer>
 
-  <script src="buttons.js?v=20261118b" defer></script>
+  <script src="members/config.js?v=20261105" defer></script>
+  <script src="live-content.js?v=20261119" defer></script>
+  <script src="buttons.js?v=20261119" defer></script>
 </body>
 </html>

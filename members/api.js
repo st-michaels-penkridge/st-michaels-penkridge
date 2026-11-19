@@ -280,9 +280,9 @@
         else check(await sb.from("events").insert(row));
       },
       deleteEvent: async function (id) { check(await sb.from("events").delete().eq("id", id)); },
-      notices: async function () { return check(await sb.from("notices").select("id, title, body, show_from, show_until, published").order("show_from", { ascending: false })); },
+      notices: async function () { return check(await sb.from("notices").select("id, title, body, show_from, show_until, published, keep").order("show_from", { ascending: false })); },
       saveNotice: async function (d) {
-        var row = { title: d.title, body: d.body, show_from: d.show_from, show_until: d.show_until || null, published: d.published };
+        var row = { title: d.title, body: d.body, show_from: d.show_from, show_until: d.show_until || null, published: d.published, keep: !!d.keep };
         if (d.id) check(await sb.from("notices").update(row).eq("id", d.id));
         else check(await sb.from("notices").insert(row));
       },
