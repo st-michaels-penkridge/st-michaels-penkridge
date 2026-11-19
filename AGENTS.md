@@ -50,6 +50,7 @@ Agents flag legal issues. They never decide them. Tobi and the PCC sign off.
 - When you finish, report: files changed, what you did in one line each, anything you were unsure about.
 
 ## Workflow files
+- `.ai/HANDOFF.md` - where the work stands (19 Nov 2026): branch, what changed, open items. Read it first.
 - `.ai/PLAN.md` - the current plan, written by Opus in Claude Code (`/handoff`).
 - `.ai/LOG.md` - one line per finished task, plus questions and legal flags for Tobi.
 - `.claude/debt-log.md` - existing clean-up notes, if present.
