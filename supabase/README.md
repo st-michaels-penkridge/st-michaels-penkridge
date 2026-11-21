@@ -7,6 +7,8 @@ The members area lets church members sign in, see the rotas, mark the dates they
 ## What is where
 
 - `supabase/migrations/20261021000000_members_area.sql` - the whole database: tables, row-level security, the actions the pages call, and the starting content (the AV rota and the current Coming up dates)
+- `supabase/migrations/20261118000000_notice_board_pictures.sql` - pictures pinned to the Notices page, and their storage bucket
+- `supabase/migrations/20261119000000_bygone_notices.sql` - the "Keep it in Bygone days" tick box on notices, and the rule that shows kept notices under Past events once their last day has passed
 - `supabase/functions/` - four edge functions, for the jobs that need the secret key:
   - `invite-member` - admins invite someone (sends the invite email, approves them, puts them on teams)
   - `remove-member` - admins remove someone and everything held about them
@@ -21,11 +23,11 @@ The members area lets church members sign in, see the rotas, mark the dates they
 - `members/api.js` - all reads and writes, plus the demo version that runs in the browser
 - `members/app.js`, `members/members.css` - drawing the pages
 - `members/vendor/supabase-2.117.2.js` - the Supabase browser library (MIT licence), kept here so the site does not depend on a CDN
-- `live-content.js` - fills Coming up, notices and service details on `events.html` from the database. If the database is not set up or cannot be reached, the dates written in the HTML stay
+- `live-content.js` - fills Coming up, notices and service details on `events.html`, the notices and pinned pictures on the Notices page, and the kept past notices on Bygone days, from the database. If the database is not set up or cannot be reached, the dates written in the HTML stay
 
 ## Who can do what
 
-- **Visitors** see published Coming up events, current notices and the service details. Nothing else
+- **Visitors** see published Coming up events, current notices and Notices page pictures, past notices the office chose to keep, and the service details. Nothing else
 - **Members** (invited and approved) see names on every rota, their own contact details, ask for swaps on their own dates, take swaps on their own teams, and manage their own away dates
 - **Rota leads** (per rota) also see their team's contact details and away dates, add dates, put people on and take them off, manage the team and the jobs on their rota
 - **Admins** do everything, but only after their two-step code (an authenticator app) in that session. Without it they are treated as a member
@@ -39,7 +41,7 @@ With `members/config.js` empty, run the site locally (`python -m http.server 800
 ## Setting up the real project
 
 1. **Create the project** at supabase.com: a new project in the London region (eu-west-2), with a strong database password kept in a password manager. The free plan is enough for a church this size. At the time of writing, free projects pause after a week without any use and can be restored from the dashboard; the What's on page and the daily reminders count as use.
-2. **Create the database.** Either run `npx supabase login`, `npx supabase link --project-ref <ref>` and `npx supabase db push` from the repo folder, or paste the migration file into the dashboard's SQL editor and run it. Do not run `seed.sql` on the real project.
+2. **Create the database.** Either run `npx supabase login`, `npx supabase link --project-ref <ref>` and `npx supabase db push` from the repo folder, or paste the migration files into the dashboard's SQL editor and run them in date order. The second one (notice board pictures) also creates the `notice-board` storage bucket. The third adds the Bygone days tick box. Do not run `seed.sql` on the real project.
 3. **Sign-in settings** (dashboard, Authentication):
    - Sign-ups: turn off "Allow new users to sign up". People only get in by invite
    - URL configuration: Site URL `https://<the site>/members/`, and add `https://<the site>/members/**` to the redirect URLs

@@ -11,10 +11,12 @@ function element() {
     removeChild(child) { this.children.splice(this.children.indexOf(child), 1); }
   };
 }
-async function render({ live = false, hostname = 'localhost', rows = [], fail = false } = {}) {
-  const nodes = { notices: element(), 'notice-status': element(), 'notice-demo': element() };
-  nodes.notices.dataset.limit = '3';
-  nodes['notice-demo'].hidden = true;
+async function render({ live = false, hostname = 'localhost', rows = [], fail = false, page = 'notices' } = {}) {
+  const nodes = page === 'bygone'
+    ? { 'past-notices': element(), 'past-events': element(), 'past-demo': element() }
+    : { notices: element(), 'notice-status': element(), 'notice-demo': element() };
+  if (nodes.notices) nodes.notices.dataset.limit = '3';
+  if (nodes['notice-demo']) nodes['notice-demo'].hidden = true;
   const requests = [];
   vm.runInNewContext(source, {
     window: { SMP_SUPABASE: live ? { url: 'https://example.test', key: 'public' } : {}, addEventListener() {} },
@@ -58,4 +60,21 @@ test('empty and failed responses have useful states', async () => {
   assert.match(empty.nodes['notice-status'].textContent, /No current notices/);
   const failed = await render({ live: true, fail: true });
   assert.match(failed.nodes['notice-status'].textContent, /couldn't load/);
+});
+test('Bygone days shows only kept, published notices whose last day has passed, newest first', async () => {
+  const past = (title, show_until, extra = {}) => ({ ...current(title), show_until, keep: true, ...extra });
+  const { nodes } = await render({ page: 'bygone', rows: [
+    past('Older', '2020-01-05'), past('Newer', '2020-03-01'), past('Not kept', '2020-02-01', { keep: false }),
+    past('Draft', '2020-02-02', { published: false }), past('Still on', '2099-01-01'), { ...current('No end'), keep: true }
+  ] });
+  const titles = nodes['past-notices'].children.map(n => n.children[1].textContent);
+  assert.deepEqual(titles, ['Newer', 'Older']);
+  assert.equal(nodes['past-events'].hidden, false);
+  assert.equal(nodes['past-demo'].hidden, false);
+});
+test('live Bygone days asks only for kept notices that have ended, and stays hidden with none', async () => {
+  const { nodes, requests } = await render({ page: 'bygone', live: true, rows: [] });
+  assert.equal(requests.length, 1);
+  assert.match(requests[0], /keep=is.true&show_until=lt\.\d{4}-\d{2}-\d{2}/);
+  assert.equal(nodes['past-events'].hidden, true);
 });
