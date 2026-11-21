@@ -993,3 +993,11 @@
 .m-section > .m-inline-form + .m-help {
   margin-top: 0.9rem;
 }
+
+/* Page editor: notice board pictures. The frame and crop come from site.css, so the preview matches the home page */
+.m-crop-preview { max-width: 18rem; }
+.m-crop { cursor: grab; touch-action: none; user-select: none; }
+.m-crop:active { cursor: grabbing; }
+.m-crop img { pointer-events: none; }
+.m-thumb { width: 6rem; }
+

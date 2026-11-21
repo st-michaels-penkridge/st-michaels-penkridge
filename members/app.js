@@ -727,10 +727,11 @@
   // Page editor
   // ---------------------------------------------------------------------
   async function editorPage() {
-    add(main, h("p", { class: "lede", text: "Saved content updates What's on. Published notices also appear on the home page, between the dates you choose." }),
+    add(main, h("p", { class: "lede", text: "Saved content updates What's on. Published notices also appear on the Notices page, between the dates you choose." }),
       h("p", null, h("a", { href: "../events.html", target: "_blank", rel: "noopener", text: "Open the What's on page" })));
-    var res = await Promise.all([api.events(), api.notices(), api.siteText()]);
-    add(main, eventsEditor(res[0]), noticesEditor(res[1]), textEditor(res[2]));
+    // Pictures need the notice board database update; until it's applied the rest of the editor still works
+    var res = await Promise.all([api.events(), api.notices(), api.siteText(), api.pictures().catch(function () { return null; })]);
+    add(main, eventsEditor(res[0]), noticesEditor(res[1]), picturesEditor(res[3]), textEditor(res[2]));
   }
 
   function counter(el, max) {
@@ -802,23 +803,26 @@
   }
 
   function noticeForm(n, onDone) {
-    var d = n || { title: "", body: "", show_from: today(), show_until: "", published: true };
+    var d = n || { title: "", body: "", show_from: today(), show_until: "", published: true, keep: false };
     var title = input({ value: d.title, maxlength: "80", required: true });
     var body = h("textarea", { rows: "3", maxlength: "600" });
     body.value = d.body || "";
     var from = input({ type: "date", value: d.show_from || today(), required: true });
     var until = input({ type: "date", value: d.show_until || "" });
     var pub = input({ type: "checkbox", checked: d.published !== false });
+    var keep = input({ type: "checkbox", checked: !!d.keep });
     var save = button(n ? "Save changes" : "Add the notice", "m-btn m-btn-sm");
     var f = h("form", { class: "m-form m-edit" },
       field("Title", title), field("The notice", body), counter(body, 600),
       h("div", { class: "m-row m-wrap" }, field("Show from", from), field("Until (optional)", until, "Leave empty to show it until you remove it.")),
       h("label", { class: "m-check" }, pub, " Show it on the website"),
+      h("label", { class: "m-check" }, keep, " Keep it in Bygone days after its last day"),
       h("div", { class: "m-row" }, save, n ? h("button", { type: "button", class: "m-btn m-btn-quiet m-btn-sm", text: "Cancel", onclick: function () { onDone(false); } }) : null));
     f.addEventListener("submit", act(save, async function () {
       if (!title.value.trim()) throw new Error("Give the notice a title.");
       if (until.value && until.value < from.value) throw new Error("The last day can't be before the first.");
-      await api.saveNotice({ id: n && n.id, title: title.value.trim(), body: body.value.trim(), show_from: from.value, show_until: until.value || null, published: pub.checked });
+      if (keep.checked && !until.value) throw new Error("Give it a last day, so it knows when to move to Bygone days.");
+      await api.saveNotice({ id: n && n.id, title: title.value.trim(), body: body.value.trim(), show_from: from.value, show_until: until.value || null, published: pub.checked, keep: keep.checked });
       say(n ? "Saved." : "Notice added.", "ok");
       onDone(true);
     }));
@@ -826,9 +830,9 @@
   }
 
   function noticesEditor(list) {
-    var s = section("Notice board", "Home and What's on");
-    add(s, h("p", { class: "muted", text: "Publish a short update for the church community. The latest three notices appear on the home page, with up to five on What's on. They appear and expire on the dates you choose. These notices are public, so keep private team messages out of them." }));
-    add(s, h("a", { href: "../index.html#notice-board", target: "_blank", rel: "noopener", text: "View the home page notice board ↗" }));
+    var s = section("Notices", "Notices, What's on and Bygone days");
+    add(s, h("p", { class: "muted", text: "Publish a short update for the church community. Up to five appear on the Notices page and on What's on, between the dates you choose. Tick \"Keep it in Bygone days\" and, once its last day has passed, it moves to Past events on the Bygone days page. These notices are public, so keep private team messages out of them." }));
+    add(s, h("a", { href: "../notices.html", target: "_blank", rel: "noopener", text: "View the Notices page ↗" }));
     var body = h("div");
     async function redraw() { drawList(await api.notices()); }
     function drawList(items) {
@@ -843,7 +847,7 @@
           add(li, h("div", { class: "m-item-date" },
             h("strong", { text: plainDate(n.show_from, { day: "numeric", month: "short" }) + (n.show_until ? " to " + plainDate(n.show_until, { day: "numeric", month: "short" }) : " onwards") })),
             h("div", { class: "m-item-body" }, h("h3", { text: n.title }), n.body ? h("p", { text: n.body }) : null,
-              h("span", { class: "m-tag" + (live ? " m-tag-red" : ""), text: live ? "On the website now" : n.published ? "Not showing on these dates" : "Hidden from the website" })),
+              h("span", { class: "m-tag" + (live ? " m-tag-red" : ""), text: live ? "On the website now" : n.published && n.keep && n.show_until && n.show_until < t ? "In Bygone days" : n.published ? "Not showing on these dates" : "Hidden from the website" })),
             h("div", { class: "m-row" },
               h("button", { type: "button", class: "m-btn m-btn-quiet m-btn-sm", text: "Edit", onclick: function () { clear(li); add(li, noticeForm(n, function (c) { if (c) redraw(); else view(); })); } }),
               confirmButton("Remove", "Yes, remove it", async function () { await api.deleteNotice(n.id); say("Removed.", "ok"); redraw(); }, "m-btn m-btn-quiet m-btn-sm")));
@@ -852,6 +856,156 @@
         return li;
       })));
       add(body, h("details", { class: "m-add-box" }, h("summary", { text: "Add a notice" }), noticeForm(null, function () { redraw(); })));
+    }
+    drawList(list);
+    add(s, body);
+    return s;
+  }
+
+  // Notice board pictures
+  // A chosen photo is shrunk to 1600px (1200px in the demo) and saved as a JPEG.
+  // Drawing it afresh also drops any location data the camera stored in it.
+  function shrink(file) {
+    return new Promise(function (done, fail) {
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function () {
+        var k = Math.min(1, (api.mode === "demo" ? 1200 : 1600) / Math.max(img.naturalWidth, img.naturalHeight));
+        var c = h("canvas", { width: String(Math.round(img.naturalWidth * k)), height: String(Math.round(img.naturalHeight * k)) });
+        var g = c.getContext("2d");
+        g.fillStyle = "#fff";
+        g.fillRect(0, 0, c.width, c.height);
+        g.drawImage(img, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url);
+        c.toBlob(function (b) { if (b) done(b); else fail(new Error("That picture couldn't be read. Try another.")); }, "image/jpeg", 0.82);
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); fail(new Error("That file isn't a picture we can use. Try a JPEG or PNG.")); };
+      img.src = url;
+    });
+  }
+
+  // The picture inside its frame, cropped the same way as on the home page
+  function cropped(src, p) {
+    var img = h("img", { alt: "", src: src || null });
+    img.style.setProperty("--x", p.focus_x + "%");
+    img.style.setProperty("--y", p.focus_y + "%");
+    img.style.setProperty("--zoom", p.zoom);
+    return img;
+  }
+
+  function pictureForm(p, onDone) {
+    var d = p || { alt: "", caption: "", shape: "portrait", zoom: 1, focus_x: 50, focus_y: 50, show_from: today(), show_until: "", published: true };
+    var file = null, src = d.src || "";
+    var pick = input({ type: "file", accept: "image/jpeg,image/png,image/webp", required: !p });
+    var shape = h("select", null, [["portrait", "Portrait (A4, for newsletters)"], ["square", "Square"], ["landscape", "Landscape"]].map(function (o) {
+      return h("option", { value: o[0], text: o[1], selected: o[0] === d.shape });
+    }));
+    var zoom = input({ type: "range", min: "1", max: "3", step: "0.05", value: String(d.zoom) });
+    var fx = input({ type: "range", min: "0", max: "100", value: String(d.focus_x) });
+    var fy = input({ type: "range", min: "0", max: "100", value: String(d.focus_y) });
+    var alt = input({ value: d.alt, maxlength: "200", required: true });
+    var caption = input({ value: d.caption || "", maxlength: "120" });
+    var from = input({ type: "date", value: d.show_from || today(), required: true });
+    var until = input({ type: "date", value: d.show_until || "" });
+    var pub = input({ type: "checkbox", checked: d.published !== false });
+    var img = cropped(src, d);
+    var frame = h("div", { class: "board-frame m-crop" }, img);
+    var preview = h("figure", { class: "board-picture m-crop-preview" }, frame, h("figcaption", { text: "Drag the picture to move it, or use the sliders." }));
+
+    function draw() {
+      preview.setAttribute("data-shape", shape.value);
+      img.style.setProperty("--x", fx.value + "%");
+      img.style.setProperty("--y", fy.value + "%");
+      img.style.setProperty("--zoom", zoom.value);
+      preview.hidden = !src;
+    }
+    [shape, zoom, fx, fy].forEach(function (c) { c.addEventListener("input", draw); });
+
+    // Dragging the picture right shows more of its left side, and so on
+    var drag = null;
+    function clamp(v) { return Math.round(Math.max(0, Math.min(100, v))); }
+    frame.addEventListener("pointerdown", function (e) {
+      drag = { x: e.clientX, y: e.clientY, fx: +fx.value, fy: +fy.value };
+      frame.setPointerCapture(e.pointerId);
+    });
+    frame.addEventListener("pointermove", function (e) {
+      if (!drag) return;
+      var r = frame.getBoundingClientRect();
+      fx.value = clamp(drag.fx - (e.clientX - drag.x) / r.width * 100 / zoom.value);
+      fy.value = clamp(drag.fy - (e.clientY - drag.y) / r.height * 100 / zoom.value);
+      draw();
+    });
+    frame.addEventListener("pointerup", function () { drag = null; });
+    frame.addEventListener("pointercancel", function () { drag = null; });
+
+    pick.addEventListener("change", async function () {
+      if (!pick.files[0]) return;
+      try {
+        file = await shrink(pick.files[0]);
+        if (src.slice(0, 5) === "blob:") URL.revokeObjectURL(src);
+        src = URL.createObjectURL(file);
+        img.src = src;
+        fx.value = fy.value = "50";
+        zoom.value = "1";
+        draw();
+      } catch (err) { say(err.message, "error"); }
+    });
+    draw();
+
+    var save = button(p ? "Save changes" : "Pin it to the notice board", "m-btn m-btn-sm");
+    var f = h("form", { class: "m-form m-edit" },
+      field(p ? "Swap the picture (optional)" : "Picture", pick, "A photo or scan, such as this month's newsletter. Only use pictures the church has permission to share, and no photos of children without their parents' consent."),
+      preview,
+      h("div", { class: "m-row m-wrap" }, field("Shape", shape), field("Size", zoom, "Slide right to zoom in.")),
+      h("div", { class: "m-row m-wrap" }, field("Left and right", fx), field("Up and down", fy)),
+      field("Describe the picture", alt, "For people who can't see it, for example \"The November newsletter\"."),
+      field("Caption (optional)", caption),
+      h("div", { class: "m-row m-wrap" }, field("Show from", from), field("Until (optional)", until, "Leave empty to show it until you remove it.")),
+      h("label", { class: "m-check" }, pub, " Show it on the website"),
+      h("div", { class: "m-row" }, save, p ? h("button", { type: "button", class: "m-btn m-btn-quiet m-btn-sm", text: "Cancel", onclick: function () { onDone(false); } }) : null));
+    f.addEventListener("submit", act(save, async function () {
+      if (!src) throw new Error("Choose a picture first.");
+      if (!alt.value.trim()) throw new Error("Describe the picture for people who can't see it.");
+      if (until.value && until.value < from.value) throw new Error("The last day can't be before the first.");
+      await api.savePicture({ id: p && p.id, path: p && p.path, src: p && p.src, alt: alt.value.trim(), caption: caption.value.trim(), shape: shape.value,
+        zoom: Number(zoom.value), focus_x: Number(fx.value), focus_y: Number(fy.value), show_from: from.value, show_until: until.value || null, published: pub.checked }, file);
+      say(p ? "Saved." : "Pinned to the notice board.", "ok");
+      onDone(true);
+    }));
+    return f;
+  }
+
+  function picturesEditor(list) {
+    var s = section("Notice board pictures", "Home page");
+    if (!list) {
+      add(s, empty("Pictures need a database update before they can be used. It's in supabase/migrations: ask whoever set up the members area to apply it."));
+      return s;
+    }
+    add(s, h("p", { class: "muted", text: "Pin up to three pictures, such as the newsletter or a poster, on the left of the Notices page. Visitors can tap one to see it full size. They appear and come down on the dates you choose." }));
+    add(s, h("a", { href: "../notices.html", target: "_blank", rel: "noopener", text: "View the Notices page ↗" }));
+    var body = h("div");
+    async function redraw() { drawList(await api.pictures()); }
+    function drawList(items) {
+      clear(body);
+      var t = today();
+      if (!items.length) add(body, empty("No pictures pinned."));
+      add(body, h("ul", { class: "m-items" }, items.map(function (p) {
+        var li = h("li", { class: "m-item" });
+        var live = p.published && p.show_from <= t && (!p.show_until || p.show_until >= t);
+        function view() {
+          clear(li);
+          add(li, h("figure", { class: "board-picture m-thumb", "data-shape": p.shape }, h("div", { class: "board-frame" }, cropped(p.src, p))),
+            h("div", { class: "m-item-body" }, h("h3", { text: p.alt }), p.caption ? h("p", { text: p.caption }) : null,
+              h("p", { class: "muted", text: plainDate(p.show_from, { day: "numeric", month: "short" }) + (p.show_until ? " to " + plainDate(p.show_until, { day: "numeric", month: "short" }) : " onwards") }),
+              h("span", { class: "m-tag" + (live ? " m-tag-red" : ""), text: live ? "On the website now" : p.published ? "Not showing on these dates" : "Hidden from the website" })),
+            h("div", { class: "m-row" },
+              h("button", { type: "button", class: "m-btn m-btn-quiet m-btn-sm", text: "Edit", onclick: function () { clear(li); add(li, pictureForm(p, function (c) { if (c) redraw(); else view(); })); } }),
+              confirmButton("Remove", "Yes, remove it", async function () { await api.deletePicture(p); say("Removed.", "ok"); redraw(); }, "m-btn m-btn-quiet m-btn-sm")));
+        }
+        view();
+        return li;
+      })));
+      add(body, h("details", { class: "m-add-box" }, h("summary", { text: "Pin a picture" }), pictureForm(null, function () { redraw(); })));
     }
     drawList(list);
     add(s, body);
@@ -994,6 +1148,7 @@
     var words = {
       "events:insert": "added an event to Coming up", "events:update": "changed an event", "events:delete": "removed an event",
       "notices:insert": "added a notice", "notices:update": "changed a notice", "notices:delete": "removed a notice",
+      "board_pictures:insert": "pinned a picture to the notice board", "board_pictures:update": "changed a notice board picture", "board_pictures:delete": "took a picture off the notice board",
       "site_text:update": "changed the page text (" + String(x.row_id || "").replace(/_/g, " ") + ")",
       "services:insert": "added a date", "services:update": "changed a date", "services:delete": "removed a date",
       "assignments:insert": "put someone on a rota", "assignments:update": "swapped a date", "assignments:delete": "took someone off a rota",

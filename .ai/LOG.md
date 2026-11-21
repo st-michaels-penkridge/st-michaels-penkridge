@@ -1,25 +1,20 @@
 # Log
 
 ## Baseline test failures
-none (18 Nov 2026: npm test passes - HTML valid, links OK, 34 of 34 page runs)
+none (18 Nov 2026: npm test passes - HTML valid, links OK, 36 of 36 page runs)
 
 ## Done
-<!-- One line per finished task: T1 | files | summary -->
-S1 | buttons.js | season worked out from the date and set as data-season on <html>; checked 29 dates across 2022-2028 plus the ?season= preview
-S2 | site.css | --band variable for the two home bands; Advent violet, Christmas evergreen bands, Easter gold; .season-note styles
-S3 | index.html | one seasonal hero line per season, linking to What's on
-S4 | all pages | cache versions bumped to 20261118
-B1 | bygone.html, images/bygone/ | Bygone days page with 24 of Andy's old pictures in four groups
-B2 | site.css | .album columns, reusing the History page frame
-B3 | all pages, gallery.html | Bygone days in the About us menu, and linked from the History page photos
+H1 | index.html, site.css | welcome strip and 10:30 band removed, with their styles and script
+H2 | index.html, site.css, live-content.js, members/*, supabase/* | framed notice board; admins pin pictures with crop, position and size in the page editor; new migration with an admin-only storage bucket
+H3 | index.html, site.css | Sunday photo matches the text; Find a grave search band; big counter without paragraphs; giving cut to essentials
+H4 | buttons.js, site.css, privacy.html | map waits for consent; bottom bar with equal choices; privacy page explains it and lets people change their answer
 
 ## Questions for Tobi
-- Lent and Holy Week weren't asked for. Add them too?
+- None.
 
 ## Legal flags for Tobi
-- Bygone days only uses old postcards, engravings and early photographs. The dated ones are 1936 or earlier, and the rest look as old, but most are undated, so Andy should confirm none of them are recent or someone else's work. The pictures left out are listed in PLAN.md under Waiting on.
-- The home page says giving is set up through the Parish Giving Scheme, but the scheme's own site says St Michael's hasn't registered yet. The treasurer should check.
-- Colours meet WCAG 2.2 AA in every season (axe, 4 seasons x 13 pages).
+- The cookie bar is the legal way to load Google Maps straight away (UK PECR): nothing loads until a visitor says yes, "No thanks" is as easy as "Allow", and the privacy page lets them change their mind.
+- Pictures on the notice board are public. The editor reminds admins to use only pictures the church may share and no photos of children without consent.
 
 ## Final test run
-18 Nov 2026, Opus: npm test fully passes - HTML valid, links OK, 36 of 36 page runs. Extra season check: 4 seasons x 13 pages, axe clean on desktop, no sideways scroll at 375px.
+18 Nov 2026, Opus: npm test fully passes (HTML valid, links OK, 36 of 36 page runs). Extra checks: axe clean on the editor with the picture form open, the home page with a picture pinned, privacy and visit, at 1280 and 375; cookie choices tested across pages; seasons still clean on 13 pages.

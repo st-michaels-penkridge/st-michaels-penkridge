@@ -280,13 +280,36 @@
         else check(await sb.from("events").insert(row));
       },
       deleteEvent: async function (id) { check(await sb.from("events").delete().eq("id", id)); },
-      notices: async function () { return check(await sb.from("notices").select("id, title, body, show_from, show_until, published").order("show_from", { ascending: false })); },
+      notices: async function () { return check(await sb.from("notices").select("id, title, body, show_from, show_until, published, keep").order("show_from", { ascending: false })); },
       saveNotice: async function (d) {
-        var row = { title: d.title, body: d.body, show_from: d.show_from, show_until: d.show_until || null, published: d.published };
+        var row = { title: d.title, body: d.body, show_from: d.show_from, show_until: d.show_until || null, published: d.published, keep: !!d.keep };
         if (d.id) check(await sb.from("notices").update(row).eq("id", d.id));
         else check(await sb.from("notices").insert(row));
       },
       deleteNotice: async function (id) { check(await sb.from("notices").delete().eq("id", id)); },
+      // Notice board pictures: the file sits in the notice-board bucket, the crop in board_pictures
+      pictures: async function () {
+        var rows = check(await sb.from("board_pictures").select("id, path, alt, caption, shape, zoom, focus_x, focus_y, show_from, show_until, published").order("show_from", { ascending: false }));
+        return rows.map(function (p) { p.src = sb.storage.from("notice-board").getPublicUrl(p.path).data.publicUrl; return p; });
+      },
+      savePicture: async function (d, file) {
+        var bucket = sb.storage.from("notice-board");
+        var row = { alt: d.alt, caption: d.caption, shape: d.shape, zoom: d.zoom, focus_x: d.focus_x, focus_y: d.focus_y,
+                    show_from: d.show_from, show_until: d.show_until || null, published: d.published };
+        if (file) {
+          row.path = crypto.randomUUID() + ".jpg";
+          var up = await bucket.upload(row.path, file, { contentType: "image/jpeg", upsert: false });
+          if (up.error) throw friendly(up.error);
+        }
+        var res = d.id ? await sb.from("board_pictures").update(row).eq("id", d.id) : await sb.from("board_pictures").insert(row);
+        if (res.error && file) await bucket.remove([row.path]);
+        check(res);
+        if (file && d.path) await bucket.remove([d.path]);
+      },
+      deletePicture: async function (p) {
+        check(await sb.from("board_pictures").delete().eq("id", p.id));
+        await sb.storage.from("notice-board").remove([p.path]);
+      },
       siteText: async function () { return check(await sb.from("site_text").select("key, label, help, value").order("sort")); },
       saveSiteText: async function (key, value) { check(await sb.from("site_text").update({ value: value }).eq("key", key)); }
     };
@@ -748,6 +771,28 @@
         changed();
       },
       deleteNotice: async function (nid) { if (!isAdmin()) deny(); db().notices = db().notices.filter(function (x) { return x.id !== nid; }); log("notices", "delete", nid); changed(); },
+      // The demo keeps each picture in this browser as text, so it has to stay small
+      pictures: async function () { if (!isAdmin()) deny(); return copy(db().pictures || []); },
+      savePicture: async function (d, file) {
+        if (!isAdmin()) deny();
+        var row = copy(d);
+        if (file) {
+          row.src = await new Promise(function (done, fail) {
+            var r = new FileReader();
+            r.onload = function () { done(r.result); };
+            r.onerror = function () { fail(new Error("That picture couldn't be read. Try another.")); };
+            r.readAsDataURL(file);
+          });
+          if (row.src.length > 1500000) throw new Error("That picture is too big for the demo. Try a smaller one.");
+        }
+        var s = db();
+        s.pictures = s.pictures || [];
+        if (row.id) s.pictures = s.pictures.map(function (x) { return x.id === row.id ? row : x; });
+        else { row.id = id(); s.pictures.unshift(row); }
+        log("board_pictures", d.id ? "update" : "insert", row.id);
+        changed();
+      },
+      deletePicture: async function (p) { if (!isAdmin()) deny(); db().pictures = (db().pictures || []).filter(function (x) { return x.id !== p.id; }); log("board_pictures", "delete", p.id); changed(); },
       siteText: async function () { return copy(db().siteText); },
       saveSiteText: async function (key, value) {
         if (!isAdmin()) deny();
