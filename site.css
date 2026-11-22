@@ -553,24 +553,24 @@ address {
 
 /* History, leading into giving */
 
-/* Giving: everything in one centred box on white, lifted by six stacked shadows */
+/* Giving: a dimmed photo backdrop with a white card floating over it, to match Find a grave above it */
 :root { --shadow-6: 0 1px 1px rgba(20, 20, 22, .07), 0 2px 2px rgba(20, 20, 22, .07), 0 4px 4px rgba(20, 20, 22, .07), 0 8px 8px rgba(20, 20, 22, .07), 0 16px 16px rgba(20, 20, 22, .07), 0 32px 32px rgba(20, 20, 22, .07); }
-.give { padding: clamp(3rem, 6vw, 5rem) var(--edge); background: #fff; }
+.give { position: relative; overflow: hidden; display: grid; place-items: center; padding: clamp(2rem, 5vw, 3.5rem) var(--edge); text-align: center; background: var(--black); border-top: 6px solid #fff; }
+.give-photo { position: absolute; inset: 0; margin: 0; }
+.give-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; filter: saturate(.3) brightness(.82); }
 .give-box {
-  max-width: 44rem; margin: 0 auto; overflow: hidden; border-radius: 8px; color: #fff; background: var(--black); text-align: center;
-  box-shadow: var(--shadow-6);
+  position: relative; display: grid; justify-items: center; gap: 1rem; box-sizing: border-box; width: 100%; max-width: 38rem;
+  padding: clamp(1.75rem, 4vw, 2.5rem) clamp(1.25rem, 4vw, 2.5rem); border-radius: 1.75rem; background: #fff; color: var(--black);
+  box-shadow: var(--shadow-6), 0 12px 40px rgba(0, 0, 0, .18);
 }
-.give-photo { margin: 0; aspect-ratio: 16 / 7; }
-.give-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
-.give-text { display: grid; justify-items: center; padding: clamp(2rem, 5vw, 3rem) clamp(1.25rem, 4vw, 3rem); }
-.give h2 { max-width: 16ch; margin: 0 0 1rem; font-size: clamp(2rem, 4vw, 3rem); }
+.give h2 { max-width: 16ch; margin: 0 0 .4rem; font-size: clamp(2.2rem, 5vw, 3.6rem); }
+.give-box p:not(.give-charity) { margin: 0 auto; max-width: 30rem; font-size: clamp(1.05rem, 1rem + .3vw, 1.25rem); color: var(--ink-soft); }
 .give .actions { justify-content: center; gap: 1rem; }
 .give .btn-square { min-width: 12rem; min-height: 3.4rem; padding: .75rem 1.75rem; font-size: 1rem; }
 @media (max-width: 480px) { .give .actions { display: grid; justify-content: stretch; width: 100%; } }
 
-.give-charity { margin: 1.25rem 0 0; font-size: var(--step--1); color: rgba(255, 255, 255, .65); }
-.give h2 { color: #fff; }
-.give :focus-visible, .give .btn-give:focus-visible { outline-color: #fff; }
+.give-charity { margin: 0; font-size: var(--step--1); color: var(--ink-soft); }
+.give :focus-visible, .give .btn-give:focus-visible { outline-color: var(--black); }
 
 /* Visit */
 .visit {
@@ -2818,7 +2818,7 @@ html {
 
 /* ===== home-v1.css ===== */
 /* V1 home: limestone, crimson and photographs held within the architecture. */
-.home-v1 { --paper: #f7f4ee; --stone: #eae4da; --ink: #292724; --ink-soft: #615b55; --edge: clamp(1.25rem, 6vw, 6rem); }
+.home-v1 { --stone: #eae4da; --ink: #292724; --ink-soft: #615b55; --edge: clamp(1.25rem, 6vw, 6rem); }
 .home-v1 h1, .home-v1 h2, .home-v1 h3 { font-family: var(--script); text-transform: none; letter-spacing: -.035em; }
 .home-v1 .masthead { padding-block: 1.25rem; }
 .home-v1 .wordmark-place { display: block; margin-top: .4rem; }
@@ -2984,24 +2984,28 @@ h1, h2, h3 { text-transform: none; letter-spacing: -.025em; font-weight: 500; }
   }
   .wordmark { flex: 1 1 0; min-width: 0; }
   .nav-toggle { display: inline-flex; flex: 0 0 auto; }
+
+  /* The open menu is its own solid card, not the page's own background showing through */
   .masthead .nav, .home-v1 .masthead .nav {
     display: none; flex: 0 0 100%; flex-direction: column; align-items: stretch; gap: 0;
-    border-top: 1px solid #e6ded2; margin-top: .25rem; max-height: calc(100svh - 6rem); overflow-y: auto;
+    box-sizing: border-box; margin-top: .75rem; padding: .25rem 1.25rem .75rem;
+    max-height: calc(100svh - 7rem); overflow-y: auto; overscroll-behavior: contain;
+    background: var(--paper); border-radius: 1rem; box-shadow: 0 20px 40px rgba(17, 17, 19, .2);
   }
   .masthead.nav-open .nav { display: flex; }
   .masthead .nav > a, .nav-group-btn {
     width: 100%; justify-content: space-between; font-size: .95rem; min-height: 3.25rem;
-    border-bottom: 1px solid #e6ded2;
+    border-bottom: 1px solid var(--stone-line);
   }
   .masthead .nav > a::after { display: none; }
   .masthead .nav > a[aria-current="page"] { color: var(--crimson); }
   .nav-menu {
     position: static; min-width: 0; box-shadow: none; border-top: 0; background: transparent;
-    border-bottom: 1px solid #e6ded2; padding: .25rem 0 .5rem;
+    border-bottom: 1px solid var(--stone-line); padding: .25rem 0 .5rem;
   }
   .nav .nav-menu a { border-bottom: 0; padding: .7rem 1rem; }
   .masthead .nav > a[data-nav="donate"] {
-    margin-top: 1rem; justify-content: center; min-height: 3rem; border-bottom: 0; align-self: stretch;
+    margin: 1.25rem 0 0; justify-content: center; min-height: 3rem; border-bottom: 0; border-radius: 6px; align-self: stretch;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3213,18 +3217,10 @@ h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
 .grave-reel-track { --blend: 12rem; display: flex; width: max-content; height: 100%; margin-left: calc(-1 * var(--blend)); }
 .grave-reel img { width: auto; height: 100%; margin-right: calc(-1 * var(--blend)); object-fit: cover; filter: saturate(.3) brightness(.82); -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--blend)); mask-image: linear-gradient(to right, transparent, #000 var(--blend)); }
 .find-grave.is-moving .grave-reel-track { animation: grave-reel 160s linear infinite; }
-.find-grave.is-paused .grave-reel-track { animation-play-state: paused; }
 @keyframes grave-reel { to { transform: translateX(-50%); } }
 .grave-card { position: relative; display: grid; justify-items: center; gap: 1rem; box-sizing: border-box; width: 100%; max-width: 38rem; padding: clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 4vw, 2.5rem); border-radius: 1.75rem; background: #fff; box-shadow: var(--shadow-6), 0 12px 40px rgba(0, 0, 0, .18); }
 .find-grave .grave-card h2 { color: var(--black); }
 .find-grave .grave-card :is(p, a) { color: var(--black); }
-.reel-pause { position: absolute; right: 1rem; bottom: 1rem; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; padding: 0; border: 0; border-radius: 50%; color: var(--black); background: rgba(255, 255, 255, .9); cursor: pointer; }
-.reel-pause[hidden] { display: none; }
-.reel-pause svg { width: 1.1rem; height: 1.1rem; }
-.reel-pause .i-play, .reel-pause[aria-pressed="true"] .i-pause { display: none; }
-.reel-pause[aria-pressed="true"] .i-play { display: inline; }
-.reel-pause:focus-visible { outline-color: #fff; }
-@media (max-width: 600px) { .find-grave { padding-bottom: 4rem; } .reel-pause { bottom: .6rem; } }
 .find-grave h2 { margin: 0 0 .4rem; font-size: clamp(2.2rem, 5vw, 3.6rem); }
 .find-grave p { margin: 0 auto; max-width: 34rem; font-size: clamp(1.05rem, 1rem + .3vw, 1.25rem); color: var(--ink-soft); }
 /* One rounded field with a dark search button closing off the right-hand end */
@@ -3263,22 +3259,16 @@ h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
 .life-rows a::before {
   content: ""; position: absolute; inset: 0; background: rgba(255, 255, 255, .05);
   box-shadow: inset 0 1px rgba(255, 255, 255, .45), inset 0 -1px rgba(255, 255, 255, .15);
-  -webkit-backdrop-filter: blur(7px) saturate(180%) brightness(1.08); backdrop-filter: blur(7px) saturate(180%) brightness(1.08);
-  translate: 0 101%; transition: translate .2s cubic-bezier(.4, 0, .2, 1);
+  opacity: 0; transition: opacity .15s ease-out;
 }
 .life-row { --gutter: max(var(--edge), calc((100% - 76rem) / 2)); position: relative; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: clamp(.9rem, 1.4vw, 1.1rem) var(--gutter); }
-.life-label { font-family: var(--display); font-size: clamp(1.2rem, 1.05rem + .6vw, 1.55rem); transition: opacity .15s ease-out; }
-.life-big { position: absolute; top: 50%; left: var(--gutter); max-width: calc(100% - 2 * var(--gutter) - 5rem); font-family: var(--display); font-size: clamp(1.7rem, 1.3rem + 1.6vw, 2.4rem); line-height: 1.1; opacity: 0; translate: calc(-1 * var(--gutter) - 100%) -50%; transition: translate 1.2s var(--spring), opacity .25s ease-out; }
-.life-arrow { display: grid; place-items: center; flex: none; width: 2.5rem; height: 2.5rem; border-radius: 50%; color: var(--black); background: #fff; transform-origin: 100% 50%; transition: scale 1.2s var(--spring-bounce), color .2s, background-color .2s; }
+.life-label { font-family: var(--display); font-size: clamp(1.2rem, 1.05rem + .6vw, 1.55rem); }
+.life-big { display: none; }
+.life-arrow { display: grid; place-items: center; flex: none; width: 2.5rem; height: 2.5rem; border-radius: 50%; color: var(--black); background: #fff; transition: color .2s, background-color .2s; }
 .life-arrow svg { width: 1.15rem; height: 1.15rem; }
-.life-rows a:is(:hover, :focus-visible)::before { translate: 0 0; }
-.life-rows a:is(:hover, :focus-visible) .life-label { opacity: 0; }
-.life-rows a:is(:hover, :focus-visible) .life-big { opacity: 1; translate: 0 -50%; }
-.life-rows a:is(:hover, :focus-visible) .life-arrow { scale: 1.5; color: #fff; background: var(--black); }
+.life-rows a:is(:hover, :focus-visible)::before { opacity: 1; }
+.life-rows a:is(:hover, :focus-visible) .life-arrow { color: #fff; background: var(--black); }
 .life-rows a:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
-@media (prefers-reduced-motion: reduce) {
-  .life-rows a::before, .life-big, .life-arrow { transition-duration: .2s; transition-timing-function: ease-out; }
-}
 
 /* The age of the church: the counter is the whole point, so it is big */
 .age { display: flex; flex-direction: column; align-items: center; padding: clamp(1.25rem, 2.5vw, 1.75rem) var(--edge); text-align: center; color: var(--black); background: #fff; }
@@ -3309,103 +3299,12 @@ h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
 .cookie-bar .btn-square { min-width: 8.5rem; font-family: var(--display); }
 .cookie-bar :focus-visible, .cookie-bar .btn-line:focus-visible { outline-color: #fff; }
 
-/* Your first Sunday: a tab on the right edge of the hero (it scrolls away with the page) that grows into a panel when opened,
-   on the same spring as the menu (buttons.js) */
-.sunday-tab { position: absolute; z-index: 30; right: 0; top: var(--tab-top, 36rem); display: inline-flex; align-items: center; gap: .7rem; padding: 1.1rem .7rem; border: 0; border-radius: 0 8px 8px 0; color: var(--black); background: #fff; font: 400 .95rem/1 var(--display); letter-spacing: .08em; writing-mode: vertical-rl; transform: rotate(180deg); cursor: pointer; box-shadow: 0 0 0 1px rgba(20, 20, 22, .15), 0 4px 16px rgba(0, 0, 0, .2); transition: opacity .2s ease-out; }
-.first-sunday .sunday-tab { font-family: var(--display); }
-/* A finger appears, holds still, taps, then fades away: three times as the page loads (done inside
-   5 seconds, as the accessibility rules ask), and over and over while the tab is hovered.
-   The tab is turned upside down, so the icon is turned back to stay upright. */
-.sunday-tab .tap { flex: none; width: 1.35rem; height: 1.35rem; transform: rotate(180deg); overflow: visible; opacity: 0; animation: tap-show 1.3s ease-out .6s 3; }
-.tap-hand { transform-origin: 50% 90%; animation: tap-press 1.3s ease-out .6s 3; }
-.tap-ring { opacity: 0; transform-origin: 10.5px 4.5px; animation: tap-ring 1.3s ease-out .6s 3; }
-.sunday-tab:hover .tap { animation: tap-show-h 1.3s ease-out infinite; }
-.sunday-tab:hover .tap-hand { animation: tap-press-h 1.3s ease-out infinite; }
-.sunday-tab:hover .tap-ring { animation: tap-ring-h 1.3s ease-out infinite; }
-@keyframes tap-show { 0% { opacity: 0; } 15%, 72% { opacity: 1; } 92%, 100% { opacity: 0; } }
-@keyframes tap-press { 0%, 40%, 64%, 100% { transform: none; } 52% { transform: translateY(1.5px) scale(.92); } }
-@keyframes tap-ring { 0%, 48% { opacity: 0; transform: scale(.3); } 56% { opacity: .9; } 80%, 100% { opacity: 0; transform: scale(1.4); } }
-@keyframes tap-show-h { 0% { opacity: 0; } 15%, 72% { opacity: 1; } 92%, 100% { opacity: 0; } }
-@keyframes tap-press-h { 0%, 40%, 64%, 100% { transform: none; } 52% { transform: translateY(1.5px) scale(.92); } }
-@keyframes tap-ring-h { 0%, 48% { opacity: 0; transform: scale(.3); } 56% { opacity: .9; } 80%, 100% { opacity: 0; transform: scale(1.4); } }
-.sunday-tab[aria-expanded="true"] { opacity: 0; }
-/* While the panel is open the rest of the site dims behind it, header included */
-.first-sunday::before { content: ""; position: fixed; z-index: 45; inset: 0; background: rgba(17, 17, 19, .55); opacity: 0; pointer-events: none; transition: opacity .35s ease-out; }
-.first-sunday.is-open::before { opacity: 1; pointer-events: auto; }
-/* The open panel is mostly the nave photo, with the words on a white card across its top */
-.sunday-panel { position: fixed; z-index: 46; right: 0; bottom: var(--panel-bottom, 2rem); box-sizing: border-box; width: min(28rem, calc(100vw - 1.5rem)); height: min(36rem, calc(100dvh - var(--panel-bottom, 2rem) - 5.5rem)); overflow: hidden; border-radius: 12px 0 0 12px; background: #fff; box-shadow: var(--shadow-6); transform-origin: 100% 100%; scale: .25; opacity: 0; transition: scale .7s var(--spring-pop), opacity .2s .2s ease-in; }
-.sunday-panel.is-open { scale: 1; opacity: 1; transition: scale .7s var(--spring-pop), opacity .15s ease-out; }
-.sunday-panel > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 85%; }
-.sunday-body { position: absolute; top: .75rem; right: .75rem; left: .75rem; max-height: calc(100% - 5rem); overflow: auto; padding: 1.25rem 1.4rem 1.3rem; border-radius: 4px; text-align: left; background: #fff; box-shadow: 0 8px 24px rgba(0, 0, 0, .2); }
-.sunday-body h2 { margin: 0 0 .6rem; padding-right: 2.5rem; font-size: clamp(1.6rem, 2.6vw, 1.9rem); }
-.sunday-body h2:focus { outline: none; }
-.sunday-body p { margin: 0 0 .5rem; font-size: .95rem; line-height: 1.5; }
-.sunday-body .text-link { display: inline-block; margin-top: .25rem; font-size: .85rem; }
-/* The close cross sits in the top right corner of the white card */
-.sunday-close { position: absolute; top: 1.15rem; right: 1.15rem; display: grid; place-items: center; width: 2.25rem; height: 2.25rem; padding: 0; border: 1px solid rgba(20, 20, 22, .2); border-radius: 50%; color: var(--black); background: transparent; cursor: pointer; transition: background-color .15s ease-out; }
-.sunday-close:hover { background: #f1efea; }
-.sunday-close svg { width: 1.1rem; height: 1.1rem; }
-@media (prefers-reduced-motion: reduce) {
-  .sunday-tab, .sunday-panel, .first-sunday::before { transition: none; }
-  .sunday-tab :is(.tap, .tap-hand, .tap-ring), .sunday-tab:hover :is(.tap, .tap-hand, .tap-ring) { animation: none; }
-}
-
-/* ===== 20 Nov 2026: Farm Africa-style menu =====
-   A black tab hangs from the top of the bar: three lines, with "Menu" on hover. It drops a black panel
-   from the top with every page as one big link and the site behind dimmed, and the tab rides down to
-   the panel's lower edge, reading "Close". buttons.js opens it and measures the panel. */
-.masthead, .home-v1 .masthead { display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 1rem; }
-.masthead .wordmark { position: relative; z-index: 2; flex: 1 1 auto; min-width: 0; }
-.masthead .nav, .home-v1 .masthead .nav { position: relative; z-index: 2; display: flex; flex: 0 0 auto; width: auto; margin: 0; padding: 0; border: 0; overflow: visible; max-height: none; }
-.masthead:not(.nav-open) .nav > :not([data-nav="donate"]) { display: none; }
-.masthead .nav > a[data-nav="donate"] { width: auto; min-height: 3rem; margin: 0; border-bottom: 0; }
-
-.masthead .nav-toggle, .home-v1 .masthead .nav-toggle, .home-v1 .masthead:not(.is-scrolled):not(.nav-open) .nav-toggle {
-  position: absolute; z-index: 3; top: 0; left: 50%; display: grid; place-items: center; width: 8.5rem; height: 3.4rem; min-height: 0; padding: 0 0 .3rem;
-  border: 0; border-radius: 0 0 4.25rem 4.25rem / 0 0 3.4rem 3.4rem; color: #fff; background: var(--black); translate: -50% 0; box-shadow: 0 6px 18px rgba(0, 0, 0, .2);
-}
-.nav-toggle > * { grid-area: 1 / 1; }
-.masthead .nav-toggle-bars, .masthead .nav-toggle-bars::before, .masthead .nav-toggle-bars::after { width: 1.7rem; height: 2px; }
-.masthead .nav-toggle-bars::before { top: -7px; }
-.masthead .nav-toggle-bars::after { top: 7px; }
-.nav-toggle-word { opacity: 0; font-family: var(--display); font-size: .9rem; letter-spacing: .12em; transition: opacity .2s ease-out; }
-.nav-toggle:hover .nav-toggle-bars, .nav-toggle:focus-visible .nav-toggle-bars, .masthead.nav-open .nav-toggle-bars { opacity: 0; }
-.nav-toggle:hover .nav-toggle-word, .nav-toggle:focus-visible .nav-toggle-word, .masthead.nav-open .nav-toggle-word { opacity: 1; }
-.masthead .nav-toggle:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
-
-/* The panel: every page as one big link in two columns, Donate on the right */
-.masthead.nav-open::after { content: ""; position: fixed; inset: 0; z-index: 0; background: rgba(17, 17, 19, .55); }
-.masthead.nav-open .nav, .home-v1 .masthead.nav-open .nav {
-  position: fixed; top: 0; right: 0; left: 0; z-index: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(12rem, .8fr); grid-template-rows: repeat(5, auto); grid-auto-flow: column; align-items: start; gap: .35rem 3rem;
-  max-height: calc(100dvh - 4rem); padding: calc(var(--mast-h, 5.5rem) + 1.5rem) max(var(--edge), calc((100% - 76rem) / 2)) 3rem; overflow-y: auto; overscroll-behavior: contain;
-  background: var(--black);
-}
-.masthead.nav-open :is(.nav-group, .nav-menu), .home-v1 .masthead.nav-open :is(.nav-group, .nav-menu) { display: contents; }
-.masthead.nav-open .nav-group-btn { display: none; }
-.masthead.nav-open .nav-menu small { display: none; }
-.masthead.nav-open .nav a, .masthead.nav-open .nav .nav-menu a, .home-v1 .masthead.nav-open .nav > a {
-  width: auto; min-height: 0; padding: .3rem 0; border: 0; color: #fff; background: none; box-shadow: none;
-  font-family: var(--display); font-size: clamp(1.3rem, 2vw, 1.75rem); letter-spacing: .03em; justify-content: flex-start;
-}
-.masthead.nav-open .nav a::after { display: none; }
-.masthead.nav-open .nav a:is(:hover, :focus-visible), .masthead.nav-open .nav a[aria-current="page"] { color: var(--brass-soft); background: none; }
-.masthead.nav-open .nav a:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
-.masthead.nav-open .wordmark :is(.wordmark-name, .wordmark-place) { color: #fff; }
-
-@media (max-width: 700px) {
-  .masthead .wordmark { margin-right: 5.5rem; }
-  .masthead:not(.nav-open) .nav { display: none; }
-  .masthead .nav-toggle, .home-v1 .masthead .nav-toggle, .home-v1 .masthead:not(.is-scrolled):not(.nav-open) .nav-toggle { right: .75rem; left: auto; width: 5rem; height: 3.1rem; translate: none; border-radius: 0 0 2.5rem 2.5rem / 0 0 3.1rem 3.1rem; }
-  .masthead.nav-open .nav, .home-v1 .masthead.nav-open .nav { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-auto-flow: row; gap: .25rem; }
-}
-@media (prefers-reduced-motion: reduce) { .masthead.nav-open :is(.nav, .nav-toggle) { animation: none; } .nav-toggle-word { transition: none; } }
-
-/* No bar: the header is just the floating Menu tab and Donate button, on every page */
-.masthead, .home-v1 .masthead, .home-v1 .masthead.is-scrolled, .home-v1 .masthead.nav-open {
-  position: fixed; top: 0; right: 0; left: 0; justify-content: flex-end; background: transparent; border-bottom-color: transparent; box-shadow: none; pointer-events: none;
-}
-.masthead > *, .masthead.nav-open { pointer-events: auto; }
-.masthead .wordmark { display: none; }
+/* Will, 21 Nov: back to the header bar from before the "glass Menu corner" redesign. The classic
+   masthead/nav rules above (the slim sticky bar, and the home page's "floats over the photo, then
+   turns solid once you scroll or open the menu" override) already give the look asked for; this just
+   drops the floating-corner Menu button, the full-screen animated panel, and the "no bar" overrides
+   that were layered on top of them. Donate's burgundy colour, the springs (Life rows, first Sunday
+   panel, scroll hint) and the pop-up fades are kept. */
 
 /* Donate buttons carry the giving mark: a hand holding a heart, drawn in the button's text colour */
 .btn-give, .nav a[data-nav="donate"] { display: inline-flex; align-items: center; justify-content: center; gap: .6em; }
@@ -3414,76 +3313,9 @@ h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 11.2 9.3 8.7C8.2 7.7 7.7 6.4 8.4 5.2c.8-1.4 2.8-1.5 3.6-.2.8-1.3 2.8-1.2 3.6.2.7 1.2.2 2.5-.9 3.5z'/%3E%3Cpath d='M2 14.2h2.6c.9 0 1.7.2 2.5.6l1.6.8h3.6a1.5 1.5 0 0 1 0 3H9.2'/%3E%3Cpath d='M4.6 20.6h2.7l4.6.9c.8.2 1.6 0 2.3-.4l6.2-3.7a1.5 1.5 0 0 0-1.4-2.6l-4.2 1.9'/%3E%3Cpath d='M2 13.2v8.3'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 11.2 9.3 8.7C8.2 7.7 7.7 6.4 8.4 5.2c.8-1.4 2.8-1.5 3.6-.2.8-1.3 2.8-1.2 3.6.2.7 1.2.2 2.5-.9 3.5z'/%3E%3Cpath d='M2 14.2h2.6c.9 0 1.7.2 2.5.6l1.6.8h3.6a1.5 1.5 0 0 1 0 3H9.2'/%3E%3Cpath d='M4.6 20.6h2.7l4.6.9c.8.2 1.6 0 2.3-.4l6.2-3.7a1.5 1.5 0 0 0-1.4-2.6l-4.2 1.9'/%3E%3Cpath d='M2 13.2v8.3'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
-/* The open menu: nine pages in three tidy columns of three, Donate on its own row beneath */
-.masthead.nav-open .nav, .home-v1 .masthead.nav-open .nav {
-  grid-template-columns: repeat(3, max-content); grid-template-rows: repeat(3, auto) auto; justify-content: start; gap: 1rem clamp(2.5rem, 5vw, 5rem);
-}
-.masthead.nav-open .nav a, .masthead.nav-open .nav .nav-menu a, .home-v1 .masthead.nav-open .nav > a { padding: .2rem 0; font-size: clamp(1.25rem, 1.7vw, 1.55rem); }
-@media (max-width: 1000px) {
-  .masthead.nav-open .nav, .home-v1 .masthead.nav-open .nav { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-auto-flow: row; gap: .35rem; }
-}
-
-/* ===== The menu tab as a subtle, smooth bump =====
-   A shallow curve that flows out of the top edge of the screen (Menu) or out of the bottom edge of the
-   open panel (Close). Centred on every screen size now that the bar has gone. */
-.masthead .nav-toggle, .home-v1 .masthead .nav-toggle, .home-v1 .masthead:not(.is-scrolled):not(.nav-open) .nav-toggle,
-.masthead.nav-open .nav-toggle, .home-v1 .masthead.nav-open .nav-toggle {
-  left: 50%; right: auto; width: 15rem; height: 3.375rem; padding: 0 0 .375rem; border-radius: 0; background: none; box-shadow: none; translate: -50% 0;
-}
-.masthead .nav-toggle::before {
-  content: ""; position: absolute; inset: 0; z-index: -1; background: var(--black);
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 54'%3E%3Cpath d='M0 0C44 0 64 6 80 22C94 36 102 52 120 52C138 52 146 36 160 22C176 6 196 0 240 0Z'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 54'%3E%3Cpath d='M0 0C44 0 64 6 80 22C94 36 102 52 120 52C138 52 146 36 160 22C176 6 196 0 240 0Z'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
-}
-.masthead .nav-toggle { isolation: isolate; }
-.masthead.nav-open .nav-toggle, .home-v1 .masthead.nav-open .nav-toggle { top: calc(var(--menu-h, 22rem) - 1px); }
-.masthead .nav-toggle:focus-visible { outline-offset: -2px; }
-
-/* The open menu: nine pages in equal columns (Donate stays floating in the top right corner) */
-.masthead.nav-open .nav, .home-v1 .masthead.nav-open .nav {
-  grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(3, auto) auto; grid-auto-flow: column; justify-content: stretch; gap: .9rem 3rem;
-  padding-bottom: 3.5rem;
-}
-.masthead.nav-open .nav a, .masthead.nav-open .nav .nav-menu a, .home-v1 .masthead.nav-open .nav > a { font-size: clamp(1.15rem, 1.5vw, 1.35rem); text-wrap: balance; }
-@media (max-width: 1099px) {
-  .masthead.nav-open .nav, .home-v1 .masthead.nav-open .nav { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; grid-auto-flow: row; gap: .8rem 2.5rem; }
-}
-@media (max-width: 760px) {
-  .masthead.nav-open .nav, .home-v1 .masthead.nav-open .nav { grid-template-columns: minmax(0, 1fr); gap: .55rem; }
-  .masthead .nav-toggle, .home-v1 .masthead .nav-toggle, .home-v1 .masthead:not(.is-scrolled):not(.nav-open) .nav-toggle,
-  .masthead.nav-open .nav-toggle, .home-v1 .masthead.nav-open .nav-toggle { width: 12rem; height: 2.7rem; padding-bottom: .3rem; }
-}
-
-/* Donate floats in the top right corner, the same distance from the top and the side, 20% larger than before */
-.masthead:not(.nav-open) .nav > a[data-nav="donate"], .home-v1 .masthead:not(.nav-open) .nav > a[data-nav="donate"] {
-  position: fixed; top: var(--corner, 1.5rem); right: var(--corner, 1.5rem); min-height: 3.6rem; padding: calc(.7rem + .12em) 1.2rem calc(.7rem - .12em) calc(1.2rem + .05em); font-size: .98rem;
-}
-@media (max-width: 1000px) { .masthead { --corner: 1rem; } }
-/* Inner pages start clear of the Menu corner and the Donate button */
-body:not(.home-v1) main { padding-top: 5.75rem; }
-@media (max-width: 1000px) { body:not(.home-v1) main { padding-top: 7rem; } }
-@media (max-width: 700px) { body:not(.home-v1) main { padding-top: 6.5rem; } }
-
-/* Menu in white: a white bump with black lines and lettering, and a white panel with black links.
-   A soft shadow follows the bump's curve so it still shows against white pages. */
-.masthead .nav-toggle, .home-v1 .masthead .nav-toggle, .home-v1 .masthead:not(.is-scrolled):not(.nav-open) .nav-toggle,
-.masthead.nav-open .nav-toggle, .home-v1 .masthead.nav-open .nav-toggle { color: var(--black); filter: drop-shadow(0 3px 6px rgba(17, 17, 19, .2)); }
-.masthead .nav-toggle:focus-visible { outline-color: var(--black); }
-.masthead.nav-open .nav, .home-v1 .masthead.nav-open .nav { background: #fff; }
-.masthead.nav-open .nav a, .masthead.nav-open .nav .nav-menu a, .home-v1 .masthead.nav-open .nav > a { color: var(--black); }
-.masthead.nav-open .nav a:is(:hover, :focus-visible), .masthead.nav-open .nav a[aria-current="page"] { color: var(--crimson); }
-.masthead.nav-open .nav a:focus-visible { outline-color: var(--black); }
-.masthead.nav-open .nav > a[data-nav="donate"], .home-v1 .masthead.nav-open .nav > a[data-nav="donate"] { color: #fff; background: var(--crimson); outline-color: rgba(255, 255, 255, .45); }
-.masthead.nav-open .nav > a[data-nav="donate"]:is(:hover, :focus-visible) { color: #fff; background: color-mix(in oklch, var(--crimson), #000 20%); }
-/* Donate stays exactly where it is, floating in the top right corner, while the menu is open */
-.masthead.nav-open .nav > a[data-nav="donate"], .home-v1 .masthead.nav-open .nav > a[data-nav="donate"] {
-  position: fixed; top: var(--corner, 1.5rem); right: var(--corner, 1.5rem); width: auto; min-height: 3.6rem; margin: 0;
-  padding: calc(.7rem + .12em) 1.2rem calc(.7rem - .12em) calc(1.2rem + .05em); font-size: .98rem; letter-spacing: .12em; justify-content: center;
-}
-/* Every Donate button is burgundy with white lettering */
-.btn-give, .nav a[data-nav="donate"], .nav a[data-nav="donate"][aria-current="page"], .home-v1 .masthead:not(.is-scrolled):not(.nav-open) .nav > a[data-nav="donate"] { color: #fff; background-color: var(--crimson); box-shadow: none; outline-color: rgba(255, 255, 255, .45); }
-.btn-give:is(:hover, :focus-visible), .nav a[data-nav="donate"]:is(:hover, :focus-visible) { color: #fff; background-color: color-mix(in oklch, var(--crimson), #000 20%); }
-.home-v1 .masthead:not(.is-scrolled):not(.nav-open) button.nav-toggle { color: var(--black); }
-.home-v1 .masthead:not(.is-scrolled):not(.nav-open) button.nav-toggle:focus-visible { outline-color: var(--black); }
+/* Give monthly / Give once are burgundy with white lettering; the Donate link in the header stays white (Will, 22 Nov) */
+.btn-give { color: #fff; background-color: var(--crimson); box-shadow: none; outline-color: rgba(255, 255, 255, .45); }
+.btn-give:is(:hover, :focus-visible) { color: #fff; background-color: color-mix(in oklch, var(--crimson), #000 20%); }
 
 /* Springs measured from Farm Africa's own animations, written as CSS curves so no animation library is needed */
 :root {
@@ -3492,31 +3324,8 @@ body:not(.home-v1) main { padding-top: 5.75rem; }
   --spring-bounce: linear(0.0000 0%, 0.1123 1.8%, 0.3723 3.6%, 0.6748 5.4%, 0.9417 7.1%, 1.1293 8.9%, 1.2254 10.7%, 1.2412 12.5%, 1.2010 14.3%, 1.1324 16.1%, 1.0596 17.9%, 0.9992 19.6%, 0.9598 21.4%, 0.9423 23.2%, 0.9429 25%, 0.9553 26.8%, 0.9728 28.6%, 0.9900 30.4%, 1.0034 32.1%, 1.0115 33.9%, 1.0144 35.7%, 1.0133 37.5%, 1.0098 39.3%, 1.0054 41.1%, 1.0014 42.9%, 0.9985 44.6%, 0.9969 46.4%, 0.9965 48.2%, 0.9970 50%, 0.9979 51.8%, 0.9990 53.6%, 0.9999 55.4%, 1.0005 57.1%, 1.0008 58.9%, 1.0008 60.7%, 1.0007 62.5%, 1.0004 64.3%, 1.0002 66.1%, 1.0000 67.9%, 0.9998 69.6%, 0.9998 71.4%, 0.9998 73.2%, 0.9998 75%, 0.9999 76.8%, 1.0000 78.6%, 1.0000 80.4%, 1.0000 82.1%, 1.0001 83.9%, 1.0000 85.7%, 1.0000 87.5%, 1.0000 89.3%, 1.0000 91.1%, 1.0000 92.9%, 1.0000 94.6%, 1.0000 96.4%, 1.0000 98.2%, 1.0000 100%);
 }
 
-/* ===== Menu tab, after Farm Africa: on hover the lines shrink away on a spring and the word drops in from above ===== */
-.masthead .nav-toggle-bars { transition: transform 1s var(--spring), opacity .3s cubic-bezier(.215, .61, .355, 1); }
-.nav-toggle:is(:hover, :focus-visible) .nav-toggle-bars, .masthead.nav-open .nav-toggle-bars { transform: scaleX(0); opacity: 0; }
-.nav-toggle-word, .masthead .nav-toggle-word { translate: 0 -2.6rem; opacity: 0; transition: translate 1s var(--spring), opacity .3s cubic-bezier(.215, .61, .355, 1); }
-.nav-toggle:is(:hover, :focus-visible) .nav-toggle-word, .masthead.nav-open .nav-toggle-word { translate: 0 0; opacity: 1; }
-
-/* ===== Menu open and close, like an app opening on a Mac: the menu grows out of the Menu corner on a spring,
-   overshoots a little and settles, and shrinks back into the corner on the same spring as it fades
-   (buttons.js adds .is-closing while it does). The first Sunday panel uses the same spring.
-   The white of the panel is a layer of its own that does the growing, so Donate (which lives in the menu) stays
-   still in its corner; the links pop in with it, and once it has settled the panel itself turns white. ===== */
+/* The first Sunday panel uses the same spring to grow in and shrink away. */
 :root { --spring-pop: linear(0, 0.005 1%, 0.038 3%, 0.099 5%, 0.223 8%, 0.667 17%, 0.797 20%, 0.905 23%, 0.991 26%, 1.054 29%, 1.095 32%, 1.122 36%, 1.123 41%, 1.083 49%, 1.014 61%, 0.987 71%, 0.988 86%, 1); }
-.masthead.nav-open .nav::before { content: ""; position: absolute; inset: 0; z-index: -1; background: #fff; transform-origin: 0 0; animation: menu-pop .7s var(--spring-pop), menu-fade .15s ease-out; }
-.masthead.nav-open .nav, .home-v1 .masthead.nav-open .nav { animation: menu-clear .7s; }
-.masthead.nav-open .nav a:not([data-nav="donate"]) { transform-origin: 0 0; animation: menu-pop-in .6s .12s var(--spring-pop) backwards; }
-.masthead.nav-open.is-closing .nav, .home-v1 .masthead.nav-open.is-closing .nav { background-color: transparent; animation: none; }
-.masthead.nav-open.is-closing .nav::before { animation: menu-unpop .7s var(--spring-pop) forwards, menu-out .2s .2s ease-in forwards; }
-.masthead.nav-open.is-closing .nav a:not([data-nav="donate"]) { opacity: 0; transition: opacity .1s ease-out; }
-@keyframes menu-pop { from { scale: .25; } }
-@keyframes menu-unpop { to { scale: .25; } }
-@keyframes menu-pop-in { from { opacity: 0; translate: -2rem -1.5rem; scale: .85; } }
-@keyframes menu-clear { from, to { background-color: transparent; } }
-@keyframes menu-fade { from { opacity: 0; } }
-@keyframes menu-out { to { opacity: 0; } }
-.masthead.nav-open::after { animation: menu-fade .3s ease-out; }
 /* The home page's scroll hint (buttons.js): the page lifts a little to show there is more below and drops back on
    the same spring, bouncing at the top like a phone's scroll, with the dark behind it */
 html.hint-down main { animation: hint-down .7s var(--spring-pop) forwards; }
@@ -3524,11 +3333,6 @@ html.hint-up main { animation: hint-up .7s var(--spring-pop); }
 html:is(.hint-down, .hint-up) body { background: var(--black); }
 @keyframes hint-down { to { translate: 0 -18vh; } }
 @keyframes hint-up { from { translate: 0 -18vh; } }
-.masthead.nav-open.is-closing::after { opacity: 0; transition: opacity .4s ease-out; }
-@media (prefers-reduced-motion: reduce) {
-  .masthead .nav-toggle-bars, .nav-toggle-word, .masthead .nav-toggle-word { transition: opacity .2s ease-out; }
-  .masthead.nav-open :is(.nav, .nav-toggle, .nav a), .home-v1 .masthead.nav-open :is(.nav, .nav-toggle), .masthead.nav-open::after, .masthead.nav-open .nav::before { animation: none; }
-}
 
 /* ===== Pop-ups, after Farm Africa: the backdrop fades in while the box grows from 80% to full size ===== */
 .welcome-dialog, .lightbox { opacity: 0; scale: .8; transition: opacity .3s cubic-bezier(.645, .045, .355, 1), scale .3s cubic-bezier(.645, .045, .355, 1), overlay .3s allow-discrete, display .3s allow-discrete; }
@@ -3541,128 +3345,12 @@ html:is(.hint-down, .hint-up) body { background: var(--black); }
 }
 @media (prefers-reduced-motion: reduce) { .welcome-dialog, .lightbox, .welcome-dialog::backdrop, .lightbox::backdrop { transition: none; } }
 
-/* ===== Experiment: the closed Menu bump as clear iOS-style glass (a light blur, almost no tint, and a bright edge that catches the light at its shoulders
-   along its curve). A shadow filter on the button would stop the glass blurring, so it has none. ===== */
-.masthead:not(.nav-open) .nav-toggle, .home-v1 .masthead:not(.nav-open) .nav-toggle, .home-v1 .masthead:not(.is-scrolled):not(.nav-open) .nav-toggle { filter: none; }
-.masthead .nav-toggle::before {
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 54' fill='none'%3E%3Cpath d='M0 0C44 0 64 6 80 22C94 36 102 52 120 52C138 52 146 36 160 22C176 6 196 0 240 0' stroke='%23000' stroke-opacity='.16'/%3E%3Cpath d='M0 0C44 0 64 6 80 22C94 36 102 52 120 52C138 52 146 36 160 22C176 6 196 0 240 0' transform='translate(0 -1.2)' stroke='%23fff' stroke-opacity='.5' stroke-width='1.5'/%3E%3Cpath d='M0 0C44 0 64 6 80 22C94 36 102 52 120 52C138 52 146 36 160 22C176 6 196 0 240 0' transform='translate(0 -1.2)' pathLength='100' stroke-dasharray='0 14 22 28 22 14' stroke='%23fff' stroke-opacity='.55' stroke-width='1.5'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat; background-color: rgba(255, 255, 255, .06);
-  -webkit-backdrop-filter: blur(7px) saturate(180%) brightness(1.08); backdrop-filter: blur(7px) saturate(180%) brightness(1.08);
-}
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .masthead .nav-toggle::before { background-color: rgba(255, 255, 255, .92); } }
+/* Your first Sunday is now a plain inline section next to Visit, not a floating tab/panel (Will, 22 Nov) */
+.first-sunday-inline { display: grid; gap: 2rem clamp(2rem, 5vw, 4rem); align-items: center; padding: clamp(3rem, 6vw, 5rem) max(var(--edge), calc((100% - 76rem) / 2)) 0; background: #fff; }
+.first-sunday-inline figure { margin: 0; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 8px; }
+.first-sunday-inline img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.first-sunday-inline h2 { margin: 0 0 1rem; font-size: clamp(2.2rem, 5vw, 3.6rem); }
+.first-sunday-inline p { margin: 0 0 .75rem; color: var(--ink-soft); }
+.first-sunday-inline .actions { margin-top: 1.25rem; }
+@media (min-width: 900px) { .first-sunday-inline { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); } }
 
-/* Like iOS glass, the lines and the word each turn white over dark sections and stay black over light ones
-   (buttons.js adds .on-dark to whichever is over a dark part) */
-.masthead:not(.nav-open) .nav-toggle .on-dark { color: #fff; }
-.masthead .nav-toggle { transition: color .25s ease-out; }
-.masthead .nav-toggle-bars, .masthead .nav-toggle-bars::before, .masthead .nav-toggle-bars::after { height: 2px; border-radius: 1px; }
-
-/* The first Sunday tab as a smooth glass bump flowing out of the right edge of the screen, like the Menu bump at the top:
-   an S-curve out of the edge, a straight run that holds the words, and an S-curve back. It is drawn at its true size
-   (3rem by 24rem, scaled evenly on phones) so the curves are never stretched. The tab is turned upside down for its
-   vertical lettering, so its own left side is the screen edge. Its lettering and finger turn white over dark parts
-   of the page (buttons.js adds .on-dark) */
-.first-sunday .sunday-tab {
-  isolation: isolate; justify-content: center; width: 3rem; height: 24rem; padding: 0; border-radius: 0;
-  color: var(--black); background: none; box-shadow: none; transition: opacity .2s ease-out, color .25s ease-out;
-}
-.first-sunday .sunday-tab::before {
-  content: ""; position: absolute; inset: 0; z-index: -1;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 384' fill='none'%3E%3Cpath d='M0 0C0 50 48 40 48 90V294C48 344 0 334 0 384' stroke='%23000' stroke-opacity='.16'/%3E%3Cpath d='M0 0C0 50 48 40 48 90V294C48 344 0 334 0 384' transform='translate(-1.2 0)' stroke='%23fff' stroke-opacity='.55' stroke-width='1.5'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat, rgba(255, 255, 255, .06);
-  -webkit-backdrop-filter: blur(7px) saturate(180%) brightness(1.08); backdrop-filter: blur(7px) saturate(180%) brightness(1.08);
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 384'%3E%3Cpath d='M0 0C0 50 48 40 48 90V294C48 344 0 334 0 384Z'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 384'%3E%3Cpath d='M0 0C0 50 48 40 48 90V294C48 344 0 334 0 384Z'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
-}
-.first-sunday .sunday-tab.on-dark { color: #fff; }
-/* On hover the glass bump dilates out of the screen edge (the tab is upside down, so its own left is the edge) */
-.first-sunday .sunday-tab::before { transform-origin: 0 50%; transition: scale .7s var(--spring-pop); }
-.first-sunday .sunday-tab:hover::before { scale: 1.15; }
-@media (prefers-reduced-motion: reduce) { .first-sunday .sunday-tab::before { transition: none; } }
-.first-sunday .sunday-tab:focus-visible { outline: 2px solid currentColor; outline-offset: -4px; }
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .first-sunday .sunday-tab::before { background-color: rgba(255, 255, 255, .92); } }
-@media (max-width: 760px) { .first-sunday .sunday-tab { width: 2.75rem; height: 22rem; font-size: .85rem; } }
-
-/* ===== The Menu button in the top left corner, with Donate in the top right (Tobi and Will, 20 Nov) =====
-   A clear glass rectangle the same height and corner style as Donate, with the three lines and the word "Menu"
-   always showing, so it is plain to older visitors. Open, it fills white, reads "Close" and its lines cross into an X.
-   The lettering still turns white over dark parts of the page (buttons.js adds .on-dark). */
-.masthead .nav-toggle, .home-v1 .masthead .nav-toggle, .home-v1 .masthead:not(.is-scrolled):not(.nav-open) .nav-toggle,
-.masthead.nav-open .nav-toggle, .home-v1 .masthead.nav-open .nav-toggle {
-  position: fixed; top: var(--corner, 1.5rem); left: var(--corner, 1.5rem); right: auto; translate: none;
-  display: inline-flex; align-items: center; justify-content: center; gap: .75rem; width: 8.25rem; height: 3.6rem; padding: 0;
-  border-radius: 2px; animation: none; transition: color .25s ease-out, scale .15s ease-out;
-}
-.masthead .nav-toggle > * { grid-area: auto; }
-.masthead .nav-toggle::before {
-  border-radius: inherit; background: rgba(255, 255, 255, .06); -webkit-mask: none; mask: none;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .55), 0 0 0 1px rgba(17, 17, 19, .16);
-  outline: 1px solid rgba(255, 255, 255, .35); outline-offset: -5px;
-}
-.masthead:not(.nav-open) .nav-toggle:hover::before { background-color: rgba(255, 255, 255, .16); }
-.masthead .nav-toggle:active { scale: .97; }
-.masthead .nav-toggle-word, .masthead.nav-open .nav-toggle-word,
-.nav-toggle:is(:hover, :focus-visible) .nav-toggle-word { translate: none; opacity: 1; font-size: .9rem; letter-spacing: .12em; transition: none; }
-.masthead .nav-toggle-bars, .nav-toggle:is(:hover, :focus-visible) .nav-toggle-bars { width: 1.4rem; opacity: 1; transform: none; transition: background-color .2s ease-out; }
-.masthead .nav-toggle-bars::before, .masthead .nav-toggle-bars::after { width: 1.4rem; transition: transform .35s var(--spring-soft); }
-.masthead .nav-toggle-bars::before { top: -6px; }
-.masthead .nav-toggle-bars::after { top: 6px; }
-.masthead.nav-open .nav-toggle-bars { opacity: 1; transform: none; background: transparent; }
-.masthead.nav-open .nav-toggle-bars::before { transform: translateY(6px) rotate(45deg); }
-.masthead.nav-open .nav-toggle-bars::after { transform: translateY(-6px) rotate(-45deg); }
-/* The cross turns back into three lines as soon as the menu starts to close */
-.masthead.is-closing .nav-toggle-bars { background-color: currentColor; }
-.masthead.is-closing .nav-toggle-bars::before, .masthead.is-closing .nav-toggle-bars::after { transform: none; }
-.masthead .nav-toggle:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
-@media (max-width: 760px) {
-  .masthead .nav-toggle, .home-v1 .masthead .nav-toggle, .home-v1 .masthead:not(.is-scrolled):not(.nav-open) .nav-toggle,
-  .masthead.nav-open .nav-toggle, .home-v1 .masthead.nav-open .nav-toggle { width: 7.25rem; height: 3rem; gap: .6rem; }
-  .masthead .nav-toggle-word { font-size: .82rem; }
-}
-@media (prefers-reduced-motion: reduce) { .masthead .nav-toggle-bars::before, .masthead .nav-toggle-bars::after, .masthead .nav-toggle { transition: none; } }
-/* The open menu starts below the Menu (Close) button */
-.masthead.nav-open .nav, .home-v1 .masthead.nav-open .nav { padding-top: calc(var(--corner, 1.5rem) + 3.6rem + 2rem); }
-@media (max-width: 760px) { .masthead.nav-open .nav, .home-v1 .masthead.nav-open .nav { padding-top: 5.5rem; } }
-
-/* ===== The Menu button as a glass corner: a triangle in the top left whose long edge is smoothed so it flows into
-   the top and left edges of the screen. Drawn at its true size (12.5rem, 10rem on phones) so the curves never stretch.
-   Only the shape itself can be clicked: the clip sits on the glass layer, not the button, because a clip on the
-   button would stop the glass blurring what is behind it. The lines and word sit in the corner; open, it fills
-   white and reads "Close". */
-.masthead .nav-toggle, .home-v1 .masthead .nav-toggle, .home-v1 .masthead:not(.is-scrolled):not(.nav-open) .nav-toggle,
-.masthead.nav-open .nav-toggle, .home-v1 .masthead.nav-open .nav-toggle {
-  top: 0; left: 0; width: 12.5rem; height: 12.5rem; padding: 1.55rem 0 0 1.6rem; border-radius: 0; filter: none;
-  flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: .6rem; pointer-events: none;
-}
-.masthead .nav-toggle::before {
-  border-radius: 0; box-shadow: none; outline: 0;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' fill='none'%3E%3Cpath d='M200 0C150 0 140 20 110 50L50 110C20 140 0 150 0 200' stroke='%23000' stroke-opacity='.16'/%3E%3Cpath d='M200 0C150 0 140 20 110 50L50 110C20 140 0 150 0 200' transform='translate(-1.1 -1.1)' stroke='%23fff' stroke-opacity='.6' stroke-width='1.5'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat, rgba(255, 255, 255, .06);
-  pointer-events: auto; clip-path: path("M0 0H200C150 0 140 20 110 50L50 110C20 140 0 150 0 200Z");
-}
-/* Open, the glass corner melts into the white menu. Closing, it comes back, a little large, and springs into place
-   as the menu shrinks into it, with its shadow */
-.masthead .nav-toggle::before, .masthead::before { transform-origin: 0 0; transition: opacity .3s ease-out, background-color .3s ease-out, scale .7s var(--spring-pop); }
-.masthead.nav-open .nav-toggle::before, .masthead.nav-open::before { scale: 1.15; }
-/* On hover the glass corner and its shadow dilate */
-.masthead:not(.nav-open) .nav-toggle:hover::before, .masthead:not(.nav-open):has(.nav-toggle:hover)::before { scale: 1.1; }
-.masthead.nav-open:not(.is-closing) .nav-toggle::before { opacity: 0; }
-@media (prefers-reduced-motion: reduce) {
-  .masthead .nav-toggle::before, .masthead::before { transition: opacity .2s ease-out; }
-  .masthead.nav-open .nav-toggle::before, .masthead.nav-open::before, .masthead:not(.nav-open) .nav-toggle:hover::before, .masthead:not(.nav-open):has(.nav-toggle:hover)::before { scale: none; }
-}
-.masthead .nav-toggle-bars { margin: .4rem 0; }
-.masthead .nav-toggle:focus-visible { outline: 0; }
-.masthead .nav-toggle:focus-visible::after { content: ""; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' fill='none'%3E%3Cpath d='M200 0C150 0 140 20 110 50L50 110C20 140 0 150 0 200' transform='translate(-5 -5)' stroke='%23fff' stroke-width='6'/%3E%3Cpath d='M200 0C150 0 140 20 110 50L50 110C20 140 0 150 0 200' transform='translate(-5 -5)' stroke='%23111113' stroke-width='2.5'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat; }
-@media (max-width: 760px) {
-  .masthead .nav-toggle, .home-v1 .masthead .nav-toggle, .home-v1 .masthead:not(.is-scrolled):not(.nav-open) .nav-toggle,
-  .masthead.nav-open .nav-toggle, .home-v1 .masthead.nav-open .nav-toggle {
-    width: 10rem; height: 10rem; padding: 1.15rem 0 0 1.15rem; gap: .45rem;
-  }
-  .masthead .nav-toggle::before { clip-path: path("M0 0H160C120 0 112 16 88 40L40 88C16 112 0 120 0 160Z"); }
-  .masthead::before { background-size: 10rem; -webkit-mask-size: auto, 10rem; mask-size: auto, 10rem; }
-}
-/* A soft shadow just outside the corner's curved edge lifts the glass off white pages. It is the corner's shape
-   with its shadow, with the shape itself cut away, so nothing sits under the glass. */
-.masthead::before {
-  content: ""; position: fixed; top: 0; left: 0; width: 15rem; height: 15rem;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M0 0H200C150 0 140 20 110 50L50 110C20 140 0 150 0 200Z'/%3E%3C/svg%3E") 0 0 / 12.5rem no-repeat; filter: drop-shadow(0 3px 12px rgba(17, 17, 19, .12));
-  -webkit-mask: linear-gradient(#000 0 0), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M0 0H200C150 0 140 20 110 50L50 110C20 140 0 150 0 200Z'/%3E%3C/svg%3E") 0 0 / 12.5rem no-repeat; -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath d='M0 0H200C150 0 140 20 110 50L50 110C20 140 0 150 0 200Z'/%3E%3C/svg%3E") 0 0 / 12.5rem no-repeat; mask-composite: exclude;
-}
