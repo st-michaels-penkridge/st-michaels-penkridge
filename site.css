@@ -2334,43 +2334,8 @@ html {
   }
 }
 
-/* Mount colour for the thin frames on the History page photo strips */
-:root {
-  --mount: #f6f4ef;
-}
-
-/* The History page photo strips and the Bygone days album: thin black frames with a pale mount */
-.carousel-viewport .carousel-track .gallery-thumb,
-.album img {
-  padding: 0.4rem;
-  background: var(--mount);
-  border: 4px solid #141416;
-  border-image: linear-gradient(145deg, #505056 0%, #222225 30%, #121214 62%, #050506 100%) 1;
-  box-shadow: inset 0 1px 2px rgba(17, 17, 19, 0.25), 0 3px 8px -4px rgba(17, 17, 19, 0.35), 0 14px 24px -16px rgba(17, 17, 19, 0.45);
-  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
-}
-
-.carousel-viewport .gallery-item img {
-  box-shadow: 0 0 0 1.5px #fff, 0 0 0 2.5px rgba(17, 17, 19, 0.14);
-}
-
-.carousel-viewport .gallery-thumb:hover img {
-  transform: none;
-}
-
-.carousel-viewport .gallery-thumb:hover {
-  transform: translateY(-3px);
-  box-shadow: inset 0 1px 2px rgba(17, 17, 19, 0.25), 0 6px 12px -6px rgba(17, 17, 19, 0.35), 0 22px 32px -18px rgba(17, 17, 19, 0.5);
-}
-
 .carousel-viewport .carousel-track {
   padding-block: 0.5rem 1.25rem;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .carousel-viewport .carousel-track .gallery-thumb {
-    transition: none;
-  }
 }
 
 /* ---------------------------------------------------------------
@@ -3293,10 +3258,16 @@ html:is(.hint-down, .hint-up) body { background: var(--black); }
 
 /* Your first Sunday is now a plain inline section next to Visit, not a floating tab/panel (Will, 22 Nov) */
 .first-sunday-inline { display: grid; gap: 2rem clamp(2rem, 5vw, 4rem); align-items: center; padding: clamp(3rem, 6vw, 5rem) max(var(--edge), calc((100% - 76rem) / 2)) 0; background: #fff; }
-.first-sunday-inline figure { margin: 0; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 8px; }
+.first-sunday-inline figure { margin: 0; aspect-ratio: 4 / 3; }
 .first-sunday-inline img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
 .first-sunday-inline h2 { margin: 0 0 1rem; font-size: clamp(2.2rem, 5vw, 3.6rem); }
 .first-sunday-inline p { margin: 0 0 .75rem; color: var(--ink-soft); }
 .first-sunday-inline .actions { margin-top: 1.25rem; }
 @media (min-width: 900px) { .first-sunday-inline { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); } }
 
+/* Every photo set into a page (not full-bleed backgrounds) gets Apple-style smooth corners.
+   corner-shape works in Chrome and Edge; Safari and Firefox show a plain rounded corner instead. */
+:root { --photo-corner: 1.25rem; }
+@supports (corner-shape: squircle) { :root { --photo-corner: 3rem; } }
+:is(.sun-intro-photo, .first-sunday-inline, .hist-photo, .album) img,
+.carousel-viewport .gallery-thumb { overflow: hidden; border-radius: var(--photo-corner); corner-shape: squircle; }
