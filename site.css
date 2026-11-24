@@ -3239,8 +3239,8 @@ h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
 .grave-name { display: inline-block; color: var(--ink-soft); transition: opacity .25s ease, transform .25s ease; }
 .grave-name.out { opacity: 0; transform: translateY(.6em); }
 .grave-name.prep { opacity: 0; transform: translateY(-.6em); transition: none; }
-.grave-search button { display: grid; place-items: center; flex: none; width: 4rem; border: 0; background: var(--black); color: #fff; cursor: pointer; transition: background-color .15s ease; }
-.grave-search button:hover, .grave-search button:focus-visible { background: #34343a; }
+.grave-search button { display: grid; place-items: center; flex: none; width: 4rem; border: 0; background: var(--crimson); color: #fff; cursor: pointer; transition: background-color .15s ease; }
+.grave-search button:hover, .grave-search button:focus-visible { background: color-mix(in oklch, var(--crimson), #000 20%); }
 .grave-search button:focus-visible { outline: 2px solid #fff; outline-offset: -5px; }
 .grave-search button svg { width: 1.3rem; height: 1.3rem; }
 @media (prefers-reduced-motion: reduce) { .grave-search, .grave-search button { transition: none; } }
