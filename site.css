@@ -961,72 +961,19 @@ footer.footer h2 { margin: 0 0 .9rem; font-size: .95rem; letter-spacing: .08em; 
   flex: 1;
 }
 
-/* Square, bordered buttons: a bordered alternative to the pill .btn family.
-   -fill/-ghost are for light (paper/stone) backgrounds; -light/-light-ghost
-   are for dark backgrounds (the crimson give/monthly bands). */
+/* Every button on the site: one square shape. Its look is .btn-line (white, engraved line), or .btn-give for giving. */
 .btn-square {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 2.9rem;
+  min-width: 11rem;
+  min-height: 3.2rem;
   padding: 0.6rem 1.2rem;
   border-radius: 2px;
-  font-family: var(--body);
-  font-weight: 600;
-  font-size: 0.9rem;
-  letter-spacing: 0.01em;
+  font-size: 0.95rem;
   text-decoration: none;
   text-align: center;
   cursor: pointer;
-}
-
-.btn-square-fill {
-  border: 2px solid var(--crimson);
-  background: var(--crimson);
-  color: var(--paper);
-}
-
-.btn-square-fill:hover,
-.btn-square-fill:focus-visible {
-  background: var(--crimson-deep);
-  border-color: var(--crimson-deep);
-  color: var(--paper);
-}
-
-.btn-square-ghost {
-  border: 2px solid var(--crimson);
-  background: transparent;
-  color: var(--crimson);
-}
-
-.btn-square-ghost:hover,
-.btn-square-ghost:focus-visible {
-  background: var(--crimson);
-  color: var(--paper);
-}
-
-.btn-square-light {
-  border: 2px solid #fff;
-  background: #fff;
-  color: var(--btn-ink);
-}
-
-.btn-square-light:hover,
-.btn-square-light:focus-visible {
-  background: transparent;
-  color: #fff;
-}
-
-.btn-square-light-ghost {
-  border: 2px solid #fff;
-  background: transparent;
-  color: #fff;
-}
-
-.btn-square-light-ghost:hover,
-.btn-square-light-ghost:focus-visible {
-  background: #fff;
-  color: var(--btn-ink);
 }
 
 .welcome-where {
@@ -1878,6 +1825,7 @@ b {
 .hero-full :focus-visible,
 .glass-band :focus-visible,
 .monthly :focus-visible,
+.monthly .btn-line:focus-visible,
 .footer :focus-visible,
 .lightbox :focus-visible {
   outline-color: #fff;
@@ -2258,8 +2206,6 @@ html {
 .visit-compact address { margin: 0 0 .5rem; font-size: 1.15rem; font-style: normal; }
 .visit-compact p { margin: 0; color: var(--ink-soft); }
 .visit-compact .actions { gap: 1rem; }
-.visit-compact .btn-square { min-width: 11rem; min-height: 3.2rem; font-size: .95rem; }
-.visit-compact .map-load { font-family: var(--display); }
 .visit-compact .map-facade { min-height: clamp(14rem, 24vw, 18rem); border-radius: 8px; background: #f3f1ed; }
 .visit-compact .visit-map iframe, .visit-compact .visit-map .map-fallback { min-height: 0; height: clamp(14rem, 24vw, 18rem); border-radius: 8px; }
 @media (min-width: 900px) { .visit-compact { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); } }
@@ -2869,7 +2815,7 @@ html {
 .home-v1 h1, .home-v1 h2, .home-v1 h3, .home-v1 .counter strong { font-family: var(--heading-font); }
 .home-v1 .wordmark-name { font-family: var(--heading-font); font-size: 1.1rem; letter-spacing: .025em; }
 .home-v1 .nav a, .home-v1 .kicker, .home-v1 .text-link { font-family: var(--label-font); }
-.home-v1 .btn, .home-v1 input, .home-v1 button { font-family: var(--reading-font); }
+.home-v1 .btn, .home-v1 input, .home-v1 button:not(.btn-square) { font-family: var(--reading-font); }
 .home-v1 .hero-full > img { object-position: 50% 43%; }
 .home-v1 .hero-full::after { background: linear-gradient(90deg,rgba(16,23,23,.76),rgba(16,23,23,.12) 72%),linear-gradient(0deg,rgba(16,23,23,.5),transparent 65%); }
 .home-v1 .hero-copy { padding-block: 4rem; }
@@ -3296,7 +3242,7 @@ h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
 .cookie-bar p { flex: 1 1 18rem; margin: 0; font-size: var(--step--1); }
 .cookie-bar a { color: #fff; text-decoration-color: rgba(255, 255, 255, .5); text-underline-offset: .2em; }
 .cookie-bar .actions { gap: .75rem; margin: 0; flex-wrap: wrap; }
-.cookie-bar .btn-square { min-width: 8.5rem; font-family: var(--display); }
+.cookie-bar .btn-square { min-width: 8.5rem; }
 .cookie-bar :focus-visible, .cookie-bar .btn-line:focus-visible { outline-color: #fff; }
 
 /* Will, 21 Nov: back to the header bar from before the "glass Menu corner" redesign. The classic
