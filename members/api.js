@@ -343,7 +343,7 @@
     }
 
     function fresh() {
-      var names = ["Alex Morgan", "Ruth Ashby", "Daniel Okafor", "Margaret Hill", "Sam Patel", "Joy Bennett", "Peter Lowe", "Helen Ward"];
+      var names = ["Tobi Hussey", "Ruth Ashby", "Daniel Okafor", "Margaret Hill", "Sam Patel", "Joy Bennett", "Peter Lowe", "Helen Ward"];
       var people = names.map(function (name, i) {
         return { id: "p" + (i + 1), full_name: name, is_admin: i === 0, approved: true,
                  email: name.toLowerCase().replace(" ", ".") + "@example.org", phone: i === 2 ? "07700 900123" : "" };

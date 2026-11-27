@@ -156,7 +156,7 @@
     if (api.mode !== "demo") return null;
     var role = api.demoRole();
     var pick = h("select", { id: "demo-role", onchange: function () { api.setDemoRole(pick.value); state.signedIn = null; say(""); route(); } },
-      [["member", "Daniel, a member"], ["lead", "Ruth, the AV rota lead"], ["admin", "Alex, an admin"]].map(function (o) {
+      [["member", "Daniel, a member"], ["lead", "Ruth, the AV rota lead"], ["admin", "Tobi, an admin"]].map(function (o) {
         return h("option", { value: o[0], selected: o[0] === role }, o[1]);
       }));
     return h("div", { class: "m-demo", role: "note" },
@@ -170,7 +170,7 @@
   function subnav() {
     var a = state.access;
     var items = [["index.html", "Home", "home"], ["rota.html", "Rotas", "rota"]];
-    if (a.admin_account) items.push(["editor.html", "Page editor", "editor"], ["people.html", "People", "people"]);
+    if (a.admin_account) items.push(["editor.html", "Notice board", "editor"], ["people.html", "People", "people"]);
     items.push(["account.html", "My details", "account"]);
     var nav = h("nav", { class: "m-nav", "aria-label": "Members area" },
       items.map(function (it) { return h("a", { href: it[0], "aria-current": it[2] === PAGE ? "page" : null, text: it[1] }); }));
@@ -210,12 +210,13 @@
     function askEmail() {
       clear(box);
       var email = input({ type: "email", name: "email", autocomplete: "email", required: true, inputmode: "email" });
-      var go = button(api.mode === "demo" ? "Sign in to the demo" : "Email me a link");
+      var go = button(api.mode === "demo" ? "Sign in to the demo" : "Email me a sign-in link");
       var form = h("form", { class: "m-form", novalidate: true },
         h("h2", { text: "Sign in" }),
         h("p", { text: "Put in the email address the church has for you and we'll send you a link. There's no password to remember." }),
         api.mode === "demo" ? h("p", { class: "m-help", text: "Demo: any email works. Choose who to be in the bar above." }) : null,
-        field("Email address", email), go);
+        field("Email address", email), go,
+        h("p", { class: "m-help", text: "No email after a few minutes? Check your junk folder, or call the parish office on 01785 714344." }));
       form.addEventListener("submit", act(go, async function () {
         var v = email.value.trim();
         if (api.mode === "demo") {
@@ -253,7 +254,7 @@
     }
     askEmail();
 
-    var join = h("div", { class: "m-card m-card-stone" });
+    var join = h("div", { class: "m-card m-card-plain" });
     function joinForm() {
       clear(join);
       var name = input({ name: "name", autocomplete: "name", required: true, maxlength: "80" });
@@ -365,6 +366,11 @@
     var a = state.access;
     add(main, h("div", { class: "m-hello" }, h("h2", { text: "Hello, " + firstName(a.full_name) })));
     if (a.admin_account && !a.admin) add(main, twoStepGate("banner"));
+    if (a.admin_account) add(main, h("nav", { class: "m-shortcuts", "aria-labelledby": "shortcuts-title" },
+      h("h2", { id: "shortcuts-title", text: "For admins" }),
+      h("ul", null, [["editor.html", "Edit the notice board"], ["rota.html", "Edit the rotas"], ["people.html", "Invite someone or answer requests"]].map(function (l) {
+        return h("li", null, h("a", { href: l[0], text: l[1] }));
+      }))));
 
     var res = await Promise.all([api.myDates(), api.openSwaps(), api.myAway()]);
     var dates = res[0], swaps = res[1], away = res[2];
@@ -443,7 +449,7 @@
         cancel.addEventListener("click", act(cancel, async function () { await api.cancelSwap(d.swap_id); d.swap_id = null; draw(); say("Swap request cancelled. You're still down for this date.", "ok"); }));
         add(actions, h("span", { class: "m-tag m-tag-red", text: "Swap asked" }), cancel);
       } else {
-        var ask = h("button", { type: "button", class: "m-btn m-btn-sm", text: "Ask for a swap" });
+        var ask = h("button", { type: "button", class: "m-btn m-btn-quiet m-btn-sm", text: "Ask for a swap" });
         ask.addEventListener("click", function () {
           clear(actions);
           var note = input({ maxlength: "200", placeholder: "For example: away that weekend" });
@@ -724,7 +730,7 @@
   }
 
   // ---------------------------------------------------------------------
-  // Page editor
+  // Notice board (notices, pictures, Coming up and service details)
   // ---------------------------------------------------------------------
   async function editorPage() {
     add(main, h("p", { class: "lede", text: "Saved content updates What's on. Published notices also appear on the Notices page, between the dates you choose." }),

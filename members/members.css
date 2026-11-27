@@ -1,4 +1,4 @@
-/* Members area. Builds on ../site.css: same colours, fonts and buttons */
+/* Members area. Builds on ../site.css: same colours, fonts and buttons, and the same squircle panels as the public pages */
 
 .members-head {
   padding-bottom: 1rem;
@@ -25,7 +25,9 @@
   justify-content: space-between;
   gap: 0.75rem 1.5rem;
   margin: 0 0 1.5rem;
-  padding: 0.9rem 1.1rem;
+  padding: 0.9rem 1.25rem;
+  border-radius: 1rem;
+  corner-shape: squircle;
   background: var(--ink);
   color: #fff;
   font-size: 0.95rem;
@@ -57,6 +59,8 @@
 .m-demo .m-btn-quiet {
   background: rgba(255, 255, 255, 0.14);
   color: #fff;
+  box-shadow: none;
+  outline: 0;
 }
 
 .m-demo .m-btn-quiet:hover {
@@ -78,34 +82,27 @@
 .m-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 1.6rem;
+  gap: 0.35rem;
 }
 
 .m-nav a {
-  position: relative;
-  padding: 0.35rem 0;
+  padding: 0.6rem 1.1rem;
+  border-radius: 0.9rem;
+  corner-shape: squircle;
   color: var(--ink);
-  font-weight: 600;
   text-decoration: none;
+  transition: background-color 0.15s ease-out;
 }
 
-.m-nav a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 2px;
-  background: var(--red);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.25s ease;
+.m-nav a:hover,
+.m-nav a:focus-visible {
+  background: #f6f0e7;
 }
 
-.m-nav a:hover::after,
-.m-nav a:focus-visible::after,
-.m-nav a[aria-current="page"]::after {
-  transform: scaleX(1);
+.m-nav a[aria-current="page"] {
+  background: var(--stone);
+  color: var(--crimson);
+  font-weight: 600;
 }
 
 .m-who {
@@ -124,8 +121,9 @@
 
 .m-flash {
   margin: 0 0 1.5rem;
-  padding: 0.85rem 1.1rem;
-  border-left: 3px solid var(--ink);
+  padding: 0.9rem 1.25rem;
+  border-radius: 1rem;
+  corner-shape: squircle;
   background: var(--stone);
 }
 
@@ -134,8 +132,8 @@
 }
 
 .m-flash.is-error {
-  border-left-color: var(--red);
   background: #f8ebeb;
+  color: var(--crimson);
 }
 
 /* Layout */
@@ -151,15 +149,17 @@
   }
 }
 
+/* Panels: stone squircles with no border, like the cards on the public pages */
 .m-card {
-  padding: clamp(1.25rem, 3vw, 2rem);
-  border: 1px solid var(--stone-line);
-  background: var(--paper);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border-radius: 1.75rem;
+  corner-shape: squircle;
+  background: var(--stone);
 }
 
-.m-card-stone {
-  background: var(--stone);
-  border-color: var(--stone);
+.m-card-plain {
+  padding-inline: 0;
+  background: none;
 }
 
 .m-card h2,
@@ -170,7 +170,6 @@
 
 .m-gate {
   margin-bottom: 2rem;
-  border-left: 3px solid var(--red);
 }
 
 .m-hello {
@@ -258,10 +257,11 @@
 .m-app textarea,
 .m-demo select {
   width: 100%;
-  min-height: 2.9rem;
-  padding: 0.55rem 0.8rem;
+  min-height: 3.25rem;
+  padding: 0.55rem 1rem;
   border: 1px solid #b7afa2;
-  border-radius: 6px;
+  border-radius: 0.9rem;
+  corner-shape: squircle;
   background: #fff;
   color: var(--ink);
   font: inherit;
@@ -306,8 +306,11 @@
   display: grid;
   gap: 0.5rem;
   margin: 0;
-  padding: 0.9rem 1rem;
-  border: 1px solid var(--stone-line);
+  padding: 1rem 1.25rem;
+  border: 0;
+  border-radius: 1rem;
+  corner-shape: squircle;
+  background: var(--stone);
 }
 
 .m-code {
@@ -331,29 +334,37 @@
   margin-top: 0.9rem;
 }
 
-/* Buttons: the site's pill buttons, without the arrow dot */
+/* Buttons: the home page's engraved buttons. Burgundy for the main action, white (like .btn-line) for the rest */
 .m-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  min-height: 2.9rem;
-  padding: 0.4rem 1.4rem;
+  min-height: 3.25rem;
+  padding: 0.4rem 1.6rem;
   border: 0;
-  border-radius: 999px;
-  background: var(--ink);
+  border-radius: 2px;
+  background: var(--crimson);
   color: #fff;
-  font: 600 1rem/1.1 var(--body);
+  outline: 1px solid rgba(255, 255, 255, 0.45);
+  outline-offset: -4px;
+  font: 400 0.95rem/1.1 var(--display);
+  letter-spacing: 0.08em;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.15s ease;
+  transition: background-color 0.15s ease-out, transform 0.15s ease;
   justify-self: start;
 }
 
 .m-btn:hover,
 .m-btn:focus-visible {
-  background: #000;
+  background: color-mix(in oklch, var(--crimson), #000 20%);
   color: #fff;
+}
+
+.m-btn:focus-visible {
+  outline: 3px solid var(--black);
+  outline-offset: 3px;
 }
 
 .m-btn:active {
@@ -366,26 +377,30 @@
 }
 
 .m-btn-sm {
-  min-height: 2.4rem;
-  padding: 0.3rem 1rem;
-  font-size: 0.92rem;
+  min-height: 2.75rem;
+  padding: 0.3rem 1.15rem;
+  font-size: 0.85rem;
 }
 
 .m-btn-quiet {
-  background: rgba(20, 20, 22, 0.07);
-  color: var(--ink);
+  background: #fff;
+  color: var(--btn-ink);
+  box-shadow: 0 0 0 1px rgba(20, 20, 22, 0.2);
+  outline-color: rgba(20, 20, 22, 0.35);
 }
 
 .m-btn-quiet:hover,
 .m-btn-quiet:focus-visible {
-  background: rgba(20, 20, 22, 0.13);
-  color: var(--ink);
+  background: #f3f1ed;
+  color: var(--btn-ink);
 }
 
 .m-btn.is-armed,
 .m-btn.is-armed:hover {
   background: var(--red);
   color: #fff;
+  box-shadow: none;
+  outline-color: rgba(255, 255, 255, 0.45);
 }
 
 .m-link {
@@ -402,16 +417,12 @@
 /* Labels */
 .m-tag {
   display: inline-block;
-  margin-left: 0.4rem;
-  padding: 0.1rem 0.55rem;
-  border: 1px solid var(--stone-line);
-  border-radius: 999px;
-  font-size: 0.78rem;
+  margin-left: 0.5rem;
+  font-size: 0.88rem;
   font-weight: 600;
   line-height: 1.5;
   color: var(--ink-soft);
   white-space: nowrap;
-  vertical-align: middle;
 }
 
 .m-tag:first-child {
@@ -419,9 +430,7 @@
 }
 
 .m-tag-red {
-  border-color: var(--red);
-  background: var(--red);
-  color: #fff;
+  color: var(--crimson);
 }
 
 .m-note {
@@ -435,7 +444,6 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 1rem;
 }
 
 .m-date {
@@ -443,8 +451,8 @@
   grid-template-columns: 5.25rem minmax(0, 1fr);
   gap: 0.9rem 1.25rem;
   align-items: start;
-  padding: 1.1rem 1.25rem;
-  border: 1px solid var(--stone-line);
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--stone-line);
 }
 
 .m-date h3 {
@@ -494,7 +502,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  padding: 0.5rem 0.5rem 0.5rem 1.1rem;
+  border-radius: 1rem;
+  corner-shape: squircle;
   background: var(--stone);
 }
 
@@ -512,16 +522,18 @@
   display: grid;
   gap: 0.3rem;
   height: 100%;
-  padding: 1.1rem 1.25rem;
-  border: 1px solid var(--stone-line);
+  padding: 1.4rem 1.5rem;
+  border-radius: 1.5rem;
+  corner-shape: squircle;
+  background: var(--stone);
   color: var(--ink);
   text-decoration: none;
-  transition: border-color 0.2s ease;
+  transition: background-color 0.15s ease-out;
 }
 
 .m-rotas a:hover,
 .m-rotas a:focus-visible {
-  border-color: var(--ink);
+  background: #e0d8cb;
 }
 
 .m-rotas strong {
@@ -623,10 +635,11 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.25rem 0.35rem 0.25rem 0.75rem;
-  border: 1px solid var(--stone-line);
-  border-radius: 999px;
-  background: var(--paper);
+  padding: 0.3rem 0.35rem 0.3rem 0.85rem;
+  border: 1px solid transparent;
+  border-radius: 0.9rem;
+  corner-shape: squircle;
+  background: var(--stone);
 }
 
 .m-chip:not(:has(button)) {
@@ -638,8 +651,9 @@
 }
 
 .m-chip.is-mine {
-  border-color: var(--red);
-  color: var(--red);
+  border-color: var(--crimson);
+  background: var(--paper);
+  color: var(--crimson);
   font-weight: 600;
 }
 
@@ -649,7 +663,8 @@
   width: 1.7rem;
   height: 1.7rem;
   border: 0;
-  border-radius: 50%;
+  border-radius: 0.6rem;
+  corner-shape: squircle;
   background: rgba(20, 20, 22, 0.07);
   color: var(--ink);
   font-size: 1.05rem;
@@ -707,7 +722,10 @@
 
   .m-rota tr {
     margin-bottom: 1rem;
+    overflow: hidden;
     border: 1px solid var(--stone-line);
+    border-radius: 1.25rem;
+    corner-shape: squircle;
   }
 
   .m-rota tbody th {
@@ -795,7 +813,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.6rem 1rem;
-  padding: 0.75rem 1rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 1rem;
+  corner-shape: squircle;
   background: var(--paper);
 }
 
@@ -816,15 +836,14 @@
   margin: 0 0 1rem;
   padding: 0;
   display: grid;
-  gap: 0.75rem;
 }
 
 .m-item {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 0.6rem 1.25rem;
-  padding: 1rem 1.15rem;
-  border: 1px solid var(--stone-line);
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--stone-line);
 }
 
 @media (min-width: 760px) {
@@ -839,8 +858,7 @@
 }
 
 .m-item.is-draft {
-  background: #faf9f6;
-  border-style: dashed;
+  border-bottom-style: dashed;
 }
 
 .m-item-date {
@@ -863,9 +881,11 @@
 
 .m-add-box,
 .m-past {
-  margin-top: 1rem;
-  padding: 0.9rem 1.1rem;
-  border: 1px solid var(--stone-line);
+  margin-top: 1.25rem;
+  padding: 1.1rem 1.5rem;
+  border-radius: 1.5rem;
+  corner-shape: squircle;
+  background: var(--stone);
 }
 
 .m-add-box > summary,
@@ -901,7 +921,8 @@
 
 .m-qr {
   margin: 0.75rem 0;
-  border: 1px solid var(--stone-line);
+  border-radius: 1rem;
+  corner-shape: squircle;
   background: #fff;
 }
 
@@ -933,8 +954,9 @@
 
 .m-draft {
   max-width: var(--measure);
-  padding: 0.85rem 1.1rem;
-  border-left: 3px solid var(--red);
+  padding: 1rem 1.25rem;
+  border-radius: 1rem;
+  corner-shape: squircle;
   background: var(--stone);
 }
 
@@ -1001,3 +1023,11 @@
 .m-crop img { pointer-events: none; }
 .m-thumb { width: 6rem; }
 
+/* Members home: shortcuts for admins, in a stone panel under the greeting */
+.m-shortcuts { margin: 0 0 clamp(2.25rem, 5vw, 3.25rem); padding: clamp(1.25rem, 3vw, 2rem) clamp(1.5rem, 4vw, 2.5rem); border-radius: 1.75rem; corner-shape: squircle; background: var(--stone); }
+.m-shortcuts h2 { margin: 0 0 .5rem; font-size: var(--step-1); }
+.m-shortcuts ul { display: grid; column-gap: 2rem; margin: 0; padding: 0; list-style: none; }
+.m-shortcuts a { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .85rem 0; border-bottom: 1px solid var(--stone-line); color: var(--ink); font-weight: 600; text-decoration: none; }
+.m-shortcuts a::after { content: ""; flex: none; width: .5rem; height: .5rem; border: solid var(--crimson); border-width: 2px 2px 0 0; transform: rotate(45deg); }
+.m-shortcuts a:hover, .m-shortcuts a:focus-visible { color: var(--crimson); }
+@media (min-width: 760px) { .m-shortcuts ul { grid-template-columns: repeat(3, minmax(0, 1fr)); } }

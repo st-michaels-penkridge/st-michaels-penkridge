@@ -70,7 +70,7 @@ With `members/config.js` empty, run the site locally (`python -m http.server 800
    where id = (select id from auth.users where email = '<your email>');
    ```
    Accept the invite, open My details, turn on two-step sign-in, and invite everyone else from People.
-8. **Check it**: sign in as yourself, add a test event in the Page editor and see it on What's on, invite a second address you own, put it on the AV rota, ask for a swap from one account and take it from the other, then remove the test account.
+8. **Check it**: sign in as yourself, add a test event in the Notice board and see it on What's on, invite a second address you own, put it on the AV rota, ask for a swap from one account and take it from the other, then remove the test account.
 
 ## Running it locally
 
