@@ -16,6 +16,7 @@ B5 (27 Nov, tobi-27-11-2026) | index.html, images/opt | Give photo re-encoded fr
 B6 (27 Nov, tobi-27-11-2026) | site.css | header Donate button now burgundy with white lettering like the Give buttons, on every page and in the phone menu (dropped the white override and the outlined current-page style); site.css v=20261127c
 B7 (27 Nov, tobi-27-11-2026) | site.css | menus: the dropdown is a squircle card with no dividers, each link lights up as its own squircle on hover or keyboard focus (desktop and phone), the current page shows in red; the phone menu card has squircle corners; site.css v=20261127d
 M1 (27 Nov, login-usability) | members/members.css, members/app.js, members/*.html, READMEs | members area in the public site's look: home page buttons (burgundy main action, white engraved for the rest), stone squircle panels, squircle inputs, tabs and chips, thin-line rows instead of boxed lists, labels as plain words; sign-in help line; "Page editor" renamed "Notice board"; For admins shortcuts on the members home; demo admin renamed Tobi; cache versions bumped
+M2 (27 Nov, login-usability) | members/config.js, api.js, app.js, members.css, privacy.html, supabase/README.md | "Continue with Google" and "Continue with Apple" under the email link (shown for the providers listed in config.js; both in the demo); invite-only, so the account email must match an invited member, with a plain message when it doesn't; privacy notice draft explains it; setup steps added to the backend README
 
 ## Questions for Tobi
 - None.

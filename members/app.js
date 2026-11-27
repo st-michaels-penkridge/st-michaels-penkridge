@@ -198,6 +198,7 @@
     var desc = hash.get("error_description") || search.get("error_description");
     if (!desc) return null;
     history.replaceState(null, "", location.pathname + location.search.replace(/[?&]error[^&]*/g, ""));
+    if (/signups? not allowed|user not found|not allowed for this instance/i.test(desc)) return "That account's email address isn't on our list. Sign in with the email address the church has for you, or ask to join below.";
     return /expired|invalid/i.test(desc) ? "That sign-in link has run out or was already used. Ask for a new one below." : desc;
   }
 
@@ -216,7 +217,7 @@
         h("p", { text: "Put in the email address the church has for you and we'll send you a link. There's no password to remember." }),
         api.mode === "demo" ? h("p", { class: "m-help", text: "Demo: any email works. Choose who to be in the bar above." }) : null,
         field("Email address", email), go,
-        h("p", { class: "m-help", text: "No email after a few minutes? Check your junk folder, or call the parish office on 01785 714344." }));
+        h("p", { class: "m-help", text: "No email after a few minutes? Check your junk folder, or call the parish office on 01785\u00a0714344." }));
       form.addEventListener("submit", act(go, async function () {
         var v = email.value.trim();
         if (api.mode === "demo") {
@@ -229,6 +230,17 @@
         askCode(v);
       }));
       add(box, form);
+      if (api.providers.length) add(box, h("div", { class: "m-providers" },
+        h("p", { class: "m-or", text: "or" }),
+        api.providers.map(function (p) {
+          var b = h("button", { type: "button", class: "m-btn m-btn-quiet", text: "Continue with " + (p === "google" ? "Google" : "Apple") });
+          b.addEventListener("click", act(b, async function () {
+            await api.signInWith(p);
+            if (api.mode === "demo") { state.signedIn = null; route(); }
+          }));
+          return b;
+        }),
+        h("p", { class: "m-help", text: "Use the Google or Apple account with the same email address the church has for you." })));
       if (!err) setTimeout(function () { email.focus(); }, 0);
     }
     function askCode(address) {

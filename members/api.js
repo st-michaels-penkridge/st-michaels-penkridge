@@ -114,6 +114,13 @@
         var r = await sb.auth.verifyOtp({ email: email, token: code, type: "email" });
         if (r.error) throw new Error("That code didn't work. Check it, or ask for a new link.");
       },
+      // Google or Apple: only the ones listed in config.js. The account's email has to match an invited member,
+      // because sign-ups are switched off in Supabase
+      providers: (cfg.providers || []).filter(function (p) { return p === "google" || p === "apple"; }),
+      signInWith: async function (provider) {
+        var r = await sb.auth.signInWithOAuth({ provider: provider, options: { redirectTo: new URL("./", location.href).href } });
+        if (r.error) throw friendly(r.error);
+      },
       signOut: async function () { await sb.auth.signOut(); },
       access: async function () { return check(await sb.rpc("my_access")); },
 
@@ -435,6 +442,8 @@
       sendLink: async function () { await wait(); },
       verifyCode: async function () { await wait(); db().signedIn = true; db().aal2 = false; save(); },
       demoSignIn: async function () { await wait(); db().signedIn = true; db().aal2 = false; save(); },
+      providers: ["google", "apple"],
+      signInWith: async function () { await wait(); db().signedIn = true; db().aal2 = false; save(); },
       signOut: async function () { db().signedIn = false; db().aal2 = false; save(); },
       access: async function () {
         var s = db();

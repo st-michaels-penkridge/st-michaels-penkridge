@@ -1031,3 +1031,9 @@
 .m-shortcuts a::after { content: ""; flex: none; width: .5rem; height: .5rem; border: solid var(--crimson); border-width: 2px 2px 0 0; transform: rotate(45deg); }
 .m-shortcuts a:hover, .m-shortcuts a:focus-visible { color: var(--crimson); }
 @media (min-width: 760px) { .m-shortcuts ul { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* Sign in: Google and Apple under the email link, each a full-width white button */
+.m-providers { display: grid; gap: .75rem; margin-top: 1.75rem; }
+.m-providers .m-btn { justify-self: stretch; }
+.m-or { display: flex; align-items: center; gap: 1rem; margin: 0; color: var(--ink-soft); }
+.m-or::before, .m-or::after { content: ""; flex: 1; border-top: 1px solid var(--stone-line); }
