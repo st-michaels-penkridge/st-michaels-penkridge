@@ -2850,9 +2850,10 @@ h1, h2, h3 { text-transform: none; letter-spacing: -.025em; font-weight: 500; }
 .nav-group.is-open > .nav-group-btn::after { transform: translateY(2px) rotate(-135deg); }
 .nav-group-btn:focus-visible, .nav-toggle:focus-visible { outline: 2px solid var(--crimson); outline-offset: 4px; }
 
+/* The dropdown is a squircle card, and each link in it lights up as its own squircle on hover */
 .nav-menu {
-  display: none; position: absolute; top: 100%; left: -1.25rem; z-index: 50; min-width: 16rem;
-  flex-direction: column; background: #fffdf9; border-top: 3px solid var(--crimson);
+  display: none; position: absolute; top: 100%; left: -1.25rem; z-index: 50; min-width: 16rem; gap: .15rem;
+  flex-direction: column; padding: .4rem; background: #fffdf9; border-radius: 1.5rem; corner-shape: squircle;
   box-shadow: 0 14px 34px rgba(30, 22, 16, .14);
 }
 .nav-group.is-open > .nav-menu { display: flex; }
@@ -2861,13 +2862,12 @@ h1, h2, h3 { text-transform: none; letter-spacing: -.025em; font-weight: 500; }
 }
 .nav .nav-menu a {
   font-family: var(--body); font-size: 1rem; letter-spacing: 0; text-transform: none; white-space: normal;
-  color: var(--ink); padding: .85rem 1.25rem; min-height: 0; display: block;
-  border-bottom: 1px solid #e6ded2;
+  color: var(--ink); padding: .8rem 1rem; min-height: 0; display: block;
+  border-radius: 1rem; corner-shape: squircle; transition: background-color .15s ease-out, color .15s ease-out;
 }
-.nav .nav-menu a:last-child { border-bottom: 0; }
 .nav .nav-menu a::after { display: none; }
-.nav .nav-menu a:hover, .nav .nav-menu a:focus-visible { color: var(--crimson); background: #f6f0e7; }
-.nav .nav-menu a[aria-current="page"] { color: var(--crimson); box-shadow: inset 3px 0 0 var(--crimson); }
+.nav .nav-menu a:is(:hover, :focus-visible) { color: var(--crimson); background: #f6f0e7; }
+.nav .nav-menu a[aria-current="page"] { color: var(--crimson); }
 .nav-menu small { display: block; margin-top: .15rem; font-size: .85rem; color: var(--ink-soft); }
 
 .nav-toggle {
@@ -2899,7 +2899,7 @@ h1, h2, h3 { text-transform: none; letter-spacing: -.025em; font-weight: 500; }
     display: none; flex: 0 0 100%; flex-direction: column; align-items: stretch; gap: 0;
     box-sizing: border-box; margin-top: .75rem; padding: .25rem 1.25rem .75rem;
     max-height: calc(100svh - 7rem); overflow-y: auto; overscroll-behavior: contain;
-    background: var(--paper); border-radius: 1rem; box-shadow: 0 20px 40px rgba(17, 17, 19, .2);
+    background: var(--paper); border-radius: 1.5rem; corner-shape: squircle; box-shadow: 0 20px 40px rgba(17, 17, 19, .2);
   }
   .masthead.nav-open .nav { display: flex; }
   .masthead .nav > a, .nav-group-btn {
@@ -2909,16 +2909,16 @@ h1, h2, h3 { text-transform: none; letter-spacing: -.025em; font-weight: 500; }
   .masthead .nav > a::after { display: none; }
   .masthead .nav > a[aria-current="page"] { color: var(--crimson); }
   .nav-menu {
-    position: static; min-width: 0; box-shadow: none; border-top: 0; background: transparent;
+    position: static; min-width: 0; box-shadow: none; border-radius: 0; background: transparent;
     border-bottom: 1px solid var(--stone-line); padding: .25rem 0 .5rem;
   }
-  .nav .nav-menu a { border-bottom: 0; padding: .7rem 1rem; }
+  .nav .nav-menu a { padding: .7rem 1rem; }
   .masthead .nav > a[data-nav="donate"] {
     margin: 1.25rem 0 0; justify-content: center; min-height: 3rem; border-bottom: 0; border-radius: 6px; align-self: stretch;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .nav-group-btn::after, .nav-toggle-bars, .nav-toggle-bars::before, .nav-toggle-bars::after { transition: none; }
+  .nav-group-btn::after, .nav-toggle-bars, .nav-toggle-bars::before, .nav-toggle-bars::after, .nav .nav-menu a { transition: none; }
 }
 @media print { .nav-toggle { display: none; } }
 
