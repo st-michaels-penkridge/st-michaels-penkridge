@@ -553,24 +553,29 @@ address {
 
 /* History, leading into giving */
 
-/* Giving: a dimmed photo backdrop with a white card floating over it, to match Find a grave above it */
 :root { --shadow-6: 0 1px 1px rgba(20, 20, 22, .07), 0 2px 2px rgba(20, 20, 22, .07), 0 4px 4px rgba(20, 20, 22, .07), 0 8px 8px rgba(20, 20, 22, .07), 0 16px 16px rgba(20, 20, 22, .07), 0 32px 32px rgba(20, 20, 22, .07); }
-.give { position: relative; overflow: hidden; display: grid; place-items: center; padding: clamp(2rem, 5vw, 3.5rem) var(--edge); text-align: center; background: var(--black); border-top: 6px solid #fff; }
-.give-photo { position: absolute; inset: 0; margin: 0; }
-.give-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; filter: saturate(.3) brightness(.82); }
-.give-box {
-  position: relative; display: grid; justify-items: center; gap: 1rem; box-sizing: border-box; width: 100%; max-width: 38rem;
-  padding: clamp(1.75rem, 4vw, 2.5rem) clamp(1.25rem, 4vw, 2.5rem); border-radius: 1.75rem; background: #fff; color: var(--black);
-  box-shadow: var(--shadow-6), 0 12px 40px rgba(0, 0, 0, .18);
-}
-.give h2 { max-width: 16ch; margin: 0 0 .4rem; font-size: clamp(2.2rem, 5vw, 3.6rem); }
-.give-box p:not(.give-charity) { margin: 0 auto; max-width: 30rem; font-size: clamp(1.05rem, 1rem + .3vw, 1.25rem); color: var(--ink-soft); }
-.give .actions { justify-content: center; gap: 1rem; }
-.give .btn-square { min-width: 12rem; min-height: 3.4rem; padding: .75rem 1.75rem; font-size: 1rem; }
-@media (max-width: 480px) { .give .actions { display: grid; justify-content: stretch; width: 100%; } }
 
-.give-charity { margin: 0; font-size: var(--step--1); color: var(--ink-soft); }
+/* Giving: the church in blossom, the Give card overlapping it, and what a gift does beside the card.
+   Both columns sit on the same bottom line, so the card never has empty space inside it. */
+.give { padding-bottom: clamp(3.5rem, 7vw, 7rem); }
+.give-photo { height: clamp(18rem, 40vw, 35rem); margin: 0; }
+.give-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.give-inner { display: grid; align-items: end; gap: 2.5rem 5rem; max-width: 80rem; margin: 0 auto; padding: 0 var(--edge); }
+.give-box {
+  position: relative; display: grid; gap: 1.25rem; max-width: 37rem; margin-top: clamp(-15rem, -16vw, -5rem);
+  padding: clamp(1.75rem, 4vw, 3.5rem); border-radius: 1.75rem; corner-shape: squircle; background: #fff; box-shadow: 0 32px 68px rgba(0, 0, 0, .3);
+}
+.give h2 { margin: 0; font-size: clamp(2.1rem, 4vw, 3.2rem); text-wrap: balance; }
+.give-box > p { margin: 0; font-size: clamp(1.05rem, 1rem + .3vw, 1.2rem); color: var(--ink-soft); }
+.give .actions { display: grid; gap: .75rem; margin-top: .5rem; }
+.give .btn-square { min-height: 3.6rem; font-size: 1rem; }
+.give-box > .give-charity { font-size: var(--step--1); }
 .give :focus-visible, .give .btn-give:focus-visible { outline-color: var(--black); }
+.give-does h3 { margin: 0 0 1.25rem; font-size: clamp(1.4rem, 2.5vw, 1.75rem); color: var(--crimson); }
+.give-does ul { display: grid; column-gap: 2.5rem; margin: 0 0 1.5rem; padding: 0; list-style: none; }
+.give-does li { padding: 1rem 0 1.25rem; border-top: 1px solid var(--stone-line); }
+@media (min-width: 640px) { .give-does ul { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1200px) { .give-inner { grid-template-columns: minmax(0, 37rem) minmax(0, 1fr); } .give-does { padding-top: 2.5rem; } }
 
 /* Visit */
 .visit {

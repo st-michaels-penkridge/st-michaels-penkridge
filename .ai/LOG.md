@@ -10,6 +10,7 @@ H3 | index.html, site.css | Sunday photo matches the text; Find a grave search b
 H4 | buttons.js, site.css, privacy.html | map waits for consent; bottom bar with equal choices; privacy page explains it and lets people change their answer
 B1 (24 Nov, william-tobi) | sundays, visit, life-events, donate, privacy, index (welcome popup), site.css | every button now uses the home page look (.btn-line, or .btn-give for giving); old -fill/-ghost/-light variants deleted; one size in .btn-square; site.css v=20261124. Already failing on William before this: index.html desktop page weight 1593KB (limit 1500)
 B2 (24 Nov, william-tobi) | site.css | every photo set into a page (Sundays intro, home first Sunday, History rows and photo strips, Bygone album) gets squircle corners via corner-shape (Chrome/Edge); Safari and Firefox fall back to plain rounded corners; the black frames and mount on the strips and album removed; site.css v=20261124b
+B3 (27 Nov, tobi-27-11-2026) | index.html, site.css | Give rebuilt from the signed-off mockup: full-width blossom photo, the Give card overlapping it with stacked buttons, and "What your gift does" (the Donate page's four lines) beside it on the same bottom line so the card has no empty space; site.css v=20261127. Also fixes the index.html desktop page-weight failure (smaller Give photo)
 
 ## Questions for Tobi
 - None.
