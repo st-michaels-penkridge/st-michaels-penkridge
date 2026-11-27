@@ -15,6 +15,7 @@ B4 (27 Nov, tobi-27-11-2026) | index.html, site.css, buttons.js, images/opt | Fi
 B5 (27 Nov, tobi-27-11-2026) | index.html, images/opt | Give photo re-encoded from the church's original at higher quality with light sharpening (7cc8b9568f0a-1443.webp); the original is only 1443px wide, so a full-size file from the church would be sharper still on high-density screens
 B6 (27 Nov, tobi-27-11-2026) | site.css | header Donate button now burgundy with white lettering like the Give buttons, on every page and in the phone menu (dropped the white override and the outlined current-page style); site.css v=20261127c
 B7 (27 Nov, tobi-27-11-2026) | site.css | menus: the dropdown is a squircle card with no dividers, each link lights up as its own squircle on hover or keyboard focus (desktop and phone), the current page shows in red; the phone menu card has squircle corners; site.css v=20261127d
+B8 (27 Nov, tobi-27-11-2026) | visit.html | Visit map back to click-to-load (the "Show the map" placeholder), so Google Maps only loads after Accept on the cookie bar or a click, as on the home page; undoes the always-on map from 56ef4fd before this goes to main
 
 ## Questions for Tobi
 - None.
