@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&amp;family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=20261127e">
+  <link rel="stylesheet" href="site.css?v=20261127f">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -45,8 +45,17 @@
         </div>
       </div>
       <a href="churchyard.html" data-nav="churchyard">Find a grave</a>
-      <a href="donate.html" data-nav="donate" aria-current="page">Donate</a>
+      <div class="nav-group is-current">
+        <button type="button" class="nav-group-btn" aria-expanded="false">Giving</button>
+        <div class="nav-menu">
+          <a href="donate.html#give">Give online<small>Monthly or once, with Gift Aid</small></a>
+          <a href="donate.html#gift-aid">Gift Aid<small>25p more for every &pound;1, at no cost to you</small></a>
+          <a href="donate.html#ways-title">Other ways to give<small>In memory and in your will</small></a>
+        </div>
+      </div>
+      <a href="donate.html#give" data-nav="donate" aria-current="page">Donate</a>
     </nav>
+    <a class="nav-account" href="members/index.html" aria-label="Members sign in" title="Members sign in"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></a>
   </header>
 
   <main id="main">
@@ -67,10 +76,8 @@
           <li>Looks after the churchyard and its records, so families can find the people they love</li>
         </ul>
       </div>
-      <div class="monthly give-online" id="monthly">
+      <div class="monthly give-online" id="give">
         <h2 id="give-title" tabindex="-1">Give online</h2>
-        <p class="give-demo">Demo only: no money is taken and nothing you type leaves this page.</p>
-
         <form class="give-step" id="give-choose" hidden>
           <fieldset class="give-pick">
             <legend>How often</legend>
@@ -102,11 +109,13 @@
             <legend>Card</legend>
             <label>Card number<input value="4242 4242 4242 4242" disabled></label>
             <label>Expiry<input value="12 / 34" disabled></label>
-            <label>Security code<input value="123" disabled></label>
+            <label>CVC<input value="123" disabled></label>
           </fieldset>
           <p class="small">The demo uses a test card. When this goes live, card details go straight to Stripe and never touch this website. See our <a href="privacy.html">privacy notice</a>.</p>
-          <button class="btn-square btn-line" type="submit" data-pay>Pay</button>
-          <button class="give-back" type="button">Back</button>
+          <div class="give-actions">
+            <button class="btn-square btn-line" type="submit" data-pay>Pay</button>
+            <button class="give-back" type="button">Back</button>
+          </div>
         </form>
 
         <div class="give-step" id="give-done" hidden>
@@ -115,7 +124,7 @@
           <button class="btn-square btn-line" type="button" data-again>Start again</button>
         </div>
 
-        <p class="small">Rather talk to someone? Call the parish office on <a href="tel:+441785714344">01785&nbsp;714344</a>.</p>
+        <p class="small give-foot">Demo only: no money is taken and nothing you type leaves this page. Rather talk to someone? Call the parish office on <a href="tel:+441785714344">01785&nbsp;714344</a>.</p>
       </div>
     </section>
 
@@ -126,7 +135,7 @@
           <h3>Give once</h3>
           <p>Give during a service or when you visit the church. To give another way, <a href="tel:+441785714344">call the parish office on 01785 714344</a>.</p>
         </li>
-        <li>
+        <li id="gift-aid">
           <h3>Add Gift Aid</h3>
           <p>If you pay UK income tax, Gift Aid adds 25p to every &pound;1 you give, at no cost to you. Tick the Gift Aid box when you give, or ask the parish office for a form. <a href="https://www.gov.uk/donating-to-charity/gift-aid" target="_blank" rel="noopener">How Gift Aid works</a></p>
         </li>
@@ -180,7 +189,7 @@
   </footer>
 
   <script src="buttons.js?v=20261127" defer></script>
-  <script src="give-demo.js?v=20261127" defer></script>
+  <script src="give-demo.js?v=20261127b" defer></script>
   <script src="font-lab.js?v=20261127" defer></script>
 </body>
 </html>

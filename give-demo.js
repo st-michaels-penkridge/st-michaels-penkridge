@@ -1,7 +1,7 @@
 // Donate page: a demo of giving online. Nothing is sent anywhere and no money is taken.
 // When it goes live, the Pay step hands over to Stripe instead of showing the thank-you.
 (function () {
-  var box = document.getElementById("monthly");
+  var box = document.getElementById("give");
   var choose = document.getElementById("give-choose");
   if (!box || !choose) return;
   var pay = document.getElementById("give-pay");

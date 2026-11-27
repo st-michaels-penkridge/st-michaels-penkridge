@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&amp;family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=20261127e">
+  <link rel="stylesheet" href="site.css?v=20261127f">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -45,8 +45,17 @@
         </div>
       </div>
       <a href="churchyard.html" data-nav="churchyard">Find a grave</a>
-      <a href="donate.html" data-nav="donate">Donate</a>
+      <div class="nav-group">
+        <button type="button" class="nav-group-btn" aria-expanded="false">Giving</button>
+        <div class="nav-menu">
+          <a href="donate.html#give">Give online<small>Monthly or once, with Gift Aid</small></a>
+          <a href="donate.html#gift-aid">Gift Aid<small>25p more for every &pound;1, at no cost to you</small></a>
+          <a href="donate.html#ways-title">Other ways to give<small>In memory and in your will</small></a>
+        </div>
+      </div>
+      <a href="donate.html#give" data-nav="donate">Donate</a>
     </nav>
+    <a class="nav-account" href="members/index.html" aria-label="Members sign in" title="Members sign in"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></a>
   </header>
 
   <main id="main">

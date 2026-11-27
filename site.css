@@ -1034,48 +1034,54 @@ footer.footer h2 { margin: 0 0 .9rem; font-size: .95rem; letter-spacing: .08em; 
   margin: 1rem 0 0;
 }
 
-/* Giving online (a demo for now): choose, pay, thank you, all inside the crimson card */
-.give-online { display: grid; gap: 1.25rem; }
+/* Giving online (a demo for now): choose, pay, thank you, all inside the crimson card and short enough to fit on one screen */
+.monthly.give-online { display: grid; gap: 1rem; padding: clamp(1.5rem, 3vw, 2.25rem); }
 .give-online h2:focus { outline: none; }
 .give-online :is(h2, p, .small) { margin: 0; }
-.give-demo { padding: .55rem .9rem; border: 1px solid rgba(255, 255, 255, .55); border-radius: .9rem; corner-shape: squircle; font-size: .95rem; }
-.give-step { display: grid; gap: 1.1rem; }
+.give-step { display: grid; gap: .9rem; }
 .give-step[hidden], .give-aid-details[hidden] { display: none; }
 .give-online fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
-.give-online legend { margin-bottom: .5rem; font-weight: 600; }
+.give-online legend { margin-bottom: .4rem; font-weight: 600; }
 .give-pick { display: flex; flex-wrap: wrap; gap: .5rem; }
 .give-pick label { position: relative; }
 .give-pick input[type="radio"] { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
 .give-pick span, .give-other {
-  display: inline-flex; align-items: center; justify-content: center; min-width: 4.5rem; min-height: 3rem; padding: 0 1rem;
+  display: inline-flex; align-items: center; justify-content: center; min-width: 4.25rem; min-height: 2.75rem; padding: 0 .9rem;
   border: 1px solid rgba(255, 255, 255, .6); border-radius: .9rem; corner-shape: squircle; font-family: var(--display); letter-spacing: .06em;
 }
 .give-pick input:checked + span { background: #fff; color: var(--crimson); }
 .give-pick input:focus-visible + span, .give-other:focus-within { outline: 3px solid #fff; outline-offset: 3px; }
 .give-other { gap: .3rem; }
-.give-other input { width: 4.5rem; border: 0; background: none; color: #fff; font: inherit; letter-spacing: 0; }
+.give-other input { width: 4rem; border: 0; background: none; color: #fff; font: inherit; letter-spacing: 0; appearance: textfield; }
 .give-other input:focus { outline: none; }
-.give-other input { appearance: textfield; }
 .give-other input::-webkit-inner-spin-button { appearance: none; }
 .give-other input::placeholder { color: rgba(255, 255, 255, .85); }
 .give-aid { display: flex; gap: .6rem; align-items: flex-start; cursor: pointer; }
 .give-aid input { flex: none; width: 1.2rem; height: 1.2rem; margin: .2rem 0 0; accent-color: #fff; }
-.give-aid-details, .give-card { display: grid; gap: .75rem; }
-.give-card { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.give-aid-details, .give-card { display: grid; gap: .6rem .75rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.give-aid-details { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, .8fr); }
+.give-aid-details p { grid-column: 1 / -1; font-size: .8rem; line-height: 1.45; }
+.give-card { grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1fr)); }
 .give-card legend { grid-column: 1 / -1; }
-.give-card label:first-of-type { grid-column: 1 / -1; }
-.give-step > label:not(.give-aid), .give-aid-details label, .give-card label { display: grid; gap: .35rem; }
+.give-step > label:not(.give-aid), .give-aid-details label, .give-card label { display: grid; gap: .3rem; }
 .give-step > label:not(.give-aid) input, .give-aid-details input, .give-card input {
-  width: 100%; min-width: 0; min-height: 3rem; padding: 0 .9rem; border: 0; border-radius: .9rem; corner-shape: squircle; background: #fff; color: var(--ink); font: inherit;
+  width: 100%; min-width: 0; min-height: 2.75rem; padding: 0 .8rem; border: 0; border-radius: .9rem; corner-shape: squircle; background: #fff; color: var(--ink); font: inherit;
 }
 .give-card input:disabled { opacity: 1; color: var(--ink); -webkit-text-fill-color: var(--ink); background: #f3f1ed; }
 .give-summary { font-size: 1.15rem; }
 .give-online .btn-square { justify-self: start; }
-.give-back { justify-self: start; padding: .25rem 0; border: 0; background: none; color: #fff; font: inherit; text-decoration: underline; text-underline-offset: .2em; cursor: pointer; }
+.give-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.5rem; }
+.give-back { padding: .25rem 0; border: 0; background: none; color: #fff; font: inherit; text-decoration: underline; text-underline-offset: .2em; cursor: pointer; }
+.give-foot { font-size: .85rem; }
+@media (max-width: 600px) {
+  .give-aid-details { grid-template-columns: minmax(0, 1fr); }
+  .give-card { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .give-card label:first-of-type { grid-column: 1 / -1; }
+}
 
 @media (min-width: 900px) {
   .donate-main {
-    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
   }
 }
 
@@ -3302,3 +3308,24 @@ html:is(.hint-down, .hint-up) body { background: var(--black); }
 @supports (corner-shape: squircle) { :root { --photo-corner: 3rem; } }
 :is(.sun-intro-photo, .first-sunday-inline, .hist-photo, .album, .grave-photo) img,
 .carousel-viewport .gallery-thumb { overflow: hidden; border-radius: var(--photo-corner); corner-shape: squircle; }
+
+/* Members sign-in: a person icon in the header's top corner */
+.nav-account {
+  display: inline-flex; align-items: center; justify-content: center; flex: none; width: 2.75rem; height: 2.75rem;
+  border-radius: 50%; color: var(--ink); transition: background-color .15s ease-out, color .15s ease-out;
+}
+.nav-account svg { width: 1.35rem; height: 1.35rem; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
+.nav-account:is(:hover, :focus-visible), .nav-account[aria-current="page"] { color: var(--crimson); background: #f6f0e7; }
+.nav-account:focus-visible { outline: 2px solid var(--crimson); outline-offset: 2px; }
+.masthead:has(.nav-account) { grid-template-columns: auto minmax(0, 1fr) auto; }
+.home-v1 .masthead:not(.is-scrolled):not(.nav-open) .nav-account { color: #fff; }
+.home-v1 .masthead:not(.is-scrolled):not(.nav-open) .nav-account:is(:hover, :focus-visible) { color: #fff; background: rgba(255, 255, 255, .15); outline-color: #fff; }
+@media (max-width: 1150px) {
+  .masthead:has(.nav-account) { grid-template-columns: minmax(0, 1fr) auto; }
+  .masthead:has(.nav-account) .nav { grid-column: 1 / -1; grid-row: 2; }
+}
+@media (max-width: 1000px) {
+  .nav-account { order: 1; }
+  .nav-toggle { order: 2; }
+  .masthead .nav { order: 3; }
+}
