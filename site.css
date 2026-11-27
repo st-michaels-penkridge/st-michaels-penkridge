@@ -1937,12 +1937,6 @@ html {
   outline-offset: 3px;
 }
 
-.nav a[data-nav="donate"][aria-current="page"] {
-  background: transparent;
-  outline: 1px solid rgba(20, 20, 22, .35);
-  outline-offset: -1px;
-  box-shadow: none;
-}
 
 
 /* Stained glass tilts a little towards the cursor, with a soft glint */
@@ -3000,7 +2994,6 @@ h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
 .home-v1 .masthead:not(.is-scrolled):not(.nav-open) .nav > a::after { background: var(--brass); }
 .home-v1 .masthead:not(.is-scrolled):not(.nav-open) .nav-toggle { border-color: rgba(255,255,255,.6); }
 .home-v1 .masthead:not(.is-scrolled):not(.nav-open) :is(.nav > a, .nav-group-btn, .nav-toggle):focus-visible { outline-color: #fff; }
-.home-v1 .masthead:not(.is-scrolled):not(.nav-open) .nav > a[data-nav="donate"] { color: var(--btn-ink); }
 
 .hero-altar {
   position: relative; isolation: isolate; overflow: hidden;
@@ -3223,9 +3216,9 @@ h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 11.2 9.3 8.7C8.2 7.7 7.7 6.4 8.4 5.2c.8-1.4 2.8-1.5 3.6-.2.8-1.3 2.8-1.2 3.6.2.7 1.2.2 2.5-.9 3.5z'/%3E%3Cpath d='M2 14.2h2.6c.9 0 1.7.2 2.5.6l1.6.8h3.6a1.5 1.5 0 0 1 0 3H9.2'/%3E%3Cpath d='M4.6 20.6h2.7l4.6.9c.8.2 1.6 0 2.3-.4l6.2-3.7a1.5 1.5 0 0 0-1.4-2.6l-4.2 1.9'/%3E%3Cpath d='M2 13.2v8.3'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 11.2 9.3 8.7C8.2 7.7 7.7 6.4 8.4 5.2c.8-1.4 2.8-1.5 3.6-.2.8-1.3 2.8-1.2 3.6.2.7 1.2.2 2.5-.9 3.5z'/%3E%3Cpath d='M2 14.2h2.6c.9 0 1.7.2 2.5.6l1.6.8h3.6a1.5 1.5 0 0 1 0 3H9.2'/%3E%3Cpath d='M4.6 20.6h2.7l4.6.9c.8.2 1.6 0 2.3-.4l6.2-3.7a1.5 1.5 0 0 0-1.4-2.6l-4.2 1.9'/%3E%3Cpath d='M2 13.2v8.3'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
-/* Give monthly / Give once are burgundy with white lettering; the Donate link in the header stays white (Will, 22 Nov) */
-.btn-give { color: #fff; background-color: var(--crimson); box-shadow: none; outline-color: rgba(255, 255, 255, .45); }
-.btn-give:is(:hover, :focus-visible) { color: #fff; background-color: color-mix(in oklch, var(--crimson), #000 20%); }
+/* Every Give and Donate button, the header's included, is burgundy with white lettering */
+.btn-give, .nav a[data-nav="donate"] { color: #fff; background-color: var(--crimson); box-shadow: none; outline-color: rgba(255, 255, 255, .45); }
+.btn-give:is(:hover, :focus-visible), .nav a[data-nav="donate"]:is(:hover, :focus-visible) { color: #fff; background-color: color-mix(in oklch, var(--crimson), #000 20%); }
 
 /* Springs measured from Farm Africa's own animations, written as CSS curves so no animation library is needed */
 :root {

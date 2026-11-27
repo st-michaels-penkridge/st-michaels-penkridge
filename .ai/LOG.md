@@ -12,6 +12,8 @@ B1 (24 Nov, william-tobi) | sundays, visit, life-events, donate, privacy, index 
 B2 (24 Nov, william-tobi) | site.css | every photo set into a page (Sundays intro, home first Sunday, History rows and photo strips, Bygone album) gets squircle corners via corner-shape (Chrome/Edge); Safari and Firefox fall back to plain rounded corners; the black frames and mount on the strips and album removed; site.css v=20261124b
 B3 (27 Nov, tobi-27-11-2026) | index.html, site.css | Give rebuilt from the signed-off mockup: full-width blossom photo, the Give card overlapping it with stacked buttons, and "What your gift does" (the Donate page's four lines) beside it on the same bottom line so the card has no empty space; site.css v=20261127. Also fixes the index.html desktop page-weight failure (smaller Give photo)
 B4 (27 Nov, tobi-27-11-2026) | index.html, site.css, buttons.js, images/opt | Find a grave rebuilt from the mockup: plain search on white beside the snow-cross photo (squircle), bigger search bar, link to browse the churchyard on gravefindr; rolling reel and card removed (HTML, CSS, script, unused --shadow-6); site.css v=20261127b, buttons.js v=20261127
+B5 (27 Nov, tobi-27-11-2026) | index.html, images/opt | Give photo re-encoded from the church's original at higher quality with light sharpening (7cc8b9568f0a-1443.webp); the original is only 1443px wide, so a full-size file from the church would be sharper still on high-density screens
+B6 (27 Nov, tobi-27-11-2026) | site.css | header Donate button now burgundy with white lettering like the Give buttons, on every page and in the phone menu (dropped the white override and the outlined current-page style); site.css v=20261127c
 
 ## Questions for Tobi
 - None.
