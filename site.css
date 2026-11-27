@@ -1067,7 +1067,8 @@ footer.footer h2 { margin: 0 0 .9rem; font-size: .95rem; letter-spacing: .08em; 
 .give-step > label:not(.give-aid) input, .give-aid-details input, .give-card input {
   width: 100%; min-width: 0; min-height: 2.75rem; padding: 0 .8rem; border: 0; border-radius: .9rem; corner-shape: squircle; background: #fff; color: var(--ink); font: inherit;
 }
-.give-card input:disabled { opacity: 1; color: var(--ink); -webkit-text-fill-color: var(--ink); background: #f3f1ed; }
+.give-card input { font-variant-numeric: tabular-nums; }
+.give-link { padding: 0; border: 0; background: none; color: #fff; font: inherit; text-decoration: underline; text-underline-offset: .2em; cursor: pointer; }
 .give-summary { font-size: 1.15rem; }
 .give-online .btn-square { justify-self: start; }
 .give-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.5rem; }

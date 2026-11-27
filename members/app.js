@@ -29,6 +29,7 @@
     for (var i = 2; i < arguments.length; i++) add(el, arguments[i]);
     return el;
   }
+  function name(p) { return p === "google" ? "Google" : "Apple"; }
   // add(parent, child, child, ...): strings become text, arrays are flattened, empty values skipped
   function add(el) {
     for (var i = 1; i < arguments.length; i++) {
@@ -233,14 +234,15 @@
       if (api.providers.length) add(box, h("div", { class: "m-providers" },
         h("p", { class: "m-or", text: "or" }),
         api.providers.map(function (p) {
-          var b = h("button", { type: "button", class: "m-btn m-btn-quiet", text: "Continue with " + (p === "google" ? "Google" : "Apple") });
+          // Laid out like the providers' own sign-in buttons; their official logo goes in front of the words
+          var b = h("button", { type: "button", class: "m-provider m-provider-" + p }, h("span", { text: "Continue with " + name(p) }));
           b.addEventListener("click", act(b, async function () {
             await api.signInWith(p);
             if (api.mode === "demo") { state.signedIn = null; route(); }
           }));
           return b;
         }),
-        h("p", { class: "m-help", text: "Use the Google or Apple account with the same email address the church has for you." })));
+        h("p", { class: "m-help", text: "Use the " + api.providers.map(name).join(" or ") + " account with the same email address the church has for you." })));
       if (!err) setTimeout(function () { email.focus(); }, 0);
     }
     function askCode(address) {

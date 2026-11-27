@@ -56,8 +56,40 @@
     pay.querySelector("[data-pay]").textContent = monthly() ? "Start " + gift() : "Pay " + gift();
     show(pay);
   });
+  // Card boxes: numbers only, in groups as you type. Only Stripe's public test cards are taken
+  var TEST_CARDS = ["4242424242424242", "4000056655665556", "5555555555554444", "378282246310005"];
+  var card = pay.elements.card, expiry = pay.elements.expiry, cvc = pay.elements.cvc;
+  function digits(el) { return el.value.replace(/\D/g, ""); }
+  card.addEventListener("input", function () { card.value = digits(card).slice(0, 16).replace(/(\d{4})(?=\d)/g, "$1 "); card.setCustomValidity(""); });
+  expiry.addEventListener("input", function () { var d = digits(expiry).slice(0, 4); expiry.value = d.length > 2 ? d.slice(0, 2) + " / " + d.slice(2) : d; expiry.setCustomValidity(""); });
+  cvc.addEventListener("input", function () { cvc.value = digits(cvc).slice(0, 4); cvc.setCustomValidity(""); });
+  pay.querySelector("[data-test]").addEventListener("click", function () {
+    card.value = "4242 4242 4242 4242";
+    expiry.value = "12 / 34";
+    cvc.value = "123";
+    [card, expiry, cvc].forEach(function (el) { el.setCustomValidity(""); });
+  });
+  function cardProblem() {
+    if (TEST_CARDS.indexOf(digits(card)) < 0) {
+      card.value = "";
+      return [card, "This demo only takes Stripe's test card, 4242 4242 4242 4242."];
+    }
+    var d = digits(expiry), month = +d.slice(0, 2), year = 2000 + +d.slice(2), now = new Date();
+    if (d.length !== 4 || month < 1 || month > 12 || year < now.getFullYear() || (year === now.getFullYear() && month < now.getMonth() + 1)) {
+      return [expiry, "Put in a date in the future, like 12 / 34."];
+    }
+    if (digits(cvc).length < 3) return [cvc, "Put in the 3 numbers from the back of the card."];
+    return null;
+  }
+
   pay.addEventListener("submit", function (e) {
     e.preventDefault();
+    var problem = cardProblem();
+    if (problem) {
+      problem[0].setCustomValidity(problem[1]);
+      problem[0].reportValidity();
+      return;
+    }
     done.querySelector("[data-thanks]").textContent = "Your gift of " + gift() + " helps keep St Michael's open for everyone.";
     show(done);
   });

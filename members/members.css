@@ -1032,8 +1032,15 @@
 .m-shortcuts a:hover, .m-shortcuts a:focus-visible { color: var(--crimson); }
 @media (min-width: 760px) { .m-shortcuts ul { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
-/* Sign in: Google and Apple under the email link, each a full-width white button */
+/* Sign in: Google (and Apple, if switched on) under the email link, laid out like the providers' own buttons */
 .m-providers { display: grid; gap: .75rem; margin-top: 1.75rem; }
-.m-providers .m-btn { justify-self: stretch; }
+.m-provider {
+  display: flex; align-items: center; justify-content: center; gap: .75rem; min-height: 2.75rem; padding: 0 1rem;
+  border: 1px solid #747775; border-radius: 999px; background: #fff; color: #1f1f1f;
+  font: 500 .95rem/1.2 Roboto, system-ui, "Segoe UI", Arial, sans-serif; letter-spacing: .01em; cursor: pointer;
+}
+.m-provider:hover { background: #f8f9fa; }
+.m-provider:focus-visible { outline: 3px solid var(--crimson); outline-offset: 3px; }
+.m-provider img { flex: none; width: 20px; height: 20px; }
 .m-or { display: flex; align-items: center; gap: 1rem; margin: 0; color: var(--ink-soft); }
 .m-or::before, .m-or::after { content: ""; flex: 1; border-top: 1px solid var(--stone-line); }

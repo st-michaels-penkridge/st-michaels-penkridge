@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&amp;family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=20261127f">
+  <link rel="stylesheet" href="site.css?v=20261127g">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -107,11 +107,11 @@
           <label>Email for your receipt<input type="email" name="email" autocomplete="email" required></label>
           <fieldset class="give-card">
             <legend>Card</legend>
-            <label>Card number<input value="4242 4242 4242 4242" disabled></label>
-            <label>Expiry<input value="12 / 34" disabled></label>
-            <label>CVC<input value="123" disabled></label>
+            <label>Card number<input name="card" inputmode="numeric" autocomplete="off" maxlength="19" placeholder="1234 1234 1234 1234" required></label>
+            <label>Expiry<input name="expiry" inputmode="numeric" autocomplete="off" maxlength="7" placeholder="MM / YY" required></label>
+            <label>CVC<input name="cvc" inputmode="numeric" autocomplete="off" maxlength="4" placeholder="123" required></label>
           </fieldset>
-          <p class="small">The demo uses a test card. When this goes live, card details go straight to Stripe and never touch this website. See our <a href="privacy.html">privacy notice</a>.</p>
+          <p class="small">This demo only takes Stripe's test card, 4242 4242 4242 4242, with any future date and any 3 numbers: <button class="give-link" type="button" data-test>fill it in for me</button>. When it goes live, card details go straight to Stripe and never touch this website. See our <a href="privacy.html">privacy notice</a>.</p>
           <div class="give-actions">
             <button class="btn-square btn-line" type="submit" data-pay>Pay</button>
             <button class="give-back" type="button">Back</button>
@@ -189,7 +189,7 @@
   </footer>
 
   <script src="buttons.js?v=20261127" defer></script>
-  <script src="give-demo.js?v=20261127b" defer></script>
+  <script src="give-demo.js?v=20261127c" defer></script>
   <script src="font-lab.js?v=20261127" defer></script>
 </body>
 </html>
