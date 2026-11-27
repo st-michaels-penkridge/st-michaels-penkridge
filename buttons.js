@@ -107,30 +107,6 @@
   });
 })();
 
-// Glass controls (the Menu corner and the first Sunday tab): like iOS, their lettering turns white over dark
-// parts of the page and stays black over light ones. The Menu lines and word are checked one by one, so each
-// gets .on-dark when what is behind it is dark, even when the corner sits across two sections.
-(function () {
-  "use strict";
-  var darkParts = ".hero-altar, .life, .find-grave, .give-text, .footer";
-  var parts = document.querySelectorAll(".nav-toggle-bars, .nav-toggle-word, .sunday-tab");
-  if (!parts.length) return;
-  var pending = false;
-  function tint() {
-    pending = false;
-    parts.forEach(function (el) {
-      var host = el.closest(".masthead, .first-sunday"), box = el.getBoundingClientRect();
-      var under = document.elementsFromPoint(box.left + box.width / 2, box.top + box.height / 2).filter(function (u) { return !host.contains(u); })[0];
-      el.classList.toggle("on-dark", !!(under && under.closest(darkParts)));
-    });
-  }
-  function queue() { if (!pending) { pending = true; requestAnimationFrame(tint); } }
-  window.addEventListener("scroll", queue, { passive: true });
-  window.addEventListener("resize", queue);
-  window.addEventListener("load", queue);
-  tint();
-})();
-
 // Main menu: a tab at the top of every page opens a panel with every page listed (Farm Africa style)
 (function () {
   "use strict";
@@ -145,12 +121,10 @@
   groups.forEach(function (g) {
     var btn = g.querySelector(".nav-group-btn");
     btn.addEventListener("click", function () {
-      if (mast && mast.classList.contains("nav-open")) return; // in the full menu every group stays open
       var open = !g.classList.contains("is-open");
       closeAll(g); setGroup(g, open);
     });
     g.addEventListener("focusout", function (e) {
-      if (mast && mast.classList.contains("nav-open")) return;
       if (!g.contains(e.relatedTarget) && window.matchMedia("(min-width: 1001px)").matches) setGroup(g, false);
     });
   });
@@ -177,7 +151,6 @@
       if (mast.classList.contains("nav-open")) return closeMenu(false);
       mast.classList.add("nav-open");
       toggle.setAttribute("aria-expanded", "true");
-      groups.forEach(function (g) { setGroup(g, true); }); // the full menu shows every page at once
       word(true);
     });
   }
@@ -302,75 +275,6 @@
   }, 1560);
 })();
 
-// Find a grave: churchyard photos drift slowly behind the search, with a button to pause them.
-// They stay still for anyone who has turned motion off.
-(function () {
-  var section = document.querySelector(".find-grave");
-  var pause = section && section.querySelector(".reel-pause");
-  if (!pause || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  section.classList.add("is-moving");
-  pause.hidden = false;
-  pause.addEventListener("click", function () {
-    var paused = pause.getAttribute("aria-pressed") !== "true";
-    pause.setAttribute("aria-pressed", String(paused));
-    section.classList.toggle("is-paused", paused);
-  });
-})();
-
-// Your first Sunday: the tab on the right edge grows into a panel, and shrinks back into the tab when closed
-(function () {
-  var tab = document.querySelector(".sunday-tab");
-  var panel = tab && document.getElementById(tab.getAttribute("aria-controls"));
-  if (!panel) return;
-  var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var address = document.querySelector(".hero-address span");
-
-  // The tab stays on the hero, its bottom level with the address line, and scrolls away with the page
-  function place() {
-    if (!address) return;
-    var top = address.getBoundingClientRect().bottom + window.scrollY - tab.offsetHeight;
-    tab.parentElement.style.setProperty("--tab-top", Math.max(16, top) + "px");
-  }
-  place();
-  window.addEventListener("resize", place);
-
-  function open() {
-    var r = tab.getBoundingClientRect();
-    // The panel opens from wherever the tab is on screen, kept clear of the screen edges
-    panel.style.setProperty("--panel-bottom", Math.min(Math.max(16, window.innerHeight - r.bottom), window.innerHeight * .4) + "px");
-    panel.style.setProperty("--tab-h", r.height + "px");
-    panel.style.setProperty("--tab-w", r.width + "px");
-    panel.hidden = false;
-    void panel.offsetWidth;
-    panel.classList.add("is-open");
-    tab.parentElement.classList.add("is-open");
-    tab.setAttribute("aria-expanded", "true");
-    panel.querySelector("h2").focus({ preventScroll: true });
-  }
-
-  function close(returnFocus) {
-    if (panel.hidden) return;
-    panel.classList.remove("is-open");
-    tab.parentElement.classList.remove("is-open");
-    tab.setAttribute("aria-expanded", "false");
-    if (returnFocus) tab.focus();
-    setTimeout(function () {
-      if (!panel.classList.contains("is-open")) panel.hidden = true;
-    }, still ? 0 : 500);
-  }
-
-  tab.addEventListener("click", function () {
-    if (panel.hidden) open(); else close(true);
-  });
-  panel.querySelector(".sunday-close").addEventListener("click", function () { close(true); });
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") close(true);
-  });
-  document.addEventListener("click", function (e) {
-    if (!panel.contains(e.target) && e.target !== tab) close(false);
-  });
-})();
-
 // Home: if the visitor is still on the hero after 5 seconds (once the finger on the first Sunday tab has finished)
 // and hasn't scrolled or touched anything, the page lifts a little to show there is more below and drops back,
 // on the same spring as the menu. The CSS does the moving; this only sets the classes.
@@ -384,7 +288,7 @@
   inputs.forEach(function (type) { window.addEventListener(type, stop, { passive: true }); });
   setTimeout(function () {
     inputs.forEach(function (type) { window.removeEventListener(type, stop); });
-    if (busy || window.scrollY > 0 || document.querySelector(".first-sunday.is-open, .masthead.nav-open")) return;
+    if (busy || window.scrollY > 0 || document.querySelector(".masthead.nav-open")) return;
     root.classList.add("hint-down");
     setTimeout(function () {
       root.classList.replace("hint-down", "hint-up");

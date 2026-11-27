@@ -1,1 +1,3 @@
 2026-11-17 | resolved: the five superseded CSS files and scripts/gallery-tags.py | deleted in the clean-up plan (T1, T3) | nothing left open
+2026-11-21 | buttons.js:116-128 | the on-dark tint() watcher for .nav-toggle-bars/.nav-toggle-word is now dead weight (its CSS hook was removed when the header reverted from the floating glass corner to the classic bar) | harmless no-op, not worth touching until buttons.js is next in for edits
+2026-11-22 | site.css:~3488 | --spring, --spring-soft and --spring-bounce custom properties are now unused (last users were the life-rows hover and the old nav-toggle hover, both removed) | harmless dead CSS vars, fold into next site.css pass
