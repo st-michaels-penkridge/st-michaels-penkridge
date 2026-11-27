@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&amp;family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="site.css?v=20261127d">
+  <link rel="stylesheet" href="site.css?v=20261127e">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -67,12 +67,55 @@
           <li>Looks after the churchyard and its records, so families can find the people they love</li>
         </ul>
       </div>
-      <div class="monthly" id="monthly">
-        <h2>Give monthly</h2>
-        <p>A regular gift helps the parish plan ahead. Please ask the parish office about setting up a regular donation.</p>
-        <!-- TODO: replace with the parish's own Parish Giving Scheme link from the treasurer -->
-        <a class="btn-square btn-line" href="tel:+441785714344">Call the parish office</a>
-        <p class="small">01785 714344. Online giving is not available on this site yet.</p>
+      <div class="monthly give-online" id="monthly">
+        <h2 id="give-title" tabindex="-1">Give online</h2>
+        <p class="give-demo">Demo only: no money is taken and nothing you type leaves this page.</p>
+
+        <form class="give-step" id="give-choose" hidden>
+          <fieldset class="give-pick">
+            <legend>How often</legend>
+            <label><input type="radio" name="often" value="month" checked><span>Monthly</span></label>
+            <label><input type="radio" name="often" value="once"><span>Once</span></label>
+          </fieldset>
+          <fieldset class="give-pick">
+            <legend>Amount</legend>
+            <label><input type="radio" name="amount" value="5"><span>&pound;5</span></label>
+            <label><input type="radio" name="amount" value="10" checked><span>&pound;10</span></label>
+            <label><input type="radio" name="amount" value="20"><span>&pound;20</span></label>
+            <label><input type="radio" name="amount" value="50"><span>&pound;50</span></label>
+            <label class="give-other"><span class="visually-hidden">Other amount in pounds</span>&pound;<input type="number" name="other" min="1" max="10000" step="1" inputmode="numeric" placeholder="Other"></label>
+          </fieldset>
+          <label class="give-aid"><input type="checkbox" name="aid"><span>Add Gift Aid: <strong data-aid>&pound;2.50</strong> more at no cost to you</span></label>
+          <div class="give-aid-details" hidden>
+            <p class="small">I want to Gift Aid my donation and any donations I make in the future or have made in the past 4 years to the PCC of St Michael and All Angels, Penkridge. I am a UK taxpayer and understand that if I pay less Income Tax and/or Capital Gains Tax than the amount of Gift Aid claimed on all my donations in that tax year it is my responsibility to pay any difference.</p>
+            <label>Full name<input name="name" autocomplete="name"></label>
+            <label>Home address<input name="address" autocomplete="address-line1"></label>
+            <label>Postcode<input name="postcode" autocomplete="postal-code"></label>
+          </div>
+          <button class="btn-square btn-line" type="submit" data-give>Give &pound;10 a month</button>
+        </form>
+
+        <form class="give-step" id="give-pay" hidden>
+          <p class="give-summary" data-summary></p>
+          <label>Email for your receipt<input type="email" name="email" autocomplete="email" required></label>
+          <fieldset class="give-card">
+            <legend>Card</legend>
+            <label>Card number<input value="4242 4242 4242 4242" disabled></label>
+            <label>Expiry<input value="12 / 34" disabled></label>
+            <label>Security code<input value="123" disabled></label>
+          </fieldset>
+          <p class="small">The demo uses a test card. When this goes live, card details go straight to Stripe and never touch this website. See our <a href="privacy.html">privacy notice</a>.</p>
+          <button class="btn-square btn-line" type="submit" data-pay>Pay</button>
+          <button class="give-back" type="button">Back</button>
+        </form>
+
+        <div class="give-step" id="give-done" hidden>
+          <p class="give-summary">Thank you. <span data-thanks></span></p>
+          <p class="small">This was a demo, so no payment was taken.</p>
+          <button class="btn-square btn-line" type="button" data-again>Start again</button>
+        </div>
+
+        <p class="small">Rather talk to someone? Call the parish office on <a href="tel:+441785714344">01785&nbsp;714344</a>.</p>
       </div>
     </section>
 
@@ -137,5 +180,6 @@
   </footer>
 
   <script src="buttons.js?v=20261127" defer></script>
+  <script src="give-demo.js?v=20261127" defer></script>
 </body>
 </html>

@@ -442,7 +442,7 @@
       sendLink: async function () { await wait(); },
       verifyCode: async function () { await wait(); db().signedIn = true; db().aal2 = false; save(); },
       demoSignIn: async function () { await wait(); db().signedIn = true; db().aal2 = false; save(); },
-      providers: ["google", "apple"],
+      providers: ["google"],
       signInWith: async function () { await wait(); db().signedIn = true; db().aal2 = false; save(); },
       signOut: async function () { db().signedIn = false; db().aal2 = false; save(); },
       access: async function () {
