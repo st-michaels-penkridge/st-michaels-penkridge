@@ -275,14 +275,6 @@
   }, 1560);
 })();
 
-// Find a grave: churchyard photos drift slowly behind the search.
-// They stay still for anyone who has turned motion off.
-(function () {
-  var section = document.querySelector(".find-grave");
-  if (!section || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  section.classList.add("is-moving");
-})();
-
 // Home: if the visitor is still on the hero after 5 seconds (once the finger on the first Sunday tab has finished)
 // and hasn't scrolled or touched anything, the page lifts a little to show there is more below and drops back,
 // on the same spring as the menu. The CSS does the moving; this only sets the classes.

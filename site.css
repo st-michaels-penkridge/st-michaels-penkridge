@@ -553,7 +553,6 @@ address {
 
 /* History, leading into giving */
 
-:root { --shadow-6: 0 1px 1px rgba(20, 20, 22, .07), 0 2px 2px rgba(20, 20, 22, .07), 0 4px 4px rgba(20, 20, 22, .07), 0 8px 8px rgba(20, 20, 22, .07), 0 16px 16px rgba(20, 20, 22, .07), 0 32px 32px rgba(20, 20, 22, .07); }
 
 /* Giving: the church in blossom, the Give card overlapping it, and what a gift does beside the card.
    Both columns sit on the same bottom line, so the card never has empty space inside it. */
@@ -3126,22 +3125,17 @@ h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
 
 
 
-/* Find a grave: a plain search on white that goes straight to the churchyard records */
-.find-grave { position: relative; overflow: hidden; display: grid; place-items: center; padding: clamp(2rem, 5vw, 3.5rem) var(--edge); text-align: center; background: var(--black); border-top: 6px solid #fff; }
-.grave-reel { position: absolute; inset: 0; }
-/* Each photo fades in over the one before it, like a slow dissolve, so there are no edges or gaps */
-.grave-reel-track { --blend: 12rem; display: flex; width: max-content; height: 100%; margin-left: calc(-1 * var(--blend)); }
-.grave-reel img { width: auto; height: 100%; margin-right: calc(-1 * var(--blend)); object-fit: cover; filter: saturate(.3) brightness(.82); -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--blend)); mask-image: linear-gradient(to right, transparent, #000 var(--blend)); }
-.find-grave.is-moving .grave-reel-track { animation: grave-reel 160s linear infinite; }
-@keyframes grave-reel { to { transform: translateX(-50%); } }
-.grave-card { position: relative; display: grid; justify-items: center; gap: 1rem; box-sizing: border-box; width: 100%; max-width: 38rem; padding: clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 4vw, 2.5rem); border-radius: 1.75rem; background: #fff; box-shadow: var(--shadow-6), 0 12px 40px rgba(0, 0, 0, .18); }
-.find-grave .grave-card h2 { color: var(--black); }
-.find-grave .grave-card :is(p, a) { color: var(--black); }
-.find-grave h2 { margin: 0 0 .4rem; font-size: clamp(2.2rem, 5vw, 3.6rem); }
-.find-grave p { margin: 0 auto; max-width: 34rem; font-size: clamp(1.05rem, 1rem + .3vw, 1.25rem); color: var(--ink-soft); }
+/* Find a grave: a plain search on white beside a churchyard photo; the search goes straight to the churchyard records */
+.find-grave { display: grid; gap: 2.5rem 5rem; align-items: center; max-width: 80rem; margin: 0 auto; padding: clamp(3.5rem, 7vw, 7rem) var(--edge); }
+.grave-text { display: grid; justify-items: start; gap: 1.25rem; }
+.find-grave h2 { margin: 0; font-size: clamp(2.2rem, 5vw, 4rem); }
+.find-grave p { margin: 0; max-width: 30ch; font-size: clamp(1.1rem, 1rem + .4vw, 1.4rem); color: var(--ink-soft); }
+.grave-photo { margin: 0; aspect-ratio: 4 / 3; }
+.grave-photo img { width: 100%; height: 100%; object-fit: cover; }
+@media (min-width: 900px) { .find-grave { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 /* One rounded field with a dark search button closing off the right-hand end */
 .grave-search {
-  display: flex; box-sizing: border-box; width: 100%; min-width: 0; max-width: 34rem; height: 3.25rem; margin-top: .25rem; overflow: hidden;
+  display: flex; box-sizing: border-box; width: 100%; min-width: 0; max-width: 34rem; height: 4rem; margin-top: .25rem; overflow: hidden;
   border: 1px solid #c9c4bd; border-radius: 999px; background: #fff; transition: border-color .15s ease, box-shadow .15s ease;
 }
 .grave-search:focus-within { border-color: var(--black); box-shadow: 0 0 0 4px rgba(20, 20, 22, .1); }
@@ -3155,7 +3149,7 @@ h1, h2, h3 { font-weight: 400; letter-spacing: .02em; line-height: 1.15; }
 .grave-name { display: inline-block; color: var(--ink-soft); transition: opacity .25s ease, transform .25s ease; }
 .grave-name.out { opacity: 0; transform: translateY(.6em); }
 .grave-name.prep { opacity: 0; transform: translateY(-.6em); transition: none; }
-.grave-search button { display: grid; place-items: center; flex: none; width: 4rem; border: 0; background: var(--crimson); color: #fff; cursor: pointer; transition: background-color .15s ease; }
+.grave-search button { display: grid; place-items: center; flex: none; width: 4.75rem; border: 0; background: var(--crimson); color: #fff; cursor: pointer; transition: background-color .15s ease; }
 .grave-search button:hover, .grave-search button:focus-visible { background: color-mix(in oklch, var(--crimson), #000 20%); }
 .grave-search button:focus-visible { outline: 2px solid #fff; outline-offset: -5px; }
 .grave-search button svg { width: 1.3rem; height: 1.3rem; }
@@ -3274,5 +3268,5 @@ html:is(.hint-down, .hint-up) body { background: var(--black); }
    corner-shape works in Chrome and Edge; Safari and Firefox show a plain rounded corner instead. */
 :root { --photo-corner: 1.25rem; }
 @supports (corner-shape: squircle) { :root { --photo-corner: 3rem; } }
-:is(.sun-intro-photo, .first-sunday-inline, .hist-photo, .album) img,
+:is(.sun-intro-photo, .first-sunday-inline, .hist-photo, .album, .grave-photo) img,
 .carousel-viewport .gallery-thumb { overflow: hidden; border-radius: var(--photo-corner); corner-shape: squircle; }
